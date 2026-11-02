@@ -85,6 +85,30 @@ Definition x218_connected_treedepth_at_most (H : sgraph) (k : nat) : Prop :=
   exists H' : sgraph,
     [/\ connected [set: H'], has_subgraph H' H & x194_treedepth_at_most H' k].
 
+(** An odd [H]-minor in the TREE model of arXiv:2308.15721 (arXiv.tex l.139-145):
+    pairwise disjoint nonempty branch sets, each connected through the edges of
+    [G] inside it that are bichromatic under one 2-colouring [sigma] (that is, it
+    spans a properly 2-coloured tree), and a MONOCHROMATIC edge of [G] between the
+    branch sets of every edge of [H].  Other edges inside a branch set are
+    unconstrained.  The body of X271's [x271_odd_minor_tree_model], which this
+    package does not import. *)
+Definition x218_odd_minor_tree_model (G H : sgraph) : Prop :=
+  exists (B : H -> {set G}) (sigma : G -> bool),
+    [/\ forall x : H, B x != set0,
+        forall (x : H) (u v : G), u \in B x -> v \in B x ->
+          connect (fun a b : G => [&& a \in B x, b \in B x, a -- b & sigma a != sigma b]) u v,
+        forall x y : H, x != y -> [disjoint B x & B y] &
+        forall x y : H, x -- y ->
+          exists u v : G, [/\ u \in B x, v \in B y, u -- v & sigma u == sigma v]].
+
+(** CONNECTED tree-depth at most [k] in the sense of arXiv:2308.15721 (arXiv.tex
+    l.153): a rooted tree on exactly V(H) of vertex-height at most [k] whose
+    closure contains [H].  Removing its root [r] leaves a rooted forest of [H - r]
+    of height at most [k - 1], and a new root above such a forest gives back such
+    a tree; so: [0 < k] and some [r] with td(H - r) <= k - 1 (X194's rankings). *)
+Definition x218_ctd_at_most (H : sgraph) (k : nat) : Prop :=
+  0 < k /\ exists r : H, x194_treedepth_at_most (induced (~: [set r])) k.-1.
+
 (** The DEFECTIVE chromatic number of a class is at most [k]: one defect bound
     [m], chosen before the graphs, such that every graph of the class has a
     [k]-colouring in which every vertex has at most [m] neighbours of its own
@@ -208,47 +232,40 @@ Definition every_forest_is_multibounding_statement : Prop :=
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2308.15721__00.json
     English statement: (Hickingbotham, Kang, Oum, Steiner and Wood 2023, Conjecture 2, arXiv:2308.15721)
       For every finite simple graph H whose connected tree-depth is exactly k, the class of graphs
-      having no odd H-minor has defective chromatic number at most k - 1 and clustered chromatic
-      number at most k - 1.
-    Definitions: [x218_odd_minor G H] - a minor model of H in G together with a 2-colouring of G
-      making every edge inside a branch set bichromatic and giving, for every edge of H, a
-      monochromatic edge between the corresponding branch sets (this file);
-      [x218_connected_treedepth_at_most H k] - some connected graph containing H as a subgraph has
-      tree-depth at most k (this file); [x194_treedepth_at_most] (X194.v);
-      [x218_defective_chromatic_class_le F k] - one defect bound m, chosen before the graphs, with
-      a k-colouring of every graph of the class in which each vertex has at most m neighbours of
-      its own colour (this file); [x218_clustered_chromatic_class_le F k] - one clustering bound c,
-      chosen before the graphs (this file); [clustered_colouring] (GTBase surface.v);
-      [has_subgraph] (GTBase common.v).
-    Notes: BLOCKED. Two primitives of the source could not be verified against the paper from the
-      corpus text available here, so the body is a PLACEHOLDER encoding the best available reading
-      and the row's statement leg stays blocked. (1) The odd-minor model above is the standard one
-      from the literature, but the paper's own normalisation (whether the bipartition is required
-      on all of G or only on the union of the branch sets, and whether the branch sets must induce
-      connected BIPARTITE subgraphs) is not recorded in the row. (2) td-bar(H), the "connected
-      tree-depth", is encoded as the least tree-depth of a connected graph containing H as a
-      subgraph; the corpus text does not fix whether new vertices are allowed, whether the
-      containment is as a subgraph or as a spanning subgraph, and which tree-depth convention
-      (rooted-forest height counted in vertices, as in X194.v) the paper uses, and the conjectured
-      value k - 1 is off by one under the alternative conventions. The class parameters ARE
-      quantified class-uniformly, the collapse found by the 2026-07-17 audit in X138/X194. What is
-      reliable in this body: the two class parameters, the equality with a single bound k - 1, and
-      the domain "graphs with no odd H-minor". Corpus status: open; the paper proves the chain
-      td-bar(H)-1 <= defective <= clustered <= 3*2^(td-bar(H)) - 4. The second-reader readback of
-      2026-09-23 CONFIRMED and sharpened both blockers by reading the paper: td-bar(G) is defined
-      there as the minimum vertex-height of a rooted tree T with V(T) = V(G) such that G is a
-      subgraph of the closure of T -- the same vertex set, no new vertices -- so the placeholder's
-      "some connected graph containing H as a subgraph" reading is indeed not the paper's; and the
-      current arXiv version states Conjecture 2 as "chi_star <= 2*td-bar(H) - 2 AND chi_Delta =
-      td-bar(H) - 1", not as the single equality the corpus statement_text records, so the corpus
-      row itself should be re-checked against the paper version before the row is re-authored. *)
+      with no odd H-minor has clustered chromatic number at most 2k - 2 and defective chromatic
+      number exactly k - 1.
+    Definitions: [x218_odd_minor_tree_model G H] - pairwise disjoint nonempty branch sets, each
+      connected through the edges of G inside it that are bichromatic under one 2-colouring of G,
+      with a monochromatic edge of G between the branch sets of every edge of H (this file);
+      [x218_ctd_at_most H k] - 0 < k and some vertex r of H with td(H - r) <= k - 1 (this file);
+      [x194_treedepth_at_most] (X194.v); [x218_clustered_chromatic_class_le F k] - one clustering
+      bound c, chosen before the graphs (this file); [x218_defective_chromatic_class_le F k] - one
+      defect bound m, chosen before the graphs, with a k-colouring of every graph of the class in
+      which each vertex has at most m neighbours of its own colour (this file);
+      [clustered_colouring] (GTBase surface.v); [induced] (coq-graph-theory).
+    Notes: encoded as stated in arXiv:2308.15721v2 (arXiv.tex l.199-202; v1 main.tex l.201-204 is
+      the same). The odd H-model is the source's (l.139-145): a branch set spans a properly
+      2-coloured tree iff it is connected through its bichromatic edges. ctd(H) (l.153) is the
+      least vertex-height of a rooted tree on exactly V(H) whose closure contains H; deleting the
+      root, or adding one above a rooted forest of H - r, gives the encoded form. The graph with no
+      vertex has no such tree, so the body is vacuous there (and the clause would be true under
+      ctd(K_0) = 1: K_0 is an odd minor of every graph). At k = 1, H = K_1 and the class holds
+      only the graph with no vertex. "= k - 1" is the bound k - 1 together with no bound j < k - 1;
+      the lower half is known (l.155-156, l.180-184). RE-ENCODED 2026-11-02
+      (coordination/PROGRAMME.md section 3, A2, direction re-encode; the earlier body is frozen as
+      X218Legacy in theories/migration/monochromatic.v): it gave both parameters the bound k - 1,
+      from the row's reconstructed statement_text, which l.166 contradicts (informally) for
+      clustered colouring (CORPUS_FEEDBACK items 10 and 64), with an odd minor whose branch sets had
+      no monochromatic edge inside. Corpus status: open; Theorem 1 (l.172-176) gives
+      chi_star(G_H^odd) <= 3 * 2^ctd(H) - 4. *)
 Definition odd_minor_free_defective_clustered_treedepth_statement : Prop :=
   forall (H : sgraph) (k : nat),
-    1 <= k ->
-    x218_connected_treedepth_at_most H k ->
-    ~ x218_connected_treedepth_at_most H k.-1 ->
-    x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor G H) (k - 1) /\
-    x218_clustered_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor G H) (k - 1).
+    x218_ctd_at_most H k ->
+    ~ x218_ctd_at_most H k.-1 ->
+    x218_clustered_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (2 * k - 2) /\
+    x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (k - 1) /\
+    (forall j : nat, j.+1 < k ->
+       ~ x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) j).
 
 (** Corpus row: arxiv:2601.15245#04
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2601.15245__04/

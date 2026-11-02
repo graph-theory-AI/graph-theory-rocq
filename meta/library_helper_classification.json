@@ -647,6 +647,16 @@
       "family_id": "complexity-layer",
       "milestone": "post-rc-library-wave"
     },
+    "odd_minor_tree_model": {
+      "class": "candidate_family",
+      "reason": "an odd H-minor in the tree model (pairwise disjoint nonempty branch sets, each connected through its edges that are bichromatic under one 2-colouring, and a monochromatic edge for every edge of H): X218 (chromatic-theory; Hickingbotham, Kang, Oum, Steiner and Wood, arXiv:2308.15721v2, arXiv.tex l.139-145) and X271 (minor-theory; Kuhn, Sauermann, Steiner and Wigderson, arXiv:2512.20392v1, main.tex l.182-187) have identical bodies in two packages that do not import each other; no GTBase promotion now (the Mac's 2026-11-01 assessment)",
+      "members": [
+        "Chromatic.conjectures.X218.x218_odd_minor_tree_model",
+        "Minor.conjectures.X271.x271_odd_minor_tree_model"
+      ],
+      "family_id": "odd-minor",
+      "milestone": "post-rc-library-wave"
+    },
     "oedges": {
       "class": "paper_specific",
       "reason": "a count (twice the edge count) in one row, an oriented edge set in the other",

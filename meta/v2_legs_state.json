@@ -4493,14 +4493,14 @@
    "audit_page": "todo"
   },
   "axv_2308_15721_00": {
-   "statement": "blocked",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x218-conjecture-relations",
    "package": "chromatic-theory",
-   "note": "BLOCKED — Two primitives could not be verified against arXiv:2308.15721 from the corpus text available here. (1) The ODD MINOR normalisation: the placeholder uses the standard model (nonempty connected pairwise-disjoint branch sets, a 2-colouring of G making every edge inside a branch set bichromatic and giving a monochromatic edge for every edge of H), but the paper's own convention -- whether the bipartition is required on all of G or only on the union of the branch sets -- is not recorded. (2) td-bar(H), the CONNECTED tree-depth, is encoded as the least tree-depth of a connected graph conta"
+   "note": "Authored in X218.v:odd_minor_free_defective_clustered_treedepth_statement. Re-encoded 2026-11-02 (coordination/PROGRAMME.md section 3, A2 with the A4 direction re-encode; frozen by the monochromatic family): Conjecture 2 of arXiv:2308.15721v2 (arXiv.tex l.199-202), clustered <= 2 ctd(H) - 2 and defective = ctd(H) - 1, over the source's tree model of odd minors (x218_odd_minor_tree_model) and its connected tree-depth (x218_ctd_at_most). Implemented by Lancelot; the earlier body (both bounds k - 1, x218_odd_minor) stays only in the frozen chain."
   },
   "axv_2309_04385_00": {
    "statement": "todo",

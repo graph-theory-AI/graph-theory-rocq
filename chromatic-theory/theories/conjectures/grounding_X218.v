@@ -5,7 +5,9 @@
     guard and a GUARD-HAS-TEETH lemma for every notion that could collapse.
     They validate the statements; they do not prove them.  The [poly_chi_bounded]
     wrapper itself is grounded where it lives, in
-    [chromatic-theory/theories/foundations/chi_bounding.v]. *)
+    [chromatic-theory/theories/foundations/chi_bounding.v].  The odd-minor row,
+    re-encoded on 2026-11-02, has certificates in X271's claim shape
+    (hyp_inhabited, not_trivially_true, helper_sanity). *)
 
 From GraphTheory Require Import bij.
 From GTBase Require Import base.
@@ -197,6 +199,184 @@ Lemma x218_not_clustered_class_all :
   ~ x218_clustered_chromatic_class_le (fun _ : sgraph => True) 0.
 Proof. by case=> c /(_ 'K_1 I) [col _]; case: (col ord0) => k; rewrite ltn0. Qed.
 
+(** ** The re-encoded odd-minor row, arxiv:2308.15721#00 (2026-11-02) *****
+
+    X271's claim shape: helper_sanity for [x218_odd_minor_tree_model] and
+    [x218_ctd_at_most], hyp_inhabited (the hypotheses hold together at H = K_2,
+    k = 2, and the statement gives the defective bound) and not_trivially_true
+    (without "no odd H-minor" in the clustered clause the statement is false at
+    H = K_1, k = 1, and that variant implies it; a second one drops "k is exactly
+    ctd(H)"). *)
+
+Definition g218_o1 : 'I_2 := @Ordinal 2 1 isT.
+
+(** helper sanity: K_n has an odd K_n minor (singleton branch sets, one colour). *)
+Lemma g218_Kn_odd_tree (n : nat) : x218_odd_minor_tree_model 'K_n 'K_n.
+Proof.
+exists (fun x => [set x]), (fun _ => true); split.
+- by move=> x; apply/set0Pn; exists x; rewrite inE.
+- by move=> x u v; rewrite !inE => /eqP -> /eqP ->; exact: connect0.
+- by move=> x y xy; rewrite disjoints1 in_set1 (negbTE xy).
+- by move=> x y xy; exists x, y; rewrite !inE !eqxx.
+Qed.
+
+(** helper sanity: K_1 has no odd K_2 minor. *)
+Lemma g218_K1_no_odd_tree_K2 : ~ x218_odd_minor_tree_model 'K_1 'K_2.
+Proof.
+case=> B [sigma [ne _ dis _]].
+have [u uB0] := set0Pn _ (ne ord0).
+have [v vB1] := set0Pn _ (ne g218_o1).
+have uv : u = v by rewrite (ord1 u) (ord1 v).
+move: (dis ord0 g218_o1 isT); rewrite disjoint_subset => /subsetP/(_ u uB0).
+by rewrite inE uv vB1.
+Qed.
+
+(** helper sanity: ctd(K_1) <= 1, and nothing has ctd <= 0. *)
+Lemma g218_ctd_K1 : x218_ctd_at_most 'K_1 1.
+Proof.
+split=> //; exists ord0.
+have F (v : induced (~: [set (ord0 : 'K_1)])) : False.
+  by case: v => x; rewrite !inE (ord1 x) eqxx.
+by exists (fun v => False_rect _ (F v)) => x; case: (F x).
+Qed.
+
+Lemma g218_not_ctd_0 (H : sgraph) : ~ x218_ctd_at_most H 0.
+Proof. by case. Qed.
+
+Lemma g218_one (v : induced (~: [set (ord0 : 'K_2)])) : val v = g218_o1.
+Proof.
+move: (valP v); rewrite !inE => vn0; apply: val_inj; move: (val v) vn0 => w.
+by case: w => [[|[|m]] p].
+Qed.
+
+(** helper sanity: ctd(K_2) = 2 (a rooted tree on two vertices has vertex-height 2: the convention's off-by-one). *)
+Lemma g218_ctd_K2 : x218_ctd_at_most 'K_2 2 /\ ~ x218_ctd_at_most 'K_2 1.
+Proof.
+split.
+- split=> //; exists ord0; exists (fun _ => ord0) => x y p xy.
+  by move: xy; rewrite -(inj_eq val_inj) (g218_one x) (g218_one y) eqxx.
+- case=> _ [r [rank _]].
+  have [w wr] : exists (w : 'K_2), w \in ~: [set r].
+    case: (eqVneq r ord0) => [->|rn0]; first by exists g218_o1; rewrite !inE.
+    by exists ord0; rewrite !inE eq_sym.
+  by case: (rank (Sub w wr)).
+Qed.
+
+(** helper sanity: the graph with no vertex has no connected tree-depth (no rooted tree on an empty vertex set), so
+    the body is vacuous there. *)
+Lemma g218_no_ctd_empty (k : nat) : ~ x218_ctd_at_most 'K_0 k.
+Proof. by case=> _ [[]]. Qed.
+
+(** hyp_inhabited: H = K_2 has connected tree-depth exactly 2, and the statement gives defective chromatic number at
+    most 1 for the graphs with no odd K_2 minor. *)
+Definition g218_ominf_hyp_claim : Prop :=
+  [/\ x218_ctd_at_most 'K_2 2, ~ x218_ctd_at_most 'K_2 1 &
+      (odd_minor_free_defective_clustered_treedepth_statement ->
+         x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G 'K_2) 1)].
+
+Theorem g218_ominf_hyp_inhabited : g218_ominf_hyp_claim.
+Proof.
+have [c2 nc1] := g218_ctd_K2.
+by split=> // S; case: (S 'K_2 2 c2 nc1) => _ [].
+Qed.
+
+(** not_trivially_true: without "no odd H-minor" in the clustered clause the statement is false at H = K_1, k = 1 (no
+    0-colouring of a nonempty graph), and that variant implies the statement. *)
+Definition g218_ominf_no_free : Prop :=
+  forall (H : sgraph) (k : nat),
+    x218_ctd_at_most H k ->
+    ~ x218_ctd_at_most H k.-1 ->
+    x218_clustered_chromatic_class_le (fun _ : sgraph => True) (2 * k - 2) /\
+    x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (k - 1) /\
+    (forall j : nat, j.+1 < k ->
+       ~ x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) j).
+
+Definition g218_ominf_ntt_claim : Prop :=
+  ~ g218_ominf_no_free /\ (g218_ominf_no_free -> odd_minor_free_defective_clustered_treedepth_statement).
+
+Theorem g218_ominf_not_trivially_true : g218_ominf_ntt_claim.
+Proof.
+split.
+- move=> h; apply: x218_not_clustered_class_all.
+  by case: (h 'K_1 1 g218_ctd_K1 (@g218_not_ctd_0 'K_1)).
+- move=> h H k c nc; have [[c0 cl] rest] := h H k c nc.
+  by split=> //; exists c0 => G _; exact: cl G I.
+Qed.
+
+(** helper_sanity: connected tree-depth is monotone in the bound (X194's ranking into a wider ordinal). *)
+Lemma g218_ctd_mono (H : sgraph) (k : nat) : x218_ctd_at_most H k -> x218_ctd_at_most H k.+1.
+Proof.
+case=> k0 [r [rank rk]]; split=> //; exists r.
+move: rank rk; case: k k0 => [//|k _] rank rk /=.
+exists (fun v => widen_ord (leqnSn k) (rank v)) => x y p xy pth lst e.
+have e' : rank x = rank y by apply: val_inj; move/(congr1 val): e.
+by have [z [zp lt]] := rk x y p xy pth lst e'; exists z.
+Qed.
+
+(** helper_sanity: two isolated vertices, X218's edgeless [K_1(2)], have tree-depth 1 but connected tree-depth 2,
+    the case that separates ctd from td (arXiv.tex l.153, footnote: two components of tree-depth td). *)
+Lemma g218_td_2K1 : x194_treedepth_at_most (x218_complete_multipartite 1 2) 1.
+Proof.
+exists (fun _ => ord0) => x y [|z p] xy /=.
+- by move=> _ e; rewrite e eqxx in xy.
+- by case/andP=> xz _; move: (x218_multipartite_1_edgeless x z); rewrite xz.
+Qed.
+
+Lemma g218_ctd_2K1 :
+  x218_ctd_at_most (x218_complete_multipartite 1 2) 2 /\ ~ x218_ctd_at_most (x218_complete_multipartite 1 2) 1.
+Proof.
+split.
+- split=> //; exists (ord0, ord0); exists (fun _ => ord0) => x y [|z p] xy /=.
+  + by move=> _ e; rewrite e eqxx in xy.
+  + by case/andP=> xz _; case: (negP (x218_multipartite_1_edgeless (val x) (val z)) xz).
+- case=> _ [r [rank _]].
+  have [w wr] : exists (w : x218_complete_multipartite 1 2), w \in ~: [set r].
+    case: (eqVneq r (ord0, ord0)) => [->|rn0]; first by exists (ord0, g218_o1); rewrite !inE.
+    by exists (ord0, ord0); rewrite !inE eq_sym.
+  by case: (rank (Sub w wr)).
+Qed.
+
+(** every graph with a vertex has an odd K_1-minor (one vertex as its branch set). *)
+Lemma g218_K1_odd_tree (G : sgraph) (w : G) : x218_odd_minor_tree_model G 'K_1.
+Proof.
+exists (fun _ => [set w]), (fun _ => true); split.
+- by move=> x; apply/set0Pn; exists w; rewrite inE.
+- by move=> x u v; rewrite !inE => /eqP -> /eqP ->; exact: connect0.
+- by move=> x y; rewrite (ord1 x) (ord1 y) eqxx.
+- by move=> x y; rewrite (ord1 x) (ord1 y) sg_irrefl.
+Qed.
+
+(** so the graphs with no odd K_1-minor (only the graph with no vertex) have defective chromatic number 0. *)
+Lemma g218_defective_no_odd_K1 :
+  x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G 'K_1) 0.
+Proof.
+exists 0 => G noK1.
+have F (v : G) : False by exact: noK1 (g218_K1_odd_tree v).
+by exists (fun v => False_rect _ (F v)) => v; case: (F v).
+Qed.
+
+(** not_trivially_true: without "~ x218_ctd_at_most H k.-1" (k is exactly ctd(H)) the statement is false at H = K_1,
+    k = 2: its lower clause at j = 0 denies the 0-colouring of the graph with no vertex; and that variant implies the
+    statement. *)
+Definition g218_ominf_no_exact : Prop :=
+  forall (H : sgraph) (k : nat),
+    x218_ctd_at_most H k ->
+    x218_clustered_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (2 * k - 2) /\
+    x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (k - 1) /\
+    (forall j : nat, j.+1 < k ->
+       ~ x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) j).
+
+Definition g218_ominf_exact_ntt_claim : Prop :=
+  ~ g218_ominf_no_exact /\ (g218_ominf_no_exact -> odd_minor_free_defective_clustered_treedepth_statement).
+
+Theorem g218_ominf_exact_not_trivially_true : g218_ominf_exact_ntt_claim.
+Proof.
+split.
+- move=> h; have [_ [_ low]] := h 'K_1 2 (g218_ctd_mono g218_ctd_K1).
+  exact: low 0 isT g218_defective_no_odd_K1.
+- by move=> h H k c _; exact: h H k c.
+Qed.
+
 (** ** [x130_frac_chi_le] at the X218 instance ***************************)
 
 (** Non-vacuity: the one-vertex graph has fractional chromatic number at most
@@ -232,3 +412,13 @@ Print Assumptions x218_path_induced_copy_K1.
 Print Assumptions x218_odd_minor_refl.
 Print Assumptions x218_no_odd_minor_K2_in_K1.
 Print Assumptions x218_frac_chi_K1.
+Print Assumptions g218_ominf_hyp_inhabited.
+Print Assumptions g218_ominf_not_trivially_true.
+Print Assumptions g218_Kn_odd_tree.
+Print Assumptions g218_K1_no_odd_tree_K2.
+Print Assumptions g218_ctd_K2.
+Print Assumptions g218_no_ctd_empty.
+Print Assumptions g218_ominf_exact_not_trivially_true.
+Print Assumptions g218_ctd_mono.
+Print Assumptions g218_ctd_2K1.
+Print Assumptions g218_td_2K1.

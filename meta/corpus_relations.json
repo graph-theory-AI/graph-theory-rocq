@@ -17,7 +17,7 @@
    "plausible": 11
   },
   "n_unmapped_endpoints": 0,
-  "both_formalized": 155
+  "both_formalized": 156
  },
  "edges": [
   {
@@ -3912,13 +3912,13 @@
    "to_slug": "axv_1708_02370_00",
    "from_formal_name": "odd_minor_free_defective_clustered_treedepth_statement",
    "to_formal_name": "clustered_chromatic_minor_class_treedepth_bound_statement",
-   "from_leg": "blocked",
+   "from_leg": "done",
    "to_leg": "done",
    "via_alias": {
     "from": null,
     "to": null
    },
-   "both_formalized": false,
+   "both_formalized": true,
    "rocq_edge": "odd_minor_free_defective_clustered_treedepth_statement->clustered_chromatic_minor_class_treedepth_bound_statement:implies:candidate",
    "argument": "Confirmed, after correcting both extracted statements. Verbatim Conjecture 2 of 2308.15721: 'χ⋆(G_H^odd) ≤ 2·td̄(H)−2 and χ_Δ(G_H^odd) = td̄(H)−1' (the batch's 'χ⋆ = td̄(H)−1' is a mis-extraction). NSSW's Conjecture 4 in 1708.02370 reads 'χ⋆(M_H) ≤ 2 td(H)−2' where their td denotes CONNECTED tree-depth ('We choose to work with connected tree-depth to avoid this distinction'), i.e. td̄ in the odd-minor paper's notation. An odd H-minor is in particular an H-minor, so M_H ⊆ G_H^odd, and χ⋆ is monotone under class containment; hence Conjecture 2 gives χ⋆(M_H) ≤ χ⋆(G_H^odd) ≤ 2td̄(H)−2, exactly the target. Even under the batch's face-value source statement the chain td̄(H)−1 ≤ td(H) ≤ 2td(H)−2 (td ≥ 2, using td̄ ≤ td+1) yields the target. Direction as claimed: odd-minor-free is the larger class, so the source is stronger.",
    "citations": [
