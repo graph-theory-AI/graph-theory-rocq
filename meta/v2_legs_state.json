@@ -1692,11 +1692,14 @@
    "note": "Authored in X219.v:list_chromatic_index_even_clique_statement. Alon-Bucic-Kalvari-Kuperwasser-Szabo: the record's open case (the list Ramsey number R_ell(K_{1,2},k) for odd k) is stated in the determinate form its own context declares EQUIVALENT to it -- the List Colouring Conjecture for cliques of even order, i.e. 'K_n is (n-1)-edge-choosable for every positive even n'. Only the upper bound is stated, since the lower bound chi'_ell >= chi' = n-1 is a theorem. Edge choosability is local x219 vocabulary on simple graphs."
   },
   "axv_1902_07018_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x282-list-ramsey-erdos-79-k-connected-growth",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X282.v:list_ramsey_two_colour_clique_equality_statement. The open clique question of Alon, Bucic, Kalvari, Kuperwasser and Szabo (arXiv:1902.07018v2, source.tex l.417-419; pinned open), the affirmative answer R_l(K_r, 2) = R(K_r, 2) for r >= 4 through its open half: an order n with a 2-colouring (lists {1, 2}) avoiding a monochromatic K_r has, for every valid 2-list assignment, an avoiding L-colouring (definitions l.197-205, l.245-274; R_l <= R is l.280). OPEN at the pin."
   },
   "axv_1902_10878_00": {
    "statement": "todo",
@@ -9381,11 +9384,14 @@
    "audit_page": "todo"
   },
   "erdos_79": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x282-list-ramsey-erdos-79-k-connected-growth",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X282.v:erdos_79_minimal_non_ramsey_size_linear_statement. Erdos Problems #79 (Erdos, Faudree, Rousseau and Schelp; pinned solved), the affirmative answer: graphs of unbounded order that are not Ramsey size-linear while every proper subgraph (smaller |V| + |E|) is, where r(G, H) <= C e(H) for all H without isolated vertices (Wigderson, arXiv:2409.05931v2, revised.tex l.60-66). PROVED before the pin by Wigderson, non-constructively."
   },
   "erdos_794": {
    "statement": "done",
@@ -12932,11 +12938,14 @@
    "audit_page": "todo"
   },
   "std_pavez_sign_piga_sanhueza_matamala_conjecture_on": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x282-list-ramsey-erdos-79-k-connected-growth",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X282.v:k_connected_ramsey_growth_statement. Conjecture 16 of Pavez-Signe, Piga and Sanhueza-Matamala (arXiv:2209.05455v3, main.tex l.486-489; pinned open): for k >= 2 and every f with n <= f(n) <= R(K_n), k-connected graphs G_n on n vertices for all n >= n0 with R(G_n) <= a f(n) and f(n) <= b R(G_n). PROVED before the pin by Ahme and Scott (arXiv:2311.01887v1, Theorem 3, main.tex l.44-47); lit22 records the status."
   },
   "std_pavez_sign_piga_sanhueza_matamala_question_on_ra": {
    "statement": "todo",
