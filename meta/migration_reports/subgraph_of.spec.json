@@ -843,6 +843,21 @@
       "path": "extremal-graph-theory/theories/conjectures/grounding_X255.v",
       "name": "xe1_graph_ramsey_number",
       "note": "Wave X255 (2026-10-28) imports XE1 and uses its two-colour Ramsey number xe1_graph_ramsey_number for R(3,n) (row erdos:553, the ratio R(3,3,n) / R(3,n)) as shared vocabulary: imported, no copy, XE1 untouched; X255.v names it in the statement and grounding_X255.v in the concrete value R(3,1) = 1; declared as for X240 / X241."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X282.v",
+      "name": "xe1_diagonal_ramsey_number",
+      "note": "Wave X282 (2026-11-02) imports XE1 and uses its two-colour Ramsey numbers as shared vocabulary: xe1_graph_ramsey_number for r(G, H) in the helper x282_ramsey_size_linear (row erdos:79, Ramsey size-linear graphs) and xe1_diagonal_ramsey_number for R(G_n) and R(K_n) (row studies:std_pavez_sign_piga_sanhueza_matamala_conjecture_on); imported, no copy, XE1 untouched; grounding_X282.v names xe1_diagonal_ramsey_number in R(K_n) >= n; declared as for X240 / X241 / X255."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X282.v",
+      "name": "xe1_graph_ramsey_number",
+      "note": "Wave X282 (2026-11-02) imports XE1 and uses its two-colour Ramsey numbers as shared vocabulary: xe1_graph_ramsey_number for r(G, H) in the helper x282_ramsey_size_linear (row erdos:79, Ramsey size-linear graphs) and xe1_diagonal_ramsey_number for R(G_n) and R(K_n) (row studies:std_pavez_sign_piga_sanhueza_matamala_conjecture_on); imported, no copy, XE1 untouched; grounding_X282.v names xe1_diagonal_ramsey_number in R(K_n) >= n; declared as for X240 / X241 / X255."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X282.v",
+      "name": "xe1_diagonal_ramsey_number",
+      "note": "Wave X282 (2026-11-02) imports XE1 and uses its two-colour Ramsey numbers as shared vocabulary: xe1_graph_ramsey_number for r(G, H) in the helper x282_ramsey_size_linear (row erdos:79, Ramsey size-linear graphs) and xe1_diagonal_ramsey_number for R(G_n) and R(K_n) (row studies:std_pavez_sign_piga_sanhueza_matamala_conjecture_on); imported, no copy, XE1 untouched; grounding_X282.v names xe1_diagonal_ramsey_number in R(K_n) >= n; declared as for X240 / X241 / X255."
     }
   ],
   "distinct_variants": [],
