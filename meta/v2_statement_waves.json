@@ -12869,6 +12869,115 @@
       },
       "faithfulness_verified_by": "Marcol (X277 wave verification, 2026-11-02)",
       "faithfulness_result": "Readback 2026-11-02 (verifier Marcol): 2/2 PASS against the pinned texts and the sources (arxiv:2307.15048#00 done, erdos:1156 PARTIAL), at math/arthur-x277-20261102 = 4f3cb663409d01a40b83bad1184186f929d82626 (five commits on work/coordinator c979d846), after my design read ((320), FAITHFUL 2/2 with B1, the l.227-233 sentence; packet x277-design-read-by-marcol 2105cb6b), my O1 (x277-teeth-by-marcol 3a3cc514, taken as g277_Kn_needs_n / g277_Kn_upper_fails), r2 (959ec38d) and r3 (a0e549a2; my look (324)). r3 fixes two design defects that dev run 1 (x277-dev-by-arthur 215f9fb4) found and my design read had missed: D1, helper_ownership paper_specific (library_inventory.py ALLOWED_OWNERSHIP); D2, no theorem of exact type ~ statement for this open row (gate_contracts.py l.150-166), the ntt now drops 0 < p. At 4f3cb663 X277.v, grounding_X277.v and the wave entry are the r3 files byte for byte; my MCP built X159.v l.14-31 verbatim + r3 X277.v + r3 grounding as one stand-in: 16 proof blocks, no holes. Helper x277_correspondence_colourable = l.194-201 with lists renamed to {v} x I_k (lists of at least k shorten to k), X159's three clauses (g277_cc_x159 proves the equivalence at k = 3); no names or body group; paper_specific. arxiv:2307.15048#00, encoded as printed, p in (0, 1]: for rational 0 < a < b, constants c1, c2 >= 1 and fg_whp over fg_gnp_weight (b - a) b n, i.e. G(n, 1 - a/b), of Theta(n / log n) for the least colourable k (n <= c1 k trunc_log 2 n for every colourable k in I_(n+1); some colourable k in I_(c2 n + 1) with k trunc_log 2 n <= c2 n), and the same event eventually on the edgeless graph for p = 1 (G(n, 0); fg_gnp_weight has no mass at edge probability 0); rational p is equivalent to real p by the monotone coupling; the p = 1 clause is false (g277_p_one_clause_false), \"false as printed\", a question for Marc through the DAILY, no status change; b - a guarded by a < b. erdos:1156 PARTIAL, question (b) encoded (X197 shape): some unbounded w such that for every f, eventually 2 P(f < chi + w and chi < f + w) < total in G(n, 1/2) with positive mass; \"sufficiently slowly\" = some unbounded w works (monotone), integer f and w lose nothing; question (a) has no single meaning (C consecutive values: answered NO by Heckel l.119-122; any C values: open), so not encoded; (b) open at the pin (HR l.182-183). Grounding: hyp at a = 1, b = 2 and at an unbounded window with positive mass; ntt row 1: the variant with the p = 0 endpoint (G(n, 1) = K_n) added is false (K_n needs n colours, the event's upper half fails beyond any N) and implies the row; ntt row 2: the every-unbounded-window variant is false (w = n + 1, f = 0, chi <= n) and implies the row; helper_sanity: X159 at k = 3, edgeless 1-colourable, K_2 not 1-colourable; every claim names its statement; the partial row's spec is compiled, not contract-checked (check_milestone l.203-207). Metadata: source_hash 2/2 recomputed from b72c5857, equal; waves.X277 = r3 wave-x277.json, the only waves change, its verifier fields empty before this; legs: axv_2307_15048_00 done / done and erdos_1156 partial / todo, notes 529 / 504 = the builder's forms, no other legs entry changed; README 590 / 11 / 39 / 1,033 -> 591 / 12 / 39 / 1,031; LANDED gains X277 chromatic-theory after X279; no allowlist entry (lint clean). Dev run 1b (x277-dev1b-by-arthur 55142ab6, -c OK, 39 listed = present): PASS-WITH-EXPECTED, 28 steps, 24 rc 0, only W1 / A3a / A3 / A10 on the empty fields; W1 12 / 14 (helper ownership PASS; Print Assumptions clean on 2 / 2 statements + 3 certificates; 20 exact-type probes PASS), W2 914 / 914, W3 2 probed 0 flagged, W4 0 active (51 allowlisted), A12 OK; written only the four generated files."
+    },
+    "X281": {
+      "phase": "X281",
+      "repo": "chromatic-theory",
+      "defines_file": "X281.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X281 (Any lane; routed by Lancelot (396), (397); design x281-design-by-arthur r1), branch math/arthur-x281-20261102",
+      "source_verified_by": "Marcol (X281 wave verifier, A3: pinned records re-read at graph-conjectures b72c5857: data/erdos_graph.json problems 1092 and 627, statement alone, the erdos rows' rule = 663de14eb6a22e6b6c9419529fd74f18a9db890bad383773256f18c44651d574 and 2c38e82bf4123353f9fa311c43d940700fd843b855d94cc39e925e76fe26dbf7, status open; data/arxiv_conjectures.json, the second of the two 2402.04237 records (Problem 12), statement_text + \"\\n\" + context_text, the arXiv rows' rule = efc3b00ad40fbbf1906c75ee65f8c899295eef74e47f73be8ccb79dcf486e7e2, status open; all three equal to the manifest rows, the wave's source_hash values and the Mac's PINNED-SELECTION.json; the Mac's deposit coordination/sources/x281-source-mac-20261102 (SHA256SUMS 40368101, 54 listed = present, -c OK) read with its SOURCE-READ.md: Er76c-p4.png (Erdos 1976, p.4, read as an image: \"There is a c_r > 0 so that if every subgraph G(m) of G(n) (1 <= m <= n) is the union of an r-chromatic graph and a graph of fewer than c_r m edges, then G(n) has chromatic number not exceeding r + 1\", Erdos, Hajnal and Szemeredi), erdos-1092.txt l.25-26, l.33, l.36-39, Ro82-publisher.html.txt l.549-550 (Rodl 1982, negative answer); erdos-627.txt l.25, 2512.16062v2 Max_ratio_v2.tex (d388dc26) l.133-139, l.157, l.159-164, l.166-178; 2402.04237v2 chromaticpolys.tex (0a1ec739) l.122, l.126, l.133-134, l.146-150, l.171-174, l.197, l.384, l.387-389.)",
+      "source_verified_at": "2026-11-02",
+      "commit": "x281-almost-r-chromatic-ratio-limit-generalised-chromatic-polynomials",
+      "rows": {
+        "erdos_1092": {
+          "formal_name": "erdos_hajnal_szemeredi_almost_r_chromatic_subgraphs_statement",
+          "source_hash": "663de14eb6a22e6b6c9419529fd74f18a9db890bad383773256f18c44651d574",
+          "note": "Erdos Problems #1092, the general question f_r(n) >>_r n (it contains r = 2), in the form of its source [Er76c] p.4: some c_r = 1/q > 0 such that, if every nonempty induced subgraph on m vertices becomes r-colourable after deleting fewer than m/q of its edges, then chi(G) <= r + 1. \"Chromatic number r\" read as at most r; every subgraph and induced subgraphs are equivalent. FALSE in the literature for r >= 2 (Rodl 1982; the page l.36-39): historical body kept, pinned open, status for lit21.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g281_ehs_hyp_inhabited",
+              "claim": "g281_ehs_hyp_claim",
+              "references": [
+                "erdos_hajnal_szemeredi_almost_r_chromatic_subgraphs_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g281_ehs_not_trivially_true",
+              "claim": "g281_ehs_ntt_claim",
+              "references": [
+                "erdos_hajnal_szemeredi_almost_r_chromatic_subgraphs_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g281_gcp_helper_sanity",
+                "claim": "g281_gcp_helper_claim",
+                "references": [
+                  "x281_gen_chromatic_poly"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_627": {
+          "formal_name": "chi_over_omega_max_ratio_limit_exists_statement",
+          "source_hash": "2c38e82bf4123353f9fa311c43d940700fd843b855d94cc39e925e76fe26dbf7",
+          "note": "Erdos Problems #627: existence of lim f(n) / (n / (log_2 n)^2) as a Cauchy criterion for rational eps from N >= 2, f(n) the chi / omega ratio of a maximiser among the labelled graphs on 'I_n (one exists for every n, grounding_X281), with trunc_log 2 for log_2: f(n) (log_2 n)^2 / n is bounded (2512.16062v2 l.166-178), so the two limits exist together. Pinned open.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g281_ratio_hyp_inhabited",
+              "claim": "g281_ratio_hyp_claim",
+              "references": [
+                "chi_over_omega_max_ratio_limit_exists_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g281_ratio_not_trivially_true",
+              "claim": "g281_ratio_ntt_claim",
+              "references": [
+                "chi_over_omega_max_ratio_limit_exists_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g281_gcp_helper_sanity",
+                "claim": "g281_gcp_helper_claim",
+                "references": [
+                  "x281_gen_chromatic_poly"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2402_04237_01": {
+          "formal_name": "generalised_chromatic_polynomials_determine_almost_every_graph_statement",
+          "source_hash": "efc3b00ad40fbbf1906c75ee65f8c899295eef74e47f73be8ccb79dcf486e7e2",
+          "note": "Problem 12 of arXiv:2402.04237v2 (chromaticpolys.tex l.387-389), affirmative: a finite family H_1..H_t fixed before n such that whp in G(n, 1/2) every G' on the same vertex set with pi^(H_i)_G'(k) = pi^(H_i)_G(k) for k <= n max|H_i| is isomorphic to G. pi^(H) = x281_gen_chromatic_poly (sets of k-colourings inducing H, l.122-134), a polynomial of degree <= n|H|; same order loses nothing (add K_1). Pinned open.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g281_pcr_hyp_inhabited",
+              "claim": "g281_pcr_hyp_claim",
+              "references": [
+                "generalised_chromatic_polynomials_determine_almost_every_graph_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g281_pcr_not_trivially_true",
+              "claim": "g281_pcr_ntt_claim",
+              "references": [
+                "generalised_chromatic_polynomials_determine_almost_every_graph_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g281_gcp_helper_sanity",
+                "claim": "g281_gcp_helper_claim",
+                "references": [
+                  "x281_gen_chromatic_poly"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x281_gen_chromatic_poly": {
+          "classification": "paper_specific",
+          "reason": "The generalised chromatic polynomial pi^(H)_G(k) of Asgarli, Krehbiel, Levinson and Russell as Hogan, Scott, Tamitegama and Tan state it (arXiv:2402.04237v2, chromaticpolys.tex l.122-134): the number of sets of proper k-colourings of G that induce a copy of H in the k-colouring graph (two colourings adjacent when they differ at exactly one vertex). Paper-specific; no inventory normalized name or body group at the base."
+        }
+      },
+      "faithfulness_verified_by": "Marcol (X281 wave verification, 2026-11-02)",
+      "faithfulness_result": "Readback 2026-11-02 (verifier Marcol): 3/3 PASS against the pinned texts and the sources, at math/arthur-x281-20261102 = 6b179327422870202c1e26a42be15ade6e79d4ea (five commits on work/coordinator 8c39c74f), after my design read ((331), FAITHFUL 3/3, packet x281-design-read-by-marcol 7b6e0f20) of x281-design-by-arthur r1 (27358d7b). At 6b179327 X281.v, grounding_X281.v and waves.X281 are the design packet's files byte for byte; my MCP (Rocq 9.2, all imports GTBase) built X281.v + grounding_X281.v as one file: 19 proof blocks, no holes. Helper x281_gen_chromatic_poly G H k = chromaticpolys.tex l.122-134: the SETS of proper k-colourings V(G) -> I_k inducing H in the k-colouring graph (adjacent when they differ at exactly one vertex), through an injective f; paper_specific; no names or body group; helper_sanity in all three rows (pi^(K_1) = the proper colourings; pi^(K_2) of K_1 = C(k, 2)). erdos:1092 as Er76c p.4: for r >= 1 some q > 0 such that every G whose every nonempty vertex set S has edges F inside G[S] with chi(G[S] - F) <= r and q|F| < |S| has chi(G) <= r + 1 (c_r = 1/q; induced subgraphs equivalent to all subgraphs; \"r-chromatic\" read as <= r; the f_r \">>\" form is the uniform constant); FALSE in the literature (Rodl 1982), historical body kept, status for Lancelot's lit21. erdos:627: for every rational eps = p/q some N >= 2 with |b(n1) - b(n2)| < eps over maximisers of chi/omega among labelled graphs on I_n (one exists for every n), b(n) = chi trunc_log(2, n)^2 / (omega n), cross-multiplied; the Cauchy criterion is the existence of the real limit, and trunc_log 2 is justified by the bound f(n) <= (3.71943 + o(1)) n / (log_2 n)^2 (l.175-178); open at the pin. arxiv:2402.04237#01: a family H_1..H_t chosen before n such that whp in G(n, 1/2) every graph on I_n agreeing with G in pi^(H_i)(k) for k = 0 .. n max_i |H_i| is isomorphic to G; degree <= n |H| and the add-K_1 equivalence give the printed question; open at the pin. Grounding: hyp at r = 2 (K_2), maximisers on every I_n with trunc_log 2 n > 0 from n = 2, positive mass and G' = G; ntt: erdos:1092 without its hypothesis (false at r = 1, chi(K_3) = 3), erdos:627 from N = 2 (false at K_2, K_3, eps = 1/7), Problem 12 without the polynomial hypothesis (every G' isomorphic fails from n = 2); each variant implies its row; no certificate of exact type S or ~ S (the rows are open). Metadata: source_hash 3/3 recomputed, equal; waves.X281 = the design packet's wave-x281.json, the only waves change, verifier fields empty before this; allowlist = base + the packet's one entry (54 -> 55); legs: erdos_1092, erdos_627, axv_2402_04237_01 done / done, notes 576 / 433 / 505 = \"Authored in X281.v:<name>. \" + the wave note, no other legs entry changed; README 594 / 12 / 39 / 1,028 -> 597 / 12 / 39 / 1,025; LANDED gains X281 chromatic-theory after X277. Dev run 1 (x281-dev-by-arthur f4f6d624, -c OK, 38 listed = present): PASS-WITH-EXPECTED, 28 steps, 24 rc 0, only W1 / A3a / A3 / A10 on the empty fields; W1 12 / 14 (helper ownership PASS; Print Assumptions clean on 3 / 3 statements + 9 certificates; 30 exact-type probes), W2 920 / 920, W3 3 probed 0 flagged, W4 0 active (55 allowlisted), A12 101 OK; written only the three generated files."
     }
   }
 }

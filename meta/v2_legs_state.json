@@ -4917,11 +4917,14 @@
    "audit_page": "todo"
   },
   "axv_2402_04237_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x281-almost-r-chromatic-ratio-limit-generalised-chromatic-polynomials",
+   "package": "chromatic-theory",
+   "note": "Authored in X281.v:generalised_chromatic_polynomials_determine_almost_every_graph_statement. Problem 12 of arXiv:2402.04237v2 (chromaticpolys.tex l.387-389), affirmative: a finite family H_1..H_t fixed before n such that whp in G(n, 1/2) every G' on the same vertex set with pi^(H_i)_G'(k) = pi^(H_i)_G(k) for k <= n max|H_i| is isomorphic to G. pi^(H) = x281_gen_chromatic_poly (sets of k-colourings inducing H, l.122-134), a polynomial of degree <= n|H|; same order loses nothing (add K_1). Pinned open."
   },
   "axv_2402_08418_00": {
    "statement": "todo",
@@ -7899,11 +7902,14 @@
    "note": "Authored in XE2.v:erdos_1091_statement. Encodes Erdos Problems #1091 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_1092": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x281-almost-r-chromatic-ratio-limit-generalised-chromatic-polynomials",
+   "package": "chromatic-theory",
+   "note": "Authored in X281.v:erdos_hajnal_szemeredi_almost_r_chromatic_subgraphs_statement. Erdos Problems #1092, the general question f_r(n) >>_r n (it contains r = 2), in the form of its source [Er76c] p.4: some c_r = 1/q > 0 such that, if every nonempty induced subgraph on m vertices becomes r-colourable after deleting fewer than m/q of its edges, then chi(G) <= r + 1. \"Chromatic number r\" read as at most r; every subgraph and induced subgraphs are equivalent. FALSE in the literature for r >= 2 (Rodl 1982; the page l.36-39): historical body kept, pinned open, status for lit21."
   },
   "erdos_110": {
    "statement": "todo",
@@ -8856,11 +8862,14 @@
    "audit_page": "todo"
   },
   "erdos_627": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x281-almost-r-chromatic-ratio-limit-generalised-chromatic-polynomials",
+   "package": "chromatic-theory",
+   "note": "Authored in X281.v:chi_over_omega_max_ratio_limit_exists_statement. Erdos Problems #627: existence of lim f(n) / (n / (log_2 n)^2) as a Cauchy criterion for rational eps from N >= 2, f(n) the chi / omega ratio of a maximiser among the labelled graphs on 'I_n (one exists for every n, grounding_X281), with trunc_log 2 for log_2: f(n) (log_2 n)^2 / n is bounded (2512.16062v2 l.166-178), so the two limits exist together. Pinned open."
   },
   "erdos_628": {
    "statement": "done",
