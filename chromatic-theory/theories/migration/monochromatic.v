@@ -122,12 +122,167 @@ split=> -[c hc]; exists c => G minor_free; have hg := hc G minor_free.
 all: by apply/GTBase.migration.monochromatic.clustered_colouring_compat.
 Qed.
 
+(** ** X194 re-encoding: the weakening, kernel-checked *)
+
+(* a walk of H inside S lifts to the induced subgraph on S *)
+Lemma x194_lift (H : sgraph) (S : {set H}) (p : seq H) (x : H) (hx : x \in S) :
+  all (fun v => v \in S) p -> path (--) x p ->
+  exists p' : seq (induced S), map val p' = p /\ path (--) (Sub x hx : induced S) p'.
+Proof.
+elim: p x hx => [|y q IH] x hx /=; first by exists [::].
+case/andP=> hy aq /andP [xy pq].
+have [q' [mq pq']] := IH y hy aq pq.
+by exists (Sub y hy :: q'); rewrite /= mq; split => //; apply/andP; split.
+Qed.
+
+(* td <= ctd: rank r at the top, the other vertices by the ranking of H - r *)
+Lemma x194_td_of_ctd (H : sgraph) (k : nat) : x194_ctd_at_most H k -> x194_treedepth_at_most H k.
+Proof.
+case=> k0 [r [rank0 rk0]].
+move: rank0 rk0; case: k k0 => [//|k] _ rank0 rk0 /=.
+pose S := ~: [set r].
+pose rank' (v : H) : 'I_k.+1 :=
+  oapp (fun v' : induced S => widen_ord (leqnSn k) (rank0 v')) ord_max (insub v : option (induced S)).
+have rr : rank' r = ord_max by rewrite /rank' insubF // !inE eqxx.
+have rv (v : H) (hv : v \in S) : rank' v = widen_ord (leqnSn k) (rank0 (Sub v hv)).
+  by rewrite /rank' (insubT (mem S) hv).
+have lt (v : H) (hv : v \in S) : rank' v < k by rewrite (rv v hv) /=; exact: ltn_ord.
+exists rank' => x y p xy pth lst e.
+case: (eqVneq x r) => [xr|xr].
+  have yS : y \in S.
+    by rewrite !inE; apply: contra_neq xy => ->; rewrite xr.
+  by move: (lt y yS); rewrite -e xr rr /= ltnn.
+have xS : x \in S by rewrite !inE.
+case: (eqVneq y r) => [yr|yr].
+  by move: (lt x xS); rewrite e yr rr /= ltnn.
+have yS : y \in S by rewrite !inE.
+case rp: (r \in p).
+  by exists r; split => //; rewrite rr /=; exact: lt x xS.
+have ap : all (fun v => v \in S) p.
+  by apply/allP => v vp; rewrite !inE; apply: contraFneq rp => <-.
+have [p' [mp pp']] := x194_lift xS ap pth.
+have lst' : last (Sub x xS : induced S) p' = Sub y yS.
+  by apply: val_inj; rewrite /= -(last_map val) mp lst.
+have xy' : (Sub x xS : induced S) != Sub y yS by apply: contra_neq xy => /(congr1 val).
+have e' : rank0 (Sub x xS) = rank0 (Sub y yS).
+  by apply: val_inj; move: (congr1 val e); rewrite (rv x xS) (rv y yS).
+have [z' [zp ltz]] := rk0 _ _ _ xy' pp' lst' e'.
+have zS : val z' \in S := valP z'.
+exists (val z'); split; first by rewrite -mp; exact: map_f.
+rewrite (rv x xS) (rv _ zS) /=.
+by have -> : (Sub (val z') zS : induced S) = z' by apply: val_inj.
+Qed.
+
+(* ctd(H) <= 1: H has exactly one vertex, so every graph with a vertex has H as a minor *)
+Lemma x194_ctd1_minor (H G : sgraph) (v : G) : x194_ctd_at_most H 1 -> minor G H.
+Proof.
+case=> _ [r [rank0 _]].
+have one (y : H) : y = r.
+  apply/eqP; apply: contraT => yr.
+  have hy : y \in ~: [set r] by rewrite !inE.
+  by case: (rank0 (Sub y hy)).
+exists (fun x => if x == v then Some r else None); split.
+- by move=> y; exists v; rewrite eqxx (one y).
+- move=> y.
+  have -> : (fun x => if x == v then Some r else None) @^-1: pred1 (Some y) = [set v].
+    by apply/setP => x; rewrite !inE; case: (x == v) => /=; rewrite (one y) ?eqxx.
+  exact: connected1.
+- by move=> x y; rewrite (one x) (one y) sg_irrefl.
+Qed.
+
+Lemma x194_class_ctd1 (H : sgraph) : x194_ctd_at_most H 1 -> x194_clustered_chromatic_minor_class_le H 0.
+Proof.
+move=> hc; exists 0 => G noH.
+have F (v : G) : False by exact: noH (x194_ctd1_minor v hc).
+exists (fun v => False_rect _ (F v)) => S _ _.
+by rewrite leqn0 cards_eq0; apply/eqP/setP => v; case: (F v).
+Qed.
+
+(** X194 RE-ENCODING (2026-11-02, PROGRAMME section 3, A2 with the direction weaken; record
+    meta/STATEMENT_IMPROVEMENTS.md), not a migration equivalence: the live row uses the source's connected tree-depth
+    (arXiv:1708.02370v2, l.147, l.184) for every H, the frozen row ordinary tree-depth with the guard 2 <= k.  The
+    frozen row implies the live one: for k >= 2 through td <= ctd ([x194_td_of_ctd]), for k = 1 because the class is
+    the graph with no vertex ([x194_class_ctd1]).  The type below is the repair's exact certificate
+    (REPAIR_PROBES weaken: frozen -> live). *)
 Lemma clustered_chromatic_minor_class_treedepth_bound_statement_compat :
-  X194Legacy.clustered_chromatic_minor_class_treedepth_bound_statement <->
+  X194Legacy.clustered_chromatic_minor_class_treedepth_bound_statement ->
   clustered_chromatic_minor_class_treedepth_bound_statement.
 Proof.
-split=> h H k k2 td; have hc := h H k k2 td.
-all: by apply/x194_clustered_chromatic_minor_class_le_compat.
+move=> L H k hc.
+move: (hc) => [k0 _].
+case: k k0 hc => [//|[|k]] _ hc.
+- exact: x194_class_ctd1.
+- apply/x194_clustered_chromatic_minor_class_le_compat.
+  exact: L H k.+2 isT (x194_td_of_ctd hc).
+Qed.
+
+(** ** X194 re-encoding: the two parameters differ, kernel-checked (2K_2) *)
+
+(* 2K_2 on 'I_4: two disjoint edges, {0, 1} and {2, 3} (the vertices sharing val / 2) *)
+Definition x194_2K2_rel (x y : 'I_4) : bool := (x != y) && (val x %/ 2 == val y %/ 2).
+Lemma x194_2K2_sym : symmetric x194_2K2_rel.
+Proof. by move=> x y; rewrite /x194_2K2_rel eq_sym [val y %/ 2 == _]eq_sym. Qed.
+Lemma x194_2K2_irrefl : irreflexive x194_2K2_rel.
+Proof. by move=> x; rewrite /x194_2K2_rel eqxx. Qed.
+Definition x194_2K2 : sgraph := SGraph x194_2K2_sym x194_2K2_irrefl.
+
+(* a walk stays in its edge *)
+Lemma x194_2K2_walk (x : x194_2K2) (p : seq x194_2K2) :
+  path (--) x p -> val (last x p) %/ 2 = val x %/ 2.
+Proof.
+elim: p x => [|y q IH] x //= /andP [xy pq].
+rewrite IH //.
+by case/andP: xy => _ /eqP ->.
+Qed.
+
+(* td(2K_2) <= 2: rank by parity *)
+Lemma x194_td_2K2 : x194_treedepth_at_most x194_2K2 2.
+Proof.
+exists (fun v : x194_2K2 => Ordinal (ltn_pmod (val v) (isT : 0 < 2))) => x y p xy pth lst e.
+exfalso; move: xy; apply/negP; rewrite negbK; apply/eqP/val_inj.
+have d : val x %/ 2 = val y %/ 2 by rewrite -lst (x194_2K2_walk pth).
+have m : val x %% 2 = val y %% 2 by move/(congr1 val): e.
+by rewrite (divn_eq (val x) 2) (divn_eq (val y) 2) d m.
+Qed.
+
+Lemma x194_2K2_avoid (r : x194_2K2) : exists a b : x194_2K2, [/\ a != r, b != r & a -- b].
+Proof.
+case: r => [[|[|[|[|m]]]] pr].
+- by exists (@Ordinal 4 2 isT), (@Ordinal 4 3 isT).
+- by exists (@Ordinal 4 2 isT), (@Ordinal 4 3 isT).
+- by exists (@Ordinal 4 0 isT), (@Ordinal 4 1 isT).
+- by exists (@Ordinal 4 0 isT), (@Ordinal 4 1 isT).
+- by [].
+Qed.
+
+(* not ctd(2K_2) <= 2: whichever vertex is removed, an edge survives, and one rank cannot rank an edge *)
+Lemma x194_not_ctd_2K2_2 : ~ x194_ctd_at_most x194_2K2 2.
+Proof.
+case=> _ [r [rank rk]].
+have [a [b [ar br ab]]] := x194_2K2_avoid r.
+have ha : a \in ~: [set r] by rewrite !inE.
+have hb : b \in ~: [set r] by rewrite !inE.
+have ab' : (Sub a ha : induced (~: [set r])) != Sub b hb.
+  by apply: contraTneq ab => /(congr1 val) /= ->; rewrite sg_irrefl.
+have pth : path (--) (Sub a ha : induced (~: [set r])) [:: Sub b hb] by rewrite /= andbT.
+have e : rank (Sub a ha) = rank (Sub b hb).
+  by rewrite (ord1 (rank (Sub a ha))) (ord1 (rank (Sub b hb))).
+have [z [_ lt]] := rk _ _ _ ab' pth erefl e.
+by move: lt; rewrite (ord1 (rank z)) (ord1 (rank (Sub a ha))).
+Qed.
+
+(* ctd(2K_2) <= 3: remove vertex 0; the rest is ranked by parity *)
+Lemma x194_ctd_2K2_3 : x194_ctd_at_most x194_2K2 3.
+Proof.
+split => //; exists (@Ordinal 4 0 isT).
+exists (fun v : induced (~: [set (@Ordinal 4 0 isT : x194_2K2)]) =>
+          Ordinal (ltn_pmod (val (val v)) (isT : 0 < 2))) => x y p xy pth lst e.
+exfalso; move: xy; apply/negP; rewrite negbK; apply/eqP/val_inj/val_inj.
+have pth' : path (--) (val x) (map val p) by rewrite path_map.
+have d : val (val x) %/ 2 = val (val y) %/ 2.
+  by rewrite -lst -(last_map val) (x194_2K2_walk pth').
+have m : val (val x) %% 2 = val (val y) %% 2 by move/(congr1 val): e.
+by rewrite (divn_eq (val (val x)) 2) (divn_eq (val (val y)) 2) d m.
 Qed.
 
 Lemma x218_clustered_chromatic_class_le_compat (F : sgraph -> Prop) k :

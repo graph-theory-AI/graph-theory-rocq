@@ -191,6 +191,16 @@
       "family_id": "cops-and-robbers",
       "milestone": "post-rc-library-wave"
     },
+    "ctd_at_most": {
+      "class": "candidate_family",
+      "reason": "connected tree-depth at most k, by root removal (0 < k and td(H - r) <= k - 1 for some vertex r, over X194's vertex rankings): X194 (Norin, Scott, Seymour and Wood, arXiv:1708.02370v2, ClusteredColouring.arXiv2.tex l.147) and X218 (Hickingbotham, Kang, Oum, Steiner and Wood, arXiv:2308.15721v2, arXiv.tex l.153) have identical bodies; X218 imports X194, and X218 keeps its copy as integrated (Arthur's A3 of the X194 repair, Q3), to be unified by a later migration",
+      "members": [
+        "Chromatic.conjectures.X194.x194_ctd_at_most",
+        "Chromatic.conjectures.X218.x218_ctd_at_most"
+      ],
+      "family_id": "connected-treedepth",
+      "milestone": "post-rc-library-wave"
+    },
     "cycle_diagonal_count": {
       "class": "candidate_family",
       "reason": "diagonals of a cycle over the registered consecutive_in_cycle (XE1, XE2)",

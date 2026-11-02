@@ -3114,3 +3114,36 @@ x218_ctd_at_most H k -> ~ x218_ctd_at_most H k.-1 -> x218_clustered_chromatic_cl
   says why). `minor-theory/theories/conjectures/X271.v` is unchanged. In its Notes (l.48) only the adjective in
   "(the blocked row arxiv:2308.15721#00)" goes out of date; the next change to X271.v can drop the word under its own
   review (Marcol, X271's author, (317)).
+
+## chromatic-theory — `clustered_chromatic_minor_class_treedepth_bound_statement` re-encoded to connected tree-depth (2026-11-02)
+
+Item of coordination/PROGRAMME.md, section 3, Lancelot's lane: an A2 repair with the direction `weaken`. The Mac's scope
+assessment of 2026-11-02T06:41Z places it within that authority; the re-audit read is x194-reaudit-read-by-lancelot
+(Arthur's R1), the design x194-design-by-lancelot r1, and Arthur's A3 x194r-design-a3-by-arthur (FAITHFUL). The row
+arxiv:1708.02370#00 (`X194.v:73`) is frozen by the monochromatic family (`X194Legacy` in
+`chromatic-theory/theories/migration/monochromatic.v`, byte-identical); the repair entry is in
+`meta/migration_reports/monochromatic.spec.json`.
+
+- **Source** (the Mac's deposit coordination/sources/x194-source-mac-20261102): Norin, Scott, Seymour and Wood,
+  arXiv:1708.02370v2, ClusteredColouring.arXiv2.tex l.182-186, Conjecture 4: "For every graph H, chi_star(M_H) <= 2
+  ctd(H) - 2" (l.184). ctd (l.147): the minimum depth of a rooted tree whose closure contains H; td = ctd unless two
+  components attain td(H), and then ctd = td + 1.
+- **Before** (2026-07-17 / 07-18): ordinary tree-depth (`x194_treedepth_at_most`) with the guard `2 <= k`, stronger
+  than the source for H with two components of tree-depth td(H) >= 2 (informally; not known to be false).
+- **After**: the new local helper `x194_ctd_at_most H k` (`0 < k` and some vertex `r` with
+  `x194_treedepth_at_most (induced (~: [set r])) k.-1`; the body of X218's `x218_ctd_at_most`), no guard, and the
+  body's one replacement, whitespace-normalized as the migration report compares declaration texts:
+  `2 <= k -> x194_treedepth_at_most H k` -> the repaired text:
+
+```
+x194_ctd_at_most H k
+```
+
+- **Relation**: a WEAKENING, kernel-checked. In monochromatic.v,
+  `clustered_chromatic_minor_class_treedepth_bound_statement_compat` has exactly the type frozen -> live: for k >= 2
+  through `x194_td_of_ctd` (td <= ctd: r on top, walks avoiding r lifted by `x194_lift`); for k = 1 through
+  `x194_class_ctd1` (every graph with a vertex has the one-vertex H as a minor, `x194_ctd1_minor`).
+- **Teeth** (monochromatic.v): `x194_td_2K2`, `x194_not_ctd_2K2_2` and `x194_ctd_2K2_3`: on two disjoint edges,
+  td <= 2 but ctd = 3 exactly, so the frozen body claims 2 colours there where the source claims 4.
+- **Edge**: e168 (X218 -> X194) stays unscheduled. With both bounds on ctd it follows directly from the class inclusion
+  of the H-minor-free graphs in the odd-H-minor-free graphs; its note says so.

@@ -39,7 +39,14 @@
     "GTBase.monochromatic.non_monochromatic_onP",
     "Chromatic.migration.monochromatic.x181_event_weight_compat",
     "Chromatic.migration.monochromatic.x218_normalisation_defect",
-    "Chromatic.migration.monochromatic.x218_legacy_model_is_tree_model"
+    "Chromatic.migration.monochromatic.x218_legacy_model_is_tree_model",
+    "Chromatic.migration.monochromatic.x194_lift",
+    "Chromatic.migration.monochromatic.x194_td_of_ctd",
+    "Chromatic.migration.monochromatic.x194_ctd1_minor",
+    "Chromatic.migration.monochromatic.x194_class_ctd1",
+    "Chromatic.migration.monochromatic.x194_td_2K2",
+    "Chromatic.migration.monochromatic.x194_not_ctd_2K2_2",
+    "Chromatic.migration.monochromatic.x194_ctd_2K2_3"
   ],
   "downstream_client": "base/theories/examples/monochromatic.v",
   "summary": [
@@ -174,6 +181,25 @@
         "x194_clustered_chromatic_minor_class_le": "X194Legacy.x194_clustered_chromatic_minor_class_le"
       },
       "certificate": "Chromatic.migration.monochromatic.clustered_chromatic_minor_class_treedepth_bound_statement_compat",
+      "repair": {
+        "replace": [
+          "2 <= k -> x194_treedepth_at_most H k",
+          "x194_ctd_at_most H k"
+        ],
+        "direction": "weaken",
+        "doc_block_sha256": "f3f156c769e17dcc0ece9b9e97b9a6b048e4771ddb6cfd49064a99981512f21c",
+        "record": "meta/STATEMENT_IMPROVEMENTS.md",
+        "row_fields": [
+          "implemented_by",
+          "source_verified_by",
+          "source_verified_at",
+          "verification_note"
+        ],
+        "leg_fields": [
+          "commit",
+          "note"
+        ]
+      },
       "corpus": "v2"
     },
     {
