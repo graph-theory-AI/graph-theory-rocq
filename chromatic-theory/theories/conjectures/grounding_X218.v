@@ -328,7 +328,7 @@ Proof.
 split.
 - split=> //; exists (ord0, ord0); exists (fun _ => ord0) => x y [|z p] xy /=.
   + by move=> _ e; rewrite e eqxx in xy.
-  + by case/andP=> xz _; exact: (negP (x218_multipartite_1_edgeless (val x) (val z)) xz).
+  + by case/andP=> xz _; case: (negP (x218_multipartite_1_edgeless (val x) (val z)) xz).
 - case=> _ [r [rank _]].
   have [w wr] : exists (w : x218_complete_multipartite 1 2), w \in ~: [set r].
     case: (eqVneq r (ord0, ord0)) => [->|rn0]; first by exists (ord0, g218_o1); rewrite !inE.
