@@ -24990,13 +24990,13 @@
     ]
   },
   "counts": {
-    "files": 371,
-    "helpers": 2764,
+    "files": 373,
+    "helpers": 2766,
     "repeated_body_shapes": 152,
     "repeated_normalized_names": 222,
     "repeated_signature_shapes": 337,
-    "statements_excluded": 872,
-    "x_wave_helpers": 1603
+    "statements_excluded": 877,
+    "x_wave_helpers": 1605
   },
   "groups": {
     "body_shape_hash": {
@@ -27793,7 +27793,8 @@
       "2dfa0209a96d75a88801009d8ba7195a085ea00271e0a87197a15c4dd968dd2e": [
         "Chromatic.conjectures.X181.x181_clique_colourable",
         "Chromatic.conjectures.X261.x261_choosable_b",
-        "Chromatic.conjectures.X261.x261_cochromatic_at_most"
+        "Chromatic.conjectures.X261.x261_cochromatic_at_most",
+        "Chromatic.conjectures.X277.x277_correspondence_colourable"
       ],
       "2e34ca0733dcaa4bafbbadaf1fbf6cdff3e34458418b9b4d98d271c21358f851": [
         "Digraph.conjectures.X221.x221_tbar",
@@ -35047,6 +35048,25 @@
       "signature_shape_hash": "625dac751598ade908ec395151085f6a8ada8cc68113aca2d12c96a64ee52933"
     },
     {
+      "body_hash": "39082c8c9ddce90d33fe2b059d89f7df78f4217f305ec6477c6c0faedc7719bf",
+      "body_shape_hash": "39082c8c9ddce90d33fe2b059d89f7df78f4217f305ec6477c6c0faedc7719bf",
+      "declaration_hash": "ca58e948360d80c7a80d33a9ce8fe77834b19d6af0783961e649d5c2db7bd19d",
+      "direct_consumers": [
+        "Chromatic.conjectures.X277.correspondence_chromatic_random_graph_theta_n_over_log_n_statement"
+      ],
+      "kind": "Definition",
+      "line": 22,
+      "local_dependencies": [],
+      "name": "x277_correspondence_colourable",
+      "normalized_name": "correspondence_colourable",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X277.v",
+      "phase": "X277",
+      "qualified_name": "Chromatic.conjectures.X277.x277_correspondence_colourable",
+      "signature": "(G : sgraph) (k : nat) : bool",
+      "signature_shape_hash": "2dfa0209a96d75a88801009d8ba7195a085ea00271e0a87197a15c4dd968dd2e"
+    },
+    {
       "body_hash": "a252d3382e9e2e9f0450759c627d453616f368776f8069089a1ef10686104455",
       "body_shape_hash": "a252d3382e9e2e9f0450759c627d453616f368776f8069089a1ef10686104455",
       "declaration_hash": "878e6b7b38de02228ff230072604516c0b256a6acc9b7bcc0a598c1b95afbc67",
@@ -35064,6 +35084,25 @@
       "qualified_name": "Chromatic.conjectures.X28.x28_no_cycle_length_between",
       "signature": "(G : sgraph) (a b : nat) : Prop",
       "signature_shape_hash": "2d2ba99afb6352521678a4783f8f4e2987abd9b45e353d95d0c92302b5da996d"
+    },
+    {
+      "body_hash": "a1a0a951365bd50f76ed7836d3857a7bb212b852a9f1450828aaf1a16c30ce50",
+      "body_shape_hash": "a1a0a951365bd50f76ed7836d3857a7bb212b852a9f1450828aaf1a16c30ce50",
+      "declaration_hash": "118a9c1e0d7ea9cffd7f8cc1831e81557e077d94280ce0e3c86be25e6d3356b0",
+      "direct_consumers": [
+        "Chromatic.conjectures.X281.generalised_chromatic_polynomials_determine_almost_every_graph_statement"
+      ],
+      "kind": "Definition",
+      "line": 21,
+      "local_dependencies": [],
+      "name": "x281_gen_chromatic_poly",
+      "normalized_name": "gen_chromatic_poly",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X281.v",
+      "phase": "X281",
+      "qualified_name": "Chromatic.conjectures.X281.x281_gen_chromatic_poly",
+      "signature": "(G H : sgraph) (k : nat) : nat",
+      "signature_shape_hash": "ee5e91dbeba53a0f0e8fc132059fcfc3ed14e77217a98672ed4838b60de87a7f"
     },
     {
       "body_hash": "56501c3ad9fa41f9eed4b94da49f11e929de90da6d61fd67360d8c50660c4379",
