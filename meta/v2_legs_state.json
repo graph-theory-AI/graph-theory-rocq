@@ -4401,11 +4401,14 @@
    "note": "Authored in X59.v:c4_free_subgraph_polynomial_average_degree_statement. Encodes the polynomial threshold question for C4-free subgraphs of prescribed average degree."
   },
   "axv_2307_15048_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x277-correspondence-random-graph-chromatic-concentration",
+   "package": "chromatic-theory",
+   "note": "Authored in X277.v:correspondence_chromatic_random_graph_theta_n_over_log_n_statement. Conjecture 1.4 of arXiv:2307.15048v1 (main.tex l.246-248) as printed, p in (0, 1]: an fg_whp clause over G(n, (b - a)/b) for rational 0 < p < 1 and an eventually clause for p = 1 (G(n, 0) is edgeless). Theta(n / log n) with nat constants and trunc_log 2; x277_correspondence_colourable = DP-colourability with k colours (l.194-201; X159 at k = 3). FALSE AS PRINTED at p = 1 (kernel: g277_p_one_clause_false); a question for Marc. Pinned open."
   },
   "axv_2307_15512_00": {
    "statement": "done",
@@ -7968,11 +7971,14 @@
    "audit_page": "todo"
   },
   "erdos_1156": {
-   "statement": "todo",
+   "statement": "partial",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x277-correspondence-random-graph-chromatic-concentration",
+   "package": "chromatic-theory",
+   "note": "PARTIAL (proxy) — The row asks two questions; the second (some omega -> oo with P(|chi(G(n,1/2)) - f(n)| < omega(n)) < 1/2 for every f and all large n) is encoded. The first (concentration on at most C values) has no single fixed meaning: the literature reads C consecutive values, answered negatively by Heckel (arXiv:1906.11808v2 l.120-122), while the page does not say consecutive. Open at the pin. Authored in X277.v:random_graph_chromatic_number_not_concentrated_in_slowly_growing_windows_statement."
   },
   "erdos_1178": {
    "statement": "todo",
