@@ -12797,6 +12797,76 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Arthur (X278 wave verification, 2026-11-02)",
       "faithfulness_result": "Readback 2026-11-02 (verifier Arthur): 3/3 PASS against the pinned texts and the sources, at math/marcol-x278-20261102 = 023e2e6ead6a69bf4ab1150350824d04cddf9de0 (five commits on work/coordinator fd2f2b81), after my design read ((405), FAITHFUL 3/3, no blocking item, optional O1 taken; packet x278-design-a3-by-arthur 16ef9534) of x278-design-by-marcol r1 (4c045df8). grounding_X278.v at 023e2e6e is byte-identical to the r1 packet; X278.v differs from it only by O1 (row 3's Notes: the Alon-Moitra-Sudakov graphs violate the body for infinitely many n, which already refutes it), a comment. No local helper. arxiv:2102.10220#00, open for r >= 4: for r >= 3 constants a, A >= 1, then for k >= 1 a threshold n0, then for n >= n0 every K_r-subgraph-free G on n vertices has F in E(G) with chi(G - F) <= k and |F|^(r-2) k^(r-1) <= (A n^2)^(r-2) (Theorem 1.1), and some K_r-free G on n vertices has n^(2(r-2)) <= (a |F|)^(r-2) k^(r-1) for every such F (the conjecture of l.176; r = 3 by Theorem 1.4); r - 2 and r - 1 guarded by 3 <= r. arxiv:2102.10220#01, open: the same two clauses for W_(2r+1) = add_node (cycle_graph (2r+1)) [set: _] (2r + 2 vertices, the l.198 wheel), r >= 1, k >= 2, exponent 2 - 1/(r+1) cleared by the power r + 1; the large-n-in-k reading is the only meaningful one (n = k gives h = 0). studies:std_meshulam_s_conjecture_on_ruzsa_szemer_di_graphs, as stated, FALSE at the pin (informal: Alon-Moitra-Sudakov, l.124-127, l.142-143): for every a, b >= 1 some n0 such that no graph on n >= n0 vertices with an (r,t)-RS partition (l.128: t pairwise disjoint induced matchings of size r covering E(G)) has n^2 <= a r t and n <= r^b; the status correction is Lancelot's literature item. Grounding: hyp_inhabited at r = 3, k = 2 (K_2), r = 1, k = 2 (K_2, W_3 = K_4) and K_(m,m) as a (1, m^2)-RS graph; not_trivially_true drops the threshold (false at n <= k: chi <= |G|) and r >= n^(1/b) (false at K_(n0,n0)), each variant implying its row; every claim names its statement (6/6). Lint: three exists-after-graph-forall findings, three allowlist entries with accurate reasons (51 -> 54). Metadata: source_hash 3/3 recomputed from b72c5857, equal; waves.X278 = the r1 packet's x278-wave.json and the only waves change, helper_ownership {} and helper_sanity [] in every row, its verifier fields empty before this; legs notes 511 / 458 / 487 = \"Authored in X278.v:<name>. \" + the wave note, no other legs entry changed; README 590 / 11 / 39 / 1,033 -> 593 / 11 / 39 / 1,030; LANDED gains X278 extremal-graph-theory; the allowlist = the base + the packet's three entries. Dev run 1 (x278-dev-by-marcol, 831dc123, -c OK, 39 files): PASS-WITH-EXPECTED, 30 steps, 26 rc 0, only W1 / A3a / A3 / A10 on the empty fields; the runner switched to the branch and ended at 023e2e6e; W1 12 / 14 (package compiles; Print Assumptions clean on 3 / 3 statements + 6 certificates; 30 exact-type probes), W2 915 / 915, W3 3 probed 0 flagged, W4 0 active (54 allowlisted); written only the three generated files."
+    },
+    "X277": {
+      "phase": "X277",
+      "repo": "chromatic-theory",
+      "defines_file": "X277.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X277 (Any lane; routed by Lancelot (348), (367); design x277-design-by-arthur r1), branch math/arthur-x277-20261102",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x277-correspondence-random-graph-chromatic-concentration",
+      "rows": {
+        "axv_2307_15048_00": {
+          "formal_name": "correspondence_chromatic_random_graph_theta_n_over_log_n_statement",
+          "source_hash": "5d7d85f81d6117908e5688f27d698d4b91363556001fd54d541d746d539875fa",
+          "note": "Conjecture 1.4 of arXiv:2307.15048v1 (main.tex l.246-248) as printed, p in (0, 1]: an fg_whp clause over G(n, (b - a)/b) for rational 0 < p < 1 and an eventually clause for p = 1 (G(n, 0) is edgeless). Theta(n / log n) with nat constants and trunc_log 2; x277_correspondence_colourable = DP-colourability with k colours (l.194-201; X159 at k = 3). FALSE AS PRINTED at p = 1 (kernel: g277_p_one_clause_false); a question for Marc. Pinned open.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g277_dp_hyp_inhabited",
+              "claim": "g277_dp_hyp_claim",
+              "references": [
+                "correspondence_chromatic_random_graph_theta_n_over_log_n_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g277_dp_not_trivially_true",
+              "claim": "g277_dp_ntt_claim",
+              "references": [
+                "correspondence_chromatic_random_graph_theta_n_over_log_n_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g277_cc_helper_sanity",
+                "claim": "g277_cc_helper_claim",
+                "references": [
+                  "x277_correspondence_colourable"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_1156": {
+          "formal_name": "random_graph_chromatic_number_not_concentrated_in_slowly_growing_windows_statement",
+          "source_hash": "4e3030f9ef29d88fa1ed0543082d84be434e3cf54a636947a366ee5107b02914",
+          "state": "partial",
+          "partial_reason": "The row asks two questions; the second (some omega -> oo with P(|chi(G(n,1/2)) - f(n)| < omega(n)) < 1/2 for every f and all large n) is encoded. The first (concentration on at most C values) has no single fixed meaning: the literature reads C consecutive values, answered negatively by Heckel (arXiv:1906.11808v2 l.120-122), while the page does not say consecutive. Open at the pin.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g277_win_hyp_inhabited",
+              "claim": "g277_win_hyp_claim",
+              "references": [
+                "random_graph_chromatic_number_not_concentrated_in_slowly_growing_windows_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g277_win_not_trivially_true",
+              "claim": "g277_win_ntt_claim",
+              "references": [
+                "random_graph_chromatic_number_not_concentrated_in_slowly_growing_windows_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {
+        "x277_correspondence_colourable": {
+          "classification": "paper_specific",
+          "reason": "Correspondence (DP-) colourability with k colours per vertex (Dvorak and Yepremyan, arXiv:2307.15048v1, main.tex l.194-201): every assignment of symmetric partial matchings between the lists {u} x I_k and {v} x I_k on the edges admits a colouring avoiding them. Chromatic.conjectures.X159 states the same notion at k = 3 as a Prop (x159_correspondence_3_colourable; grounding_X277 proves them equivalent); X159 cannot be generalised in place without changing its reviewed statement. No inventory normalized name correspondence_colourable."
+        }
+      }
     }
   }
 }
