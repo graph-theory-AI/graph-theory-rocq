@@ -24990,13 +24990,13 @@
     ]
   },
   "counts": {
-    "files": 373,
-    "helpers": 2766,
+    "files": 375,
+    "helpers": 2768,
     "repeated_body_shapes": 152,
     "repeated_normalized_names": 222,
     "repeated_signature_shapes": 337,
-    "statements_excluded": 877,
-    "x_wave_helpers": 1605
+    "statements_excluded": 882,
+    "x_wave_helpers": 1607
   },
   "groups": {
     "body_shape_hash": {
@@ -29046,6 +29046,7 @@
         "Extremal.conjectures.X180.x180_average_degree_logarithmic",
         "Extremal.conjectures.X180.x180_multitasker_capacity_positive",
         "Extremal.conjectures.X229.x229_robust_sublinear_expander",
+        "Extremal.conjectures.X282.x282_ramsey_size_linear",
         "Extremal.conjectures.X96.x96_c4_free",
         "Extremal.conjectures.XE1.xe1_every_7_set_has_triangle",
         "Extremal.conjectures.XE1.xe1_h5_graph",
@@ -60424,6 +60425,44 @@
       "qualified_name": "Extremal.conjectures.X263.x263_comparable_pairs",
       "signature": "(n : nat) (F : {set {set 'I_n}}) : nat",
       "signature_shape_hash": "e465f42eb6fc5086b2d22cb3b8533d20d0e4ea4a1007f457aab9d2518bd12bbf"
+    },
+    {
+      "body_hash": "eac828acf0c9ed9ff4b2d7f540bdb1d511f06482737482e7246c49c16d56a438",
+      "body_shape_hash": "eac828acf0c9ed9ff4b2d7f540bdb1d511f06482737482e7246c49c16d56a438",
+      "declaration_hash": "a21ee52dc8b311ef10127cf23302923acb476254e8f8fc658139508a7bdba68f",
+      "direct_consumers": [
+        "Extremal.conjectures.X280.pure_pairs_linear_side_small_congestion_statement"
+      ],
+      "kind": "Definition",
+      "line": 8,
+      "local_dependencies": [],
+      "name": "x280_congestion_at_most",
+      "normalized_name": "congestion_at_most",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X280.v",
+      "phase": "X280",
+      "qualified_name": "Extremal.conjectures.X280.x280_congestion_at_most",
+      "signature": "(H : sgraph) (q : nat) : Prop",
+      "signature_shape_hash": "618a60b31330e24879ef37a01aabb77bde72e24331360d43087e2d2fca450a54"
+    },
+    {
+      "body_hash": "d12065ef360dd954bded118c8a5de60c8142d4d022ad6eb8c2e963bfd5215fac",
+      "body_shape_hash": "f4b004feb67e7cbcf0128faa118e44e9cca638fb68c4ffaee3d8714be7a391ca",
+      "declaration_hash": "d75d0287be5d3fde61371586616872b51e26c1c7427e8bf0c203c83f637110f3",
+      "direct_consumers": [
+        "Extremal.conjectures.X282.erdos_79_minimal_non_ramsey_size_linear_statement"
+      ],
+      "kind": "Definition",
+      "line": 10,
+      "local_dependencies": [],
+      "name": "x282_ramsey_size_linear",
+      "normalized_name": "ramsey_size_linear",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X282.v",
+      "phase": "X282",
+      "qualified_name": "Extremal.conjectures.X282.x282_ramsey_size_linear",
+      "signature": "(G : sgraph) : Prop",
+      "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
     },
     {
       "body_hash": "857e81095417ec9a7b32ad78ef7497e0e68db404b9edf9f8ff9d7b7f4a404cbd",
