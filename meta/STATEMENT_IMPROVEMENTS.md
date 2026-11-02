@@ -3087,15 +3087,11 @@ arxiv:2308.15721#00 (`X218.v:261`) is frozen by the monochromatic family (`X218L
   has tree-depth at most k).
 - **After**: the new local helpers `x218_odd_minor_tree_model` (the body of X271's `x271_odd_minor_tree_model`) and
   `x218_ctd_at_most H k` (`0 < k` and some vertex `r` with `x194_treedepth_at_most (induced (~: [set r])) k.-1`), and
-  the body's one replacement, `    1 <= k -> ... (k - 1)` (five lines) -> the repaired text:
+  the body's one replacement, from `1 <= k -> ... (k - 1)` (whitespace-normalized, as the migration report compares
+  declaration texts) to the repaired text:
 
 ```
-    x218_ctd_at_most H k ->
-    ~ x218_ctd_at_most H k.-1 ->
-    x218_clustered_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (2 * k - 2) /\
-    x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (k - 1) /\
-    (forall j : nat, j.+1 < k ->
-       ~ x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) j)
+x218_ctd_at_most H k -> ~ x218_ctd_at_most H k.-1 -> x218_clustered_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (2 * k - 2) /\ x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (k - 1) /\ (forall j : nat, j.+1 < k -> ~ x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) j)
 ```
 
   `x218_odd_minor` and `x218_connected_treedepth_at_most` stay unchanged for the frozen chain and their grounding

@@ -201,8 +201,8 @@
       "certificate": "Chromatic.migration.monochromatic.odd_minor_free_defective_clustered_treedepth_statement_compat",
       "repair": {
         "replace": [
-          "    1 <= k ->\n    x218_connected_treedepth_at_most H k ->\n    ~ x218_connected_treedepth_at_most H k.-1 ->\n    x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor G H) (k - 1) /\\\n    x218_clustered_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor G H) (k - 1)",
-          "    x218_ctd_at_most H k ->\n    ~ x218_ctd_at_most H k.-1 ->\n    x218_clustered_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (2 * k - 2) /\\\n    x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (k - 1) /\\\n    (forall j : nat, j.+1 < k ->\n       ~ x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) j)"
+          "1 <= k -> x218_connected_treedepth_at_most H k -> ~ x218_connected_treedepth_at_most H k.-1 -> x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor G H) (k - 1) /\\ x218_clustered_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor G H) (k - 1)",
+          "x218_ctd_at_most H k -> ~ x218_ctd_at_most H k.-1 -> x218_clustered_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (2 * k - 2) /\\ x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (k - 1) /\\ (forall j : nat, j.+1 < k -> ~ x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) j)"
         ],
         "direction": "re-encode",
         "relation": "({frozen} -> True) /\\ ({live} -> True)",
