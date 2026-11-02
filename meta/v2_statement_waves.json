@@ -13057,6 +13057,115 @@
       },
       "faithfulness_verified_by": "Arthur (X280 wave verification, 2026-11-02)",
       "faithfulness_result": "Readback 2026-11-02 (verifier Arthur): 2/2 PASS against the pinned texts and the sources (arxiv:2201.04062#00 done, erdos:805 done), at math/marcol-x280-20261102 = 2921ae3754f56c111fa9f577051286bab34278da (five commits on work/coordinator 8c39c74f), after my design read ((419), FAITHFUL 2/2, packet x280-design-a3-by-arthur c016486d, no blocking item). At 2921ae37 grounding_X280.v is the design packet's (249b7e48) byte for byte, and X280.v differs only by my O1, taken as an erdos:805 Notes sentence (both bounds asymptotic, so open in either base). Helper x280_congestion_at_most H q = l.139-144 cleared by q|F| > 0 (q|F| <= q(|S| - 1) + |F| on every subgraph (S, F) with an edge; |S| >= 2 there; forests hold it for every q); the literal subgraph form, equivalent to the induced one; no names or body group; paper_specific; its sanity listed in both rows. arxiv:2201.04062#00, Possibility 1.6 encoded affirmatively in the source's order c, xi, H, eps, G with c = 1/k, xi = 1/q, eps = 1/m (reciprocals lose nothing: 1/k <= c strengthens |B| >= eps |G|^(1-c) when |G| > 1; smaller xi, eps weaken); |G| <= m|A| and |G|^(k-1) <= (m|B|)^k exact (k-1 under 0 < k); induced H-freeness and complement-H-freeness (l.92-93), the pure pair disjoint and complete or anticomplete (l.86-90); the tiny H (K_0, K_1, K_2, its complement) vacuous for |G| > 1 as in the source; open at l.204. erdos:805, the particular question g(n) = (log n)^3 encoded affirmatively for all large n, \"For which g(n)\" named as not formalized (leg done, as X241 erdos:1182 and X247 erdos:1033); base 2 and the threshold conventions of ABS l.189, both exact: n <= 2^|K| for |K| >= log_2 n, and the rational test (2^a < n^b -> a^3 <= |S| b^3) for |S| >= (log_2 n)^3, which is the ceiling test with no floor-log; sets of at least g(n) vertices = subgraphs on g(n) vertices by monotonicity; open at the pin (ABS l.164; AS07 does not settle it). Grounding: hyp row 1 at k = 1 with H0 = add_node K_2 set0 (congestion <= 1/q for every q) and G = K_2 (free of H0 and of its complement); hyp row 2 with K_n and the full vertex set at n = 2^j, j >= 10 (j^3 <= 2^j); ntt row 1 drops |G| > 1 (K_1), ntt row 2 drops the size hypothesis (S = {v}, n0 + 3 > 2), each variant implying its row; helper_sanity: at most one edge is at most 1/q, K_3 is not at most 1/4; no theorem of exact type statement or ~ statement; every claim names its statement or the helper. Metadata: source_hash 2/2 recomputed from b72c5857, equal; waves.X280 = the packet's x280-wave.json, the only waves change, its verifier fields empty before this; legs: both rows done / done, notes 519 / 481 = the builder's forms, no other legs entry changed; README 594 / 12 / 39 / 1,028 -> 596 / 12 / 39 / 1,026; LANDED gains X280 extremal-graph-theory; allowlist 54 -> 56 = the base plus the packet's two exists-after-graph-forall entries, whose texts are accurate. Dev run 1 (x280-dev-by-marcol f0871e2d, -c OK, 39 files): PASS-WITH-EXPECTED, 30 steps, 26 rc 0, only W1 / A3a / A3 / A10 on the empty fields; W1 12 / 14 (helper ownership PASS; Print Assumptions clean on 2 / 2 statements + 6 grounding certificates; 20 exact-type probes PASS), W2 919 / 919, W3 2 probed 0 flagged, W4 0 active (56 allowlisted), A12 101 / 101 migration reports OK; written only the three generated files."
+    },
+    "X282": {
+      "phase": "X282",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X282.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X282 (A3 verifier Arthur; routing Lancelot (408); selection x282-selection-by-marcol, design x282-design-by-marcol r1), branch math/marcol-x282-20261102, 2026-11-02",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x282-list-ramsey-erdos-79-k-connected-growth",
+      "rows": {
+        "axv_1902_07018_01": {
+          "formal_name": "list_ramsey_two_colour_clique_equality_statement",
+          "source_hash": "e1c164779f1fb16cfcb1b3d697c3757b881bcfc1bb7f9a0c5b432febfa900ee4",
+          "note": "The open clique question of Alon, Bucic, Kalvari, Kuperwasser and Szabo (arXiv:1902.07018v2, source.tex l.417-419; pinned open), the affirmative answer R_l(K_r, 2) = R(K_r, 2) for r >= 4 through its open half: an order n with a 2-colouring (lists {1, 2}) avoiding a monochromatic K_r has, for every valid 2-list assignment, an avoiding L-colouring (definitions l.197-205, l.245-274; R_l <= R is l.280). OPEN at the pin.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g282_lr_hyp_inhabited",
+              "claim": "g282_lr_hyp_claim",
+              "references": [
+                "list_ramsey_two_colour_clique_equality_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g282_lr_not_trivially_true",
+              "claim": "g282_lr_ntt_claim",
+              "references": [
+                "list_ramsey_two_colour_clique_equality_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g282_rsl_helper_sanity",
+                "claim": "g282_rsl_helper_claim",
+                "references": [
+                  "x282_ramsey_size_linear"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_79": {
+          "formal_name": "erdos_79_minimal_non_ramsey_size_linear_statement",
+          "source_hash": "061aac1907532ebfdf5bbb4f90a5455d79dcf46c483baab92e23d929e53145bc",
+          "note": "Erdos Problems #79 (Erdos, Faudree, Rousseau and Schelp; pinned solved), the affirmative answer: graphs of unbounded order that are not Ramsey size-linear while every proper subgraph (smaller |V| + |E|) is, where r(G, H) <= C e(H) for all H without isolated vertices (Wigderson, arXiv:2409.05931v2, revised.tex l.60-66). PROVED before the pin by Wigderson, non-constructively.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g282_e79_hyp_inhabited",
+              "claim": "g282_e79_hyp_claim",
+              "references": [
+                "erdos_79_minimal_non_ramsey_size_linear_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g282_e79_not_trivially_true",
+              "claim": "g282_e79_ntt_claim",
+              "references": [
+                "erdos_79_minimal_non_ramsey_size_linear_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g282_rsl_helper_sanity",
+                "claim": "g282_rsl_helper_claim",
+                "references": [
+                  "x282_ramsey_size_linear"
+                ]
+              }
+            ]
+          }
+        },
+        "std_pavez_sign_piga_sanhueza_matamala_conjecture_on": {
+          "formal_name": "k_connected_ramsey_growth_statement",
+          "source_hash": "e07e38c9df90548dd5ec83994d5a85b64a05ad80c42c8ab2abf0740de2be4c99",
+          "note": "Conjecture 16 of Pavez-Signe, Piga and Sanhueza-Matamala (arXiv:2209.05455v3, main.tex l.486-489; pinned open): for k >= 2 and every f with n <= f(n) <= R(K_n), k-connected graphs G_n on n vertices for all n >= n0 with R(G_n) <= a f(n) and f(n) <= b R(G_n). PROVED before the pin by Ahme and Scott (arXiv:2311.01887v1, Theorem 3, main.tex l.44-47); lit22 records the status.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g282_kc_hyp_inhabited",
+              "claim": "g282_kc_hyp_claim",
+              "references": [
+                "k_connected_ramsey_growth_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g282_kc_not_trivially_true",
+              "claim": "g282_kc_ntt_claim",
+              "references": [
+                "k_connected_ramsey_growth_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g282_rsl_helper_sanity",
+                "claim": "g282_rsl_helper_claim",
+                "references": [
+                  "x282_ramsey_size_linear"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x282_ramsey_size_linear": {
+          "classification": "paper_specific",
+          "reason": "Ramsey size-linear of erdos:79 (Erdos, Faudree, Rousseau and Schelp, as Wigderson states it, arXiv:2409.05931v2, revised.tex l.62): r(G, H) <= C e(H) for every graph H without isolated vertices, read through XE1's xe1_graph_ramsey_number and GTBase min_degree_at_least."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
