@@ -3208,11 +3208,14 @@
    "audit_page": "todo"
   },
   "axv_2201_04062_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x280-pure-pairs-linear-side-erdos-805",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X280.v:pure_pairs_linear_side_small_congestion_statement. Possibility 1.6 of Scott, Seymour and Spirkl (arXiv:2201.04062v2, main.tex l.198-204; pinned open), the affirmative answer in the source's order c, xi, H, eps, G with c = 1/k, xi = 1/q, eps = 1/m: for every H of congestion at most 1/q (l.139-144), every H-free and complement-H-free G (induced, l.92-93) with |G| > 1 has a pure pair A, B (l.89-90) with |G| <= m|A| and |G|^(k-1) <= (m|B|)^k. OPEN at the pin (\"We were unable to decide this\", l.204)."
   },
   "axv_2201_04062_01": {
    "statement": "todo",
@@ -9472,11 +9475,14 @@
    "audit_page": "todo"
   },
   "erdos_805": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x280-pure-pairs-linear-side-erdos-805",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X280.v:erdos_805_log_cubed_window_statement. Erdos Problems #805 (Erdos and Hajnal; pinned open): the specific question g(n) = (log n)^3, affirmative, for all large n, with base 2 and exact thresholds as Alon, Bucic and Sudakov read it (arXiv:2004.04718v2, l.164, l.189): a graph on n vertices in which every vertex set of at least (log_2 n)^3 vertices holds a clique and an independent set of size at least log_2 n. \"For which g(n)\" is not formalized. OPEN at the pin."
   },
   "erdos_807": {
    "statement": "todo",
