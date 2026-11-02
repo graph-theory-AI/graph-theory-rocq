@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Thirty-two
+corrections are applied explicitly (ERRATA below) since the review files predate them. Thirty-three
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -66,7 +66,9 @@ Yao and Zhou's conjecture on the edge density of 4-critical planar graphs, behin
 Dvorak and Feghali (arXiv:2311.03132v1, Theorem 1: L = 5/2); Hajebi's clique-cover conjecture, behind
 wave X276, proved by Nguyen, Scott, Seymour and Thomasse (arXiv:2211.12065v1, Theorem 1.6); and the
 question of Javadi and Hajebi on linear clique covers, answered negatively in the same record (Theorem
-1.3).
+1.3). Meshulam's conjecture on Ruzsa-Szemeredi graphs, behind wave X278, was refuted before the pin by
+Alon, Moitra and Sudakov (STOC 2012; JEMS 15 (2013)), as its own record reports (arXiv:2001.00387v1,
+main.tex l.124-127 and l.140-143).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -429,6 +431,15 @@ ERRATA = [
      "on n vertices with alpha(G) <= 3 requires C n^(6/5) / (log n)^2 cliques in every clique cover; l.127-128 there "
      "present it as a disproof. The row is the question of Javadi and Hajebi: do all graphs G with alpha(G) at most a "
      "constant admit clique covers of size O(|G|)?"),
+    # literature status correction (Lancelot's lane, lit20; the studies row behind wave X278, refuted before the
+    # corpus pin as its own record reports; the encoded statement is kept)
+    ("studies", "std_meshulam_s_conjecture_on_ruzsa_szemer_di_graphs", "disproved",
+     "Literature: refuted before the corpus pin by Alon, Moitra and Sudakov, 'Nearly complete graphs decomposable into "
+     "large induced matchings and their applications' (STOC 2012; J. Eur. Math. Soc. 15 (2013), 1575-1596), as the "
+     "row's own record reports: Alon and Shraibman, arXiv:2001.00387v1 (2 January 2020), main.tex l.124-127, (r,t)-RS "
+     "graphs on n vertices with r = n^(1-o(1)) and rt = (1-o(1)) C(n,2); l.142-143 there: this 'disproved Meshulam's "
+     "conjecture in a strong form'. The row is Meshulam's conjecture as quoted at l.140-141: there are no (r,t)-RS "
+     "graphs (l.128) with both rt = Theta(C(n,2)) and r >= n^Omega(1). The primary paper was not read here."),
 ]
 
 
@@ -1037,7 +1048,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 32 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 33 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "

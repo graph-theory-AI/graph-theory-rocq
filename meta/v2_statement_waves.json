@@ -4273,14 +4273,14 @@
       "source_verified_by": "Arthur (X194 repair A3 verifier, 2026-11-02: 1708.02370v2 ClusteredColouring.arXiv2.tex (sha256 1f95072d) l.147 and l.182-186 from the Mac's deposit x194-source-mac-20261102; packet x194r-design-a3-by-arthur, SHA256SUMS 6eed116d)",
       "source_verified_at": "2026-11-02",
       "commit": "x194-connected-treedepth-reencoding",
-      "faithfulness_verified_by": "Adversarial repair verification, machine probes (2026-07-18)",
+      "faithfulness_verified_by": "Adversarial repair verification, machine probes (2026-07-18); Arthur (X194 repair A3 design read, 2026-11-02)",
       "rows": {
         "axv_1708_02370_00": {
           "formal_name": "clustered_chromatic_minor_class_treedepth_bound_statement",
           "note": "Re-encoded 2026-11-02 (coordination/PROGRAMME.md section 3, A2 with the direction weaken; frozen by the monochromatic family): Conjecture 4 of arXiv:1708.02370v2 as printed (l.184), chi_star of the H-minor-free class <= 2 ctd(H) - 2 for every H, over the source's connected tree-depth (x194_ctd_at_most, l.147), with no guard. The frozen body (ordinary tree-depth, guard 2 <= k) implies it (kernel-checked); it was stronger than the source for H with two components of tree-depth td(H) >= 2."
         }
       },
-      "faithfulness_result": "Quantifier repair CONFIRMED correctly implemented, but a degenerate-parameter hole survived and was machine-refuted; FIXED same day: 2<=k guard added (treedepth-1/edgeless-H hole: unguarded form was machine-refuted axiom-free via H=I2, 0 colours, K1)."
+      "faithfulness_result": "Quantifier repair CONFIRMED correctly implemented, but a degenerate-parameter hole survived and was machine-refuted; FIXED same day: 2<=k guard added (treedepth-1/edgeless-H hole: unguarded form was machine-refuted axiom-free via H=I2, 0 colours, K1). Superseded 2026-11-02: re-encoded to connected tree-depth without the guard (A2, direction weaken; frozen X194Legacy -> live kernel-checked in monochromatic.v); A3 design read FAITHFUL (x194r-design-a3-by-arthur 6eed116d)."
     },
     "X195": {
       "phase": "X195",

@@ -3115,7 +3115,7 @@ x218_ctd_at_most H k -> ~ x218_ctd_at_most H k.-1 -> x218_clustered_chromatic_cl
   "(the blocked row arxiv:2308.15721#00)" goes out of date; the next change to X271.v can drop the word under its own
   review (Marcol, X271's author, (317)).
 
-## chromatic-theory — `clustered_chromatic_minor_class_treedepth_bound_statement` re-encoded to connected tree-depth (2026-11-02)
+## chromatic-theory — `clustered_chromatic_minor_class_treedepth_bound_statement` on connected tree-depth (2026-11-02)
 
 Item of coordination/PROGRAMME.md, section 3, Lancelot's lane: an A2 repair with the direction `weaken`. The Mac's scope
 assessment of 2026-11-02T06:41Z places it within that authority; the re-audit read is x194-reaudit-read-by-lancelot
