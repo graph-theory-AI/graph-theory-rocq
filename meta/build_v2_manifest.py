@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Twenty-nine
+corrections are applied explicitly (ERRATA below) since the review files predate them. Thirty-two
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -61,7 +61,12 @@ answered in its own record (Dvorak, Kaiser and Kral', arXiv:1506.01412v3, Theore
 conjecture on exponentially many 3-colourings of triangle-free planar graphs, behind wave X272 (refuted
 by Thomassen in 2021, and by Dvorak and Postle, arXiv:2108.12669v1, Theorem 1). The Kalai-Meshulam
 conjecture on ternary graphs, behind wave X274, is solved in its own record (Chudnovsky, Scott, Seymour
-and Spirkl, arXiv:1810.00065v1, Theorem 1.2).
+and Spirkl, arXiv:1810.00065v1, Theorem 1.2). Three studies rows were settled before the corpus pin:
+Yao and Zhou's conjecture on the edge density of 4-critical planar graphs, behind wave X275, refuted by
+Dvorak and Feghali (arXiv:2311.03132v1, Theorem 1: L = 5/2); Hajebi's clique-cover conjecture, behind
+wave X276, proved by Nguyen, Scott, Seymour and Thomasse (arXiv:2211.12065v1, Theorem 1.6); and the
+question of Javadi and Hajebi on linear clique covers, answered negatively in the same record (Theorem
+1.3).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -404,6 +409,24 @@ ERRATA = [
      "and the number with odd cardinality differ by at most one, a graph being ternary if no induced cycle has length a "
      "multiple of three (l.83); equivalently |f_G| <= 1 for f_G the sum of (-1)^|A| over all stable sets A (abstract, "
      "l.71-77). The row is the Kalai-Meshulam conjecture of the late 1990s (l.84-86)."),
+    # literature status corrections (Lancelot's lane; the studies rows behind waves X275 and X276, and a question of
+    # the same record, settled before the corpus pin; the encoded statements are kept)
+    ("studies", "std_yao_zhou_conjecture_on_the_edge_density_of_4_cri", "disproved",
+     "Literature: refuted by Dvorak and Feghali, arXiv:2311.03132v1 (6 November 2023), Theorem 1 (main.tex l.98-100): "
+     "L = 2.5, for L the limsup of |E(G)| / |V(G)| over all 4-critical planar graphs G (l.92-94); l.106-107 there: it "
+     "refutes the conjecture of Yao and Zhou that L = 7/3. The row is that conjecture, in the limsup form of l.92-94 "
+     "(the original paper, arXiv:1509.00760v1, states it for the supremum)."),
+    ("studies", "std_hajebi_s_conjecture", "solved",
+     "Literature: proved by Nguyen, Scott, Seymour and Thomasse, arXiv:2211.12065v1 (22 November 2022), Theorem 1.6 "
+     "(main.tex l.152-163), which l.150 calls a proof of Conjecture 1.5 (l.147-149, Hajebi): for every integer t >= 1 "
+     "there is eps > 0 such that every K_{t,t}-free graph G (no induced K_{t,t}, l.100) has a clique cover of size "
+     "O(|G|^(2 - eps))."),
+    ("studies", "std_javadi_hajebi_question_linear_clique_covers_for", "disproved",
+     "Literature: answered negatively in its own record by Nguyen, Scott, Seymour and Thomasse, arXiv:2211.12065v1 "
+     "(22 November 2022), Theorem 1.3 (main.tex l.131-135): there is C > 0 such that for infinitely many n some graph G "
+     "on n vertices with alpha(G) <= 3 requires C n^(6/5) / (log n)^2 cliques in every clique cover; l.127-128 there "
+     "present it as a disproof. The row is the question of Javadi and Hajebi: do all graphs G with alpha(G) at most a "
+     "constant admit clique covers of size O(|G|)?"),
 ]
 
 
@@ -1012,7 +1035,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 29 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 32 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
