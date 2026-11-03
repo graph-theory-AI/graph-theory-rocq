@@ -4531,11 +4531,14 @@
    "audit_page": "todo"
   },
   "axv_2309_04460_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x284-rainbow-cycle-log-degree-erdos-584",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X284.v:rainbow_cycle_log_degree_insufficient_statement. Question 10.1 of Alon, Bucic, Sauermann, Zakharov and Zamir (arXiv:2309.04460v2, source.tex l.783-803; pinned open), the affirmative answer in the reading the source sets against its alternative (l.795): for every C, properly edge-coloured graphs of unbounded order with average degree at least C log n (C n floor(log2 n) <= 2 |E|) and no rainbow cycle; not the matching lower bound Omega(log n log log n). OPEN at the pin."
   },
   "axv_2309_04460_01": {
    "statement": "done",
@@ -8638,11 +8641,14 @@
    "note": "Authored in X4.v:folkman_k4_free_triangle_arrow_statement. Encodes the finite Folkman question: existence of a K4-free graph whose every 2-edge-colouring contains a monochromatic triangle."
   },
   "erdos_584": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x284-rainbow-cycle-log-degree-erdos-584",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X284.v:erdos_584_short_cycle_subgraphs_statement. Erdos Problems #584 (Duke, Erdos and Rodl; pinned open), the affirmative answer in the literal reading, one absolute constant for every density (stronger than the page's delta = n^-c challenge): H_1 with |E|^3 <= d |H_1| n^4, any two edges on a cycle of length <= 6 in H_1 and adjacent ones on a 4-cycle in H_1, and H_2 with |E|^2 <= d |H_2| n^2 and cycles of length <= 8 in H_2. FALSE before the pin in this reading by its H_2 clause (high-girth graphs; Fox and Sudakov 0706.1920v3), Li (2606.06522v1) against H_1."
   },
   "erdos_585": {
    "statement": "todo",
