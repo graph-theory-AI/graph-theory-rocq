@@ -13246,6 +13246,64 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Marcol (X283 wave verification, 2026-11-03)",
       "faithfulness_result": "Readback 2026-11-03 (verifier Marcol): 3/3 PASS against the pinned texts and the sources, at math/arthur-x283-20261102 = 8c68a23808e6b7420bfe4d8dad829a9f7b423059 (five commits on AH58 7a7fe0bf), after my design read ((346), FAITHFUL 3/3, packet x283-design-read-by-marcol be4c4081) of x283-design-by-arthur r1 (bbb99038). At 8c68a238 X283.v, grounding_X283.v and waves.X283 are the design packet's files byte for byte; no local helper (helper_ownership {}, helper_sanity [] in every row). Sivaraman (studies): forall t >= 5 and connected G with no induced P_t (has_induced_path_of_order, vertices counted), cop_number_le G (t - 3) = c(G) <= t - 3 in cops.v's game (cops placed first, may share, move first; capture on contact; finite capture time); open for t >= 6 (2301.13175v1 settles t = 5); K_0 met by 0 cops. arxiv:2301.08707#00: at most 2n simple paths of G with, for each ordered pair of distinct edges (e, f), a path containing e and not f = strong separation (l.147); \"size 2n\" an upper bound; P = [::] for graphs with fewer than two edges; open at the pin. arxiv:2603.28614#00: a duplicate-free linear listing of exactly the spanning trees (fg_spanning_tree), consecutive ones T - e + f with e in T, f not in T, e and f meeting (pivot, l.114-117); the cyclic form would strengthen it; disconnected graphs: the empty listing, K_0 / K_1: the one empty tree; open at the pin. Grounding: hyp at K_1 / K_3 / K_2; ntt: Sivaraman without 5 <= t (false at t = 0 on K_1), separation without e != f (false on K_2), the cyclic listing (stronger, false on K_1, which has one tree: my observation O1, accepted under the X233 / X275 precedent); each variant implies its row; no certificate of exact type S or ~ S (the rows are open). Metadata: source_hash 3/3 recomputed at b72c5857, equal; waves.X283 = the design packet's wave-x283.json, the only waves change, verifier fields empty before this; allowlist = base + the packet's two exists-after-graph-forall entries (57 -> 59); legs: the three rows done / done, notes 587 / 502 / 516 = \"Authored in X283.v:<name>. \" + the wave note, no other legs entry changed; README 602 / 12 / 39 / 1,020 -> 605 / 12 / 39 / 1,017; LANDED gains X283 graph-theory-misc after X282. Dev run 1 (x283-dev-by-arthur f7bfdd8d, -c OK, 40 listed = present): run-x283-1.sh bbf47929 on 8c68a238, JOB 06:39:33Z-07:25:06Z, RESULT PASS-WITH-EXPECTED, 30 STEP lines, 26 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields; W1 12 / 14 (helper ownership and hard lint PASS; 3 / 3 Defined; Print Assumptions clean on 3 / 3 statements + 6 certificates; 30 exact-type probes; the two FAIL lines are the verifier and source fields); W2 928 / 928; W3 3 probed, 0 FLAGGED; W4 0 active, 59 allowlisted; A12 101 reports OK; written only the three generated files; END HEAD 8c68a238, END STATUS empty."
+    },
+    "X284": {
+      "phase": "X284",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X284.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X284 (A3 verifier Arthur; routing Lancelot (416); selection x284-selection-by-marcol, design x284-design-by-marcol r1), branch math/marcol-x284-20261103, 2026-11-03",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x284-rainbow-cycle-log-degree-erdos-584",
+      "rows": {
+        "axv_2309_04460_00": {
+          "formal_name": "rainbow_cycle_log_degree_insufficient_statement",
+          "source_hash": "4b41dc15e7a63349c85a469512a1a1fda698e38db817d69ddf99f487e8ceee05",
+          "note": "Question 10.1 of Alon, Bucic, Sauermann, Zakharov and Zamir (arXiv:2309.04460v2, source.tex l.783-803; pinned open), the affirmative answer in the reading the source sets against its alternative (l.795): for every C, properly edge-coloured graphs of unbounded order with average degree at least C log n (C n floor(log2 n) <= 2 |E|) and no rainbow cycle; not the matching lower bound Omega(log n log log n). OPEN at the pin.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g284_rc_hyp_inhabited",
+              "claim": "g284_rc_hyp_claim",
+              "references": [
+                "rainbow_cycle_log_degree_insufficient_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g284_rc_not_trivially_true",
+              "claim": "g284_rc_ntt_claim",
+              "references": [
+                "rainbow_cycle_log_degree_insufficient_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_584": {
+          "formal_name": "erdos_584_short_cycle_subgraphs_statement",
+          "source_hash": "4648ad044e087a895d0dc48c35a2ff42b929c85a8443d8b540af6031b6982e67",
+          "note": "Erdos Problems #584 (Duke, Erdos and Rodl; pinned open), the affirmative answer in the literal reading, one absolute constant for every density (stronger than the page's delta = n^-c challenge): H_1 with |E|^3 <= d |H_1| n^4, any two edges on a cycle of length <= 6 in H_1 and adjacent ones on a 4-cycle in H_1, and H_2 with |E|^2 <= d |H_2| n^2 and cycles of length <= 8 in H_2. FALSE before the pin in this reading by its H_2 clause (high-girth graphs; Fox and Sudakov 0706.1920v3), Li (2606.06522v1) against H_1.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g284_e584_hyp_inhabited",
+              "claim": "g284_e584_hyp_claim",
+              "references": [
+                "erdos_584_short_cycle_subgraphs_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g284_e584_not_trivially_true",
+              "claim": "g284_e584_ntt_claim",
+              "references": [
+                "erdos_584_short_cycle_subgraphs_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
