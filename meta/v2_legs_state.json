@@ -4028,11 +4028,14 @@
    "audit_page": "todo"
   },
   "axv_2301_08707_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x283-sivaraman-cops-separating-paths-pivot-gray-codes",
+   "package": "graph-theory-misc",
+   "note": "Authored in X283.v:strongly_separating_path_system_2n_statement. Problem 3 of arXiv:2301.08707v3 (separating_paths_aic_template.tex l.185-187), affirmative: every graph has at most 2n simple paths (GTBase seq_simple_path, n = #|G|) such that for every ordered pair of distinct edges (e, f) some path contains e and not f (seq_edge_set), i.e. strong separation (l.147: both directions); size = number of paths (l.149), 2n read as an upper bound. Pinned open; the paper proves 19n (Theorem 2, l.170-172)."
   },
   "axv_2301_08707_01": {
    "statement": "done",
@@ -6183,11 +6186,14 @@
    "audit_page": "todo"
   },
   "axv_2603_28614_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x283-sivaraman-cops-separating-paths-pivot-gray-codes",
+   "package": "graph-theory-misc",
+   "note": "Authored in X283.v:pivot_gray_code_spanning_trees_statement. Problem 1 of arXiv:2603.28614v1 (main.tex l.119-122), affirmative: every graph has a duplicate-free listing of exactly its spanning trees (GTBase fg_spanning_tree) in which consecutive trees differ by an edge exchange T_(i+1) = T_i - e + f whose two edges share an endpoint (the strong revolving door property, l.97-101, l.114-117). Linear listing (a Gray code is a linear or cyclic order, l.86); disconnected graphs list nothing. Pinned open (l.125-127)."
   },
   "axv_2604_09449_00": {
    "statement": "todo",
@@ -13222,11 +13228,14 @@
    "audit_page": "todo"
   },
   "std_sivaraman_s_conjecture_cop_number_of_p_t_free_gr": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x283-sivaraman-cops-separating-paths-pivot-gray-codes",
+   "package": "graph-theory-misc",
+   "note": "Authored in X283.v:sivaraman_cop_number_pt_free_statement. Sivaraman's conjecture (arXiv:1903.01338v1, source.tex l.114-116, printed Conjecture 0.1; studies record arXiv:2301.13175), encoded as stated: for t >= 5, every connected P_t-free graph (no induced path on t vertices, GTBase has_induced_path_of_order) has cop number at most t - 3 (GTMisc cop_number_le: some j <= t - 3 cops win; the game of l.98, cops placed and moving first, capture on landing). OPEN at the pin for t >= 6: Chudnovsky, Norin, Seymour and Turcotte prove t = 5 (2301.13175v1, Theorem 1.1, paper.tex l.117-119)."
   },
   "std_small_quasi_kernel_conjecture_erd_s_sz_kely": {
    "statement": "done",
