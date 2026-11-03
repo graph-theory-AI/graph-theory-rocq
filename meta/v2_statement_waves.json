@@ -13166,6 +13166,86 @@
       },
       "faithfulness_verified_by": "Arthur (X282 wave verification, 2026-11-02)",
       "faithfulness_result": "Readback 2026-11-02 (verifier Arthur): 3/3 PASS against the pinned texts and the sources (arxiv:1902.07018#01 done, erdos:79 done, studies:std_pavez_sign_piga_sanhueza_matamala_conjecture_on done), at math/marcol-x282-20261102 = b39f1fec5560ce6c32243afcaa0fca7e8d432fa9 (seven commits on work/coordinator 9e9a8d6c), after my design read ((428), FAITHFUL 3/3, packet x282-design-a3-by-arthur 37b92db2, no blocking item). At that head grounding_X282.v is the design packet's (f39770c3) byte for byte, and X282.v differs only by my O1, taken in the studies row's Notes (f(0) = 0 is used by no order n >= n0, since every n0 exceeds k). Helper x282_ramsey_size_linear G = exists C, r(G, H) <= C |E(H)| for every H with min_degree_at_least H 1, r through XE1's xe1_graph_ramsey_number G H (G in the host, H in its complement, Wigderson l.60); a natural C is the ceiling of C_G; the empty H is confirmed harmless (its only instance has no vertex, has_subgraph0 gives r(G, H) = 0, the clause 0 <= C * 0 adds nothing, as under a nonempty-H convention, stated at the helper); paper_specific; no names or body group; its sanity (K_1 with C = 1) listed in every row. arxiv:1902.07018#01, the open half of R_l(K_r, 2) = R(K_r, 2) for 3 < r (l.417-419): an order with an avoiding 2-colouring (lists {1, 2}) has an avoiding L-colouring for every valid 2-list assignment (X235 vocabulary verbatim); both properties are monotone in n, so over every n this is R <= R_l, and with l.280-282 the equality; colour classes are fg_mk_sgraph (the diagonal plays no role); open at the pin. erdos:79, the affirmative answer (Wigderson, proved before the pin): for every N a graph G with N <= |G|, not size-linear, every H with has_subgraph G H and |H| + |E(H)| < |G| + |E(G)| size-linear; the strict sum is exactly properness (an injective homomorphism with equal counts is an isomorphism), the pinned \"all of its subgraphs\" read as the proper ones (l.64-66); infinitely many = unbounded order. studies (Conjecture 16, 2209.05455v3 l.486-489): for k >= 2 and every f with n <= f(n) <= R(K_n) (pointwise, read through xe1_diagonal_ramsey_number), natural a, b and n0 with, for every n >= n0, a k-connected G on n vertices and f(n) <= b R(G), R(G) <= a f(n); n0 is the original's \"for all n sufficiently large\" (the pinned quotation l.38-40 omits it, and its all-n reading is false for n <= k since k_connected needs k < |G|); Theta with natural constants after f; f(0) = 0 loses nothing; pinned open, PROVED before the pin by Ahme and Scott (Theorem 3, l.44-47; l.106), lit22 (Lancelot). Grounding: hyp row 1 on K_3 with r = 4 and the constant lists {1, 2}; hyp row 2 with K_1 size-linear and N = 1; hyp row 3 with f = id (R(K_n) >= n); ntt row 1 drops the validity of the lists (empty lists at n = 3), ntt row 2 drops the properness bound (G is its own subgraph), ntt row 3 drops n0 (n = 0), each variant implying its row; no theorem of exact type statement or ~ statement; every claim names its statement or the helper. Metadata: source_hash 3/3 recomputed from b72c5857, equal; waves.X282 = the packet's x282-wave.json, the only waves change, its verifier fields empty before this; legs: the three rows done / done, notes 488 / 446 / 430 = the builder's forms, no other legs entry changed; README 599 / 12 / 39 / 1,023 -> 602 / 12 / 39 / 1,020; LANDED gains X282 extremal-graph-theory; allowlist unchanged (57; the lint finds nothing on the three bodies); complement and subgraph_of specs gain exactly the three XE1 consumer entries each (as X240 / X241 / X255); c7 (b39f1fec) commits complement.md and subgraph_of.md byte-identical to the dev run's written copies (cmp), their Scope / Source checks lines only (+6 references and +6 checks each). Dev run 1 on 9a625d28, before c7 (x282-dev-by-marcol cd4ccc2b, -c OK, 41 files): PASS-WITH-EXPECTED, 30 steps, 26 rc 0, only W1 / A3a / A3 / A10 on the empty fields; W1 12 / 14 (helper ownership PASS; Print Assumptions clean on 3 / 3 statements + 9 grounding certificates; 25 exact-type probes PASS), W2 925 / 925, W3 3 probed 0 flagged, W4 0 active (57 allowlisted), A12 101 / 101 migration reports OK; written: the three generated files (the manifest differs from the committed one in X282's three rows and X280's two, integrated after the last regeneration) and c7's two reports."
+    },
+    "X283": {
+      "phase": "X283",
+      "repo": "graph-theory-misc",
+      "defines_file": "X283.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X283 (A3 verifier Marcol; routing Lancelot (414); selection x283-selection-by-arthur, design x283-design-by-arthur r1), branch math/arthur-x283-20261102",
+      "source_verified_by": "Marcol (X283 wave verifier, A3: pinned records re-read at graph-conjectures b72c5857: data/arxiv_conjectures.json, the first of the two 2301.08707 records (Problem 3) and the 2603.28614 record (Problem 1), statement_text + \"\\n\" + context_text, the arXiv rows' rule = 439cc28bd246aae6c9002d9bb1e2b024ff3bc723774e9d95c51943a69ebb95b5 and 78e098b982f846d29a280e0af8664f577fd02b7c8aef6242afaad3a228e39a86; data/arxiv_extracted/2301.13175.json record 0 (the studies row), statement_text alone = 61841e42ca4b177f89b16e5835096635ad4baa606d893cbdb954623776014097; status open; all three equal to the manifest rows, the wave's source_hash values and the Mac's PINNED-SELECTION.json; the Mac's deposit coordination/sources/x283-source-mac-20261103 (SHA256SUMS 86248b31, 47 listed = present, -c OK) read with its SOURCE-READ.md: 1903.01338v1 source.tex l.98 (the game), l.101 (finite simple graphs, H-free = no induced H, P_t on t vertices), l.104-106 (t - 2), l.114-116 (the conjecture); 2301.13175v1 paper.tex l.107 (cops may share a vertex), l.109, l.115, l.117-119 (Theorem 1.1, t = 5); 2301.08707v3 separating_paths_aic_template.tex l.145-149 (separation, strong separation, size), l.170-172 (19n), l.181-183, l.185-187 (Problem 3); 2603.28614v1 main.tex l.86, l.91-92, l.97-101, l.114-117 (pivot), l.119-122 (Problem 1), l.125-127, l.500-502 (directed multigraphs only).)",
+      "source_verified_at": "2026-11-03",
+      "commit": "x283-sivaraman-cops-separating-paths-pivot-gray-codes",
+      "rows": {
+        "std_sivaraman_s_conjecture_cop_number_of_p_t_free_gr": {
+          "formal_name": "sivaraman_cop_number_pt_free_statement",
+          "source_hash": "61841e42ca4b177f89b16e5835096635ad4baa606d893cbdb954623776014097",
+          "note": "Sivaraman's conjecture (arXiv:1903.01338v1, source.tex l.114-116, printed Conjecture 0.1; studies record arXiv:2301.13175), encoded as stated: for t >= 5, every connected P_t-free graph (no induced path on t vertices, GTBase has_induced_path_of_order) has cop number at most t - 3 (GTMisc cop_number_le: some j <= t - 3 cops win; the game of l.98, cops placed and moving first, capture on landing). OPEN at the pin for t >= 6: Chudnovsky, Norin, Seymour and Turcotte prove t = 5 (2301.13175v1, Theorem 1.1, paper.tex l.117-119).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g283_sv_hyp_inhabited",
+              "claim": "g283_sv_hyp_claim",
+              "references": [
+                "sivaraman_cop_number_pt_free_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g283_sv_not_trivially_true",
+              "claim": "g283_sv_ntt_claim",
+              "references": [
+                "sivaraman_cop_number_pt_free_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "axv_2301_08707_00": {
+          "formal_name": "strongly_separating_path_system_2n_statement",
+          "source_hash": "439cc28bd246aae6c9002d9bb1e2b024ff3bc723774e9d95c51943a69ebb95b5",
+          "note": "Problem 3 of arXiv:2301.08707v3 (separating_paths_aic_template.tex l.185-187), affirmative: every graph has at most 2n simple paths (GTBase seq_simple_path, n = #|G|) such that for every ordered pair of distinct edges (e, f) some path contains e and not f (seq_edge_set), i.e. strong separation (l.147: both directions); size = number of paths (l.149), 2n read as an upper bound. Pinned open; the paper proves 19n (Theorem 2, l.170-172).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g283_ss_hyp_inhabited",
+              "claim": "g283_ss_hyp_claim",
+              "references": [
+                "strongly_separating_path_system_2n_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g283_ss_not_trivially_true",
+              "claim": "g283_ss_ntt_claim",
+              "references": [
+                "strongly_separating_path_system_2n_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "axv_2603_28614_00": {
+          "formal_name": "pivot_gray_code_spanning_trees_statement",
+          "source_hash": "78e098b982f846d29a280e0af8664f577fd02b7c8aef6242afaad3a228e39a86",
+          "note": "Problem 1 of arXiv:2603.28614v1 (main.tex l.119-122), affirmative: every graph has a duplicate-free listing of exactly its spanning trees (GTBase fg_spanning_tree) in which consecutive trees differ by an edge exchange T_(i+1) = T_i - e + f whose two edges share an endpoint (the strong revolving door property, l.97-101, l.114-117). Linear listing (a Gray code is a linear or cyclic order, l.86); disconnected graphs list nothing. Pinned open (l.125-127).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g283_pg_hyp_inhabited",
+              "claim": "g283_pg_hyp_claim",
+              "references": [
+                "pivot_gray_code_spanning_trees_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g283_pg_not_trivially_true",
+              "claim": "g283_pg_ntt_claim",
+              "references": [
+                "pivot_gray_code_spanning_trees_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "Marcol (X283 wave verification, 2026-11-03)",
+      "faithfulness_result": "Readback 2026-11-03 (verifier Marcol): 3/3 PASS against the pinned texts and the sources, at math/arthur-x283-20261102 = 8c68a23808e6b7420bfe4d8dad829a9f7b423059 (five commits on AH58 7a7fe0bf), after my design read ((346), FAITHFUL 3/3, packet x283-design-read-by-marcol be4c4081) of x283-design-by-arthur r1 (bbb99038). At 8c68a238 X283.v, grounding_X283.v and waves.X283 are the design packet's files byte for byte; no local helper (helper_ownership {}, helper_sanity [] in every row). Sivaraman (studies): forall t >= 5 and connected G with no induced P_t (has_induced_path_of_order, vertices counted), cop_number_le G (t - 3) = c(G) <= t - 3 in cops.v's game (cops placed first, may share, move first; capture on contact; finite capture time); open for t >= 6 (2301.13175v1 settles t = 5); K_0 met by 0 cops. arxiv:2301.08707#00: at most 2n simple paths of G with, for each ordered pair of distinct edges (e, f), a path containing e and not f = strong separation (l.147); \"size 2n\" an upper bound; P = [::] for graphs with fewer than two edges; open at the pin. arxiv:2603.28614#00: a duplicate-free linear listing of exactly the spanning trees (fg_spanning_tree), consecutive ones T - e + f with e in T, f not in T, e and f meeting (pivot, l.114-117); the cyclic form would strengthen it; disconnected graphs: the empty listing, K_0 / K_1: the one empty tree; open at the pin. Grounding: hyp at K_1 / K_3 / K_2; ntt: Sivaraman without 5 <= t (false at t = 0 on K_1), separation without e != f (false on K_2), the cyclic listing (stronger, false on K_1, which has one tree: my observation O1, accepted under the X233 / X275 precedent); each variant implies its row; no certificate of exact type S or ~ S (the rows are open). Metadata: source_hash 3/3 recomputed at b72c5857, equal; waves.X283 = the design packet's wave-x283.json, the only waves change, verifier fields empty before this; allowlist = base + the packet's two exists-after-graph-forall entries (57 -> 59); legs: the three rows done / done, notes 587 / 502 / 516 = \"Authored in X283.v:<name>. \" + the wave note, no other legs entry changed; README 602 / 12 / 39 / 1,020 -> 605 / 12 / 39 / 1,017; LANDED gains X283 graph-theory-misc after X282. Dev run 1 (x283-dev-by-arthur f7bfdd8d, -c OK, 40 listed = present): run-x283-1.sh bbf47929 on 8c68a238, JOB 06:39:33Z-07:25:06Z, RESULT PASS-WITH-EXPECTED, 30 STEP lines, 26 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields; W1 12 / 14 (helper ownership and hard lint PASS; 3 / 3 Defined; Print Assumptions clean on 3 / 3 statements + 6 certificates; 30 exact-type probes; the two FAIL lines are the verifier and source fields); W2 928 / 928; W3 3 probed, 0 FLAGGED; W4 0 active, 59 allowlisted; A12 101 reports OK; written only the three generated files; END HEAD 8c68a238, END STATUS empty."
     }
   }
 }
