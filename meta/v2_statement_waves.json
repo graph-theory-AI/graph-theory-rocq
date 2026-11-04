@@ -13304,6 +13304,91 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Arthur (X284 wave verification, 2026-11-03)",
       "faithfulness_result": "Readback 2026-11-03 (verifier Arthur): 2/2 PASS against the pinned texts and the sources, at math/marcol-x284-20261103 = 15ea192d9bb079f4d71005a5adcb9174e0cef1e3 (five commits on work/coordinator c2438c20), after my design read ((437), FAITHFUL 2/2 with B1, packet x284-design-read-by-arthur a1033da6) of x284-design-by-marcol r1 (88f093ea). At 15ea192d9bb079f4d71005a5adcb9174e0cef1e3 grounding_X284.v is the packet's byte for byte; X284.v differs from it only by B1 (erdos:584's Notes: the every-density reading named the literal one and stronger than the page's delta = n^-c challenge, and FALSE before the pin by its H_2 clause), comments only, both statement bodies identical; waves.X284 = the packet's x284-wave.json except erdos_584's note (B1). No local helper (helper_ownership {}, helper_sanity [] in both rows). arxiv:2309.04460#00 (Question 10.1), the affirmative in the reading the source sets against its alternative (l.795): for every C and N, a properly edge-coloured G on at least N vertices with C n floor(log2 n) <= 2|E(G)| (every L with 2^L <= n) and no rainbow cycle; exactly the negation of 'average degree O(log n) suffices', not the matching Omega(log n log log n) bound; open at the pin. erdos:584, the pinned statement's affirmative with one absolute d for every density: H_1 within E(G) with |E|^3 <= d |H_1| n^4, any two distinct edges on a cycle of H_1 of length <= 6 and distinct adjacent ones on a 4-cycle of H_1; H_2 with |E|^2 <= d |H_2| n^2 and cycles of H_2 of length <= 8; pinned open, FALSE before the pin in this reading by its H_2 clause (graphs without cycles of length <= 8 and |E|/n unbounded; Fox-Sudakov l.357-359), Li l.133-146 against H_1 (statement read); the literature status is Lancelot's item (DAILY question 10), no kernel disproof. Grounding: hyp at K_2 for both rows (the statements give a graph with |G| < |E(G)| and no rainbow cycle, and a nonempty H_2 in every graph with an edge); ntt: the degree bound without its range 2^L <= n (false at C = N = 1), the H_1 clause with equal pairs (false at K_2); each variant implies its row; no certificate of exact type S or ~ S (my 32 probes; W1's 20 shapes). My MCP (Rocq 9.2) builds the packet's and the branch's combined files: 8 blocks, no hole; Print Assumptions closed 6/6. Metadata: source_hash 2/2 recomputed at b72c5857, equal; waves.X284 the only waves change, verifier fields empty before this; allowlist unchanged (57; both rows lint-clean); legs: the two rows done / done, notes 491 / 577 = \"Authored in X284.v:<name>. \" + the wave note, no other legs entry changed; README 602 / 12 / 39 / 1,020 -> 604 / 12 / 39 / 1,018; LANDED gains X284 extremal-graph-theory after X282. Dev run 1 (x284-dev-by-marcol b0810477, -c OK, 38 listed = present): run-x284-1.sh b071c93f on 15ea192d9bb079f4d71005a5adcb9174e0cef1e3, JOB 06:46:31Z-07:30:32Z, RESULT PASS-WITH-EXPECTED, 29 STEP lines, 25 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields; W1 12 / 14 (helper ownership and hard lint PASS; 2 / 2 Defined; package compiles; Print Assumptions clean on 2 / 2 statements + 4 certificates; 20 exact-type probes; the two FAIL lines the verifier and source fields); W2 927 / 927; W3 2 probed, 0 FLAGGED; W4 0 active, 57 allowlisted; A12 101 reports OK; written only the three generated files; END HEAD 15ea192d9bb079f4d71005a5adcb9174e0cef1e3."
+    },
+    "X286": {
+      "phase": "X286",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X286.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X286 (A3 verifier Arthur; routing Lancelot (441), (450); selection x286-selection-by-marcol, design x286-design-by-marcol r1), branch math/marcol-x286-20261104, 2026-11-04",
+      "source_verified_by": "Arthur (X286 wave verifier, A3: pinned records re-read at graph-conjectures b72c5857: data/erdos_graph.json problems 615 and 807, statement alone, the erdos rows' rule = 78330d84e39b046f7ec0bb4c83541acdf8f9e4d609caacd665c0a8936d7cd723 and 1855ca7a8c1166d2b774f2a72e4ccf6a9d5b7792adbc02f1e0ae9bc58be16209, page statuses solved, solved; both equal to the manifest rows and the wave's source_hash values; the Mac's deposit coordination/sources/x286-source-mac-20261104 (SHA256SUMS b81b5cba, 55 listed = present, -c OK) read with its SOURCE-READ.md: the live pages erdos615.html (097ac8a3) l.401 (= the pinned statement) and l.421, erdos807.html (8f22892e) l.401 (= the pinned statement) and l.419; EHSSS93.txt (OCR, 5092bf8a) l.112-119 (printed p.33, RT with alpha <= m, the o(n) setting) and l.1120-1124 (printed p.54, Problem 4, with the page image); Fox, Loh and Zhao 1208.3276v3 main.tex (511885f0) l.94-98 (RT with alpha < m), l.132-136 (Problem 1.4), l.243-246 (Theorem 1.10), l.302-304 (logarithms base e); KRW88-author.txt (d3e59019) l.31-36 (printed p.637, tau_F); Alon 1402.6466v1 main.tex (f9fcfe53) l.88-98 (tau <= n - alpha by stars; whp) and l.114-124 (the first disproof with its exceptional n); Alon, Bohman and Huang 1409.6165v1 main.tex (30e66257) l.85-89 (bc(G), each edge in exactly one biclique) and l.139-146 (Theorem 1.1) (statements read, proofs not verified).)",
+      "source_verified_at": "2026-11-04",
+      "commit": "x286-erdos-615-k4-independent-set-erdos-807-bipartition",
+      "rows": {
+        "erdos_615": {
+          "formal_name": "erdos_615_k4_or_large_independent_set_statement",
+          "source_hash": "78330d84e39b046f7ec0bb4c83541acdf8f9e4d609caacd665c0a8936d7cd723",
+          "note": "Erdos Problems #615 (EHSSS93 Problem 4, printed p.54; pinned solved, negative), the affirmative answer: some c = 1/m such that, for all n >= n0, every graph with at least (1/8 - c) n^2 edges contains a K_4 or an independent set of at least n / ln n vertices (natural logarithm, Fox, Loh and Zhao l.302; exact as (k + 1)^(k n) <= k^(k n) n^|S| for every k >= 1). DISPROVED before the pin by Fox, Loh and Zhao (arXiv:1208.3276v3, Theorem 1.10).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g286_e615_hyp_inhabited",
+              "claim": "g286_e615_hyp_claim",
+              "references": [
+                "erdos_615_k4_or_large_independent_set_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g286_e615_not_trivially_true",
+              "claim": "g286_e615_ntt_claim",
+              "references": [
+                "erdos_615_k4_or_large_independent_set_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g286_helper_sanity",
+                "claim": "g286_helper_claim",
+                "references": [
+                  "x286_biclique_edges",
+                  "x286_biclique_partition"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_807": {
+          "formal_name": "erdos_807_bipartition_number_random_graph_statement",
+          "source_hash": "1855ca7a8c1166d2b774f2a72e4ccf6a9d5b7792adbc02f1e0ae9bc58be16209",
+          "note": "Erdos Problems #807 (Erdos, reported by Kratzke, Reznick and West 1988, p.638; pinned solved, negative), the affirmative answer: with probability tending to 1 over G(n, 1/2), the bipartition number tau(G) (fewest edge-disjoint complete bipartite subgraphs partitioning E(G)) equals n - alpha(G). DISPROVED before the pin by Alon (arXiv:1402.6466v1) and by Alon, Bohman and Huang (arXiv:1409.6165v1, Theorem 1.1: tau(G) <= n - (1 + c) alpha(G) whp).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g286_e807_hyp_inhabited",
+              "claim": "g286_e807_hyp_claim",
+              "references": [
+                "erdos_807_bipartition_number_random_graph_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g286_e807_not_trivially_true",
+              "claim": "g286_e807_ntt_claim",
+              "references": [
+                "erdos_807_bipartition_number_random_graph_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g286_helper_sanity",
+                "claim": "g286_helper_claim",
+                "references": [
+                  "x286_biclique_edges",
+                  "x286_biclique_partition"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x286_biclique_edges": {
+          "classification": "paper_specific",
+          "reason": "The edge set of the complete bipartite graph between vertex sets A and B of G (all pairs {a, b} with a in A and b in B), the parts of erdos:807's bipartition number (Erdos Problems #807: complete bipartite graphs whose union is G)."
+        },
+        "x286_biclique_partition": {
+          "classification": "paper_specific",
+          "reason": "Erdos Problems #807's bipartition number at most k, as a boolean: k pairs of disjoint vertex sets of G whose complete bipartite edge sets (x286_biclique_edges) lie in E(G), are pairwise edge disjoint and cover E(G); tau(G) is the least such k."
+        }
+      },
+      "faithfulness_verified_by": "Arthur (X286 wave verification, 2026-11-04)",
+      "faithfulness_result": "Readback 2026-11-04 (verifier Arthur): 2/2 PASS against the pinned texts and the sources, at math/marcol-x286-20261104 = 36eb547d8864b7c5d665b4241259fa671d77dc17 (five commits on work/coordinator cd3277c3), after my design read ((448), FAITHFUL 2/2, no blocking item, packet x286-design-read-by-arthur d325f570) of x286-design-by-marcol r1 (9207cd34). At 36eb547d8864b7c5d665b4241259fa671d77dc17 X286.v and grounding_X286.v are the packet's byte for byte and waves.X286 = the packet's x286-wave.json. Two paper_specific helpers (x286_biclique_edges, x286_biclique_partition), helper_sanity g286_helper_sanity on C_4 cited in both rows. erdos:615, the affirmative of the pinned question with natural logarithms (FLZ l.302): some m and n0 such that every G on n >= n0 vertices with m n^2 <= 8 (m |E(G)| + n^2) (c = 1/m) has a K_4 subgraph or a stable S with (k+1)^(kn) <= k^(kn) n^|S| for every k >= 1, i.e. |S| >= n / ln n exactly (no rounding); the eventual order because RT is asymptotic and the every-n reading fails at K_3; DISPROVED before the pin by FLZ Theorem 1.10 (l.243-246), pinned solved. erdos:807, the affirmative: fg_whp over G(n, 1/2) (fg_gnp_weight 1 2) of a partition of E(G) into n - alpha(G) complete bipartite subgraphs (edge-disjoint, not induced, vertex sets may overlap, empty sides allowed) and none into fewer, i.e. tau(G) = n - alpha(G) (KRW88 l.31-36); n - alpha never truncates; DISPROVED before the pin (Alon l.114-124 with its exceptional n; ABH Theorem 1.1 l.139-146 uniformly), pinned solved. Grounding: hyp at K_N (N >= 2, the edge condition for every m) and at the edgeless graph (event holds, positive total weight); ntt: #615 without the K_4 alternative (false at K_(max n0 2)), #807 for every labelled graph (false at C_4, tau = 1 < 2 = 4 - alpha); each variant implies its row; no certificate of exact type S or ~ S (my 80 probes; W1's 11 shapes). My MCP (Rocq 9.2) builds the packet's combined file: 20 blocks, no hole; Print Assumptions closed 7/7. Metadata: source_hash 2/2 recomputed at b72c5857, equal; waves.X286 the only waves change, verifier fields empty before this; allowlist unchanged (59; both rows lint-clean); migration specs and reports unchanged; legs: the two rows done / done, notes 510 / 520 = \"Authored in X286.v:<name>. \" + the wave note, no other legs entry changed; README 607 / 12 / 39 / 1,015 -> 609 / 12 / 39 / 1,013; LANDED gains X286 extremal-graph-theory after X284. Dev run 1 (x286-dev-by-marcol 7b26318d, -c OK, 38 listed = present): run-x286-1.sh 3acce0e6 on 36eb547d8864b7c5d665b4241259fa671d77dc17, JOB 16:45:35Z-17:29:47Z, RESULT PASS-WITH-EXPECTED, 29 STEP lines, 25 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields; W1 12 / 14 (helper ownership and hard lint PASS; 2 / 2 Defined; package compiles; Print Assumptions clean on 2 / 2 statements + 6 certificates; 11 exact-type probes; the two FAIL lines the verifier and source fields); B3 compiled X286.v and grounding_X286.v; W2 932 / 932; W3 2 probed, 0 FLAGGED; W4 0 active, 59 allowlisted; A12 101 reports OK; written only the three generated files; END HEAD 36eb547d8864b7c5d665b4241259fa671d77dc17."
     }
   }
 }
