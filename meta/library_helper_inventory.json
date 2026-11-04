@@ -24990,13 +24990,13 @@
     ]
   },
   "counts": {
-    "files": 378,
-    "helpers": 2770,
+    "files": 380,
+    "helpers": 2772,
     "repeated_body_shapes": 152,
     "repeated_normalized_names": 222,
     "repeated_signature_shapes": 337,
-    "statements_excluded": 889,
-    "x_wave_helpers": 1609
+    "statements_excluded": 895,
+    "x_wave_helpers": 1611
   },
   "groups": {
     "body_shape_hash": {
@@ -60504,6 +60504,46 @@
       "qualified_name": "Extremal.conjectures.X286.x286_biclique_partition",
       "signature": "(G : sgraph) (k : nat) : bool",
       "signature_shape_hash": "2dfa0209a96d75a88801009d8ba7195a085ea00271e0a87197a15c4dd968dd2e"
+    },
+    {
+      "body_hash": "a9c1484df703e295b7a1c79cf873415698a3a22ba79b78a12e7bd3e44f2fa2d9",
+      "body_shape_hash": "a9c1484df703e295b7a1c79cf873415698a3a22ba79b78a12e7bd3e44f2fa2d9",
+      "declaration_hash": "1bfc5c35b8639a90c0f776a5d11605998dad1b38941799a382c7b24cb3f4d6b3",
+      "direct_consumers": [
+        "Extremal.conjectures.X287.x287_bb_graph"
+      ],
+      "kind": "Definition",
+      "line": 9,
+      "local_dependencies": [],
+      "name": "x287_bb_tables",
+      "normalized_name": "bb_tables",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X287.v",
+      "phase": "X287",
+      "qualified_name": "Extremal.conjectures.X287.x287_bb_tables",
+      "signature": ": seq (nat * seq (nat * nat))",
+      "signature_shape_hash": "04170a538cc258cbf2407c3cc050789e72a1c2243c08eadf2f28bf5d481a1fb0"
+    },
+    {
+      "body_hash": "26ab8780ee14aa10448136063abcbd6f0fd8b86a847d34dca22ab4c3a78d0b02",
+      "body_shape_hash": "874178b54362bd04bf8a4446b59265c38b83182928ce135af8cb4aa1d5ec38cf",
+      "declaration_hash": "9fe5c52f2f8c7b468934f425afabfdc8250654b94dbb48e170b6d4f43ca97d1d",
+      "direct_consumers": [
+        "Extremal.conjectures.X287.bajnok_brinkmann_six_exceptional_graphs_statement"
+      ],
+      "kind": "Definition",
+      "line": 39,
+      "local_dependencies": [
+        "x287_bb_tables"
+      ],
+      "name": "x287_bb_graph",
+      "normalized_name": "bb_graph",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X287.v",
+      "phase": "X287",
+      "qualified_name": "Extremal.conjectures.X287.x287_bb_graph",
+      "signature": "(i : 'I_6) : sgraph",
+      "signature_shape_hash": "29c363e9dbadfdf0547dab1b0d704e393a2420cbe69a0477d90c258084cae668"
     },
     {
       "body_hash": "857e81095417ec9a7b32ad78ef7497e0e68db404b9edf9f8ff9d7b7f4a404cbd",
