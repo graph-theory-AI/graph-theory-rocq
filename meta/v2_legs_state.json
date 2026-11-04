@@ -2985,11 +2985,14 @@
    "audit_page": "todo"
   },
   "axv_2107_05995_02": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x285-weak-meyniel-hat-guessing-locke-meyniel-synonym",
+   "package": "graph-theory-misc",
+   "note": "Authored in X285.v:hat_guessing_add_universal_vertex_statement. The final open question of arXiv:2107.05995v2 (main.tex l.508-526), the AFFIRMATIVE reading of a two-sided question: one f with HG(G') <= f(m) whenever HG(G) <= m, G' = G plus a vertex adjacent to all of G (coq-graph-theory add_node G [set: G]; X227 x227_hat_guessing_le). G may be disconnected (l.515-519). The G_d(N) example (HG(G') = q^2 + q) is a lower bound on f. OPEN at the pin."
   },
   "axv_2107_11780_00": {
    "statement": "todo",
@@ -12141,11 +12144,14 @@
    "audit_page": "todo"
   },
   "std_hat_guessing_number_bounded_by_hadwiger_number_a": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x285-weak-meyniel-hat-guessing-locke-meyniel-synonym",
+   "package": "graph-theory-misc",
+   "note": "Authored in X285.v:hat_guessing_hadwiger_function_bound_statement. The open problem of Alon and Chizewer as stated by Knierim, Martinsson and Steiner (arXiv:2112.09619v1, main.tex l.173; studies record), affirmative and FUNCTIONAL: one f with HG(G) <= f(h(G)) for every graph (X99 x99_hadwiger_number, x99_hat_guessing_number_at_most). Not HG(G) <= h(G) (X99's Bosek et al. row, false; 2107.05995v2 l.117-130). OPEN at the pin: yes for K_(2,s)-free graphs only (Corollary 1.5, l.175-177)."
   },
   "std_havel_s_problem": {
    "statement": "done",
@@ -12628,11 +12634,14 @@
    "audit_page": "todo"
   },
   "std_locke_s_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x285-weak-meyniel-hat-guessing-locke-meyniel-synonym",
+   "package": "graph-theory-misc",
+   "note": "Authored in X285.v:locke_finitely_many_statement. Locke's conjecture as quoted by Cames van Batenburg, Goedgebeur and Joret (arXiv:1911.12471v2, l.196; studies record), encoded as stated with finitely many as a bound on the order: some N with |G| <= N for every 3-connected (k_connected G 3) triangle-free cubic (regular G 3) G with 8 alpha(G) < 3n. TRUE at the pin: their Corollary 8 (l.249-253) leaves six exceptions of order at most 22, so N = 22; not a no-exception statement (F_14^(1) is in the class, grounding_X285 g285_locke_hyp_inhabited)."
   },
   "std_log_concavity_genus_distribution_conjecture": {
    "statement": "todo",
@@ -12714,11 +12723,14 @@
    "note": "Authored in X278.v:meshulam_ruzsa_szemeredi_statement. Meshulam's conjecture as quoted by Alon and Shraibman (arXiv:2001.00387v1, main.tex l.140-141; pinned open), encoded as stated: for all a, b >= 1, eventually no (r,t)-RS graph on n vertices (E(G) partitioned into t induced matchings of size r, l.128) has n^2 <= a r t and n <= r^b. FALSE at the pin (informal): the paper reports that Alon, Moitra and Sudakov disproved it (l.124-127, l.142-143); the status is for a literature item."
   },
   "std_meyniel_s_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x285-weak-meyniel-hat-guessing-locke-meyniel-synonym",
+   "package": "graph-theory-misc",
+   "note": "Authored in X285.v:meyniel_cop_number_sqrt_duplicate_statement. Meyniel's conjecture, the studies row (cid 390) of the conjecture others:meyniels-conjecture records: a synonym of X217's meyniel_cop_number_sqrt_statement (as X254's Tomescu duplicates); CORPUS_FEEDBACK item 69 proposes the upstream alias. OPEN at the pin."
   },
   "std_mohar_s_conjecture_kempe_equivalence_of_2_edge_c": {
    "statement": "done",
@@ -13592,11 +13604,14 @@
    "audit_page": "todo"
   },
   "std_weak_meyniel_s_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x285-weak-meyniel-hat-guessing-locke-meyniel-synonym",
+   "package": "graph-theory-misc",
+   "note": "Authored in X285.v:weak_meyniel_cop_number_statement. Weak Meyniel's Conjecture (arXiv:1912.06957v2, Revision.tex l.54-56, printed Conjecture 2; studies record), encoded for CONNECTED graphs with eps = 1/q: some q >= 1 and C with c(G)^q <= C n^(q-1) for every nonempty connected G. Conjecture 2 prints \"every graph\" and no guard; read literally it is false (n isolated vertices need n cops, grounding_X285 g285_wm_not_trivially_true), and the guard follows ordinary Meyniel (l.48-50), as X217. OPEN at the pin: the paper proves only conditional forms (Lemma 7, Corollary 8, l.229-251)."
   },
   "std_weak_net_question_for_axis_parallel_rectangles": {
    "statement": "todo",
