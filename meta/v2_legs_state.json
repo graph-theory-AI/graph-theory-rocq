@@ -8795,11 +8795,14 @@
    "audit_page": "todo"
   },
   "erdos_615": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x286-erdos-615-k4-independent-set-erdos-807-bipartition",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X286.v:erdos_615_k4_or_large_independent_set_statement. Erdos Problems #615 (EHSSS93 Problem 4, printed p.54; pinned solved, negative), the affirmative answer: some c = 1/m such that, for all n >= n0, every graph with at least (1/8 - c) n^2 edges contains a K_4 or an independent set of at least n / ln n vertices (natural logarithm, Fox, Loh and Zhao l.302; exact as (k + 1)^(k n) <= k^(k n) n^|S| for every k >= 1). DISPROVED before the pin by Fox, Loh and Zhao (arXiv:1208.3276v3, Theorem 1.10)."
   },
   "erdos_616": {
    "statement": "todo",
@@ -9503,11 +9506,14 @@
    "note": "Authored in X280.v:erdos_805_log_cubed_window_statement. Erdos Problems #805 (Erdos and Hajnal; pinned open): the specific question g(n) = (log n)^3, affirmative, for all large n, with base 2 and exact thresholds as Alon, Bucic and Sudakov read it (arXiv:2004.04718v2, l.164, l.189): a graph on n vertices in which every vertex set of at least (log_2 n)^3 vertices holds a clique and an independent set of size at least log_2 n. \"For which g(n)\" is not formalized. OPEN at the pin."
   },
   "erdos_807": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x286-erdos-615-k4-independent-set-erdos-807-bipartition",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X286.v:erdos_807_bipartition_number_random_graph_statement. Erdos Problems #807 (Erdos, reported by Kratzke, Reznick and West 1988, p.638; pinned solved, negative), the affirmative answer: with probability tending to 1 over G(n, 1/2), the bipartition number tau(G) (fewest edge-disjoint complete bipartite subgraphs partitioning E(G)) equals n - alpha(G). DISPROVED before the pin by Alon (arXiv:1402.6466v1) and by Alon, Bohman and Huang (arXiv:1409.6165v1, Theorem 1.1: tau(G) <= n - (1 + c) alpha(G) whp)."
   },
   "erdos_808": {
    "statement": "todo",
