@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Thirty-four
+corrections are applied explicitly (ERRATA below) since the review files predate them. Thirty-six
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -71,6 +71,10 @@ Alon, Moitra and Sudakov (STOC 2012; JEMS 15 (2013)), as its own record reports 
 main.tex l.124-127 and l.140-143). The conjecture of Pavez-Signe, Piga and Sanhueza-Matamala on
 k-connected graphs of prescribed Ramsey growth, behind wave X282, is proved in its own record (Ahme and
 Scott, arXiv:2311.01887v1, Theorem 3, for all sufficiently large n, as its Conjecture 16 asks).
+Locke's conjecture on 3-connected triangle-free cubic graphs, behind wave X285, and the conjecture of
+Bajnok and Brinkmann on the six exceptional 2-connected triangle-free subcubic graphs, behind wave X287,
+are both proved in their own record (Cames van Batenburg, Goedgebeur and Joret, arXiv:1911.12471v2,
+Corollary 8, whose six named exceptions have orders at most 22).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -453,6 +457,23 @@ ERRATA = [
      "sufficiently large n. That is what the row asks: Conjecture 16 of Pavez-Signe, Piga and Sanhueza-Matamala, "
      "arXiv:2209.05455v3, main.tex l.486-489 (R(G_n) = Theta(f(n)) and G_n k-connected for all n sufficiently large), "
      "quoted without that qualifier at l.38-40 of the record."),
+    # literature status corrections (Lancelot's lane, lit23; the studies rows behind waves X285 and X287, both proved
+    # by Corollary 8 of their common record before the corpus pin; the encoded statements are kept)
+    ("studies", "std_locke_s_conjecture", "solved",
+     "Literature: proved in its own record by Cames van Batenburg, Goedgebeur and Joret, 'Large independent sets in "
+     "triangle-free cubic graphs: beyond planarity', arXiv:1911.12471v2 (8 July 2020), Corollary 8 "
+     "(Revision_IndependenceRatio8over3.tex l.249-253): every 2-connected triangle-free subcubic n-vertex graph G has "
+     "alpha(G) >= 3n/8 - 1/4, and alpha(G) >= 3n/8 unless G is one of six named graphs F_11, F_14^(1), F_14^(2), "
+     "F_19^(1), F_19^(2), F_22 (orders 11 to 22). A 3-connected cubic graph is 2-connected and subcubic, so every "
+     "3-connected triangle-free cubic graph with alpha(G) < 3n/8 has at most 22 vertices: Locke's conjecture as the "
+     "record quotes it (l.196) holds. It is not a no-exception statement: F_14^(1) is 3-connected, triangle-free and "
+     "cubic with alpha = 5 < 42/8 (wave X285's grounding, on the source's figure file F_14_1-new.graphml)."),
+    ("studies", "std_bajnok_brinkmann_conjecture_triangle_free_subcub", "solved",
+     "Literature: proved in its own record by Cames van Batenburg, Goedgebeur and Joret, arXiv:1911.12471v2, "
+     "Corollary 8 (Revision_IndependenceRatio8over3.tex l.249-253): every 2-connected triangle-free subcubic n-vertex "
+     "graph G has alpha(G) >= 3n/8 unless G is one of F_11, F_14^(1), F_14^(2), F_19^(1), F_19^(2), F_22. With the six "
+     "themselves (alpha 4, 5, 5, 7, 7, 8 on 11, 14, 14, 19, 19, 22 vertices, so 8 alpha < 3n for each), that is "
+     "Bajnok and Brinkmann's conjecture as the record states it (l.208-210: exactly these six, up to isomorphism)."),
 ]
 
 
@@ -1061,7 +1082,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 34 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 36 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
