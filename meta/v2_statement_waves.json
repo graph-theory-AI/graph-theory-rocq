@@ -13389,6 +13389,130 @@
       },
       "faithfulness_verified_by": "Arthur (X286 wave verification, 2026-11-04)",
       "faithfulness_result": "Readback 2026-11-04 (verifier Arthur): 2/2 PASS against the pinned texts and the sources, at math/marcol-x286-20261104 = 36eb547d8864b7c5d665b4241259fa671d77dc17 (five commits on work/coordinator cd3277c3), after my design read ((448), FAITHFUL 2/2, no blocking item, packet x286-design-read-by-arthur d325f570) of x286-design-by-marcol r1 (9207cd34). At 36eb547d8864b7c5d665b4241259fa671d77dc17 X286.v and grounding_X286.v are the packet's byte for byte and waves.X286 = the packet's x286-wave.json. Two paper_specific helpers (x286_biclique_edges, x286_biclique_partition), helper_sanity g286_helper_sanity on C_4 cited in both rows. erdos:615, the affirmative of the pinned question with natural logarithms (FLZ l.302): some m and n0 such that every G on n >= n0 vertices with m n^2 <= 8 (m |E(G)| + n^2) (c = 1/m) has a K_4 subgraph or a stable S with (k+1)^(kn) <= k^(kn) n^|S| for every k >= 1, i.e. |S| >= n / ln n exactly (no rounding); the eventual order because RT is asymptotic and the every-n reading fails at K_3; DISPROVED before the pin by FLZ Theorem 1.10 (l.243-246), pinned solved. erdos:807, the affirmative: fg_whp over G(n, 1/2) (fg_gnp_weight 1 2) of a partition of E(G) into n - alpha(G) complete bipartite subgraphs (edge-disjoint, not induced, vertex sets may overlap, empty sides allowed) and none into fewer, i.e. tau(G) = n - alpha(G) (KRW88 l.31-36); n - alpha never truncates; DISPROVED before the pin (Alon l.114-124 with its exceptional n; ABH Theorem 1.1 l.139-146 uniformly), pinned solved. Grounding: hyp at K_N (N >= 2, the edge condition for every m) and at the edgeless graph (event holds, positive total weight); ntt: #615 without the K_4 alternative (false at K_(max n0 2)), #807 for every labelled graph (false at C_4, tau = 1 < 2 = 4 - alpha); each variant implies its row; no certificate of exact type S or ~ S (my 80 probes; W1's 11 shapes). My MCP (Rocq 9.2) builds the packet's combined file: 20 blocks, no hole; Print Assumptions closed 7/7. Metadata: source_hash 2/2 recomputed at b72c5857, equal; waves.X286 the only waves change, verifier fields empty before this; allowlist unchanged (59; both rows lint-clean); migration specs and reports unchanged; legs: the two rows done / done, notes 510 / 520 = \"Authored in X286.v:<name>. \" + the wave note, no other legs entry changed; README 607 / 12 / 39 / 1,015 -> 609 / 12 / 39 / 1,013; LANDED gains X286 extremal-graph-theory after X284. Dev run 1 (x286-dev-by-marcol 7b26318d, -c OK, 38 listed = present): run-x286-1.sh 3acce0e6 on 36eb547d8864b7c5d665b4241259fa671d77dc17, JOB 16:45:35Z-17:29:47Z, RESULT PASS-WITH-EXPECTED, 29 STEP lines, 25 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields; W1 12 / 14 (helper ownership and hard lint PASS; 2 / 2 Defined; package compiles; Print Assumptions clean on 2 / 2 statements + 6 certificates; 11 exact-type probes; the two FAIL lines the verifier and source fields); B3 compiled X286.v and grounding_X286.v; W2 932 / 932; W3 2 probed, 0 FLAGGED; W4 0 active, 59 allowlisted; A12 101 reports OK; written only the three generated files; END HEAD 36eb547d8864b7c5d665b4241259fa671d77dc17."
+    },
+    "X285": {
+      "phase": "X285",
+      "repo": "graph-theory-misc",
+      "defines_file": "X285.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X285 (A3 verifier Marcol; routing Lancelot (436), (442), (449); selection x285-selection-by-arthur, design x285-design-by-arthur r1), branch math/arthur-x285-20261103",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x285-weak-meyniel-hat-guessing-locke-meyniel-synonym",
+      "rows": {
+        "std_weak_meyniel_s_conjecture": {
+          "formal_name": "weak_meyniel_cop_number_statement",
+          "source_hash": "a38c4d231472b82021b621ff08817e32edc255e5e69625f8e3c3211d14ef8706",
+          "note": "Weak Meyniel's Conjecture (arXiv:1912.06957v2, Revision.tex l.54-56, printed Conjecture 2; studies record), encoded for CONNECTED graphs with eps = 1/q: some q >= 1 and C with c(G)^q <= C n^(q-1) for every nonempty connected G. Conjecture 2 prints \"every graph\" and no guard; read literally it is false (n isolated vertices need n cops, grounding_X285 g285_wm_not_trivially_true), and the guard follows ordinary Meyniel (l.48-50), as X217. OPEN at the pin: the paper proves only conditional forms (Lemma 7, Corollary 8, l.229-251).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g285_wm_hyp_inhabited",
+              "claim": "g285_wm_hyp_claim",
+              "references": [
+                "weak_meyniel_cop_number_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g285_wm_not_trivially_true",
+              "claim": "g285_wm_ntt_claim",
+              "references": [
+                "weak_meyniel_cop_number_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_hat_guessing_number_bounded_by_hadwiger_number_a": {
+          "formal_name": "hat_guessing_hadwiger_function_bound_statement",
+          "source_hash": "d46dbdfc87c3341c0eb6f1f5eb66adefd2b92ebd35fedf1ca93f5e8cf5284eeb",
+          "note": "The open problem of Alon and Chizewer as stated by Knierim, Martinsson and Steiner (arXiv:2112.09619v1, main.tex l.173; studies record), affirmative and FUNCTIONAL: one f with HG(G) <= f(h(G)) for every graph (X99 x99_hadwiger_number, x99_hat_guessing_number_at_most). Not HG(G) <= h(G) (X99's Bosek et al. row, false; 2107.05995v2 l.117-130). OPEN at the pin: yes for K_(2,s)-free graphs only (Corollary 1.5, l.175-177).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g285_hh_hyp_inhabited",
+              "claim": "g285_hh_hyp_claim",
+              "references": [
+                "hat_guessing_hadwiger_function_bound_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g285_hh_not_trivially_true",
+              "claim": "g285_hh_ntt_claim",
+              "references": [
+                "hat_guessing_hadwiger_function_bound_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "axv_2107_05995_02": {
+          "formal_name": "hat_guessing_add_universal_vertex_statement",
+          "source_hash": "995154dc5d13b8b43b3a57d9f3557fe844000b3aac218ddce507494012214a57",
+          "note": "The final open question of arXiv:2107.05995v2 (main.tex l.508-526), the AFFIRMATIVE reading of a two-sided question: one f with HG(G') <= f(m) whenever HG(G) <= m, G' = G plus a vertex adjacent to all of G (coq-graph-theory add_node G [set: G]; X227 x227_hat_guessing_le). G may be disconnected (l.515-519). The G_d(N) example (HG(G') = q^2 + q) is a lower bound on f. OPEN at the pin.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g285_au_hyp_inhabited",
+              "claim": "g285_au_hyp_claim",
+              "references": [
+                "hat_guessing_add_universal_vertex_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g285_au_not_trivially_true",
+              "claim": "g285_au_ntt_claim",
+              "references": [
+                "hat_guessing_add_universal_vertex_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_locke_s_conjecture": {
+          "formal_name": "locke_finitely_many_statement",
+          "source_hash": "b71121f9442c100281800f42d9e978c1fb89f4c4d2c6279f1329dff4dd4b09b6",
+          "note": "Locke's conjecture as quoted by Cames van Batenburg, Goedgebeur and Joret (arXiv:1911.12471v2, l.196; studies record), encoded as stated with finitely many as a bound on the order: some N with |G| <= N for every 3-connected (k_connected G 3) triangle-free cubic (regular G 3) G with 8 alpha(G) < 3n. TRUE at the pin: their Corollary 8 (l.249-253) leaves six exceptions of order at most 22, so N = 22; not a no-exception statement (F_14^(1) is in the class, grounding_X285 g285_locke_hyp_inhabited).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g285_locke_hyp_inhabited",
+              "claim": "g285_locke_hyp_claim",
+              "references": [
+                "locke_finitely_many_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g285_locke_not_trivially_true",
+              "claim": "g285_locke_ntt_claim",
+              "references": [
+                "locke_finitely_many_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_meyniel_s_conjecture": {
+          "formal_name": "meyniel_cop_number_sqrt_duplicate_statement",
+          "source_hash": "559a962b66fec92ff1e4820de97e7154db93609e52ac1bb914037c72f07f5128",
+          "note": "Meyniel's conjecture, the studies row (cid 390) of the conjecture others:meyniels-conjecture records: a synonym of X217's meyniel_cop_number_sqrt_statement (as X254's Tomescu duplicates); CORPUS_FEEDBACK item 69 proposes the upstream alias. OPEN at the pin.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g285_mey_hyp_inhabited",
+              "claim": "g285_mey_hyp_claim",
+              "references": [
+                "meyniel_cop_number_sqrt_duplicate_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g285_mey_not_trivially_true",
+              "claim": "g285_mey_ntt_claim",
+              "references": [
+                "meyniel_cop_number_sqrt_duplicate_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
