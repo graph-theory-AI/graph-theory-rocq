@@ -13513,6 +13513,60 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Marcol (X285 wave verification, 2026-11-04)",
       "faithfulness_result": "Readback 2026-11-04 (verifier Marcol): 5/5 PASS against the pinned texts and the sources, at math/arthur-x285-20261103 = ee05aed90272b5f21ac219ae7ef16f48d6589f6f (seven commits on work/coordinator cd3277c3), after my design read ((355), FAITHFUL 5/5 with B1 / B2 required and O1 optional, packet x285-design-read-by-marcol 3c15ef55) of x285-design-by-arthur r1 (e4d9631b). At ee05aed9 X285.v and grounding_X285.v are the design packet's files byte for byte; waves.X285 = the packet's wave-x285.json except the weak Meyniel note (B2: 568 -> 531 characters, legs note 622 -> 585), the only waves change; no local helper (helper_ownership {}, helper_sanity [] in every row). Weak Meyniel (studies): some q >= 1 and C with c(G)^q <= C n^(q-1) for every nonempty connected G (cops.v's game), eps = 1/q exact; the connected guard is a named inference after Conjecture 1 (l.48-50), Conjecture 2 (l.54-56) read literally being false on edgeless graphs (g285_wm_not_trivially_true refutes that reading); OPEN, Lemma 7 / Corollary 8 conditional. Hadwiger (studies): one f with HG(G) <= f(h(G)) in X99's exact vocabulary, not HG <= h (false, AC l.117-130); K_0 harmless; Corollary 1.5 (K_(2,s)-free) not encoded; OPEN. Universal vertex (arxiv:2107.05995#02): the affirmative side named, one f with HG(G') <= f(m) whenever HG(G) <= m, G' = add_node G [set: G], equivalent to a bound by HG(G) through the running maximum; X227's convention at G' = K_1 harmless; no connected guard (l.515-519); OPEN. Locke (studies): exists N bounding the order of every 3-connected triangle-free cubic G with 8 alpha(G) < 3n; TRUE at the pin by Corollary 8 with its six exceptions (N = 22), never as a no-exception statement: F_14^(1) is in the class (my perl brute force on the graphml table: cubic, triangle-free, alpha = 5, no separating set of at most two vertices). Meyniel (studies): the synonym of X217's meyniel_cop_number_sqrt_statement by name; CORPUS_FEEDBACK item 69 (after 68, item 33 unchanged) proposes the alias, the studies reason quoted whole (O1). Grounding: ten certificates, each claim names its statement, each not_trivially_true drops one hypothesis (connected; the Hadwiger hypothesis; the HG(G) bound; 3-connectivity; connected) and implies its row. Metadata: source_hash 5/5 recomputed at b72c5857, equal; allowlist 59 -> 60, the one exists-after-graph-forall entry of the weak Meyniel row (k stands for c(G)); regularity.spec.json cross_module_consumers += X285.v and grounding_X285.v (B1, X263's note form); legs: the five rows done / done, commit x285-weak-meyniel-hat-guessing-locke-meyniel-synonym, notes 585 / 488 / 449 / 548 / 321 = \"Authored in X285.v:<name>. \" + the wave note, no other legs entry changed; README 607 / 12 / 39 / 1,015 -> 612 / 12 / 39 / 1,010; LANDED gains X285 graph-theory-misc after X284. Dev run 1 (x285-dev-by-arthur cb4c4441, -c OK, 42 listed = present): run-x285-1.sh 528af3d2 on ee05aed90272b5f21ac219ae7ef16f48d6589f6f, JOB 16:49:37Z-17:36:23Z, RESULT PASS-WITH-EXPECTED, 32 STEP lines, 28 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields; W1 12 / 14 (helper ownership and hard lint PASS; 5 / 5 Defined; package compiles; Print Assumptions clean on 5 / 5 statements + 10 certificates; 50 exact-type probes; the two FAIL lines the verifier and source fields); B4 compiled X285.v and grounding_X285.v (two Rocq 9.2 deprecation warnings for Local Notation abbreviations, l.269-270, as grounding_X268's); G6 regularity 79 / 79 OK and G6b triangle_free 95 / 95 OK, no report changed; W2 935 / 935; W3 5 probed, 0 FLAGGED; W4 0 active, 60 allowlisted; A12 101 reports OK; G2b legs unchanged; written only the three generated files; END HEAD ee05aed90272b5f21ac219ae7ef16f48d6589f6f."
+    },
+    "X287": {
+      "phase": "X287",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X287.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X287 (A3 verifier Arthur; routing Lancelot (459); selection x287-selection-by-marcol, design x287-design-by-marcol r1), branch math/marcol-x287-20261104, 2026-11-04",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x287-bajnok-brinkmann-six-exceptional-graphs",
+      "rows": {
+        "std_bajnok_brinkmann_conjecture_triangle_free_subcub": {
+          "formal_name": "bajnok_brinkmann_six_exceptional_graphs_statement",
+          "source_hash": "1dc9bcbd5e6afd200dfbeeaa6664e5ed0ac8113c470c3955f1aebebdecd41c81",
+          "note": "The Bajnok-Brinkmann conjecture as Cames van Batenburg, Goedgebeur and Joret quote it (arXiv:1911.12471v2, l.204-210; studies record): every 2-connected triangle-free subcubic G with 8 alpha(G) < 3n is isomorphic to one of the six graphs F_11, F_14^(1), F_14^(2), F_19^(1), F_19^(2), F_22 of Figure 1 (tables from the figure files, x287_bb_graph), each of them is such a graph, and no two are isomorphic. TRUE before the pin by their Corollary 8 (l.249-253) with the six; pinned open (lit23).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g287_bb_hyp_inhabited",
+              "claim": "g287_bb_hyp_claim",
+              "references": [
+                "bajnok_brinkmann_six_exceptional_graphs_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g287_bb_not_trivially_true",
+              "claim": "g287_bb_ntt_claim",
+              "references": [
+                "bajnok_brinkmann_six_exceptional_graphs_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g287_helper_sanity",
+                "claim": "g287_helper_claim",
+                "references": [
+                  "x287_bb_tables",
+                  "x287_bb_graph"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x287_bb_tables": {
+          "classification": "paper_specific",
+          "reason": "The six exceptional graphs F_11, F_14^(1), F_14^(2), F_19^(1), F_19^(2), F_22 of the Bajnok-Brinkmann conjecture as Cames van Batenburg, Goedgebeur and Joret draw them (arXiv:1911.12471v2, Figure 1), each as (order, edge list) from the figure source files, verbatim."
+        },
+        "x287_bb_graph": {
+          "classification": "paper_specific",
+          "reason": "The i-th graph of x287_bb_tables as a simple graph on its order (fg_mk_sgraph of the listed pairs): the six graphs named by the Bajnok-Brinkmann conjecture (arXiv:1911.12471v2, l.204-210)."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
