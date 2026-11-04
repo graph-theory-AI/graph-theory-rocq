@@ -24990,13 +24990,13 @@
     ]
   },
   "counts": {
-    "files": 377,
-    "helpers": 2768,
+    "files": 378,
+    "helpers": 2770,
     "repeated_body_shapes": 152,
     "repeated_normalized_names": 222,
     "repeated_signature_shapes": 337,
-    "statements_excluded": 887,
-    "x_wave_helpers": 1607
+    "statements_excluded": 889,
+    "x_wave_helpers": 1609
   },
   "groups": {
     "body_shape_hash": {
@@ -27794,7 +27794,8 @@
         "Chromatic.conjectures.X181.x181_clique_colourable",
         "Chromatic.conjectures.X261.x261_choosable_b",
         "Chromatic.conjectures.X261.x261_cochromatic_at_most",
-        "Chromatic.conjectures.X277.x277_correspondence_colourable"
+        "Chromatic.conjectures.X277.x277_correspondence_colourable",
+        "Extremal.conjectures.X286.x286_biclique_partition"
       ],
       "2e34ca0733dcaa4bafbbadaf1fbf6cdff3e34458418b9b4d98d271c21358f851": [
         "Digraph.conjectures.X221.x221_tbar",
@@ -60463,6 +60464,46 @@
       "qualified_name": "Extremal.conjectures.X282.x282_ramsey_size_linear",
       "signature": "(G : sgraph) : Prop",
       "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
+    },
+    {
+      "body_hash": "9ec20af7676db230e32779769f552f0a9f694b31470fa4463558376ecabc81c3",
+      "body_shape_hash": "9ec20af7676db230e32779769f552f0a9f694b31470fa4463558376ecabc81c3",
+      "declaration_hash": "26da22a08fc70e91743d75d46cf4ec2eed2dd6a2522133fdd57dff489a6f4381",
+      "direct_consumers": [
+        "Extremal.conjectures.X286.x286_biclique_partition"
+      ],
+      "kind": "Definition",
+      "line": 9,
+      "local_dependencies": [],
+      "name": "x286_biclique_edges",
+      "normalized_name": "biclique_edges",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X286.v",
+      "phase": "X286",
+      "qualified_name": "Extremal.conjectures.X286.x286_biclique_edges",
+      "signature": "(G : sgraph) (A B : {set G}) : {set {set G}}",
+      "signature_shape_hash": "3fa2a5170952b798c4e72a36897454303b28e3e6261ad98b2157da062d66d04f"
+    },
+    {
+      "body_hash": "166ab42d9911b05ae559fd43f84501f9420fcefb4ce010316e12dc359d2e7927",
+      "body_shape_hash": "adf183de9bfc6df38160064dd1e1d367d3da9976b3b2cef1c22dcf9aacff0807",
+      "declaration_hash": "2ccde08f6e5f729e31abc12778a2e461ef08a7097bdd9512a42528fdbf23d30c",
+      "direct_consumers": [
+        "Extremal.conjectures.X286.erdos_807_bipartition_number_random_graph_statement"
+      ],
+      "kind": "Definition",
+      "line": 18,
+      "local_dependencies": [
+        "x286_biclique_edges"
+      ],
+      "name": "x286_biclique_partition",
+      "normalized_name": "biclique_partition",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X286.v",
+      "phase": "X286",
+      "qualified_name": "Extremal.conjectures.X286.x286_biclique_partition",
+      "signature": "(G : sgraph) (k : nat) : bool",
+      "signature_shape_hash": "2dfa0209a96d75a88801009d8ba7195a085ea00271e0a87197a15c4dd968dd2e"
     },
     {
       "body_hash": "857e81095417ec9a7b32ad78ef7497e0e68db404b9edf9f8ff9d7b7f4a404cbd",
