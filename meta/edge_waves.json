@@ -29,6 +29,20 @@
    "reviewed_at": "2026-09-24",
    "note": "Case (ii) of the source with constants C, D0 > 1, applied with D_A = D_B = D := max(Delta, D0) (x219_max_degree_on is an upper bound) and k_A = k_B = k := C * trunc_log 2 D >= C > 0, gives choosable G k, so ch <= k. Target constant c := C * D0: if Delta >= D0 then 2^k = (2^(log Delta))^C <= Delta^C <= Delta^(C*D0); if Delta < D0 then k <= C*D0 (log D0 < D0) and 2^(C*D0) <= Delta^(C*D0) as Delta >= 2. The threshold D0 of the repaired source is absorbed by the existential c."
   },
+  "bajnok_brinkmann_six_exceptional_graphs_statement->locke_finitely_many_statement:implies": {
+   "gc": null,
+   "tier": "T1",
+   "wave": "A1",
+   "host": "atlas",
+   "state": "verified",
+   "proof": "bajnok_brinkmann_six_exceptional_graphs_implies_locke_finitely_many",
+   "external": [],
+   "reason": "",
+   "proved_by": "Lancelot (Claude Opus 5.5), 2026-11-04: atlas implications_X287.v",
+   "reviewed_by": "Arthur (second reader of the X287 Bajnok-Brinkmann => X285 Locke edge, 2026-11-05)",
+   "reviewed_at": "2026-11-05",
+   "note": "Rocq-only edge (no corpus relation), noted with X287's selection (Marcol's (362), Lancelot's (459)): a 3-connected cubic graph is 2-connected (k_connected is monotone in k) and subcubic (regular_subcubic), so the first clause of the Bajnok-Brinkmann statement makes it isomorphic to one of the six graphs (card_bij of the isomorphism), and N is the largest of their orders (22)."
+  },
   "bang_jensen_yeo_SAD_statement->arc_disjoint_out_branching_and_in_branching_statement:implies": {
    "gc": "e103",
    "tier": "T3",
