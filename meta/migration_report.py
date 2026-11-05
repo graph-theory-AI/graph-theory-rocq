@@ -51,6 +51,12 @@ be listed. A "reblock" (Marc's decision of 2026-10-26, X114) is text-preserving:
 it has no replacement, the statement text stays the baseline text and the
 certificate keeps the exact iff probe; only the doc block (pinned) and the listed
 leg fields change, and every listed leg state is now "blocked".
+A "restatus" (Marc's decision of 2026-11-05, question 11) is a literature status
+update: it has no replacement and no leg fields, the statement text and the doc
+block stay the baseline ones (the doc block also pinned), the certificate keeps
+the exact iff probe, and its row_fields are exactly status and status_semantics,
+the two fields that both change; one line of its record names the statement
+and the row's new status.
 An original-statement repair needs the identical repair on the row's
 statement object, in the same spec or else in exactly one other family spec.
 Every object without a repair keeps the exact iff probe.
@@ -69,9 +75,10 @@ It verifies that
     earlier family's certificate does);
   * statement texts, their doc blocks, manifest rows and leg states are unchanged
     since the baseline (under a repair: the text is the baseline text with exactly
-    the reviewed replacement, or unchanged under a reblock, the doc block has the
-    pinned hash, and the row and leg fields that changed are exactly the listed
-    ones, each listed leg state blocked under a reblock), and the listed distinct
+    the reviewed replacement, or unchanged under a reblock or a restatus, the doc
+    block has the pinned hash and is unchanged under a restatus, and the row and leg
+    fields that changed are exactly the listed ones, each listed leg state blocked
+    under a reblock), and the listed distinct
     name matches are untouched;
   * every certificate theorem is declared in its certificate file.
 
@@ -127,14 +134,20 @@ HISTORICAL_KINDS = frozenset({
 FROZEN_KINDS = STATEMENT_KINDS | HISTORICAL_KINDS | {"source", "chain", "original-chain"}
 REPAIR_KEYS = frozenset({"replace", "doc_block_sha256", "record"})
 REPAIR_OPTIONAL_KEYS = frozenset({"direction", "relation", "row_fields", "leg_fields"})
-REPAIR_DIRECTIONS = ("strengthen", "weaken", "re-encode", "reblock")
-# the probe of each fixed direction; a re-encode states its own relation and may not restate these; a reblock keeps
-# the statement text, so its certificate keeps the exact migration iff
-REPAIR_PROBES = {"strengthen": "{live} -> {frozen}", "weaken": "{frozen} -> {live}", "reblock": "{frozen} <-> {live}"}
+REPAIR_DIRECTIONS = ("strengthen", "weaken", "re-encode", "reblock", "restatus")
+# the probe of each fixed direction; a re-encode states its own relation and may not restate these; a reblock and a
+# restatus keep the statement text, so their certificates keep the exact migration iff
+REPAIR_PROBES = {"strengthen": "{live} -> {frozen}", "weaken": "{frozen} -> {live}", "reblock": "{frozen} <-> {live}",
+                 "restatus": "{frozen} <-> {live}"}
+TEXT_PRESERVING_DIRECTIONS = frozenset({"reblock", "restatus"})
 # a reblock has no replacement and must list the leg fields it changes; the leg states among them become "blocked"
 REBLOCK_KEYS = frozenset({"doc_block_sha256", "record", "direction", "leg_fields"})
 REBLOCK_OPTIONAL_KEYS = frozenset({"row_fields"})
 REBLOCK_LEG_STATES = frozenset({"statement", "grounding", "correspondence", "audit_page"})
+# a restatus (Marc's decision of 2026-11-05, question 11) has no replacement and no leg fields and lists exactly the
+# literature status fields of the manifest row
+RESTATUS_KEYS = frozenset({"doc_block_sha256", "record", "direction", "row_fields"})
+RESTATUS_ROW_FIELDS = frozenset({"status", "status_semantics"})
 PLAIN_RELATIONS = frozenset({"{live} -> {frozen}", "{frozen} -> {live}",
                              "{frozen} <-> {live}", "{live} <-> {frozen}"})
 # row identity, source and binding fields, and the leg's package, never change under a repair; the derived
@@ -1314,13 +1327,17 @@ REPAIR_LABELS = {
     "re-encode": ("Source re-encodings after migration", "certificates of each record's stated relation"),
     "reblock": ("Text-preserving reblocks after migration", "statement text unchanged and the exact iff kept; "
                 "the doc block and the listed leg fields changed, each listed leg state now blocked"),
+    "restatus": ("Literature status updates after migration", "statement text, doc block and the exact iff kept; "
+                 "only the manifest row's status and status_semantics changed"),
 }
 REPAIR_CERTIFICATE_NOTES = {
     "strengthen": " (one-way source-repair certificate `live -> frozen`, not a migration equivalence)",
     "weaken": " (one-way source-repair certificate `frozen -> live`, not a migration equivalence)",
     "re-encode": " (source re-encoding certificate of the relation `{relation}`, not a migration equivalence)",
     "reblock": " (exact migration iff, kept under a text-preserving reblock)",
+    "restatus": " (exact migration iff, kept under a literature status update)",
 }
+REPAIR_CHANGES = {"reblock": "text-preserving reblock", "restatus": "literature status update"}
 
 
 def repair_fields_note(repair: dict, sep: str) -> str:
@@ -1330,7 +1347,7 @@ def repair_fields_note(repair: dict, sep: str) -> str:
 
 def repair_item(statement: dict) -> str:
     repair = statement["repair"]
-    if repair_direction(repair) == "reblock":
+    if repair_direction(repair) in TEXT_PRESERVING_DIRECTIONS:
         return f"`{statement['qualified']}` (record `{repair['record']}`{repair_fields_note(repair, '; ')})"
     relation = f"; relation `{repair['relation']}`" if "relation" in repair else ""
     return (f"`{statement['qualified']}` (`{repair['replace'][0]}` -> `{repair['replace'][1]}`{relation}; "
@@ -1396,12 +1413,14 @@ def validate_repairs(spec: dict) -> None:
                              "that are not enrolled additional or parametric statements")
         replace = repair.get("replace") if isinstance(repair, dict) else None
         reblock = isinstance(repair, dict) and repair.get("direction") == "reblock"
+        restatus = isinstance(repair, dict) and repair.get("direction") == "restatus"
         required, allowed = ((REBLOCK_KEYS, REBLOCK_KEYS | REBLOCK_OPTIONAL_KEYS) if reblock
+                             else (RESTATUS_KEYS, RESTATUS_KEYS) if restatus
                              else (REPAIR_KEYS, REPAIR_KEYS | REPAIR_OPTIONAL_KEYS))
         if (not isinstance(repair, dict) or not required <= set(repair) <= allowed
-                or not reblock and (not isinstance(replace, list) or len(replace) != 2
-                                    or not all(isinstance(text, str) and text for text in replace)
-                                    or replace[0] == replace[1])
+                or not (reblock or restatus) and (not isinstance(replace, list) or len(replace) != 2
+                                                  or not all(isinstance(text, str) and text for text in replace)
+                                                  or replace[0] == replace[1])
                 or not isinstance(repair["doc_block_sha256"], str)
                 or not re.fullmatch(r"[0-9a-f]{64}", repair["doc_block_sha256"])
                 or not isinstance(repair["record"], str)
@@ -1410,7 +1429,8 @@ def validate_repairs(spec: dict) -> None:
             raise ValueError(f"{what}: repair must be {{replace: [old, new] (two distinct nonempty strings), "
                              "doc_block_sha256: 64 lowercase hex, record: a relative repository file path}, "
                              "or a reblock {doc_block_sha256, record, direction: reblock, leg_fields[, row_fields]} "
-                             "with no replace or relation")
+                             "with no replace or relation, or a restatus {doc_block_sha256, record, "
+                             "direction: restatus, row_fields} with no replace, relation or leg_fields")
         direction = repair.get("direction", "strengthen")
         if direction not in REPAIR_DIRECTIONS:
             raise ValueError(f"{what}: repair direction must be one of {', '.join(REPAIR_DIRECTIONS)}")
@@ -1427,11 +1447,14 @@ def validate_repairs(spec: dict) -> None:
         if reblock and not set(repair["leg_fields"]) & REBLOCK_LEG_STATES:
             raise ValueError(f"{what}: a reblock repair lists at least one leg state among "
                              f"{sorted(REBLOCK_LEG_STATES)} in leg_fields")
+        if restatus and set(repair["row_fields"]) != RESTATUS_ROW_FIELDS:
+            raise ValueError(f"{what}: a restatus repair lists exactly the row fields "
+                             f"{sorted(RESTATUS_ROW_FIELDS)} in row_fields")
         # rejected here, not as a report check, so that no other family's check count (printed in the compact
         # report) changes
-        if reblock and obj.get("non_corpus"):
-            raise ValueError(f"{what}: a reblock repair needs a corpus row and its leg-state entry, not a "
-                             "non_corpus statement")
+        if (reblock or restatus) and obj.get("non_corpus"):
+            raise ValueError(f"{what}: a {repair['direction']} repair needs a corpus row and its leg-state entry, "
+                             "not a non_corpus statement")
         if obj["kind"] == "original-statement":
             # the statement object carries the text, doc-block, row and leg checks: in this spec, or else in
             # exactly one other family spec (a row migrated by one family and snapshotted by another)
@@ -1809,11 +1832,11 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
             check(doc_same and doc_block(live_src, obj["name"]) is not None,
                   f"{obj['qualified']}: doc block unchanged since baseline")
         else:
-            reblock = repair_direction(repair) == "reblock"
-            if reblock:
+            reblock, restatus = repair_direction(repair) == "reblock", repair_direction(repair) == "restatus"
+            if reblock or restatus:
                 # text-preserving: no replacement, the statement text is the baseline text
                 check(text_same, f"{obj['qualified']}: statement text unchanged since baseline under the "
-                      "reviewed reblock")
+                      + ("reviewed reblock" if reblock else "reviewed status update"))
             else:
                 old, new = repair["replace"]
                 occurrences = base_text.count(old)
@@ -1821,18 +1844,35 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
                       f"{obj['qualified']}: statement text is the baseline text with exactly the reviewed repair",
                       f"{old!r} occurs {occurrences} times in the baseline text" if occurrences != 1
                       else f"expected: {base_text.replace(old, new)} | live: {live_text}")
+            if restatus:
+                # a literature status update changes no doc block either; the pin below records the reviewed one
+                check(doc_same, f"{obj['qualified']}: doc block unchanged since baseline under the reviewed "
+                      "status update")
             check(sha256(doc_block(live_src, obj["name"]) or "") == repair["doc_block_sha256"]
                   and doc_block(live_src, obj["name"]) is not None,
                   f"{obj['qualified']}: doc block matches the reviewed repair")
             # the published reader needs the source reading in the repository itself
             record = ROOT / repair["record"]
             record_text = record.read_text() if record.is_file() and not record.is_symlink() else ""
-            # a reblock record names the word blocked itself ("reblocked" alone does not)
-            named = (re.search(r"(?<![A-Za-z])blocked(?![A-Za-z])", record_text) is not None if reblock
-                     else new in record_text)
+            record_detail = ""
+            if reblock:
+                # a reblock record names the word blocked itself ("reblocked" alone does not)
+                named = re.search(r"(?<![A-Za-z])blocked(?![A-Za-z])", record_text) is not None
+                subject = "the word blocked"
+            elif restatus:
+                # a status update record names the statement and the row's new status as a word on ONE line: a shared
+                # record names solved on many lines; "unsolved" does not name solved
+                statuses = [row.get("status") for row in rows_for_object(rows_now, obj)]
+                word = (re.compile(rf"(?<![A-Za-z]){re.escape(statuses[0])}(?![A-Za-z])")
+                        if len(statuses) == 1 and isinstance(statuses[0], str) and statuses[0] else None)
+                named = word is not None and any(obj["name"] in line and word.search(line) is not None
+                                                 for line in record_text.splitlines())
+                subject, record_detail = "its new status on one line", f"current status {statuses}"
+            else:
+                named, subject = new in record_text, "its repaired text"
             check(obj["name"] in record_text and named,
                   f"{obj['qualified']}: repair record {repair['record']} is a repository file naming the "
-                  + ("statement and the word blocked" if reblock else "statement and its repaired text"))
+                  f"statement and {subject}", record_detail)
         formal = obj["name"]
         # a repair may change exactly its listed row and leg fields; the checks below compare everything else
         row_fields = set((repair or {}).get("row_fields", []))
@@ -2047,7 +2087,7 @@ def render_markdown(report: dict, spec: dict) -> str:
     clause = "; every other row keeps its exact iff"   # said once, in the first repair sentence
     for direction in REPAIR_DIRECTIONS:
         group = [statement for statement in repaired if repair_direction(statement["repair"]) == direction]
-        if group and direction == "reblock":   # still the exact iff, so neither a one-way nor the clause
+        if group and direction in TEXT_PRESERVING_DIRECTIONS:   # still the exact iff: neither a one-way nor the clause
             label, kind = REPAIR_LABELS[direction]
             lines += ["", f"{label} ({kind}): " + ", ".join(repair_item(statement) for statement in group) + "."]
         elif group:
@@ -2120,7 +2160,8 @@ def render_details(report: dict, spec: dict) -> str:
         if "repair" in st:
             cert += REPAIR_CERTIFICATE_NOTES[repair_direction(st["repair"])].format(
                 relation=st["repair"].get("relation"))
-            change = ("text-preserving reblock" if repair_direction(st["repair"]) == "reblock" else
+            change = (REPAIR_CHANGES[repair_direction(st["repair"])]
+                      if repair_direction(st["repair"]) in TEXT_PRESERVING_DIRECTIONS else
                       f"source repair: `{st['repair']['replace'][0]}` -> `{st['repair']['replace'][1]}`")
             metadata = (f"{change}, "
                         f"doc block sha256 `{st['repair']['doc_block_sha256'][:16]}…`, "

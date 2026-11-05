@@ -1076,6 +1076,160 @@ class RepairTests(unittest.TestCase):
         self.compile_fixture()
         self.assertTrue(REPORT.check_kernel(self.spec))
 
+    # Marc's decision of 2026-11-05 (question 11): a literature status update of a frozen row. The statement text, its
+    # doc block (pinned) and the exact iff certificate stay; only the row's status and status_semantics change.
+    BASELINE_DOC = "(** Corpus row: test\n    English statement: every number equals itself. *)"
+    RESTATUS_ROW = {"status": "solved", "status_semantics": "solved in the literature before the corpus pin"}
+
+    def restatus_fixture(self, **extra):
+        """The migrated row (exact iff), then a reviewed restatus: only the two status fields of the row change."""
+        self.write(self.RECORD, "- test_statement: solved in the literature, its status is now solved.\n")
+        self.repair = {"direction": "restatus", "doc_block_sha256": REPORT.sha256(self.BASELINE_DOC),
+                       "record": self.RECORD, "row_fields": ["status", "status_semantics"], **extra}
+        self.spec["frozen"][1]["repair"] = copy.deepcopy(self.repair)
+        self.manifest = "meta/" + REPORT.REG.CORPORA["v2"]["manifest"]
+        self.overlay = "meta/" + REPORT.REG.CORPORA["v2"]["overlay"]
+        self.write_json(self.manifest, {"rows": [{**self.row, **self.RESTATUS_ROW}]})
+
+    def test_reviewed_restatus_passes(self):
+        self.restatus_fixture()
+        self.assertEqual(self.failures(), [])
+
+    def test_restatus_keeps_the_statement_text(self):
+        self.restatus_fixture()
+        self.write(self.source, self.live.replace("local_helper n.\n", "local_helper (n + 0).\n"))
+        self.assertIn(self.statement + ": statement text unchanged since baseline under the reviewed status update",
+                      self.failures())
+
+    def test_restatus_keeps_and_pins_the_doc_block(self):
+        unchanged = self.statement + ": doc block unchanged since baseline under the reviewed status update"
+        pinned = self.statement + ": doc block matches the reviewed repair"
+        self.restatus_fixture()
+        changed = self.BASELINE_DOC.replace("every number", "every natural number")
+        self.write(self.source, self.live.replace(self.BASELINE_DOC, changed))
+        failures = self.failures()
+        self.assertIn(unchanged, failures)
+        self.assertIn(pinned, failures)
+        # a pin of the changed doc block does not license it: unlike a reblock, a restatus keeps the doc block
+        self.spec["frozen"][1]["repair"]["doc_block_sha256"] = REPORT.sha256(changed)
+        failures = self.failures()
+        self.assertIn(unchanged, failures)
+        self.assertNotIn(pinned, failures)
+
+    def test_restatus_record_names_the_statement_and_the_new_status(self):
+        self.restatus_fixture()
+        check = (f"{self.statement}: repair record {self.RECORD} is a repository file naming the statement "
+                 "and its new status on one line")
+        self.assertNotIn(check, self.failures())
+        for text in ("- another_statement: its status is now solved.\n", "- test_statement: status updated.\n",
+                     "- test_statement: no longer unsolved.\n", "- test_statement: now disproved.\n",
+                     "- test_statement: see the next item.\n- another row: its status is now solved.\n"):
+            with self.subTest(text=text):
+                self.write(self.RECORD, text)
+                self.assertIn(check, self.failures())
+
+    def test_restatus_changes_exactly_the_two_status_fields(self):
+        exact = "test_statement: the manifest-row fields that changed are exactly the repair's row_fields"
+        outside = "test_statement: manifest row unchanged since baseline outside the repair's listed fields"
+        self.restatus_fixture()
+        for row in ({**self.row, "status": "solved"}, {**self.row, "status_semantics": "solved"}, self.row):
+            with self.subTest(row=row):
+                self.write_json(self.manifest, {"rows": [row]})
+                self.assertIn(exact, self.failures())
+        for changed in ({"phase": "X1"}, {"difficulty_tier": "hard"}):
+            with self.subTest(changed=changed):
+                self.write_json(self.manifest, {"rows": [{**self.row, **self.RESTATUS_ROW, **changed}]})
+                failures = self.failures()
+                self.assertIn(outside, failures)
+                self.assertIn(exact, failures)
+
+    def test_restatus_keeps_the_leg_state_entry(self):
+        self.restatus_fixture()
+        for entry in ({"statement": "blocked"}, {"statement": "done", "note": "solved in the literature"}):
+            with self.subTest(entry=entry):
+                self.write_json(self.overlay, {"entries": {"test": entry}})
+                self.assertIn("test_statement: leg-state entry unchanged since baseline", self.failures())
+
+    def test_malformed_restatus_repairs_are_rejected(self):
+        self.restatus_fixture()
+        good = copy.deepcopy(self.repair)
+        bad = [
+            {**good, "replace": ["local_helper n", "local_helper m"]},
+            {**good, "relation": "{frozen} /\\ {live}"},
+            {**good, "leg_fields": ["note"]},
+            {**good, "extra": 1},
+            {key: value for key, value in good.items() if key != "row_fields"},
+            {key: value for key, value in good.items() if key != "doc_block_sha256"},
+            {key: value for key, value in good.items() if key != "record"},
+            {key: value for key, value in good.items() if key != "direction"},
+            {**good, "direction": "re-status"},
+            {**good, "row_fields": ["status"]},
+            {**good, "row_fields": ["status_semantics"]},
+            {**good, "row_fields": ["status", "status_semantics", "phase"]},
+            {**good, "row_fields": ["status", "status"]},
+            {**good, "row_fields": ["status", "legs"]},
+            {**good, "row_fields": []},
+            {**good, "row_fields": "status"},
+        ]
+        for repair in bad:
+            with self.subTest(repair=repair):
+                self.spec["frozen"][1]["repair"] = repair
+                with self.assertRaisesRegex(ValueError, "repair"):
+                    self.report()
+        self.spec["frozen"][1]["repair"] = {**good, "row_fields": ["status_semantics", "status"]}
+        self.assertEqual(self.failures(), [])   # the two fields in either order
+        self.spec["frozen"][1].update(repair=copy.deepcopy(good), non_corpus=True)
+        with self.assertRaisesRegex(ValueError, "restatus repair needs a corpus row"):
+            self.report()
+
+    def test_original_restatus_requires_the_identical_statement_repair(self):
+        self.restatus_fixture()
+        original = {**copy.deepcopy(self.spec["frozen"][1]), "kind": "original-statement"}
+        self.spec["frozen"].append(original)
+        check = self.statement + ": statement text unchanged since baseline under the reviewed status update"
+        self.assertNotIn(check, self.failures())
+        self.spec["frozen"][1]["repair"] = {**self.repair, "record": "elsewhere"}
+        with self.assertRaisesRegex(ValueError, "identical repair on its statement"):
+            self.report()
+
+    def test_restatus_adds_no_check_to_rows_without_it(self):
+        for non_corpus in (False, True):
+            with self.subTest(non_corpus=non_corpus):
+                self.spec["frozen"][1]["non_corpus"] = non_corpus
+                names = [item["check"] for item in self.report()["checks"]]
+                self.assertFalse([name for name in names if "status update" in name or "new status" in name], names)
+
+    def test_restatus_kernel_probe_is_the_exact_iff(self):
+        self.restatus_fixture()
+        self.assertIn(f"Check ({self.module}.statement_compat : {self.module}.X0Legacy.statement <-> "
+                      f"{self.statement}).", self.probe_body())
+
+    def test_compact_report_names_the_restatus(self):
+        self.restatus_fixture()
+        report = self.report()
+        self.assertTrue(report["ok"], [c for c in report["checks"] if not c["ok"]])
+        text = REPORT.render_markdown(report, self.spec)
+        self.assertIn("Literature status updates after migration (statement text, doc block and the exact iff kept; "
+                      "only the manifest row's status and status_semantics changed): "
+                      f"`{self.statement}` (record `{self.RECORD}`; row fields `status`, `status_semantics`).", text)
+        self.assertNotIn("not migration equivalences", text)
+        details = REPORT.render_details(report, self.spec)
+        self.assertIn("(exact migration iff, kept under a literature status update)", details)
+        self.assertIn("literature status update, doc block sha256", details)
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_accepts_the_iff_and_rejects_a_one_way_certificate_under_a_restatus(self):
+        self.restatus_fixture()
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+        one_way = ("Lemma statement_compat : X0Legacy.statement -> test_statement.\n"
+                   "Proof. intros h n; exact (h n). Qed.\n")
+        self.write(self.certificate, self.cert_source.replace(
+            "Lemma statement_compat : X0Legacy.statement <-> test_statement.\n"
+            "Proof. split; intros h n; apply h. Qed.\n", one_way))
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+
 
 class FrozenRoleTests(unittest.TestCase):
     """A primary row must not hide a mislabeled additional complete Original."""
