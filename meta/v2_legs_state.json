@@ -11027,11 +11027,14 @@
    "note": "Authored in X116.v:coarse_menger_paths_bounded_separator_statement. Encodes the coarse Menger conjecture with l depending on both k and d (forall k,d exists l) -- distinct from X39 (forall k exists c, radius c*d)."
   },
   "std_coarse_menger_conjecture_159": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x288-pure-pairs-le-induced-paths-cycles-coarse-menger",
+   "package": "graph-theory-misc",
+   "note": "Authored in X288.v:coarse_menger_paths_bounded_separator_duplicate_statement. Synonym of X116's coarse_menger_paths_bounded_separator_statement (the same conjecture: arXiv:2508.14332v1 paper.tex l.112-118 states 2401.06685v2 source.tex l.108-115 with c for d). CORPUS_FEEDBACK item 73 proposes the alias. FALSE at the pin for every k >= 3 (2401.06685v2 Theorem 1.3, l.121-131); recorded open, for lit24."
   },
   "std_coarse_menger_conjecture_georgakopoulos_papasogl": {
    "statement": "done",
@@ -12521,25 +12524,34 @@
    "audit_page": "todo"
   },
   "std_le_s_conjecture_on_induced_cycles_in_2o_free_gra": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x288-pure-pairs-le-induced-paths-cycles-coarse-menger",
+   "package": "graph-theory-misc",
+   "note": "Authored in X288.v:le_induced_cycles_polynomial_statement. Le's induced-cycles conjecture (arXiv:2212.01089v2, source.tex l.108-109; studies record): some c > 0 such that in every 2O-free G (l.103-106) every family of vertex sets of chordless cycles has at most |G|^c members. TRUE at the pin by Theorem 1.2 (l.124-130); recorded open, for lit24."
   },
   "std_le_s_conjecture_on_induced_paths_in_o_free_graph": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x288-pure-pairs-le-induced-paths-cycles-coarse-menger",
+   "package": "graph-theory-misc",
+   "note": "Authored in X288.v:le_induced_paths_o2_free_duplicate_statement. Synonym of le_induced_paths_polynomial_statement (the same conjecture): O_2-free is 2O-free (arXiv:2206.00594v5 revision.tex l.193-199) and 'a constant c' agrees with c > 0; quoted there as Conjecture 1.5 (l.335-337). CORPUS_FEEDBACK item 72 proposes the alias. TRUE at the pin (l.339); recorded open, for lit24."
   },
   "std_le_s_induced_paths_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x288-pure-pairs-le-induced-paths-cycles-coarse-menger",
+   "package": "graph-theory-misc",
+   "note": "Authored in X288.v:le_induced_paths_polynomial_statement. Le's induced-paths conjecture (arXiv:2212.01089v2, source.tex l.111-113, Conjecture 1.1; studies record): some c > 0 such that in every 2O-free G (no two vertex-disjoint anticomplete cycles, l.103-106) every family of vertex sets of nonempty induced paths has at most |G|^c members. TRUE at the pin by Theorem 1.2 (l.127-130); recorded open, for lit24."
   },
   "std_leader_letzter_narayanan_walters_conjecture": {
    "statement": "todo",
@@ -12601,11 +12613,14 @@
    "note": "Authored in X19.v:lichiardopol_distinct_length_dicycle_packing_statement. Encodes Lichiardopol's conjecture: for every k there is a threshold g(k) so every nonempty loopless digraph with minimum outdegree at least g(k) contains k vertex-disjoint directed cycles of pairwise distinct lengths."
   },
   "std_liebenau_pilipczuk_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x288-pure-pairs-le-induced-paths-cycles-coarse-menger",
+   "package": "graph-theory-misc",
+   "note": "Authored in X288.v:liebenau_pilipczuk_forest_pure_pair_statement. Liebenau and Pilipczuk's conjecture as stated in arXiv:1809.00919v3 (source.tex l.146-147; studies record): for every forest H some natural m > 0 (eps = 1/m) such that every H-free and complement-H-free G with |G| > 1 has a pure pair A, B (disjoint, complete or anticomplete) with |G| <= m|A| and |G| <= m|B|. TRUE at the pin by the paper itself (l.149); recorded open, for lit24."
   },
   "std_lin_et_al_conjecture_on_t_minimal_trees": {
    "statement": "todo",
@@ -13609,11 +13624,14 @@
    "audit_page": "todo"
   },
   "std_weak_coarse_menger_conjecture_nguyen_scott_seymo": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x288-pure-pairs-le-induced-paths-cycles-coarse-menger",
+   "package": "graph-theory-misc",
+   "note": "Authored in X288.v:weak_coarse_menger_statement. Nguyen, Scott and Seymour's weak coarse Menger conjecture (arXiv:2508.14332v1, paper.tex l.130-138; studies record): for all k, c >= 1 some m, l > 0 such that every G, S, T has k distinct S-T paths pairwise at distance at least c, or a set X with |X| <= m whose closed l-ball meets every S-T path. FALSE at the pin already for k = c = 3 (Theorem 1.3, l.140-147); recorded open, for lit24."
   },
   "std_weak_meyniel_s_conjecture": {
    "statement": "done",
