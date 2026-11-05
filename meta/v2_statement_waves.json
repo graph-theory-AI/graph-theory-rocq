@@ -13647,6 +13647,152 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Arthur (X289 wave verification, 2026-11-05)",
       "faithfulness_result": "Readback 2026-11-05 (verifier Arthur): 3/3 PASS against the pinned texts and the sources, at math/marcol-x289-20261105 = dc3430b8d26eb227971638a4c2c2552247512efa (eight commits on work/coordinator 943aab9e = AH63), after my design read ((460), FAITHFUL 3/3 with B1, packet x289-design-read-by-arthur 025466b7) of x289-design-by-marcol r1 (b825e1a5). At dc3430b8d26eb227971638a4c2c2552247512efa X289.v (08075d49) differs from the packet only at l.59-60 (B1: the Site and Review of arxiv:1907.12091#00 = row_urls), grounding_X289.v (9ab782e4) only at l.82 (N1: ('K_5)), applications/kiraly_four_regular_disproof.v (111e3e47) byte for byte; waves.X289 = the packet's x289-wave.json; no helper (helper_ownership {}, helper_sanity []). Rows, with c(G) = edge_family_cycle_count (Extremal.foundations.edge_cycles: each simple cycle once, as its edge set) and m = #|E(G)|: studies:std_kir_ly_s_cycle_count_conjecture, Kiraly's Conjecture 7.15 with its constant, some natural C with c(G) 5^m <= C 7^m (1.4 = 7/5); studies:std_kir_ly_s_cycle_count_conjecture_for_4_regular_gr, Conjecture 7.14 as printed (no constant; m = 2n), c(G)^2 100^m <= 199^m for 4-regular G; arxiv:1907.12091#00, Conjecture 2, some natural C with c(G)^5 r^m <= C (2r + 2p)^m whenever 0 < r and 2 r^2 <= p^2, an exact rendering of O(kappa_1^m). Literature: row 1 TRUE before the pin (1907.12091v1 Theorem 1; pinned solved); row 2 FALSE as printed at K_5 (37 cycles: my perl enumeration 10 / 15 / 12, equal to the module's 37 sequences; 37^2 100^10 > 199^10), kernel-checked in applications/kiraly_four_regular_disproof.v (the registration is Lancelot's review); row 3 open. Grounding: hyp at K_5 and at (p, r) = (3, 2); ntt: the C = 1 strengthenings of rows 1 and 3 (false at K_5) and row 2 without 4-regular, each implying its row; no certificate of exact type S or ~ S (my 12 probes; W1's 15 shapes). My MCP (Rocq 9.2) builds edge_cycles at 943aab9e + the branch's three files (scratch 6482d9ab): 42 blocks, no hole; Print Assumptions closed 7/7. Metadata: source_hash 3/3 recomputed at b72c5857, equal; waves.X289 the only waves change, verifier fields empty before this; the regularity spec gains the packet's three consumers; allowlist, CORPUS_FEEDBACK, library_primitives and the other reports unchanged; legs: the three rows done / done, notes 510 / 515 / 481 = \"Authored in X289.v:<name>. \" + the wave note, no other legs entry changed; README 615 / 12 / 39 / 1,007 -> 618 / 12 / 39 / 1,004; LANDED gains X289 extremal-graph-theory. Dev run 1 (x289-dev-by-marcol 624f0ceb, -c OK, 45 listed = present): run-x289-1.sh 8059e417 on dc3430b8d26eb227971638a4c2c2552247512efa, JOB 07:09:40Z-07:55:43Z, 35 STEP lines, 28 rc 0; W1 / A3a / A3 / A10 rc 1 on the empty A3 fields (W1 11/14, its third FAIL the registration's empty reviewer fields), R4 on those reviewer fields, R2 / R3 (RESULT FAIL, not declared) on the same reviewer fields, the registration's steps (Lancelot's classification); W1: helper ownership and hard lint PASS, 3/3 Defined, package compiles, Print Assumptions clean on 3 statements + 6 certificates, 15 exact-type probes; B3 compiled the three files; G6 regularity 79/79, G6b cycle_lengths 272/272, G6c incidence_degree 286/286 OK, no report change; W2 941/941; W3 3 probed, 0 FLAGGED; W4 0 active, 61 allowlisted; R5 28 tests OK; written only the three generated files; END HEAD dc3430b8d26eb227971638a4c2c2552247512efa."
+    },
+    "X288": {
+      "phase": "X288",
+      "repo": "graph-theory-misc",
+      "defines_file": "X288.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X288 (A3 verifier Marcol; routing Lancelot (471), (492); selection x288-selection-by-arthur, design x288-design-by-arthur r1), branch math/arthur-x288-20261105",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x288-pure-pairs-le-induced-paths-cycles-coarse-menger",
+      "rows": {
+        "std_liebenau_pilipczuk_conjecture": {
+          "formal_name": "liebenau_pilipczuk_forest_pure_pair_statement",
+          "source_hash": "4ba660b5c8df558263fe76967d4087ffe0ad0c69012cb5b393223dd600a4c6f0",
+          "note": "Liebenau and Pilipczuk's conjecture as stated in arXiv:1809.00919v3 (source.tex l.146-147; studies record): for every forest H some natural m > 0 (eps = 1/m) such that every H-free and complement-H-free G with |G| > 1 has a pure pair A, B (disjoint, complete or anticomplete) with |G| <= m|A| and |G| <= m|B|. TRUE at the pin by the paper itself (l.149); recorded open, for lit24.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g288_pp_hyp_inhabited",
+              "claim": "g288_pp_hyp_claim",
+              "references": [
+                "liebenau_pilipczuk_forest_pure_pair_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g288_pp_not_trivially_true",
+              "claim": "g288_pp_ntt_claim",
+              "references": [
+                "liebenau_pilipczuk_forest_pure_pair_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_le_s_induced_paths_conjecture": {
+          "formal_name": "le_induced_paths_polynomial_statement",
+          "source_hash": "9d7f5aa773187089a4b6b6202e462ed7be5f789544789bbd45025f11ff423a31",
+          "note": "Le's induced-paths conjecture (arXiv:2212.01089v2, source.tex l.111-113, Conjecture 1.1; studies record): some c > 0 such that in every 2O-free G (no two vertex-disjoint anticomplete cycles, l.103-106) every family of vertex sets of nonempty induced paths has at most |G|^c members. TRUE at the pin by Theorem 1.2 (l.127-130); recorded open, for lit24.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g288_ip_hyp_inhabited",
+              "claim": "g288_ip_hyp_claim",
+              "references": [
+                "le_induced_paths_polynomial_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g288_ip_not_trivially_true",
+              "claim": "g288_ip_ntt_claim",
+              "references": [
+                "le_induced_paths_polynomial_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_le_s_conjecture_on_induced_cycles_in_2o_free_gra": {
+          "formal_name": "le_induced_cycles_polynomial_statement",
+          "source_hash": "cbfd8e20187b68bb474293fdfd46c82bfdc8f1a5b7bc05984a35b88e9450e184",
+          "note": "Le's induced-cycles conjecture (arXiv:2212.01089v2, source.tex l.108-109; studies record): some c > 0 such that in every 2O-free G (l.103-106) every family of vertex sets of chordless cycles has at most |G|^c members. TRUE at the pin by Theorem 1.2 (l.124-130); recorded open, for lit24.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g288_ic_hyp_inhabited",
+              "claim": "g288_ic_hyp_claim",
+              "references": [
+                "le_induced_cycles_polynomial_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g288_ic_not_trivially_true",
+              "claim": "g288_ic_ntt_claim",
+              "references": [
+                "le_induced_cycles_polynomial_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_le_s_conjecture_on_induced_paths_in_o_free_graph": {
+          "formal_name": "le_induced_paths_o2_free_duplicate_statement",
+          "source_hash": "07de5ebed6108b90d933de97a9946afcbc0de82653f9e8ab0fc14de4b7706040",
+          "note": "Synonym of le_induced_paths_polynomial_statement (the same conjecture): O_2-free is 2O-free (arXiv:2206.00594v5 revision.tex l.193-199) and 'a constant c' agrees with c > 0; quoted there as Conjecture 1.5 (l.335-337). CORPUS_FEEDBACK item 72 proposes the alias. TRUE at the pin (l.339); recorded open, for lit24.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g288_o2_hyp_inhabited",
+              "claim": "g288_o2_hyp_claim",
+              "references": [
+                "le_induced_paths_o2_free_duplicate_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g288_o2_not_trivially_true",
+              "claim": "g288_o2_ntt_claim",
+              "references": [
+                "le_induced_paths_o2_free_duplicate_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_coarse_menger_conjecture_159": {
+          "formal_name": "coarse_menger_paths_bounded_separator_duplicate_statement",
+          "source_hash": "6da5de090614bafe051fc4c1df33c7d93df2e24deb16479cc57550feef583f6d",
+          "note": "Synonym of X116's coarse_menger_paths_bounded_separator_statement (the same conjecture: arXiv:2508.14332v1 paper.tex l.112-118 states 2401.06685v2 source.tex l.108-115 with c for d). CORPUS_FEEDBACK item 73 proposes the alias. FALSE at the pin for every k >= 3 (2401.06685v2 Theorem 1.3, l.121-131); recorded open, for lit24.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g288_cm_hyp_inhabited",
+              "claim": "g288_cm_hyp_claim",
+              "references": [
+                "coarse_menger_paths_bounded_separator_duplicate_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g288_cm_not_trivially_true",
+              "claim": "g288_cm_ntt_claim",
+              "references": [
+                "coarse_menger_paths_bounded_separator_duplicate_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_weak_coarse_menger_conjecture_nguyen_scott_seymo": {
+          "formal_name": "weak_coarse_menger_statement",
+          "source_hash": "936f3bfaf190df6a046992a4a9bebf80f84930bde8db866baa7bc54eaa51b044",
+          "note": "Nguyen, Scott and Seymour's weak coarse Menger conjecture (arXiv:2508.14332v1, paper.tex l.130-138; studies record): for all k, c >= 1 some m, l > 0 such that every G, S, T has k distinct S-T paths pairwise at distance at least c, or a set X with |X| <= m whose closed l-ball meets every S-T path. FALSE at the pin already for k = c = 3 (Theorem 1.3, l.140-147); recorded open, for lit24.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g288_wcm_hyp_inhabited",
+              "claim": "g288_wcm_hyp_claim",
+              "references": [
+                "weak_coarse_menger_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g288_wcm_not_trivially_true",
+              "claim": "g288_wcm_ntt_claim",
+              "references": [
+                "weak_coarse_menger_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
