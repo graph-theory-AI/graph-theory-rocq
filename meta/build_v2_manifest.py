@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Forty-four
+corrections are applied explicitly (ERRATA below) since the review files predate them. Forty-two
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -75,13 +75,14 @@ Locke's conjecture on 3-connected triangle-free cubic graphs, behind wave X285, 
 Bajnok and Brinkmann on the six exceptional 2-connected triangle-free subcubic graphs, behind wave X287,
 are both proved in their own record (Cames van Batenburg, Goedgebeur and Joret, arXiv:1911.12471v2,
 Corollary 8, whose six named exceptions have orders at most 22).
-Eight studies rows were settled before the corpus pin. Solved: Liebenau and Pilipczuk's forest pure-pair conjecture,
-behind wave X288, in its own record (Chudnovsky, Scott, Seymour and Spirkl, arXiv:1809.00919v3); Le's three
-conjectures on induced paths and cycles in graphs without two anticomplete cycles, behind wave X288 (Nguyen, Scott and
-Seymour, arXiv:2212.01089v2, Theorem 1.2); and the Arman-Tsaturian cycle-count conjecture, behind wave X85, in its own
-record (arXiv:1907.12091v1, Theorem 5). Refuted: the coarse Menger conjecture, in both of its studies rows (behind waves
-X116 and X288), and its weak form, behind wave X288 (Nguyen, Scott and Seymour, arXiv:2401.06685v2 and
-arXiv:2508.14332v1, Theorem 1.3 each).
+Six studies rows behind wave X288 were settled before the corpus pin. Solved: Liebenau and Pilipczuk's forest
+pure-pair conjecture, in its own record (Chudnovsky, Scott, Seymour and Spirkl, arXiv:1809.00919v3), and Le's three
+conjectures on induced paths and cycles in graphs without two anticomplete cycles (Nguyen, Scott and Seymour,
+arXiv:2212.01089v2, Theorem 1.2). Refuted: the coarse Menger conjecture in its second studies row, and its weak form
+(Nguyen, Scott and Seymour, arXiv:2401.06685v2 and arXiv:2508.14332v1, Theorem 1.3 each). The studies rows of the
+coarse Menger conjecture behind wave X116 and of the Arman-Tsaturian cycle-count conjecture behind wave X85, settled
+the same way, keep their status here: their statements are frozen in migration families, whose reports freeze the
+rows' manifest fields.
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -496,20 +497,10 @@ ERRATA = [
      "Le's conjecture on induced cycles in 2O-free graphs, and l.124-125 read 'we will prove the stronger conjecture "
      "(and hence both conjectures) for 2O-free graphs, and indeed for sO-free graphs' (Theorem 1.2, l.127-130)."),
     ("studies", "std_le_s_conjecture_on_induced_paths_in_o_free_graph", "solved",
-     "Literature: reported solved in its own record, Bonamy, Bonnet, Depres, Esperet, Geniet, Hilaire and Thomasse, "
-     "arXiv:2206.00594v5 (16 February 2024): revision.tex l.335-337 state Le's conjecture for O_2-free graphs, and l.339 "
-     "reads that it 'was recently solved by Nguyen, Scott, and Seymour [NSS22] in the more general O_k-free case' "
-     "(arXiv:2212.01089, Theorem 1.2); l.193-199 define O_k-free as having no k independent cycles."),
-    ("studies", "std_arman_tsaturian_conjecture_on_the_number_of_cycl", "solved",
-     "Literature: proved in its own record by Dvorak, Morrison, Noel, Norin and Postle, arXiv:1907.12091v1 "
-     "(28 July 2019): Theorem 5 (numcycles9.tex l.134-138) bounds the number of cycles of a simple graph with n vertices "
-     "and average degree d by ((1 + O(log d / d)) d / e)^n, the record's bound, and l.140 reads 'This proves Conjecture "
-     "6.1 of Arman and Tsaturian'. The encoded statement of wave X85 is a proxy and is unchanged."),
-    ("studies", "std_coarse_menger_conjecture", "disproved",
-     "Literature: refuted in its own record by Nguyen, Scott and Seymour, 'A counterexample to the coarse Menger "
-     "conjecture', arXiv:2401.06685v2 (15 January 2025): source.tex l.108-116 state the conjecture as the record does, "
-     "and Theorem 1.3 (l.124-131) gives, for every l, a graph of maximum degree 3 with no three S-T paths pairwise at "
-     "distance at least 3 and no 2-set X l-covering every S-T path (k = d = 3); l.121-122 extend it to all k, d >= 3."),
+     "Literature: reported solved in its own record, Bonamy, Bonnet, Depres, Esperet, Geniet, Hilaire, Thomasse and "
+     "Wesolek, arXiv:2206.00594v5 (16 February 2024): revision.tex l.335-337 state Le's conjecture for O_2-free graphs, "
+     "and l.339 reads that it 'was recently solved by Nguyen, Scott, and Seymour [NSS22] in the more general O_k-free "
+     "case' (arXiv:2212.01089, Theorem 1.2); l.193-199 define O_k-free as having no k independent cycles."),
     ("studies", "std_coarse_menger_conjecture_159", "disproved",
      "Literature: refuted before the pin, as its own record reports (Nguyen, Scott and Seymour, 'Asymptotic structure. "
      "IV. A counterexample to the weak coarse Menger conjecture', arXiv:2508.14332v1, 20 August 2025): paper.tex "
@@ -1128,7 +1119,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 44 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 42 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
