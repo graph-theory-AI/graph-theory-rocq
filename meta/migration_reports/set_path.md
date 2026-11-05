@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py set_path --details /tmp/migrati
 
 - Canonical: `GTBase.walks_paths.seq_set_path`.
 - Baseline: `fbf33a001157c4b734e98ddd3968d4e13d54602f`.
-- Scope: 4 helpers, 5 statements, 36 frozen objects, 118 recorded references.
-- Source checks: 267/267 pass; consistent.
+- Scope: 4 helpers, 5 statements, 36 frozen objects, 119 recorded references.
+- Source checks: 268/268 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
