@@ -13878,6 +13878,42 @@
       },
       "faithfulness_verified_by": "Arthur (X291 wave verification, 2026-11-05)",
       "faithfulness_result": "Readback 2026-11-05 (verifier Arthur): 1/1 PASS against the pinned text and the source, at math/marcol-x291-20261105 = f070516f029781017ebc188d50fd27c2fec55336 (five commits on work/coordinator 10521ac9, lit24's merge), after my design read ((472), FAITHFUL 1/1, no required change; packet x291-design-read-by-arthur 00abf2d9) of x291-design-by-marcol r1 (26bc6c9b). At f070516f029781017ebc188d50fd27c2fec55336 X291.v (fc28d0a5) and grounding_X291.v (672a0da9) are the packet's byte for byte, and waves.X291 = the packet's x291-wave.json. One paper_specific helper, x291_quasi_complete_minor: B : 'I_t -> {set G}, each bag non-empty, pairwise disjoint, connected (B i :|: B j) for i != j (GraphTheory's induced connectivity); the source's edge between two bags is left out because g291_union_edge derives it from the connected union. studies:std_las_vergnas_meyniel_conjecture_c_quasi_minors, encoded as the source states it: forall t G, x291_quasi_complete_minor G t -> minor G 'K_t, with coq-graph-theory's minor G 'K_t as l.172's K_t-minor (minorRE / minor_of_rmap); t = 0 and t = 1 hold (g291_small_t). FALSE at the pin in its own record (th:mainfull, l.187-189; known for t <= 10, l.183-185; no explicit t, so no kernel disproof); pinned open, a literature item. Grounding: hyp at ordinal_path 4 with bags {0, 2}, {1, 3}, each disconnected (l.217's pattern), the claim giving minor (ordinal_path 4) 'K_2; ntt drops the connected unions, false at ordinal_path 3 with three singleton bags (ordinal_path_K3_free), and the variant implies the row; helper_sanity: every K_t minor gives a quasi-K_t-minor (connectedU_edge), K_1 has no quasi-K_2-minor, and the P4 example. Metadata: source_hash 1/1 recomputed, equal; waves.X291 the only waves change, verifier fields empty before this; allowlist, library_primitives, migration reports and CORPUS_FEEDBACK unchanged; legs: the row done / done, note 452 = \"Authored in X291.v:<name>. \" + the wave note, no other legs entry changed; README 625 / 12 / 39 / 997 -> 626 / 12 / 39 / 996; LANDED gains X291 minor-theory after X290 chromatic-theory. Dev run 1 (x291-dev-by-marcol 7153f0ee, -c OK, 38 listed = present): run-x291-1.sh 4778ef9b on f070516f029781017ebc188d50fd27c2fec55336, JOB 15:26:26Z-16:10:50Z, RESULT PASS-WITH-EXPECTED, 29 STEP lines, 25 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields; W1 12/14 (helper ownership and hard lint PASS; 1/1 Defined; package compiles; Print Assumptions clean on 1 statement + 3 certificates; 10 exact-type probes); B2 compiled X291.v and grounding_X291.v (one deprecation warning, the Notation keyword for abbreviations deprecated since Rocq 9.2, not an error); G6 ordinal_path report 180 / 180, unchanged; W2 949 / 949; W3 1 probed, 0 FLAGGED; W4 0 active; A12 101 / 101 OK; written only the three generated files; END HEAD f070516f029781017ebc188d50fd27c2fec55336."
+    },
+    "X292": {
+      "phase": "X292",
+      "repo": "graph-theory-misc",
+      "defines_file": "X292.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X292 (A3 verifier Arthur; routing Lancelot (528); selection x292-selection-by-marcol, design x292-design-by-marcol r1), branch math/marcol-x292-20261105, 2026-11-05",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x292-planar-hat-guessing-max-four",
+      "rows": {
+        "std_planar_hat_guessing_number_conjecture_bosek_et_a": {
+          "formal_name": "planar_hat_guessing_max_four_statement",
+          "source_hash": "6ee5ae05203d7a7f4d5ec36bd6f3e4b7e77d7f037183c325038e1c2efb2311b5",
+          "note": "Bosek et al.'s conjecture as 2107.05995v2 states it (l.99-102): every planar graph (wagner_planar) has hat guessing number at most 4 and some planar graph wins with 4 colours (X99's vocabulary). FALSE at the pin: Theorem planar1 (l.104-107), a planar graph with hat guessing number 12. Pinned open, a literature item.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g292_phg_hyp_inhabited",
+              "claim": "g292_phg_hyp_claim",
+              "references": [
+                "planar_hat_guessing_max_four_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g292_phg_not_trivially_true",
+              "claim": "g292_phg_ntt_claim",
+              "references": [
+                "planar_hat_guessing_max_four_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
