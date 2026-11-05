@@ -1,5 +1,5 @@
 {
- "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — deterministic; regenerate + diff to review changes. Status uses the exact-type-gate vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 42 literature errata applied). b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. source_text currently holds the extractor's statement; REC/implementation replaces it with our normalized statement (licensing: LICENSE-DATA.md). Corpus tags: arxiv, erdos, derived, arxiv-studied, bm (Bondy–Murty Appendix A records bm-NNN) and others (curated data/others_conjectures.json records). site_url/review_url are derived from row_id by corpus_registry.row_urls() (null for erdos/derived/studies rows, which have no public per-record page). Legs merge in from meta/v2_legs_state.json (the source of truth). Classifier fields (bucket/topic/formalizability/repo/phase/formal_name) come from the hand-maintained meta/v2_classification.json (edit there, then rebuild — never hand-edit this file) and from wave planning.",
+ "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — deterministic; regenerate + diff to review changes. Status uses the exact-type-gate vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 46 literature errata applied). b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. source_text currently holds the extractor's statement; REC/implementation replaces it with our normalized statement (licensing: LICENSE-DATA.md). Corpus tags: arxiv, erdos, derived, arxiv-studied, bm (Bondy–Murty Appendix A records bm-NNN) and others (curated data/others_conjectures.json records). site_url/review_url are derived from row_id by corpus_registry.row_urls() (null for erdos/derived/studies rows, which have no public per-record page). Legs merge in from meta/v2_legs_state.json (the source of truth). Classifier fields (bucket/topic/formalizability/repo/phase/formal_name) come from the hand-maintained meta/v2_classification.json (edit there, then rebuild — never hand-edit this file) and from wave planning.",
  "schema_version": 1,
  "provenance": {
   "graph_conjectures_commit": "b72c5857060addbe4523016e88ae3aa626e958fd",
@@ -25,10 +25,10 @@
    "others": 1
   },
   "by_status": {
-   "disproved": 100,
-   "open": 1315,
+   "disproved": 102,
+   "open": 1311,
    "partial": 152,
-   "solved": 223
+   "solved": 225
   },
   "by_kind": {
    "Conjecture": 659,
@@ -84227,8 +84227,8 @@
    "source_verified_at": "2026-07-11",
    "verification_note": "Authored in X85.v:arman_tsaturian_average_degree_cycle_count_statement. Encodes the Arman-Tsaturian average-degree cycle-count upper envelope with a logarithmic correction.",
    "status_verified_at": null,
-   "status": "open",
-   "status_semantics": null,
+   "status": "solved",
+   "status_semantics": "Literature: proved in its own record by Dvorak, Morrison, Noel, Norin and Postle, arXiv:1907.12091v1 (28 July 2019): Theorem 5 (numcycles9.tex l.134-138) bounds the number of cycles of a simple graph with n vertices and average degree d by ((1 + O(log d / d)) d / e)^n, the record's bound, and l.140 reads 'This proves Conjecture 6.1 of Arman and Tsaturian'. The encoded statement of wave X85 is a proxy and is unchanged; its migration families carry a reviewed restatus repair.",
    "review_status": "open",
    "review_date": null,
    "recovery": "none",
@@ -89490,8 +89490,8 @@
    "source_verified_at": "2026-07-13",
    "verification_note": "Authored in X116.v:coarse_menger_paths_bounded_separator_statement. Encodes the coarse Menger conjecture with l depending on both k and d (forall k,d exists l) -- distinct from X39 (forall k exists c, radius c*d).",
    "status_verified_at": null,
-   "status": "open",
-   "status_semantics": null,
+   "status": "disproved",
+   "status_semantics": "Literature: refuted in its own record by Nguyen, Scott and Seymour, 'A counterexample to the coarse Menger conjecture', arXiv:2401.06685v2 (15 January 2025): source.tex l.108-116 state the conjecture as the record does, and Theorem 1.3 (l.124-131) gives, for every l, a graph of maximum degree 3 with no three S-T paths pairwise at distance at least 3 and no set X of at most 2 vertices l-covering every S-T path (k = d = 3); l.121-122 extend it to all k, d >= 3. Wave X116's migration families carry a reviewed restatus repair.",
    "review_status": "open",
    "review_date": null,
    "recovery": "none",
@@ -102151,8 +102151,8 @@
    "source_verified_at": "2026-11-05",
    "verification_note": "Authored in X291.v:las_vergnas_meyniel_quasi_minor_statement. Las Vergnas and Meyniel's Conjecture C as 2103.10684v2 quotes it (l.178-180), with the quasi-K_t-minor of l.172: t non-empty pairwise disjoint bags, any two with a connected union, give a K_t-minor (coq-graph-theory's minor G 'K_t). FALSE at the pin: Theorem th:mainfull (l.187-189) refutes it for large t, no explicit t known; known for t <= 10 (l.183-185). Pinned open, a literature item.",
    "status_verified_at": null,
-   "status": "open",
-   "status_semantics": null,
+   "status": "disproved",
+   "status_semantics": "Literature: refuted in its own record by Bonamy, Heinrich, Legrand-Duchesne and Narboni, 'On a recolouring version of Hadwiger's conjecture', arXiv:2103.10684v2 (13 March 2025): main.tex l.178-180 state Conjecture C of Las Vergnas and Meyniel as the record does, l.185 reads 'we strongly disprove Conjecture C for large t', and Theorem th:mainfull (l.187-189) gives, for every eps > 0 and every large enough t, a graph that admits a quasi-K_t-minor but no K_((2/3 + eps)t)-minor. No explicit t is given (known for t <= 10, l.183-185), so there is no kernel disproof; wave X291 encodes the conjecture as stated.",
    "review_status": "open",
    "review_date": null,
    "recovery": "none",
@@ -105634,8 +105634,8 @@
    "source_verified_at": "2026-11-05",
    "verification_note": "Authored in X290.v:ossona_de_mendez_oum_wood_defective_minor_statement. The Ossona de Mendez-Oum-Wood conjecture as 1708.02370v2 states it (l.161-166), with the connected tree-depth (l.147; the extraction prints td, false at H = 2K_1): for H of connected tree-depth exactly k, the H-minor-free class has defective chromatic number k - 1, X218's vocabulary reused. TRUE at the pin (Liu, arXiv:2208.10729, per 2308.15721v1 l.167). Authored in chromatic-theory, where that vocabulary lives (classified under minor-theory).",
    "status_verified_at": null,
-   "status": "open",
-   "status_semantics": null,
+   "status": "solved",
+   "status_semantics": "Literature: proved before the pin by Liu, 'Defective coloring is perfect for minors', arXiv:2208.10729v3 (22 November 2023): source.tex l.168-169 define td as the connected tree-depth (the footnote at l.168: tree-depth is its maximum over the components), l.177-179 state the Ossona de Mendez-Oum-Wood conjecture with it, and l.189-190 derive the conjecture from Theorem main_intro (l.160-162). That is the connected-tree-depth statement wave X290 encodes (1708.02370v2 l.161-166); the row's statement_text with ordinary tree-depth is false at 2K_1 (CORPUS_FEEDBACK 74). By Marc's answer to question 12 (2026-11-05): solved, with explicit qualification.",
    "review_status": "open",
    "review_date": null,
    "recovery": "none",
