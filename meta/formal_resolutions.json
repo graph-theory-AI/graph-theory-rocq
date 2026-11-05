@@ -65,6 +65,27 @@
       }
     },
     {
+      "record_key": "1907.12091",
+      "row_id": "studies:std_kir_ly_s_cycle_count_conjecture_for_4_regular_gr",
+      "source_hash": "325935ad9860116444e96cf298145339cffbda7d912fe8dee190f385c4a7d9cc",
+      "source_text": "A $4$-regular simple graph with $m$ edges has at most $1.99^{m/2}$ cycles.",
+      "source_locator": "graph-conjectures/data/arxiv_extracted (studies-role, 1 record(s): 1907.12091) | Rocq: extremal-graph-theory/theories/conjectures/X289.v#kiraly_four_regular_cycle_count_statement",
+      "corpus": "v2",
+      "package": "extremal-graph-theory",
+      "direction": "disprove",
+      "statement": "Extremal.conjectures.X289.kiraly_four_regular_cycle_count_statement",
+      "statement_file": "extremal-graph-theory/theories/conjectures/X289.v",
+      "statement_sha256": "2706842ddf576283e10d04736713b989f33513b3578cb64e93b04a47b81a5c9e",
+      "theorem": "Extremal.applications.kiraly_four_regular_disproof.kiraly_four_regular_cycle_count_disproved",
+      "theorem_file": "extremal-graph-theory/theories/applications/kiraly_four_regular_disproof.v",
+      "correspondence": {
+        "explanation": "The row statement (X289.v, wave X289) is Kiraly's cycle-count conjecture for 4-regular graphs as the studies slice of the corpus extracts it from arXiv:1907.12091 (Dvorak, Morrison, Noel, Norin and Postle, Bounding the number of cycles in a graph in terms of its degree sequence): a 4-regular simple graph with m edges has at most 1.99^{m/2} cycles. It is encoded as printed, with no constant, as in Kiraly's own Conjecture 7.14 (EGRES Technical Report TR-2009-03, l.727: c(G) <= 1.99^n, n the number of vertices, so n = m/2 for 4-regular graphs): every simple graph G whose vertices all have exactly four neighbours satisfies c(G)^2 * 100^m <= 199^m, where m = #|E(G)| and c(G) = edge_family_cycle_count G counts the cycles of G once each, as edge sets (Extremal.foundations.edge_cycles; Kiraly's cycles are simple cycles of a simple graph, l.48-51). The refutation is K_5: it is 4-regular with m = 10 and has at least 37 cycles (10 triangles, 15 four-cycles and 12 five-cycles, each checked to be a cycle with an edge set of its own), while 37^2 * 100^10 > 199^10, that is 37 > 1.99^5 ~ 31.21. Caveat: only the literal universal inequality is refuted. The asymptotic form holds: arXiv:1907.12091v1, Theorem 3 (numcycles9.tex l.120-122), gives O(1.365^m) cycles at average degree 4, which the paper says proves Kiraly's conjecture (l.118). The row's corpus status was already disproved (an ERRATA entry, lit11); this entry adds the kernel check.",
+        "implemented_by": "Marcol (Claude Opus 5.5, mathematics programme Any lane, wave X289, 2026-11-05)",
+        "reviewed_by": "",
+        "reviewed_at": ""
+      }
+    },
+    {
       "record_key": "2103.15175__00",
       "row_id": "arxiv:2103.15175#00",
       "source_hash": "535d4a72e1dc3f9bb52adccf4ae3b9f5bbaf55de5275a5f497cc6ecdf9e32d31",
