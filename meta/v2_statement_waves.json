@@ -13567,6 +13567,86 @@
       },
       "faithfulness_verified_by": "Arthur (X287 wave verification, 2026-11-04)",
       "faithfulness_result": "Readback 2026-11-04 (verifier Arthur): 1/1 PASS against the pinned text and the sources, at math/marcol-x287-20261104 = 82fb33e6a816cd2b2ac6c521547dcb35d0f8e4eb (five commits on work/coordinator 65d42982, X285's merge; the (135) rebuild of the dev chain 21016f8bdb3efd4315f0ae1e21616b87b947840c on c6867aa0: range-diff 1, 2, 5 '=', 3 '!' context only (LANDED after X285's cell, the allowlist entry the 61st), 4 '!' the README counts), after my design read ((454), FAITHFUL 1/1, no blocking item, packet x287-design-read-by-arthur 362bd256) of x287-design-by-marcol r1 (3eeeed65). At 82fb33e6a816cd2b2ac6c521547dcb35d0f8e4eb X287.v and grounding_X287.v are the packet's byte for byte (and the dev head's), waves.X287 = the packet's x287-wave.json, the allowlist entry is the packet's verbatim, the legs entry is the dev head's. Two paper_specific helpers (x287_bb_tables, the six Figure 1 graphs as (order, edge list) verbatim from the included figure files; x287_bb_graph i, fg_mk_sgraph on 'I_n), helper_sanity g287_helper_sanity. studies:std_bajnok_brinkmann_conjecture_triangle_free_subcub, encoded as stated (CGJ l.209), up to isomorphism, as three clauses: every 2-connected (k_connected G 2) triangle-free subcubic G with 8 alpha(G) < 3n is isomorphic (inhabited diso) to one of the six; each of the six is such a graph; no two are isomorphic. TRUE before the pin: Corollary 8 (l.249-253) gives the first clause; my host computation on the tables gives the other two (orders 11 / 14 / 14 / 19 / 19 / 22, 2-connected, triangle-free, subcubic, alpha 4 / 5 / 5 / 7 / 7 / 8; 5-cycles 7 / 8 and 7-cycles 8 / 7 for the same-order pairs). The pinned status open goes to lit23 (Lancelot). Grounding: hyp at F_11 (all four hypotheses, vm_compute certificates); ntt: the first clause without triangle-free is false at K_4 (2-connected, cubic, alpha 1, order 4, none of the six orders); the variant implies the row; no certificate of exact type S or ~ S (my 44 probes; W1's 10 shapes). My MCP (Rocq 9.2) builds the packet's combined file: 22 blocks, no hole; Print Assumptions closed 4/4. Metadata: source_hash 1/1 recomputed at b72c5857, equal; waves.X287 the only waves change, verifier fields empty before this; allowlist 60 -> 61 with the packet's entry only; migration specs, reports and CORPUS_FEEDBACK unchanged; legs: the row done / done, note 562 = \"Authored in X287.v:<name>. \" + the wave note, no other legs entry changed; README 614 / 12 / 39 / 1,008 -> 615 / 12 / 39 / 1,007; LANDED gains X287 extremal-graph-theory after X285. Dev run 1 (x287-dev-by-marcol 1970b202, -c OK, 41 listed = present): run-x287-1.sh 0333daf7 on 21016f8bdb3efd4315f0ae1e21616b87b947840c, JOB 19:22:13Z-20:06:41Z, RESULT PASS-WITH-EXPECTED, 32 STEP lines, 28 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields; W1 12 / 14 (helper ownership and hard lint PASS; 1 / 1 Defined; package compiles; Print Assumptions clean on 1 statement + 3 certificates; 10 exact-type probes; the two FAIL lines the verifier and source fields); B3 compiled X287.v and grounding_X287.v; G6 subcubic 168 / 168, G6b triangle_free 95 / 95, G6c stable_sets 540 / 540 OK, no report change; W2 933 / 933; W3 1 probed, 0 FLAGGED; W4 0 active, 60 allowlisted; A12 101 reports OK; written only the three generated files; END HEAD 21016f8bdb3efd4315f0ae1e21616b87b947840c."
+    },
+    "X289": {
+      "phase": "X289",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X289.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X289 (A3 verifier Arthur; routing Lancelot (482); selection x289-selection-by-marcol, design x289-design-by-marcol r1), branch math/marcol-x289-20261105, 2026-11-05",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x289-cycle-counts-kiraly-dmnnp",
+      "rows": {
+        "std_kir_ly_s_cycle_count_conjecture": {
+          "formal_name": "kiraly_cycle_count_one_point_four_statement",
+          "source_hash": "0abfa023bfebfeeb1c070a0c0e3713fb096f164713a165b592760df78f6b0cdd",
+          "note": "Kiraly's O(1.4^m) conjecture (EGRES TR-2009-03, Conjecture 7.15, with a constant; studies record 1907.12091): some natural C has c(G) 5^m <= C 7^m for every simple graph with m edges, c(G) its cycles counted once as edge sets (edge_family_cycle_count). TRUE at the pin: arXiv:1907.12091v1, Theorem 1 (gamma ~ 1.384 < 1.4). Authored in extremal-graph-theory, where the canonical count lives (classified under cycle-theory, which cannot import it).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g289_k14_hyp_inhabited",
+              "claim": "g289_k14_hyp_claim",
+              "references": [
+                "kiraly_cycle_count_one_point_four_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g289_k14_not_trivially_true",
+              "claim": "g289_k14_ntt_claim",
+              "references": [
+                "kiraly_cycle_count_one_point_four_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_kir_ly_s_cycle_count_conjecture_for_4_regular_gr": {
+          "formal_name": "kiraly_four_regular_cycle_count_statement",
+          "source_hash": "325935ad9860116444e96cf298145339cffbda7d912fe8dee190f385c4a7d9cc",
+          "note": "Kiraly's 4-regular conjecture as printed (EGRES TR-2009-03, Conjecture 7.14, no constant; studies record 1907.12091): every 4-regular simple graph with m edges has c(G)^2 100^m <= 199^m, i.e. at most 1.99^(m/2) cycles. FALSE as printed at K_5 (37 cycles, m = 10), kernel-checked in applications/kiraly_four_regular_disproof.v; the asymptotic form holds (arXiv:1907.12091v1, Theorem 3). Authored in extremal-graph-theory, where the canonical count lives.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g289_k4r_hyp_inhabited",
+              "claim": "g289_k4r_hyp_claim",
+              "references": [
+                "kiraly_four_regular_cycle_count_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g289_k4r_not_trivially_true",
+              "claim": "g289_k4r_ntt_claim",
+              "references": [
+                "kiraly_four_regular_cycle_count_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "axv_1907_12091_00": {
+          "formal_name": "cycle_count_kappa_one_statement",
+          "source_hash": "0f6328305754aa3af2a7711dad8a54a3fd8ac7532c5e5a2114057a01138cfc7d",
+          "note": "Conjecture 2 of arXiv:1907.12091v1 (l.108-112): O(kappa_1^m) cycles, kappa_1 = (2 + 2 sqrt 2)^(1/5), encoded exactly without reals: one natural C has c(G)^5 r^m <= C (2r + 2p)^m for every simple graph and every rational p/r >= sqrt 2 (2 r^2 <= p^2, r > 0), the bound at sqrt 2 by closure. OPEN at the pin. Authored in extremal-graph-theory, where the canonical count lives (classified under cycle-theory, which cannot import it).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g289_kappa_hyp_inhabited",
+              "claim": "g289_kappa_hyp_claim",
+              "references": [
+                "cycle_count_kappa_one_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g289_kappa_not_trivially_true",
+              "claim": "g289_kappa_ntt_claim",
+              "references": [
+                "cycle_count_kappa_one_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
