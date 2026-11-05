@@ -24990,13 +24990,13 @@
     ]
   },
   "counts": {
-    "files": 383,
-    "helpers": 2772,
+    "files": 384,
+    "helpers": 2773,
     "repeated_body_shapes": 152,
     "repeated_normalized_names": 222,
     "repeated_signature_shapes": 337,
-    "statements_excluded": 905,
-    "x_wave_helpers": 1611
+    "statements_excluded": 906,
+    "x_wave_helpers": 1612
   },
   "groups": {
     "body_shape_hash": {
@@ -29183,6 +29183,7 @@
         "Minor.conjectures.X175.x175_Kt_subdivision",
         "Minor.conjectures.X220.x220_clique_free",
         "Minor.conjectures.X220.x220_ibn",
+        "Minor.conjectures.X291.x291_quasi_complete_minor",
         "Packing.conjectures.XE1.xe1_clique_transversal_number"
       ],
       "ea123d14a47d3c8fecd3f855c427512e33b52cbaad7f5d5d8ade3431e24f4c1f": [
@@ -79522,6 +79523,25 @@
       "qualified_name": "Minor.conjectures.X271.x271_odd_minor_tree_model",
       "signature": "(G H : sgraph) : Prop",
       "signature_shape_hash": "386157e12d686b4cdea1c7e7e1bddc5b3f28be1b17c3f1036579936afdc0bb30"
+    },
+    {
+      "body_hash": "57149e11af79939546bab632ae62121d6a47ab0e20f9472088c20ad59214257d",
+      "body_shape_hash": "57149e11af79939546bab632ae62121d6a47ab0e20f9472088c20ad59214257d",
+      "declaration_hash": "b6b3298a27047417315c90b20a84d5ffe587efbf96a4de06cc97609be5949968",
+      "direct_consumers": [
+        "Minor.conjectures.X291.las_vergnas_meyniel_quasi_minor_statement"
+      ],
+      "kind": "Definition",
+      "line": 10,
+      "local_dependencies": [],
+      "name": "x291_quasi_complete_minor",
+      "normalized_name": "quasi_complete_minor",
+      "package": "minor-theory",
+      "path": "minor-theory/theories/conjectures/X291.v",
+      "phase": "X291",
+      "qualified_name": "Minor.conjectures.X291.x291_quasi_complete_minor",
+      "signature": "(G : sgraph) (t : nat) : Prop",
+      "signature_shape_hash": "e9307f105f9e88cab7b8bacb0dbbe231e52f3ee2ccd1bc1037d00d4265c394eb"
     },
     {
       "body_hash": "5edb615beec81191c63fde7ab2cee4db86341a0244022b1295f1b14a4dab4b23",
