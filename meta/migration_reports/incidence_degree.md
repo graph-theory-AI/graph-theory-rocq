@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py incidence_degree --details /tmp
 - Canonical: `GTBase.incidence.incidence_degree`.
 - Baseline: `a54026d37a8b40d53340be71be783ac5d5fe3635`.
 - Scope: 9 helpers, 10 statements, 33 frozen objects, 126 recorded references.
-- Source checks: 286/286 pass; consistent.
+- Source checks: 289/289 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -21,6 +21,8 @@ Full evidence: `python3 meta/migration_report.py incidence_degree --details /tmp
 | `Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement` / studies:std_aharoni_charbit_howard_conjecture_on_matchings_i | `Hypergraph.migration.incidence_degree.regular_tripartite_hypergraph_matching_lower_bound_statement_compat` |
 | `Hypergraph.conjectures.X108.three_uniform_degenerate_hypergraph_ramsey_linear_statement` / studies:std_burr_erd_s_conjecture_for_3_uniform_hypergraphs | `Hypergraph.migration.incidence_degree.three_uniform_degenerate_hypergraph_ramsey_linear_statement_compat` |
 | `Hypergraph.conjectures.X225.kpartite_hypergraph_turan_exponent_dmax_statement` / arxiv:2401.00359#01 | `Hypergraph.migration.incidence_degree.kpartite_hypergraph_turan_exponent_dmax_statement_compat` |
+
+Literature status updates after migration (statement text, doc block and the exact iff kept; only the manifest row's status and status_semantics changed): `Extremal.conjectures.X85.arman_tsaturian_average_degree_cycle_count_statement` (record `meta/CORPUS_FEEDBACK.md`; row fields `status`, `status_semantics`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py incidence_degree --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.

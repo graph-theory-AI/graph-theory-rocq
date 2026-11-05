@@ -352,7 +352,16 @@
       "substitutions": {
         "x84_cycle_count": "X84Legacy.cycle_count"
       },
-      "certificate": "Extremal.migration.incidence_degree.arman_tsaturian_average_degree_cycle_count_statement_compat"
+      "certificate": "Extremal.migration.incidence_degree.arman_tsaturian_average_degree_cycle_count_statement_compat",
+      "repair": {
+        "direction": "restatus",
+        "doc_block_sha256": "c96f3053cb522fcb69f7a434b2a326c407ca4dbed5e56c7b8802450fad50cd02",
+        "record": "meta/CORPUS_FEEDBACK.md",
+        "row_fields": [
+          "status",
+          "status_semantics"
+        ]
+      }
     },
     {
       "kind": "statement",

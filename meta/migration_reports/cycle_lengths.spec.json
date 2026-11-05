@@ -349,7 +349,16 @@
       "certificate": "Extremal.migration.cycle_lengths.arman_tsaturian_average_degree_cycle_count_statement_compat",
       "commit": "4b63976bad086439fa79f74eaccd270cd1291eb9",
       "original_certificate": "Extremal.migration.cycle_lengths.arman_tsaturian_average_degree_cycle_count_statement_original_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "direction": "restatus",
+        "doc_block_sha256": "c96f3053cb522fcb69f7a434b2a326c407ca4dbed5e56c7b8802450fad50cd02",
+        "record": "meta/CORPUS_FEEDBACK.md",
+        "row_fields": [
+          "status",
+          "status_semantics"
+        ]
+      }
     },
     {
       "kind": "historical",

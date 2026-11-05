@@ -303,7 +303,16 @@
         "x116_has_k_distant_ST_paths": "X116Legacy.x116_has_k_distant_ST_paths",
         "x116_set_ball": "Legacy.x116_set_ball"
       },
-      "certificate": "GTMisc.migration.balls.coarse_menger_paths_bounded_separator_statement_compat"
+      "certificate": "GTMisc.migration.balls.coarse_menger_paths_bounded_separator_statement_compat",
+      "repair": {
+        "direction": "restatus",
+        "doc_block_sha256": "49858c6d2dc5ff5ee70d184309b35f5b94ec10402f188a0f07c374825b961e9a",
+        "record": "meta/CORPUS_FEEDBACK.md",
+        "row_fields": [
+          "status",
+          "status_semantics"
+        ]
+      }
     },
     {
       "kind": "chain",

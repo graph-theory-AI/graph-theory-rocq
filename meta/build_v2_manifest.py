@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Forty-two
+corrections are applied explicitly (ERRATA below) since the review files predate them. Forty-five
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -79,10 +79,12 @@ Six studies rows behind wave X288 were settled before the corpus pin. Solved: Li
 pure-pair conjecture, in its own record (Chudnovsky, Scott, Seymour and Spirkl, arXiv:1809.00919v3), and Le's three
 conjectures on induced paths and cycles in graphs without two anticomplete cycles (Nguyen, Scott and Seymour,
 arXiv:2212.01089v2, Theorem 1.2). Refuted: the coarse Menger conjecture in its second studies row, and its weak form
-(Nguyen, Scott and Seymour, arXiv:2401.06685v2 and arXiv:2508.14332v1, Theorem 1.3 each). The studies rows of the
-coarse Menger conjecture behind wave X116 and of the Arman-Tsaturian cycle-count conjecture behind wave X85, settled
-the same way, keep their status here: their statements are frozen in migration families, whose reports freeze the
-rows' manifest fields.
+(Nguyen, Scott and Seymour, arXiv:2401.06685v2 and arXiv:2508.14332v1, Theorem 1.3 each). By Marc's answer to
+question 11 (2026-11-05), two more studies rows are recorded: the coarse Menger conjecture behind wave X116 (refuted,
+arXiv:2401.06685v2, Theorem 1.3) and the Arman-Tsaturian cycle-count conjecture behind wave X85 (solved,
+arXiv:1907.12091v1, Theorem 5). Their statements are frozen in migration families, and each family carries a reviewed
+restatus repair that lets exactly status and status_semantics change. The conjecture of Ossona de Mendez, Oum and
+Wood, behind wave X290, is proved by Liu (arXiv:2208.10729v3) with the connected tree-depth X290 encodes.
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -511,6 +513,25 @@ ERRATA = [
      "paper.tex l.130-138 state the weak coarse Menger conjecture as a 'False conjecture', and Theorem 1.3 (l.142-148) "
      "gives, for all l, m >= 1, a graph with sets S, T with no three S-T paths pairwise at distance at least 3 and no "
      "m-set X l-covering every S-T path (c = k = 3)."),
+    ("studies", "std_arman_tsaturian_conjecture_on_the_number_of_cycl", "solved",
+     "Literature: proved in its own record by Dvorak, Morrison, Noel, Norin and Postle, arXiv:1907.12091v1 "
+     "(28 July 2019): Theorem 5 (numcycles9.tex l.134-138) bounds the number of cycles of a simple graph with n vertices "
+     "and average degree d by ((1 + O(log d / d)) d / e)^n, the record's bound, and l.140 reads 'This proves Conjecture "
+     "6.1 of Arman and Tsaturian'. The encoded statement of wave X85 is a proxy and is unchanged; its migration families "
+     "carry a reviewed restatus repair."),
+    ("studies", "std_coarse_menger_conjecture", "disproved",
+     "Literature: refuted in its own record by Nguyen, Scott and Seymour, 'A counterexample to the coarse Menger "
+     "conjecture', arXiv:2401.06685v2 (15 January 2025): source.tex l.108-116 state the conjecture as the record does, "
+     "and Theorem 1.3 (l.124-131) gives, for every l, a graph of maximum degree 3 with no three S-T paths pairwise at "
+     "distance at least 3 and no set X of at most 2 vertices l-covering every S-T path (k = d = 3); l.121-122 extend it "
+     "to all k, d >= 3. Wave X116's migration families carry a reviewed restatus repair."),
+    ("studies", "std_ossona_de_mendez_oum_wood_defective_chromatic_nu", "solved",
+     "Literature: proved before the pin by Liu, 'Defective coloring is perfect for minors', arXiv:2208.10729v3 "
+     "(22 November 2023): source.tex l.168-169 define td as the connected tree-depth (the footnote at l.168: tree-depth "
+     "is its maximum over the components), l.177-179 state the Ossona de Mendez-Oum-Wood conjecture with it, and "
+     "l.189-190 derive the conjecture from Theorem main_intro (l.160-162). That is the connected-tree-depth statement "
+     "wave X290 encodes (1708.02370v2 l.161-166); the row's statement_text with ordinary tree-depth is false at 2K_1 "
+     "(CORPUS_FEEDBACK 74). Question 12's default (a)."),
 ]
 
 
@@ -1119,7 +1140,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 42 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 45 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
