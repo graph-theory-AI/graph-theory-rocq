@@ -520,7 +520,16 @@
         "x116_path_vertices": "Legacy.x116_path_vertices"
       },
       "certificate": "GTMisc.migration.path_vertices.coarse_menger_paths_bounded_separator_statement_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "direction": "restatus",
+        "doc_block_sha256": "49858c6d2dc5ff5ee70d184309b35f5b94ec10402f188a0f07c374825b961e9a",
+        "record": "meta/CORPUS_FEEDBACK.md",
+        "row_fields": [
+          "status",
+          "status_semantics"
+        ]
+      }
     },
     {
       "kind": "chain",
