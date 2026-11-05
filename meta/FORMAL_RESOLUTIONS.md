@@ -365,7 +365,7 @@ candidate (`ell = 7`, odd `q >= 9`) is known only from a computation in the revi
 write-up, so the extension in the candidate setting stays open as far as this refutation is
 concerned. The row's upstream review status (open) is unchanged.
 
-## Kiraly's 4-regular cycle bound
+## Király's 4-regular cycle bound
 
 For source record `1907.12091` (row `studies:std_kir_ly_s_cycle_count_conjecture_for_4_regular_gr`),
 `Extremal.applications.kiraly_four_regular_disproof.kiraly_four_regular_cycle_count_disproved`
@@ -386,6 +386,7 @@ Caveat: only the literal universal inequality is refuted. The asymptotic form ho
 Theorem 3 of arXiv:1907.12091 gives `O(1.365^m)` cycles at average degree 4, which the paper
 says proves Király's conjecture. The row's corpus status was already `disproved` (an ERRATA
 entry); this entry adds the kernel check.
+
 ## Regression tests
 
 The test suite uses isolated synthetic packages and real Rocq compilation. Its
