@@ -13793,6 +13793,42 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Marcol (X288 wave verification, 2026-11-05)",
       "faithfulness_result": "Readback 2026-11-05 (verifier Marcol): 6/6 PASS against the pinned texts and the sources, at math/arthur-x288-20261105 = c6620edcdccd168f452e5ed5d4c70a97424767c6 (nine commits on work/coordinator f135c0a0 = X289's merge, the (135) rebuild of the dev chain e55297de), after my design read ((384), FAITHFUL 6/6, packet x288-design-read-by-marcol 7584f82b) of x288-design-by-arthur r1 (b9c2af10). At the rebuild X288.v (6bff28c8) and grounding_X288.v (d31775d7) are byte-identical to the packet; waves.X288 = the packet's wave-x288.json (jq -S) and the only waves change; no helper (helper_ownership {}, helper_sanity []). Rows: (1) Liebenau-Pilipczuk, exact (eps = 1 / m; pure pair disjoint and complete or anticomplete; |G| > 1 kept); (2) / (3) Le's induced paths / cycles, exact (2O-free inline as no two seq_cycle's with anticomplete vertex sets; induced paths / cycles counted as vertex sets of nonempty_induced_path / chordless_cycle; natural c > 0); (4) a synonym of (2) by name (O_2-free = 2O-free, 2206.00594v5 l.193-201); (5) a synonym of X116's coarse_menger_paths_bounded_separator_statement (2508.14332v1 l.112-118 = 2401.06685v2 l.108-115, c for d); (6) the weak coarse Menger form, exact (m, l > 0 after k, c; the B27 canonical vocabulary). Literature for lit24: rows 1-4 TRUE, rows 5-6 FALSE. Grounding: hyp at K_2 / K_3 / K_1 witnesses, ntt variants each dropping one hypothesis (|G| > 1; the member condition on P; the path condition on p), false and implying the row; every claim names its statement. Metadata at the rebuild: allowlist +4 = the packet's entries (61 -> 65); the four consumer specs gain exactly the packet's entries; CORPUS_FEEDBACK +72 / +73 = the packet's rows; README 618 / 12 / 39 / 1,004 -> 624 / 12 / 39 / 998; LANDED gains X288 graph-theory-misc after X289; legs: the six rows done / done, notes = \"Authored in X288.v:<name>. \" + the wave note (446 / 410 / 346 / 377 / 403 / 437 <= 600), no other entry changed; c9 = the balls, distant_paths, path_vertices and set_path reports, cmp-equal to dev run 1's written copies. range-diff e55297de vs the rebuild: 1, 2, 4, 5, 6, 8 =; 3 and 7 ! (LANDED / waves context; README counts); 9 new. Dev run 1 (x288-dev-by-arthur d14183ac, run-x288-1.sh 8d7341c7 on e55297de): 40 STEP lines, 36 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields; W2, W3 (6 probed, 0 FLAGGED), W4, W5, A12 --all --check OK. My consumer scan (1,199 frozen names): X288.v only X116's statement name, declared in the four specs; grounding none."
+    },
+    "X290": {
+      "phase": "X290",
+      "repo": "chromatic-theory",
+      "defines_file": "X290.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X290 (A3 verifier Arthur; routing Lancelot (499); selection x290-selection-by-marcol, design x290-design-by-marcol r1), branch math/marcol-x290-20261105, 2026-11-05",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x290-oow-defective-chromatic-minors",
+      "rows": {
+        "std_ossona_de_mendez_oum_wood_defective_chromatic_nu": {
+          "formal_name": "ossona_de_mendez_oum_wood_defective_minor_statement",
+          "source_hash": "65d2e4afbe29acbd1ed99f4ea919697ab31267e9794059e006a2a17c204a2211",
+          "note": "The Ossona de Mendez-Oum-Wood conjecture as 1708.02370v2 states it (l.161-166), with the connected tree-depth (l.147; the extraction prints td, false at H = 2K_1): for H of connected tree-depth exactly k, the H-minor-free class has defective chromatic number k - 1, X218's vocabulary reused. TRUE at the pin (Liu, arXiv:2208.10729, per 2308.15721v1 l.167). Authored in chromatic-theory, where that vocabulary lives (classified under minor-theory).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g290_oow_hyp_inhabited",
+              "claim": "g290_oow_hyp_claim",
+              "references": [
+                "ossona_de_mendez_oum_wood_defective_minor_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g290_oow_not_trivially_true",
+              "claim": "g290_oow_ntt_claim",
+              "references": [
+                "ossona_de_mendez_oum_wood_defective_minor_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
