@@ -12932,11 +12932,14 @@
    "audit_page": "todo"
   },
   "std_ossona_de_mendez_oum_wood_defective_chromatic_nu": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x290-oow-defective-chromatic-minors",
+   "package": "chromatic-theory",
+   "note": "Authored in X290.v:ossona_de_mendez_oum_wood_defective_minor_statement. The Ossona de Mendez-Oum-Wood conjecture as 1708.02370v2 states it (l.161-166), with the connected tree-depth (l.147; the extraction prints td, false at H = 2K_1): for H of connected tree-depth exactly k, the H-minor-free class has defective chromatic number k - 1, X218's vocabulary reused. TRUE at the pin (Liu, arXiv:2208.10729, per 2308.15721v1 l.167). Authored in chromatic-theory, where that vocabulary lives (classified under minor-theory)."
   },
   "std_ostrovskii_rosenthal_question_asymptotic_dimensi": {
    "statement": "todo",
