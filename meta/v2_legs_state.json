@@ -1913,11 +1913,14 @@
    "note": "Authored in X48.v:tree_decomposition_leaf_edge_connected_statement. Encodes the leaf-parameter tree edge-decomposition row with edge-connectivity controlled by f(number of leaves)."
   },
   "axv_1907_12091_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x289-cycle-counts-kiraly-dmnnp",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X289.v:cycle_count_kappa_one_statement. Conjecture 2 of arXiv:1907.12091v1 (l.108-112): O(kappa_1^m) cycles, kappa_1 = (2 + 2 sqrt 2)^(1/5), encoded exactly without reals: one natural C has c(G)^5 r^m <= C (2r + 2p)^m for every simple graph and every rational p/r >= sqrt 2 (2 r^2 <= p^2, r > 0), the bound at sqrt 2 by closure. OPEN at the pin. Authored in extremal-graph-theory, where the canonical count lives (classified under cycle-theory, which cannot import it)."
   },
   "axv_1907_12999_00": {
    "statement": "done",
@@ -12378,18 +12381,24 @@
    "note": "Authored in X272.v:planar_two_colouring_number_at_most_eight_statement. Kierstead, Mohar, Spacapan, Yang and Zhu, Question 1 (2009 preprint, p.4; studies record arXiv:1506.01412; pinned status open), encoded as its affirmative answer: every planar graph (wagner_planar) has 2-colouring number at most 8 (x272_col2_le: an ordering in which every vertex has at most 7 earlier vertices adjacent to it or sharing a neighbour after it). TRUE at the pin: Dvorak, Kaiser and Kral', arXiv:1506.01412v3, Theorem 1; the status correction is a separate item."
   },
   "std_kir_ly_s_cycle_count_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x289-cycle-counts-kiraly-dmnnp",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X289.v:kiraly_cycle_count_one_point_four_statement. Kiraly's O(1.4^m) conjecture (EGRES TR-2009-03, Conjecture 7.15, with a constant; studies record 1907.12091): some natural C has c(G) 5^m <= C 7^m for every simple graph with m edges, c(G) its cycles counted once as edge sets (edge_family_cycle_count). TRUE at the pin: arXiv:1907.12091v1, Theorem 1 (gamma ~ 1.384 < 1.4). Authored in extremal-graph-theory, where the canonical count lives (classified under cycle-theory, which cannot import it)."
   },
   "std_kir_ly_s_cycle_count_conjecture_for_4_regular_gr": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x289-cycle-counts-kiraly-dmnnp",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X289.v:kiraly_four_regular_cycle_count_statement. Kiraly's 4-regular conjecture as printed (EGRES TR-2009-03, Conjecture 7.14, no constant; studies record 1907.12091): every 4-regular simple graph with m edges has c(G)^2 100^m <= 199^m, i.e. at most 1.99^(m/2) cycles. FALSE as printed at K_5 (37 cycles, m = 10), kernel-checked in applications/kiraly_four_regular_disproof.v; the asymptotic form holds (arXiv:1907.12091v1, Theorem 3). Authored in extremal-graph-theory, where the canonical count lives."
   },
   "std_knuth_s_minrank_problem_for_random_graphs": {
    "statement": "todo",

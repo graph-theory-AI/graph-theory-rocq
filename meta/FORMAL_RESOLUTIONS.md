@@ -5,13 +5,14 @@ upstream conjecture catalog. Its source statuses, manifests, snapshots and
 statement-formalization legs remain unchanged. A source row can therefore still
 say `open` or `partial` while this registry records a checked proof or disproof.
 
-The registry holds eleven entries:
+The registry holds twelve entries:
 
 | Record key | Direction | Result (section below) |
 |---|---|---|
 | `1611.03196__03` | prove | Fair representation by matchings (X15) |
 | `1812.02420__03` | disprove | Directed Kneser nonexistence |
 | `1904.12273__01` | disprove | Heavy paths in shortest long odd holes |
+| `1907.12091` | disprove | Király's 4-regular cycle bound |
 | `2103.15175__00` | prove | List Ramsey numbers |
 | `2209.09107__00` | disprove | Alon–Tarsi orientation counterexample |
 | `2304.03567__04` | disprove | Forward covers of strong digraphs |
@@ -363,6 +364,28 @@ pyramid, no long jewel of order at most `ell + 2`, no long odd hole of length at
 candidate (`ell = 7`, odd `q >= 9`) is known only from a computation in the review of the
 write-up, so the extension in the candidate setting stays open as far as this refutation is
 concerned. The row's upstream review status (open) is unchanged.
+
+## Király's 4-regular cycle bound
+
+For source record `1907.12091` (row `studies:std_kir_ly_s_cycle_count_conjecture_for_4_regular_gr`),
+`Extremal.applications.kiraly_four_regular_disproof.kiraly_four_regular_cycle_count_disproved`
+refutes `Extremal.conjectures.X289.kiraly_four_regular_cycle_count_statement`, Király's cycle
+bound for 4-regular graphs as the studies slice extracts it from arXiv:1907.12091 (Dvořák,
+Morrison, Noel, Norin and Postle): a 4-regular simple graph with `m` edges has at most
+`1.99^(m/2)` cycles. It is encoded as printed, with no constant, as in Király's Conjecture 7.14
+(EGRES Technical Report TR-2009-03: `c(G) <= 1.99^n` for 4-regular `G`, where `n = m/2`);
+cycles are counted once each, as edge sets (`edge_family_cycle_count`).
+
+`K_5` is 4-regular with 10 edges and has at least 37 cycles (10 triangles, 15 four-cycles and
+12 five-cycles, each checked to be a cycle with an edge set of its own), while
+`37^2 · 100^10 > 199^10`, that is `37 > 1.99^5 ≈ 31.21`. The count goes through a general lemma
+(`seq_cycle_family_cycle`): the edge set of a duplicate-free sequence of at least three vertices
+whose cyclically consecutive entries are adjacent is a cycle.
+
+Caveat: only the literal universal inequality is refuted. The asymptotic form holds:
+Theorem 3 of arXiv:1907.12091 gives `O(1.365^m)` cycles at average degree 4, which the paper
+says proves Király's conjecture. The row's corpus status was already `disproved` (an ERRATA
+entry); this entry adds the kernel check.
 
 ## Regression tests
 
