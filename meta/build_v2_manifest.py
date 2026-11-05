@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Forty-five
+corrections are applied explicitly (ERRATA below) since the review files predate them. Forty-six
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -84,7 +84,9 @@ question 11 (2026-11-05), two more studies rows are recorded: the coarse Menger 
 arXiv:2401.06685v2, Theorem 1.3) and the Arman-Tsaturian cycle-count conjecture behind wave X85 (solved,
 arXiv:1907.12091v1, Theorem 5). Their statements are frozen in migration families, and each family carries a reviewed
 restatus repair that lets exactly status and status_semantics change. The conjecture of Ossona de Mendez, Oum and
-Wood, behind wave X290, is proved by Liu (arXiv:2208.10729v3) with the connected tree-depth X290 encodes.
+Wood, behind wave X290, is proved by Liu (arXiv:2208.10729v3) with the connected tree-depth X290 encodes (Marc's
+answer to question 12: solved, with explicit qualification). Conjecture C of Las Vergnas and Meyniel on quasi-complete
+minors, behind wave X291, is refuted in its own record (arXiv:2103.10684v2, Theorem th:mainfull, for large t).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -531,7 +533,14 @@ ERRATA = [
      "is its maximum over the components), l.177-179 state the Ossona de Mendez-Oum-Wood conjecture with it, and "
      "l.189-190 derive the conjecture from Theorem main_intro (l.160-162). That is the connected-tree-depth statement "
      "wave X290 encodes (1708.02370v2 l.161-166); the row's statement_text with ordinary tree-depth is false at 2K_1 "
-     "(CORPUS_FEEDBACK 74). Question 12's default (a)."),
+     "(CORPUS_FEEDBACK 74). By Marc's answer to question 12 (2026-11-05): solved, with explicit qualification."),
+    ("studies", "std_las_vergnas_meyniel_conjecture_c_quasi_minors", "disproved",
+     "Literature: refuted in its own record by Bonamy, Heinrich, Legrand-Duchesne and Narboni, 'On a recolouring "
+     "version of Hadwiger's conjecture', arXiv:2103.10684v2 (13 March 2025): main.tex l.178-180 state Conjecture C of "
+     "Las Vergnas and Meyniel as the record does, l.185 reads 'we strongly disprove Conjecture C for large t', and "
+     "Theorem th:mainfull (l.187-189) gives, for every eps > 0 and every large enough t, a graph that admits a "
+     "quasi-K_t-minor but no K_((2/3 + eps)t)-minor. No explicit t is given (known for t <= 10, l.183-185), so there is "
+     "no kernel disproof; wave X291 encodes the conjecture as stated."),
 ]
 
 
@@ -1140,7 +1149,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 45 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 46 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
