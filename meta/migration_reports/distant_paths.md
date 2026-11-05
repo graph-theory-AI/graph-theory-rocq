@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py distant_paths --details /tmp/mi
 - Canonical: `GTBase.distant_paths.pairwise_distant_seqs`.
 - Baseline: `058da18a5f7867ad874d93cc2d57056dc25537ba`.
 - Scope: 7 helpers, 5 statements, 45 frozen objects, 90 recorded references.
-- Source checks: 293/293 pass; consistent.
+- Source checks: 296/296 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -16,6 +16,8 @@ Full evidence: `python3 meta/migration_report.py distant_paths --details /tmp/mi
 | `GTMisc.conjectures.X116.coarse_menger_paths_bounded_separator_statement` / studies:std_coarse_menger_conjecture | `GTMisc.migration.distant_paths.coarse_menger_paths_bounded_separator_statement_compat` |
 | `GTMisc.conjectures.X146.geelen_coarse_gallai_A_paths_statement` / studies:std_geelen_s_coarse_gallai_conjecture | `GTMisc.migration.distant_paths.geelen_coarse_gallai_A_paths_statement_compat` |
 | `Packing.conjectures.X26.bounded_degree_distant_induced_menger_statement` / arxiv:2309.07905#00 | `Packing.migration.distant_paths.bounded_degree_distant_induced_menger_statement_compat` |
+
+Literature status updates after migration (statement text, doc block and the exact iff kept; only the manifest row's status and status_semantics changed): `GTMisc.conjectures.X116.coarse_menger_paths_bounded_separator_statement` (record `meta/CORPUS_FEEDBACK.md`; row fields `status`, `status_semantics`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py distant_paths --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.

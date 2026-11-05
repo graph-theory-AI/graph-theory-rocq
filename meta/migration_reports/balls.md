@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py balls --details /tmp/migration-
 - Canonical: `GTBase.base.ball`.
 - Baseline: `1b8126b20a10dcf1cf6c6f95c25104acb818c1cb`.
 - Scope: 12 helpers, 8 statements, 65 frozen objects, 181 recorded references.
-- Source checks: 461/461 pass; consistent.
+- Source checks: 464/464 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -19,6 +19,8 @@ Full evidence: `python3 meta/migration_report.py balls --details /tmp/migration-
 | `GTMisc.conjectures.X146.geelen_coarse_gallai_A_paths_statement` / studies:std_geelen_s_coarse_gallai_conjecture | `GTMisc.migration.balls.geelen_coarse_gallai_A_paths_statement_compat` |
 | `Packing.conjectures.X26.bounded_degree_distant_induced_menger_statement` / arxiv:2309.07905#00 | `Packing.migration.balls.bounded_degree_distant_induced_menger_statement_compat` |
 | `Packing.conjectures.X111.chepoi_estellon_vaxes_ball_hypergraph_transversal_statement` / studies:std_chepoi_estellon_vax_s_conjecture | `Packing.migration.balls.chepoi_estellon_vaxes_ball_hypergraph_transversal_statement_compat` |
+
+Literature status updates after migration (statement text, doc block and the exact iff kept; only the manifest row's status and status_semantics changed): `GTMisc.conjectures.X116.coarse_menger_paths_bounded_separator_statement` (record `meta/CORPUS_FEEDBACK.md`; row fields `status`, `status_semantics`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py balls --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.

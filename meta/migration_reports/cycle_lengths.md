@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py cycle_lengths --details /tmp/mi
 - Canonical: `GTBase.walks_paths.has_ucycle_length`.
 - Baseline: `4b63976bad086439fa79f74eaccd270cd1291eb9`.
 - Scope: 8 helpers, 8 statements, 30 frozen objects, 62 recorded references.
-- Source checks: 272/272 pass; consistent.
+- Source checks: 275/275 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -19,6 +19,8 @@ Full evidence: `python3 meta/migration_report.py cycle_lengths --details /tmp/mi
 | `Extremal.conjectures.X96.bollobas_erdos_large_c4_free_subgraph_statement` / studies:std_bollob_s_erd_s_problem_on_large_c_free_subgraphs | `Extremal.migration.cycle_lengths.bollobas_erdos_large_c4_free_subgraph_statement_compat` |
 | `Extremal.conjectures.X84.odd_cycle_free_turan2_unique_cycle_extremal_statement` / studies:std_arman_gunderson_tsaturian_conjecture_maximum_cyc | `Extremal.migration.cycle_lengths.odd_cycle_free_turan2_unique_cycle_extremal_statement_compat` |
 | `Extremal.conjectures.X85.arman_tsaturian_average_degree_cycle_count_statement` / studies:std_arman_tsaturian_conjecture_on_the_number_of_cycl | `Extremal.migration.cycle_lengths.arman_tsaturian_average_degree_cycle_count_statement_compat` |
+
+Literature status updates after migration (statement text, doc block and the exact iff kept; only the manifest row's status and status_semantics changed): `Extremal.conjectures.X85.arman_tsaturian_average_degree_cycle_count_statement` (record `meta/CORPUS_FEEDBACK.md`; row fields `status`, `status_semantics`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py cycle_lengths --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.

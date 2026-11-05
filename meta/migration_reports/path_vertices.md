@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py path_vertices --details /tmp/mi
 - Canonical: `GTBase.walks_paths.seq_vertices`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
 - Scope: 9 helpers, 14 statements, 52 frozen objects, 282 recorded references.
-- Source checks: 468/468 pass; consistent.
+- Source checks: 471/471 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -25,6 +25,8 @@ Full evidence: `python3 meta/migration_report.py path_vertices --details /tmp/mi
 | `Minor.conjectures.X11.induced_menger_anticomplete_paths_statement` / arxiv:2512.17232#00 | `Minor.migration.path_vertices.induced_menger_anticomplete_paths_statement_compat` |
 | `Minor.conjectures.X67.theta_triangle_free_bounded_degree_treewidth_statement` / arxiv:2001.01607#01 | `Minor.migration.path_vertices.theta_triangle_free_bounded_degree_treewidth_statement_compat` |
 | `Packing.conjectures.X26.bounded_degree_distant_induced_menger_statement` / arxiv:2309.07905#00 | `Packing.migration.path_vertices.bounded_degree_distant_induced_menger_statement_compat` |
+
+Literature status updates after migration (statement text, doc block and the exact iff kept; only the manifest row's status and status_semantics changed): `GTMisc.conjectures.X116.coarse_menger_paths_bounded_separator_statement` (record `meta/CORPUS_FEEDBACK.md`; row fields `status`, `status_semantics`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py path_vertices --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
