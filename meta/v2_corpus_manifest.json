@@ -1,5 +1,5 @@
 {
- "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — deterministic; regenerate + diff to review changes. Status uses the exact-type-gate vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 34 literature errata applied). b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. source_text currently holds the extractor's statement; REC/implementation replaces it with our normalized statement (licensing: LICENSE-DATA.md). Corpus tags: arxiv, erdos, derived, arxiv-studied, bm (Bondy–Murty Appendix A records bm-NNN) and others (curated data/others_conjectures.json records). site_url/review_url are derived from row_id by corpus_registry.row_urls() (null for erdos/derived/studies rows, which have no public per-record page). Legs merge in from meta/v2_legs_state.json (the source of truth). Classifier fields (bucket/topic/formalizability/repo/phase/formal_name) come from the hand-maintained meta/v2_classification.json (edit there, then rebuild — never hand-edit this file) and from wave planning.",
+ "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — deterministic; regenerate + diff to review changes. Status uses the exact-type-gate vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 36 literature errata applied). b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. source_text currently holds the extractor's statement; REC/implementation replaces it with our normalized statement (licensing: LICENSE-DATA.md). Corpus tags: arxiv, erdos, derived, arxiv-studied, bm (Bondy–Murty Appendix A records bm-NNN) and others (curated data/others_conjectures.json records). site_url/review_url are derived from row_id by corpus_registry.row_urls() (null for erdos/derived/studies rows, which have no public per-record page). Legs merge in from meta/v2_legs_state.json (the source of truth). Classifier fields (bucket/topic/formalizability/repo/phase/formal_name) come from the hand-maintained meta/v2_classification.json (edit there, then rebuild — never hand-edit this file) and from wave planning.",
  "schema_version": 1,
  "provenance": {
   "graph_conjectures_commit": "b72c5857060addbe4523016e88ae3aa626e958fd",
@@ -26,9 +26,9 @@
   },
   "by_status": {
    "disproved": 98,
-   "open": 1323,
+   "open": 1321,
    "partial": 152,
-   "solved": 217
+   "solved": 219
   },
   "by_kind": {
    "Conjecture": 659,
@@ -84612,8 +84612,8 @@
    "source_verified_at": "2026-11-04",
    "verification_note": "Authored in X287.v:bajnok_brinkmann_six_exceptional_graphs_statement. The Bajnok-Brinkmann conjecture as Cames van Batenburg, Goedgebeur and Joret quote it (arXiv:1911.12471v2, l.204-210; studies record): every 2-connected triangle-free subcubic G with 8 alpha(G) < 3n is isomorphic to one of the six graphs F_11, F_14^(1), F_14^(2), F_19^(1), F_19^(2), F_22 of Figure 1 (tables from the figure files, x287_bb_graph), each of them is such a graph, and no two are isomorphic. TRUE before the pin by their Corollary 8 (l.249-253) with the six; pinned open (lit23).",
    "status_verified_at": null,
-   "status": "open",
-   "status_semantics": null,
+   "status": "solved",
+   "status_semantics": "Literature: proved in its own record by Cames van Batenburg, Goedgebeur and Joret, arXiv:1911.12471v2, Corollary 8 (Revision_IndependenceRatio8over3.tex l.249-253): every 2-connected triangle-free subcubic n-vertex graph G has alpha(G) >= 3n/8 unless G is one of F_11, F_14^(1), F_14^(2), F_19^(1), F_19^(2), F_22. With the six themselves (alpha 4, 5, 5, 7, 7, 8 on 11, 14, 14, 19, 19, 22 vertices, so 8 alpha < 3n for each), that is Bajnok and Brinkmann's conjecture as the record states it (l.208-210: exactly these six, up to isomorphism).",
    "review_status": "open",
    "review_date": null,
    "recovery": "none",
@@ -84636,7 +84636,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -103469,8 +103469,8 @@
    "source_verified_at": "2026-11-04",
    "verification_note": "Authored in X285.v:locke_finitely_many_statement. Locke's conjecture as quoted by Cames van Batenburg, Goedgebeur and Joret (arXiv:1911.12471v2, l.196; studies record), encoded as stated with finitely many as a bound on the order: some N with |G| <= N for every 3-connected (k_connected G 3) triangle-free cubic (regular G 3) G with 8 alpha(G) < 3n. TRUE at the pin: their Corollary 8 (l.249-253) leaves six exceptions of order at most 22, so N = 22; not a no-exception statement (F_14^(1) is in the class, grounding_X285 g285_locke_hyp_inhabited).",
    "status_verified_at": null,
-   "status": "open",
-   "status_semantics": null,
+   "status": "solved",
+   "status_semantics": "Literature: proved in its own record by Cames van Batenburg, Goedgebeur and Joret, 'Large independent sets in triangle-free cubic graphs: beyond planarity', arXiv:1911.12471v2 (8 July 2020), Corollary 8 (Revision_IndependenceRatio8over3.tex l.249-253): every 2-connected triangle-free subcubic n-vertex graph G has alpha(G) >= 3n/8 - 1/4, and alpha(G) >= 3n/8 unless G is one of six named graphs F_11, F_14^(1), F_14^(2), F_19^(1), F_19^(2), F_22 (orders 11 to 22). A 3-connected cubic graph is 2-connected and subcubic, so every 3-connected triangle-free cubic graph with alpha(G) < 3n/8 has at most 22 vertices: Locke's conjecture as the record quotes it (l.196) holds. It is not a no-exception statement: F_14^(1) is 3-connected, triangle-free and cubic with alpha = 5 < 42/8 (wave X285's grounding, on the source's figure file F_14_1-new.graphml).",
    "review_status": "open",
    "review_date": null,
    "recovery": "none",
@@ -103493,7 +103493,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },

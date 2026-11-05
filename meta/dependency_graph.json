@@ -17,20 +17,20 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 148,
+  "edges": 149,
   "by_status": {
    "candidate": 32,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 82
+   "verified": 83
   },
   "by_kind": {
    "equiv": 6,
-   "implies": 142,
+   "implies": 143,
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 98
+  "proved_theorems": 99
  },
  "edges": [
   {
@@ -57,6 +57,19 @@
    "external": [],
    "sources": [
     "atlas/implications_A1.v"
+   ]
+  },
+  {
+   "from": "bajnok_brinkmann_six_exceptional_graphs_statement",
+   "to": "locke_finitely_many_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "",
+   "proof": "bajnok_brinkmann_six_exceptional_graphs_implies_locke_finitely_many",
+   "note": "Rocq-only edge (no corpus relation), noted with X287's selection (Marcol's (362), Lancelot's (459)): a 3-connected cubic graph is 2-connected (k_connected is monotone in k) and subcubic (regular_subcubic), so the first clause of the Bajnok-Brinkmann statement makes it isomorphic to one of the six graphs (card_bij of the isomorphism), and N is the largest of their orders (22).",
+   "external": [],
+   "sources": [
+    "atlas/implications_X287.v"
    ]
   },
   {
