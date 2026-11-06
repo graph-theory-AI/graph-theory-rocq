@@ -135,7 +135,7 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Conjecture dependency graph
 
-- **149 edges** — by status {'candidate': 32, 'conditional': 2, 'refuted-direction': 32, 'verified': 83}, by kind {'equiv': 6, 'implies': 143, 'refutes': 0, 'specializes': 0}; 99 Qed-proved relative theorems.
+- **149 edges** — by status {'candidate': 32, 'conditional': 2, 'refuted-direction': 32, 'verified': 83}, by kind {'equiv': 6, 'implies': 143, 'refutes': 0, 'specializes': 0}; 100 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
   - `asymmetric_bipartite_list_colouring_statement` implies `list_chromatic_number_and_maximum_degree_of_bipartit_statement` (atlas/implications_A1.v)
   - `bajnok_brinkmann_six_exceptional_graphs_statement` implies `locke_finitely_many_statement` (atlas/implications_X287.v)
@@ -291,7 +291,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 > Programme plan: `meta/V2_FULL_CORPUS_PLAN.md`. A growing corpus: `todo` rows are expected until the M-V2-STATEMENT-COMPLETE release; the gate here checks consistency, not completion.
 
 - **1790 tracked rows** — by corpus tag: arxiv 768, arxiv-studied 568, bm 38, derived 138, erdos 277, others 1; **117 alias rows** (no statement owed).
-- Statement legs over the 1673 non-alias rows: **629 done** · 12 partial · 39 blocked · 993 todo.
+- Statement legs over the 1673 non-alias rows: **630 done** · 12 partial · 39 blocked · 992 todo.
 
 | v2 phase | done | partial | blocked | todo | total |
 |---|--:|--:|--:|--:|--:|
@@ -508,6 +508,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X290 | 1 | 0 | 0 | 0 | 1 |
 | X291 | 1 | 0 | 0 | 0 | 1 |
 | X292 | 1 | 0 | 0 | 0 | 1 |
+| X293 | 1 | 0 | 0 | 0 | 1 |
 | X294 | 1 | 0 | 0 | 0 | 1 |
 | X295 | 1 | 0 | 0 | 0 | 1 |
 | X3 | 13 | 0 | 0 | 0 | 13 |
