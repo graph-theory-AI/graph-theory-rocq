@@ -13914,6 +13914,65 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Arthur (X292 wave verification, 2026-11-05)",
       "faithfulness_result": "Readback 2026-11-05 (verifier Arthur): 1/1 PASS against the pinned text and the source, at math/marcol-x292-20261105 = 5f4d7f9541af1aae7d66a4edc991f2d2fb37ec32 (five commits on work/coordinator 19e7c224, lit25's merge onto AH66), after my design read ((482), FAITHFUL 1/1, no required change, O1 the parenthesised 'K_0; packet x292-design-read-by-arthur 27f8eadc) of x292-design-by-marcol r1 (95ca2813). At 5f4d7f9541af1aae7d66a4edc991f2d2fb37ec32 X292.v (3fea54d6) is the packet's byte for byte and grounding_X292.v (60e267b1) differs from it only by O1 (l.79: ('K_0) -> 'I_q); waves.X292 = the packet's x292-wave.json; no helper (helper_ownership {}), X99's hat vocabulary and GTBase's wagner_planar reused. studies:std_planar_hat_guessing_number_conjecture_bosek_et_a, encoded as stated: (forall G, wagner_planar G -> x99_hat_guessing_number_at_most G 4) /\\ (exists G, wagner_planar G /\\ x99_winning_hat_strategy G 4), i.e. HG(G) <= 4 for every planar graph and 4 attained, so the maximum is 4; x99_hat_guessing_number_at_most quantifies over every q > 4 (no monotonicity assumed); wagner_planar (no K_5, no K_(3,3) minor) is planarity for finite graphs by Wagner's theorem; the graph with no vertex wins with no number of colours, so it is no attainment witness. One lint allowlist entry (exists-after-graph-forall: the existential is the second conjunct's attainment witness), appended (65 -> 66 entries, no other change). FALSE at the pin in its own record (Theorem planar1, HG 12; no kernel disproof, m = 66^144); pinned open, a literature item. Grounding: hyp at K_4 (wagner_planar by minor_card, the sum rule over 'Z_4 local and winning; the statement then bounds K_4 by 4); ntt with the bound 3 (false at K_4, implies the row); g292_K0_never_wins. Metadata: source_hash 1/1 recomputed, equal; waves.X292 the only waves change, verifier fields empty before this; library_primitives, migration reports and CORPUS_FEEDBACK unchanged; legs: the row done / done, note 376 = \"Authored in X292.v:<name>. \" + the wave note, no other legs entry changed; README 626 / 12 / 39 / 996 -> 627 / 12 / 39 / 995; LANDED gains X292 graph-theory-misc after X291 minor-theory. Dev run 1 (x292-dev-by-marcol 33f66728, -c OK, 39 listed = present): run-x292-1.sh 0ae7fa48 on 5f4d7f9541af1aae7d66a4edc991f2d2fb37ec32, JOB 18:26:32Z-19:11:44Z, RESULT PASS-WITH-EXPECTED, 30 STEP lines, 26 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields; W1 12/14 (helper ownership and hard lint PASS; 1/1 Defined; package compiles; Print Assumptions clean on 1 statement + 2 certificates; 10 exact-type probes); the builds have no Error line (grounding l.11's mathcomp all_boot / all_algebra imports give MathComp 2.6 deprecation and coercion warnings); W2 950 / 950; W3 1 probed, 0 FLAGGED; W4 0 active; A12 101 / 101 OK; written only the three generated files; END HEAD 5f4d7f9541af1aae7d66a4edc991f2d2fb37ec32."
+    },
+    "X294": {
+      "phase": "X294",
+      "repo": "packing-theory",
+      "defines_file": "X294.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X294 (A3 verifier Arthur; routing Lancelot (546); selection x294-selection-by-marcol, design x294-design-by-marcol r1), branch math/marcol-x294-20261106, 2026-11-06",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x294-gruslys-perfect-induced-packings",
+      "rows": {
+        "std_gruslys_conjecture_perfect_induced_h_packings_of": {
+          "formal_name": "gruslys_perfect_induced_packing_statement",
+          "source_hash": "4245d2c119fdccc8fb99fa13cccbcb8bf1b0981f48ff708623c57a636cc277f1",
+          "note": "Gruslys' conjecture as Bonamy, Morrison and Scott state it (1710.07255v3 torus-final.tex l.104-106): G vertex-transitive, H an induced subgraph (some vertex set induces a copy of H) and |V(H)| dividing |V(G)| give n >= 1 and a partition of the vertices of the Cartesian power G^n into sets each inducing a copy of H (l.80, l.85-86). FALSE at the pin: Theorem th:unpackabletori (l.115-119) for C_k^m, k odd and not a prime power; no kernel disproof.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g294_gpip_hyp_inhabited",
+              "claim": "g294_gpip_hyp_claim",
+              "references": [
+                "gruslys_perfect_induced_packing_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g294_gpip_not_trivially_true",
+              "claim": "g294_gpip_ntt_claim",
+              "references": [
+                "gruslys_perfect_induced_packing_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g294_helper_sanity",
+                "claim": "g294_helper_claim",
+                "references": [
+                  "x294_graph_automorphism",
+                  "x294_vertex_transitive",
+                  "x294_box_power"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x294_graph_automorphism": {
+          "classification": "paper_specific",
+          "reason": "An adjacency-preserving and -reflecting bijection, the automorphism behind vertex-transitivity in Gruslys' conjecture (arXiv:1710.07255v3, torus-final.tex l.104-106). hamiltonicity-theory's U2 graph_automorphism (= X211's copy) has this body verbatim, in a package packing-theory does not import; names entry graph_automorphism (candidate_family, graph-symmetry)."
+        },
+        "x294_vertex_transitive": {
+          "classification": "paper_specific",
+          "reason": "Vertex-transitivity (arXiv:1710.07255v3, torus-final.tex l.104-106): for any two vertices some automorphism maps the first to the second. hamiltonicity-theory's U2 vertex_transitive (= X211's copy) has this body verbatim, in a package packing-theory does not import; names entry vertex_transitive (candidate_family, graph-symmetry)."
+        },
+        "x294_box_power": {
+          "classification": "paper_specific",
+          "reason": "G^n, the n-th Cartesian power (arXiv:1710.07255v3, torus-final.tex l.85-86), over GTBase cartesian_product with G^0 = K_1 and G^(t+1) = G^t box G: homomorphism-theory's x227_box_power body verbatim, in a package packing-theory does not import; names entry box_power (candidate_family, cartesian-powers). Not GTBase's graph_power, the distance power."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
