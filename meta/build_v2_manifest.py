@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Forty-seven
+corrections are applied explicitly (ERRATA below) since the review files predate them. Forty-eight
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -89,7 +89,9 @@ answer to question 12: solved, with explicit qualification). Conjecture C of Las
 minors, behind wave X291, is refuted in its own record (arXiv:2103.10684v2, Theorem th:mainfull, for large t). The
 conjecture of Bosek, Dudek, Farnik, Grytczuk and Mazur that the maximum hat guessing number of a planar graph is 4,
 behind wave X292, is refuted in its own record (Alon and Chizewer, arXiv:2107.05995v2, Theorem planar1: a planar graph
-with hat guessing number 12).
+with hat guessing number 12). Gruslys' conjecture on perfect induced H-packings of Cartesian powers, behind wave X294,
+is refuted in its own record (Bonamy, Morrison and Scott, arXiv:1710.07255v3, Theorem 1.5: powers of C_k for odd k
+that is not a prime power).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -551,6 +553,14 @@ ERRATA = [
      "Theorem planar1 (l.104-107) gives a planar graph with hat guessing number 12 (l.177-180: two adjacent vertices "
      "u, v and m = 66^144 adjacent pairs x_i, y_i, each adjacent to u and v). The graph is far too large for a kernel "
      "disproof; wave X292 encodes the conjecture as stated."),
+    ("studies", "std_gruslys_conjecture_perfect_induced_h_packings_of", "disproved",
+     "Literature: refuted in its own record by Bonamy, Morrison and Scott, 'Partitioning the vertices of a torus into "
+     "isomorphic subgraphs', arXiv:1710.07255v3 (14 June 2020): torus-final.tex l.104-106 state Gruslys' conjecture "
+     "(Conjecture 1.3 there) as the record states it, l.115 says it is false in general, and Theorem 1.5 (l.117-119) "
+     "gives, for every odd k that is not a prime power, an m >= 1 and an induced subgraph H of C_k^m with |V(H)| "
+     "dividing k^m such that C_k^n has no perfect H-packing for any n; G = C_k^m is vertex-transitive and G^n = "
+     "C_k^(mn). The smallest case, k = 15, takes an H of 81 vertices in C_15^2 and G = C_15^4 (the proof, l.364-375), "
+     "and the claim covers every n, so there is no kernel disproof; wave X294 encodes the conjecture as stated."),
 ]
 
 
@@ -1159,7 +1169,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 47 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 48 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
