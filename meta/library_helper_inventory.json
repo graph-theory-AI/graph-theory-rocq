@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2254,
-      "cross_file_files": 1117,
+      "cross_file_declarations": 2261,
+      "cross_file_files": 1119,
       "implicit_use": 3,
       "packages_without_project": [
         "graph-theory-base"
@@ -16208,15 +16208,25 @@
             "stable-set"
           ],
           "declarations": [
+            "graph-theory-misc/theories/conjectures/X295.v:strong_normal_graph_statement",
+            "graph-theory-misc/theories/conjectures/grounding_X295.v:<line 67>",
+            "graph-theory-misc/theories/conjectures/grounding_X295.v:g295_C5_induced_C5",
+            "graph-theory-misc/theories/conjectures/grounding_X295.v:g295_K0_both_sides",
+            "graph-theory-misc/theories/conjectures/grounding_X295.v:g295_no_long_cycle",
+            "graph-theory-misc/theories/conjectures/grounding_X295.v:g295_sng_both_sides",
+            "graph-theory-misc/theories/conjectures/grounding_X295.v:g295_sng_hyp_claim",
             "graph-theory-misc/theories/migration/complement.v:no_c5_c7_complement_c7_normal_graph_statement",
             "graph-theory-misc/theories/migration/complement.v:x29_has_induced_cycle_diso",
             "graph-theory-misc/theories/migration/stable_sets.v:no_c5_c7_complement_c7_normal_graph_statement"
           ],
           "files": [
+            "graph-theory-misc/theories/conjectures/X295.v",
+            "graph-theory-misc/theories/conjectures/grounding_X295.v",
             "graph-theory-misc/theories/migration/complement.v",
             "graph-theory-misc/theories/migration/stable_sets.v"
           ],
           "statements": [
+            "graph-theory-misc/theories/conjectures/X295.v:strong_normal_graph_statement",
             "graph-theory-misc/theories/migration/complement.v:no_c5_c7_complement_c7_normal_graph_statement",
             "graph-theory-misc/theories/migration/stable_sets.v:no_c5_c7_complement_c7_normal_graph_statement"
           ],
@@ -16233,6 +16243,8 @@
         },
         "provider_unlisted": false,
         "require_chain": {
+          "graph-theory-misc/theories/conjectures/X295.v": "unknown",
+          "graph-theory-misc/theories/conjectures/grounding_X295.v": "unknown",
           "graph-theory-misc/theories/migration/complement.v": "no",
           "graph-theory-misc/theories/migration/stable_sets.v": "unknown"
         },
@@ -24990,12 +25002,12 @@
     ]
   },
   "counts": {
-    "files": 386,
+    "files": 387,
     "helpers": 2776,
     "repeated_body_shapes": 153,
     "repeated_normalized_names": 223,
     "repeated_signature_shapes": 338,
-    "statements_excluded": 908,
+    "statements_excluded": 909,
     "x_wave_helpers": 1615
   },
   "groups": {
