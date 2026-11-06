@@ -13973,6 +13973,42 @@
       },
       "faithfulness_verified_by": "Arthur (X294 wave verification, 2026-11-06)",
       "faithfulness_result": "Readback 2026-11-06 (verifier Arthur): 1/1 PASS against the pinned text and the source, at math/marcol-x294-20261106 = fa0181ed8d7847bc4ef1971554412c62976ea408 (six commits on work/coordinator b8dc6b46, X292's merge onto AH67), after my design read ((489), FAITHFUL 1/1, no required change, O1 a nonempty ntt witness, O2 a commit-body check; packet x294-design-read-by-arthur 02e1882a) of x294-design-by-marcol r1 (c5984485). At fa0181ed8d7847bc4ef1971554412c62976ea408 X294.v (b421b60c) is the packet's byte for byte and grounding_X294.v (f97d8bac) differs from it only by O1 (the ntt witness G = K_3, H = K_2: g294_K2_in_K3 and g294_K3_K2_no_packing replace g294_point and g294_set0_K0; claims and theorem statements unchanged); waves.X294 = the packet's x294-wave.json; three paper_specific helpers, verbatim copies of hamiltonicity-theory U2's graph_automorphism / vertex_transitive and homomorphism-theory X227's x227_box_power (packing-theory imports neither); the helper classification = the packet's classification-x294.jq on the base (the X294 members join graph_automorphism and vertex_transitive; new names entry box_power, X227 + X294, candidate_family cartesian-powers). studies:std_gruslys_conjecture_perfect_induced_h_packings_of, encoded as stated: forall (G : sgraph) (H : sgraph), x294_vertex_transitive G -> (exists S : {set G}, inhabited (induced S ≃ H)) -> #|H| %| #|G| -> exists n, 0 < n /\\ exists P : {set {set x294_box_power G n}}, partition P [set: x294_box_power G n] /\\ forall S, S \\in P -> inhabited (induced S ≃ H). The induced-subgraph hypothesis is positive (GTBase's ~ induced_free G H is its double negation); x294_box_power G n is the n-th Cartesian power over GTBase's box product (G^0 = K_1); a perfect induced H-packing (l.80) is exactly a partition of V(G^n) into sets each inducing H (MathComp's nonempty blocks matter only for H with no vertex, which forces G empty). One lint allowlist entry (exists-after-graph-forall: n and P are the conjecture's own, exists S is the hypothesis; the binder written forall (G : sgraph) (H : sgraph) so that the rule fires, Lancelot's (549)), appended (66 -> 67 entries, no other change). FALSE at the pin in its own record (Theorem th:unpackabletori with G = C_k^m, vertex-transitive, G^n isomorphic to C_k^(mn); no kernel disproof, k >= 15); pinned open, a literature item. Grounding: hyp at G = K_2, H = K_1 (transpositions make every K_n vertex-transitive; singleton packings of every power); ntt without the divisibility, false at K_3 / K_2 (3^n is odd); helper sanity (transpositions are automorphisms, K_2 vertex-transitive and the one-edge graph on 3 vertices not, #|G^n| = #|G|^n, G^1 isomorphic to G). Metadata: source_hash 1/1 recomputed, equal; waves.X294 the only waves change, verifier fields empty before this; library_primitives, migration reports and CORPUS_FEEDBACK unchanged; legs: the row done / done, note 510 = \"Authored in X294.v:<name>. \" + the wave note, no other legs entry changed; README 627 / 12 / 39 / 995 -> 628 / 12 / 39 / 994; LANDED gains X294 packing-theory after X292 graph-theory-misc. Dev run 1 (x294-dev-by-marcol 20354df7, -c OK, 62 listed = present): run-x294-1.sh 107b085c on fa0181ed8d7847bc4ef1971554412c62976ea408, JOB 01:28:24Z-02:12:39Z, RESULT PASS-WITH-EXPECTED, 30 STEP lines, 26 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields; W1 12/14 CHECKS (helper ownership and hard lint PASS; 1/1 Defined; package compiles; Print Assumptions clean on 1 statement + 3 certificates; 10 exact-type probes; the two FAIL lines are the empty A3 fields); the builds have no Error line; W2 951 / 951 (reverse 906 / 906); W3 1 probed, 0 FLAGGED; W4 0 active; A12 101 / 101 OK; written only the three generated files (the manifest rows of X294 and of X292, whose merge postdates the committed manifest at b8dc6b46); END HEAD fa0181ed8d7847bc4ef1971554412c62976ea408."
+    },
+    "X295": {
+      "phase": "X295",
+      "repo": "graph-theory-misc",
+      "defines_file": "X295.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X295 (A3 verifier Arthur; routing Lancelot (561); selection x295-selection-by-marcol, design x295-design-by-marcol r1), branch math/marcol-x295-20261106, 2026-11-06",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x295-strong-normal-graph",
+      "rows": {
+        "std_strong_normal_graph_conjecture_de_simone_k_rner": {
+          "formal_name": "strong_normal_graph_statement",
+          "source_hash": "5bff06440e714338e68fa75a8e10d48eb461eb4e7aa5155d464b309bad3522e8",
+          "note": "De Simone and Korner's conjecture as 1508.05487v8 states it (Conjecture 1.2, source.tex l.188-191): a graph is strongly normal (every induced subgraph normal, X29's x29_normal_graph) iff neither it nor its complement (compl) has an induced C_5 or C_7. FALSE at the pin: Theorem 1.3 (l.198-200), a non-normal graph of girth at least 8. Pinned open, a literature item.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g295_sng_hyp_inhabited",
+              "claim": "g295_sng_hyp_claim",
+              "references": [
+                "strong_normal_graph_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g295_sng_not_trivially_true",
+              "claim": "g295_sng_ntt_claim",
+              "references": [
+                "strong_normal_graph_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
