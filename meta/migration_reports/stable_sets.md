@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py stable_sets --details /tmp/migr
 - Canonical: `GraphTheory.core.dom.stable`.
 - Baseline: `96be00e5259f813eed101893330ee162b63f69e2`.
 - Scope: 11 helpers, 17 statements, 73 frozen objects, 153 recorded references.
-- Source checks: 546/546 pass; consistent.
+- Source checks: 549/549 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -28,6 +28,8 @@ Full evidence: `python3 meta/migration_report.py stable_sets --details /tmp/migr
 | `GTMisc.conjectures.X29.no_c5_c7_complement_c7_normal_graph_statement` / studies:std_normal_graph_conjecture_de_simone_k_rner | `GTMisc.migration.stable_sets.no_c5_c7_complement_c7_normal_graph_statement_compat` |
 | `Packing.conjectures.X18.path_partition_independent_set_balance_statement` / arxiv:1611.03196#00 | `Packing.migration.stable_sets.path_partition_independent_set_balance_statement_compat` |
 | `Packing.conjectures.XE1.erdos_151_statement` / erdos:151 | `Packing.migration.stable_sets.erdos_151_statement_compat` |
+
+Literature status updates after migration (statement text, doc block and the exact iff kept; only the manifest row's status and status_semantics changed): `GTMisc.conjectures.X29.no_c5_c7_complement_c7_normal_graph_statement` (record `meta/CORPUS_FEEDBACK.md`; row fields `status`, `status_semantics`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py stable_sets --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.

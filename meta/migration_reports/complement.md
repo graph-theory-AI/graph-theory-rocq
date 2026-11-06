@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py complement --details /tmp/migra
 - Canonical: `GraphTheory.core.sgraph.compl`.
 - Baseline: `49ddc033ec6be3372ba6813f044fd26922fad16d`.
 - Scope: 10 helpers, 16 statements, 59 frozen objects, 207 recorded references.
-- Source checks: 486/486 pass; consistent.
+- Source checks: 489/489 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -27,6 +27,8 @@ Full evidence: `python3 meta/migration_report.py complement --details /tmp/migra
 | `Extremal.conjectures.XE2.erdos_570_statement` / erdos:570 | `Extremal.migration.complement.erdos_570_statement_compat` |
 | `Extremal.conjectures.XE2.erdos_800_statement` / erdos:800 | `Extremal.migration.complement.erdos_800_statement_compat` |
 | `GTMisc.conjectures.X29.no_c5_c7_complement_c7_normal_graph_statement` / studies:std_normal_graph_conjecture_de_simone_k_rner | `GTMisc.migration.complement.no_c5_c7_complement_c7_normal_graph_statement_compat` |
+
+Literature status updates after migration (statement text, doc block and the exact iff kept; only the manifest row's status and status_semantics changed): `GTMisc.conjectures.X29.no_c5_c7_complement_c7_normal_graph_statement` (record `meta/CORPUS_FEEDBACK.md`; row fields `status`, `status_semantics`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py complement --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
