@@ -744,7 +744,16 @@
       "substitutions": {
         "x29_complement": "Legacy.x29_complement"
       },
-      "certificate": "GTMisc.migration.complement.no_c5_c7_complement_c7_normal_graph_statement_compat"
+      "certificate": "GTMisc.migration.complement.no_c5_c7_complement_c7_normal_graph_statement_compat",
+      "repair": {
+        "direction": "restatus",
+        "doc_block_sha256": "fb505da8feace52415f48d2d212177611c3b00f78accdcd54956d80ce29792d2",
+        "record": "meta/CORPUS_FEEDBACK.md",
+        "row_fields": [
+          "status",
+          "status_semantics"
+        ]
+      }
     },
     {
       "kind": "a1-frozen",

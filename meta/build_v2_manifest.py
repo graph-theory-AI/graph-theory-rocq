@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Forty-eight
+corrections are applied explicitly (ERRATA below) since the review files predate them. Fifty
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -91,7 +91,10 @@ conjecture of Bosek, Dudek, Farnik, Grytczuk and Mazur that the maximum hat gues
 behind wave X292, is refuted in its own record (Alon and Chizewer, arXiv:2107.05995v2, Theorem planar1: a planar graph
 with hat guessing number 12). Gruslys' conjecture on perfect induced H-packings of Cartesian powers, behind wave X294,
 is refuted in its own record (Bonamy, Morrison and Scott, arXiv:1710.07255v3, Theorem 1.5: powers of C_k for odd k
-that is not a prime power).
+that is not a prime power). The Normal Graph Conjecture of De Simone and Korner, behind wave X29, and their Strong
+Normal Graph Conjecture, behind wave X295, are refuted in their own record (Harutyunyan, Pastor and Thomasse,
+arXiv:1508.05487v8, Theorem 1.3: a graph of girth at least 8 that is not normal). X29's statement is frozen in the
+migration families complement and stable_sets, and each carries a reviewed restatus repair.
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -561,6 +564,22 @@ ERRATA = [
      "dividing k^m such that C_k^n has no perfect H-packing for any n; G = C_k^m is vertex-transitive and G^n = "
      "C_k^(mn). The smallest case, k = 15, takes an H of 81 vertices in C_15^2 and G = C_15^4 (the proof, l.364-375), "
      "and the claim covers every n, so there is no kernel disproof; wave X294 encodes the conjecture as stated."),
+    ("studies", "std_normal_graph_conjecture_de_simone_k_rner", "disproved",
+     "Literature: refuted in its own record by Harutyunyan, Pastor and Thomasse, 'Disproving the normal graph "
+     "conjecture', arXiv:1508.05487v8 (28 August 2020): source.tex l.92-96 define normal graphs (a clique covering and "
+     "a stable-set covering of the vertex set, every clique meeting every stable set), l.178-180 state the Normal Graph "
+     "Conjecture of De Simone and Korner (Conjecture 1.1 there) as the record does, and Theorem 1.3 (l.198-200) gives a "
+     "graph of girth at least 8 that is not normal. That graph has no induced C_5 or C_7 and no induced complement of "
+     "C_7, which has triangles. The proof is probabilistic (l.203), so there is no kernel disproof. Wave X29's "
+     "migration families complement and stable_sets carry a reviewed restatus repair."),
+    ("studies", "std_strong_normal_graph_conjecture_de_simone_k_rner", "disproved",
+     "Literature: refuted in its own record by Harutyunyan, Pastor and Thomasse, 'Disproving the normal graph "
+     "conjecture', arXiv:1508.05487v8 (28 August 2020): source.tex l.182-183 define strongly normal graphs (every "
+     "induced subgraph normal), l.188-191 state the Strong Normal Graph Conjecture (Conjecture 1.2 there, cited to De "
+     "Simone and Korner) as the record does, and Theorem 1.3 (l.198-200) gives a graph G of girth at least 8 that is "
+     "not normal, hence not strongly normal. Neither G nor its complement has an induced C_5 or C_7: G has no cycle "
+     "shorter than 8, C_5 is self-complementary, and the complement of C_7 has triangles. The proof is probabilistic "
+     "(l.203), so there is no kernel disproof; wave X295 encodes the conjecture as stated."),
 ]
 
 
@@ -1169,7 +1188,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 48 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 50 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "

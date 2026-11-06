@@ -590,7 +590,16 @@
       "substitutions": {
         "x29_normal_graph": "X29Legacy.x29_normal_graph"
       },
-      "certificate": "GTMisc.migration.stable_sets.no_c5_c7_complement_c7_normal_graph_statement_compat"
+      "certificate": "GTMisc.migration.stable_sets.no_c5_c7_complement_c7_normal_graph_statement_compat",
+      "repair": {
+        "direction": "restatus",
+        "doc_block_sha256": "fb505da8feace52415f48d2d212177611c3b00f78accdcd54956d80ce29792d2",
+        "record": "meta/CORPUS_FEEDBACK.md",
+        "row_fields": [
+          "status",
+          "status_semantics"
+        ]
+      }
     },
     {
       "kind": "original-chain",
