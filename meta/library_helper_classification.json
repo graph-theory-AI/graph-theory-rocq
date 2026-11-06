@@ -64,6 +64,16 @@
       "family_id": "ramsey-arrows",
       "milestone": "post-rc-library-wave"
     },
+    "box_power": {
+      "class": "candidate_family",
+      "reason": "the t-th Cartesian (box) power, 'K_1 for t = 0 and G^t box G for t + 1: X227 (homomorphism-theory) and X294 (packing-theory, X227's body verbatim: packing-theory does not import Hom; Gruslys' G^n, arXiv:1710.07255v3 l.85-86) state the same power; not GTBase's graph_power, the distance power",
+      "members": [
+        "Hom.conjectures.X227.x227_box_power",
+        "Packing.conjectures.X294.x294_box_power"
+      ],
+      "family_id": "cartesian-powers",
+      "milestone": "post-rc-library-wave"
+    },
     "branch": {
       "class": "family_companion",
       "reason": "projection of the registered induced-subdivision record (isd_* x0)",
@@ -465,10 +475,11 @@
     },
     "graph_automorphism": {
       "class": "candidate_family",
-      "reason": "graph automorphisms; U2 = X211, X211 is already marked to move to base",
+      "reason": "graph automorphisms; U2 = X211 = X294 (X294's packing-theory copy, body verbatim: packing-theory does not import Hamilton), X211 is already marked to move to base",
       "members": [
         "Hamilton.conjectures.U2.graph_automorphism",
-        "Hamilton.conjectures.X211.x211_graph_automorphism"
+        "Hamilton.conjectures.X211.x211_graph_automorphism",
+        "Packing.conjectures.X294.x294_graph_automorphism"
       ],
       "family_id": "graph-symmetry",
       "milestone": "post-rc-library-wave"
@@ -1037,10 +1048,11 @@
     },
     "vertex_transitive": {
       "class": "candidate_family",
-      "reason": "vertex-transitive graphs; U2 = X211",
+      "reason": "vertex-transitive graphs; U2 = X211 = X294 (X294's packing-theory copy, body verbatim: packing-theory does not import Hamilton)",
       "members": [
         "Hamilton.conjectures.U2.vertex_transitive",
-        "Hamilton.conjectures.X211.x211_vertex_transitive"
+        "Hamilton.conjectures.X211.x211_vertex_transitive",
+        "Packing.conjectures.X294.x294_vertex_transitive"
       ],
       "family_id": "graph-symmetry",
       "milestone": "post-rc-library-wave"

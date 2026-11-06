@@ -11980,11 +11980,14 @@
    "audit_page": "todo"
   },
   "std_gruslys_conjecture_perfect_induced_h_packings_of": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x294-gruslys-perfect-induced-packings",
+   "package": "packing-theory",
+   "note": "Authored in X294.v:gruslys_perfect_induced_packing_statement. Gruslys' conjecture as Bonamy, Morrison and Scott state it (1710.07255v3 torus-final.tex l.104-106): G vertex-transitive, H an induced subgraph (some vertex set induces a copy of H) and |V(H)| dividing |V(G)| give n >= 1 and a partition of the vertices of the Cartesian power G^n into sets each inducing a copy of H (l.80, l.85-86). FALSE at the pin: Theorem th:unpackabletori (l.115-119) for C_k^m, k odd and not a prime power; no kernel disproof."
   },
   "std_gruslys_leader_tan_conjecture_hypercube_edge_dec": {
    "statement": "done",
