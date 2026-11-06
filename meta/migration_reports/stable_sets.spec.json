@@ -1031,6 +1031,16 @@
       "path": "chromatic-theory/theories/conjectures/grounding_X261.v",
       "name": "xe2_cochromatic_colouring",
       "note": "Wave X261 (Arthur, 2026-10-29): grounding_X261.v imports Chromatic.conjectures.XE2 and uses xe2_cochromatic_colouring in g261_cochromatic_at_mostP, the reflection of the wave's Boolean x261_cochromatic_at_most (erdos:625 and erdos:760: every colour class induces a complete or an empty graph). X261.v uses no tracked name."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/X295.v",
+      "name": "x29_normal_graph",
+      "note": "Wave X295 (2026-11-06): genuine use of X29's normal-graph predicate by name: X295's row studies:std_strong_normal_graph_conjecture_de_simone_k_rner (the Strong Normal Graph Conjecture, the companion of X29's Normal Graph Conjecture in record 1508.05487) writes \"strongly normal\" as forall T : {set G}, x29_normal_graph (induced T) (frozen here as X29Legacy.x29_normal_graph). X295.v copies no frozen body and depends on the predicate only through its name; declared as a cross-module consumer, as X288 declares its own."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_X295.v",
+      "name": "x29_normal_graph",
+      "note": "Wave X295 (2026-11-06): X295's grounding certificates use x29_normal_graph in their claims and in g295_complete_normal (a graph whose distinct vertices are all adjacent is normal), which unfolds the live predicate by conversion and closes its stable-set clause with coq-graph-theory's stable1 (re-exported by GTBase base; the live x29_stable_set unfolds to stable S); no frozen body is copied. Declared as a cross-module consumer with X295.v."
     }
   ],
   "distinct_variants": [
