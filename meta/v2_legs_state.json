@@ -13018,11 +13018,14 @@
    "audit_page": "todo"
   },
   "std_planar_hat_guessing_number_conjecture_bosek_et_a": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x292-planar-hat-guessing-max-four",
+   "package": "graph-theory-misc",
+   "note": "Authored in X292.v:planar_hat_guessing_max_four_statement. Bosek et al.'s conjecture as 2107.05995v2 states it (l.99-102): every planar graph (wagner_planar) has hat guessing number at most 4 and some planar graph wins with 4 colours (X99's vocabulary). FALSE at the pin: Theorem planar1 (l.104-107), a planar graph with hat guessing number 12. Pinned open, a literature item."
   },
   "std_planar_linear_arboricity_conjecture": {
    "statement": "done",
