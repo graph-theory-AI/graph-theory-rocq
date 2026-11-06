@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Forty-six
+corrections are applied explicitly (ERRATA below) since the review files predate them. Forty-seven
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -86,7 +86,10 @@ arXiv:1907.12091v1, Theorem 5). Their statements are frozen in migration familie
 restatus repair that lets exactly status and status_semantics change. The conjecture of Ossona de Mendez, Oum and
 Wood, behind wave X290, is proved by Liu (arXiv:2208.10729v3) with the connected tree-depth X290 encodes (Marc's
 answer to question 12: solved, with explicit qualification). Conjecture C of Las Vergnas and Meyniel on quasi-complete
-minors, behind wave X291, is refuted in its own record (arXiv:2103.10684v2, Theorem th:mainfull, for large t).
+minors, behind wave X291, is refuted in its own record (arXiv:2103.10684v2, Theorem th:mainfull, for large t). The
+conjecture of Bosek, Dudek, Farnik, Grytczuk and Mazur that the maximum hat guessing number of a planar graph is 4,
+behind wave X292, is refuted in its own record (Alon and Chizewer, arXiv:2107.05995v2, Theorem planar1: a planar graph
+with hat guessing number 12).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -541,6 +544,13 @@ ERRATA = [
      "Theorem th:mainfull (l.187-189) gives, for every eps > 0 and every large enough t, a graph that admits a "
      "quasi-K_t-minor but no K_((2/3 + eps)t)-minor. No explicit t is given (known for t <= 10, l.183-185), so there is "
      "no kernel disproof; wave X291 encodes the conjecture as stated."),
+    ("studies", "std_planar_hat_guessing_number_conjecture_bosek_et_a", "disproved",
+     "Literature: refuted in its own record by Alon and Chizewer, 'On the Hat Guessing Number of Graphs', "
+     "arXiv:2107.05995v2 (21 July 2021): main.tex l.100-102 report the conjecture of Bosek, Dudek, Farnik, Grytczuk "
+     "and Mazur that the maximum possible hat guessing number of a planar graph is 4, as the record states it, and "
+     "Theorem planar1 (l.104-107) gives a planar graph with hat guessing number 12 (l.177-180: two adjacent vertices "
+     "u, v and m = 66^144 adjacent pairs x_i, y_i, each adjacent to u and v). The graph is far too large for a kernel "
+     "disproof; wave X292 encodes the conjecture as stated."),
 ]
 
 
@@ -1149,7 +1159,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 46 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 47 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
