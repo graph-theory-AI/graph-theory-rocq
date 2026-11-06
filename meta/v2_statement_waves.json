@@ -14009,6 +14009,42 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Arthur (X295 wave verification, 2026-11-06)",
       "faithfulness_result": "Readback 2026-11-06 (verifier Arthur): 1/1 PASS against the pinned text and the source, at math/marcol-x295-20261106 = a9404735e7b951ace703f4257f2571f3e7ccbcb9 (7 commits on work/coordinator 45aae434, lit28's merge on AH69), after my design read ((495), FAITHFUL 1/1, no required change; packet x295-design-read-by-arthur f669210a) of x295-design-by-marcol r1 (83abada2). At a9404735e7b951ace703f4257f2571f3e7ccbcb9 X295.v (fda8df4c) and grounding_X295.v (a0e9f6aa) are the packet's byte for byte; waves.X295 = the packet's x295-wave.json; no helper. studies:std_strong_normal_graph_conjecture_de_simone_k_rner, encoded as stated: forall G : sgraph, (forall T : {set G}, x29_normal_graph (induced T)) <-> [/\\ ~ x29_has_induced_cycle G 5, ~ x29_has_induced_cycle G 7, ~ x29_has_induced_cycle (compl G) 5 & ~ x29_has_induced_cycle (compl G) 7]. Strongly normal is every induced subgraph normal (l.182-183) with X29's frozen x29_normal_graph (a list of cliques and a list of stable sets, each covering every vertex, every chosen pair meeting; l.87-96); T ranges over every vertex set, and the empty one changes nothing (the graph with no vertex is normal); the four clauses are the source's, with X29's x29_has_induced_cycle (an n-set inducing a graph isomorphic to GTBase's cycle_graph n) and compl G, the body of X29's x29_complement; the complement's C_5 clause is implied by G's (C_5 is self-complementary) and kept as printed. No lint finding, no allowlist entry. FALSE at the pin in its own record: Theorem 1.3's graph of girth at least 8 is not normal, while it has no induced C_5 or C_7 and its complement has none either (C_5 is self-complementary; the complement of C_7 has a triangle), so the if direction fails; the proof is probabilistic, so no kernel disproof; pinned open, a literature item. Grounding: hyp at K_2 (complete graphs are normal; no induced cycle longer than the graph); ntt ~ V /\\ (V -> S) with V = both sides for every graph, false at cycle_graph 5, which induces itself; g295_K0_both_sides the degenerate case. Metadata: source_hash 1/1 recomputed, equal; waves.X295 the only waves change, verifier fields empty before this; stable_sets.spec.json = the base + consumers.json's two cross_module_consumers entries (X295.v and grounding_X295.v name x29_normal_graph), nothing else in it; stable_sets.md = the dev run's written copy byte for byte (the report-drift commit after the run); library_primitives, the other migration reports, the lint allowlist, the helper classification and CORPUS_FEEDBACK unchanged; legs: the row done / done, note 416 = \"Authored in X295.v:<name>. \" + the wave note, no other legs entry changed; README 628 / 12 / 39 / 994 -> 629 / 12 / 39 / 993; LANDED gains X295 graph-theory-misc after X294 packing-theory. Dev run 1 (x295-dev-by-marcol 06c74dbe, -c OK, 46 listed = present): run-x295-1.sh 0e8d4f01 on 5c9963392cba3a8db05811a2da88f591246dbadc, JOB 09:14:23Z-10:30:11Z, RESULT PASS-WITH-EXPECTED, 31 STEP lines, 27 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields; W1 12/14 CHECKS (REJECTED on the two A3-field checks only: the audit + grounding contract, whose single error is the missing faithfulness_verified_by / faithfulness_result, so both grounding claims pass the contract, and the leg state without source_verified_by / _at; Print Assumptions clean on 1 statement + 2 grounding certificates; 10 exact-type probes); the builds have no Error line; W2 952 / 952 documented, reverse coverage 907 / 907; W3 1 probed, 0 FLAGGED; W4 0 active; A12 101 / 101 OK; written stable_sets.md (147 -> 153 recorded references, 540 -> 546 checks: the two consumer entries), committed after the run as a9404735 byte-identical to the run's copy, and the three generated files (rule 8, not committed); END HEAD 5c9963392cba3a8db05811a2da88f591246dbadc."
+    },
+    "X293": {
+      "phase": "X293",
+      "repo": "minor-theory",
+      "defines_file": "X293.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X293 (A3 verifier Marcol; routing Lancelot (541); selection x293-selection-by-arthur, design x293-design-by-arthur r0), branch math/arthur-x293-20261106, 2026-11-06",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x293-hadwiger-minor-closed-class",
+      "rows": {
+        "std_hadwiger_s_conjecture": {
+          "formal_name": "hadwiger_minor_closed_class_statement",
+          "source_hash": "0e851854984d16ea8158abffc3c4793f8d54d97b90abe98ca9dfc8494eb648ac",
+          "note": "Hadwiger's conjecture as its studies record 1710.02727 states it (v1, IslandsI4.tex l.61-63, Conjecture 1): for t >= 1 and a minor-closed class C (GTBase.minor_classes.minor_closed), every member of C is t-colourable iff K_(t+1) is not in C. The source's classes are proper (l.57); equivalent by g293_proper_equiv. Equivalent to X214's hadwiger_chromatic_clique_minor_statement (bm-041; grounding g293_equiv_X214). Open at the pin; known for t <= 5 (Hadwiger with K_6, 2512.20392v1 l.171-176).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g293_hmc_hyp_inhabited",
+              "claim": "g293_hmc_hyp_claim",
+              "references": [
+                "hadwiger_minor_closed_class_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g293_hmc_not_trivially_true",
+              "claim": "g293_hmc_ntt_claim",
+              "references": [
+                "hadwiger_minor_closed_class_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
