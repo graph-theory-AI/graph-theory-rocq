@@ -24990,13 +24990,13 @@
     ]
   },
   "counts": {
-    "files": 385,
-    "helpers": 2773,
-    "repeated_body_shapes": 152,
-    "repeated_normalized_names": 222,
-    "repeated_signature_shapes": 337,
-    "statements_excluded": 907,
-    "x_wave_helpers": 1612
+    "files": 386,
+    "helpers": 2776,
+    "repeated_body_shapes": 153,
+    "repeated_normalized_names": 223,
+    "repeated_signature_shapes": 338,
+    "statements_excluded": 908,
+    "x_wave_helpers": 1615
   },
   "groups": {
     "body_shape_hash": {
@@ -25144,6 +25144,10 @@
         "Digraph.conjectures.X166.x166_directed_path",
         "Digraph.conjectures.X179.x179_directed_path"
       ],
+      "37ef1a2d9038db5b2bdbd339036889ba814a91f26d3ca7a94625748df807480b": [
+        "Hom.conjectures.X227.x227_box_power",
+        "Packing.conjectures.X294.x294_box_power"
+      ],
       "3a0410cdba7e07ffb1040cf5f12c55bb7383316540d03fbee74e3951ee48e241": [
         "Digraph.conjectures.XE2.xe2_directed_cycle",
         "GTMisc.conjectures.XE1.xe1_rel_cycle"
@@ -25260,7 +25264,8 @@
       ],
       "5f55dcd49e0fcadd3cebad1d18d33f1bc6ac0bae46b8b04aadc804f19f4cc935": [
         "Hamilton.conjectures.U2.vertex_transitive",
-        "Hamilton.conjectures.X211.x211_vertex_transitive"
+        "Hamilton.conjectures.X211.x211_vertex_transitive",
+        "Packing.conjectures.X294.x294_vertex_transitive"
       ],
       "64d2e05a18387d1a816361661b70d3e053d44a1023f388975a4e8105b6ea718f": [
         "Cycle.conjectures.X24.x24_cycle_edge_seq",
@@ -26139,7 +26144,8 @@
       ],
       "eb5fcbdb2f89ca78586593647ab55012422f5a2b7c9e5d74ad43ab97607a950d": [
         "Hamilton.conjectures.U2.graph_automorphism",
-        "Hamilton.conjectures.X211.x211_graph_automorphism"
+        "Hamilton.conjectures.X211.x211_graph_automorphism",
+        "Packing.conjectures.X294.x294_graph_automorphism"
       ],
       "ebb08eec303b222e642ccec8d65af72c05e6223695a5020d850bc72faffeec4f": [
         "Chromatic.conjectures.X64.x64_delete_edge_graph",
@@ -26241,6 +26247,10 @@
         "Chromatic.conjectures.X219.x219_bipartition",
         "Digraph.conjectures.X46.x46_bipartition",
         "Digraph.conjectures.X53.x53_bipartition"
+      ],
+      "box_power": [
+        "Hom.conjectures.X227.x227_box_power",
+        "Packing.conjectures.X294.x294_box_power"
       ],
       "branch": [
         "Extremal.conjectures.X98.x98_branch",
@@ -26643,7 +26653,8 @@
       ],
       "graph_automorphism": [
         "Hamilton.conjectures.U2.graph_automorphism",
-        "Hamilton.conjectures.X211.x211_graph_automorphism"
+        "Hamilton.conjectures.X211.x211_graph_automorphism",
+        "Packing.conjectures.X294.x294_graph_automorphism"
       ],
       "has_cycle_length": [
         "Extremal.conjectures.X59.x59_has_cycle_length",
@@ -27247,7 +27258,8 @@
       ],
       "vertex_transitive": [
         "Hamilton.conjectures.U2.vertex_transitive",
-        "Hamilton.conjectures.X211.x211_vertex_transitive"
+        "Hamilton.conjectures.X211.x211_vertex_transitive",
+        "Packing.conjectures.X294.x294_vertex_transitive"
       ],
       "vertices_of_seq": [
         "Chromatic.conjectures.XE1.xe1_vertices_of_seq",
@@ -28960,7 +28972,8 @@
       ],
       "d77cad5d7e2380c85c4bdedd5e4e9c8bb3546ef5dc4a458414402e1b5775ccae": [
         "Hamilton.conjectures.U2.graph_automorphism",
-        "Hamilton.conjectures.X211.x211_graph_automorphism"
+        "Hamilton.conjectures.X211.x211_graph_automorphism",
+        "Packing.conjectures.X294.x294_graph_automorphism"
       ],
       "d9d52cce09399ebb0c1b84524a1e63be3a22adfa08e16cc3c739b958e135325a": [
         "Cycle.conjectures.XE1.xe1_covers_edges",
@@ -29085,6 +29098,7 @@
         "Packing.conjectures.U9.matching_cut",
         "Packing.conjectures.X15alone.bipartite",
         "Packing.conjectures.X178.x178_odd_semi_clique",
+        "Packing.conjectures.X294.x294_vertex_transitive",
         "Packing.conjectures.XE1.xe1_chordal",
         "Packing.conjectures.XE1.xe1_unimodal_independent_sequence",
         "Reconstruction.conjectures.U11.edge_reconstructible",
@@ -29351,6 +29365,10 @@
       "f4ceac35b1aaf044ed85efdcbfcf3808bddfe2ff68e56416eb24aa9adfee4248": [
         "Digraph.conjectures.chi_bounded.no_underlying_Kl",
         "Digraph.conjectures.heroes_dichotomy.no_induced_Kl"
+      ],
+      "f550b2c62a4638c2bf8899437ecd80e07d78a0613d5c2114bd5ba873f5e8622b": [
+        "Hom.conjectures.X227.x227_box_power",
+        "Packing.conjectures.X294.x294_box_power"
       ],
       "f5c25cbe6d8328e2fa0ad39f002b002fc42bd45860e24de7aa383fa23a7affb7": [
         "Digraph.conjectures.reals_growth.env_a",
@@ -82091,6 +82109,65 @@
       "qualified_name": "Packing.conjectures.X269.x269_tensor_prod",
       "signature": "(n : nat) : ('I_n.+1 -> sgraph) -> sgraph",
       "signature_shape_hash": "39c577718dc49d86d1df6356aa7ee2f544dd284a1ca96f09de98cae2ad233e38"
+    },
+    {
+      "body_hash": "eb5fcbdb2f89ca78586593647ab55012422f5a2b7c9e5d74ad43ab97607a950d",
+      "body_shape_hash": "eb5fcbdb2f89ca78586593647ab55012422f5a2b7c9e5d74ad43ab97607a950d",
+      "declaration_hash": "7540d0912d340d4516456274de34f6b901b3083ebcb9b20432dfac3d33d43379",
+      "direct_consumers": [
+        "Packing.conjectures.X294.x294_vertex_transitive"
+      ],
+      "kind": "Definition",
+      "line": 9,
+      "local_dependencies": [],
+      "name": "x294_graph_automorphism",
+      "normalized_name": "graph_automorphism",
+      "package": "packing-theory",
+      "path": "packing-theory/theories/conjectures/X294.v",
+      "phase": "X294",
+      "qualified_name": "Packing.conjectures.X294.x294_graph_automorphism",
+      "signature": "(G : sgraph) (f : G -> G) : Prop",
+      "signature_shape_hash": "d77cad5d7e2380c85c4bdedd5e4e9c8bb3546ef5dc4a458414402e1b5775ccae"
+    },
+    {
+      "body_hash": "a6ba42f7ca6d7e43f60fd009d9eb809c852d58e744a32a3f5d9f0e850c34665f",
+      "body_shape_hash": "5f55dcd49e0fcadd3cebad1d18d33f1bc6ac0bae46b8b04aadc804f19f4cc935",
+      "declaration_hash": "e075ca06edf2e6f18219bbe17797754c14db3ec808685d393874d50305ffa14f",
+      "direct_consumers": [
+        "Packing.conjectures.X294.gruslys_perfect_induced_packing_statement"
+      ],
+      "kind": "Definition",
+      "line": 17,
+      "local_dependencies": [
+        "x294_graph_automorphism"
+      ],
+      "name": "x294_vertex_transitive",
+      "normalized_name": "vertex_transitive",
+      "package": "packing-theory",
+      "path": "packing-theory/theories/conjectures/X294.v",
+      "phase": "X294",
+      "qualified_name": "Packing.conjectures.X294.x294_vertex_transitive",
+      "signature": "(G : sgraph) : Prop",
+      "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
+    },
+    {
+      "body_hash": "7cc40069f715080bebcff4f38af6c048a5efc83660aadf45e59eb17152128586",
+      "body_shape_hash": "37ef1a2d9038db5b2bdbd339036889ba814a91f26d3ca7a94625748df807480b",
+      "declaration_hash": "c4d714a83e153c69361c262e2aa815629d367941d5e80614db19222c31a90c77",
+      "direct_consumers": [
+        "Packing.conjectures.X294.gruslys_perfect_induced_packing_statement"
+      ],
+      "kind": "Fixpoint",
+      "line": 20,
+      "local_dependencies": [],
+      "name": "x294_box_power",
+      "normalized_name": "box_power",
+      "package": "packing-theory",
+      "path": "packing-theory/theories/conjectures/X294.v",
+      "phase": "X294",
+      "qualified_name": "Packing.conjectures.X294.x294_box_power",
+      "signature": "(G : sgraph) (t : nat) : sgraph",
+      "signature_shape_hash": "f550b2c62a4638c2bf8899437ecd80e07d78a0613d5c2114bd5ba873f5e8622b"
     },
     {
       "body_hash": "e4408f2db71d93537093e7dd2dd69aaf55568e65fbe5e1ab1bf5f48158bdd073",
