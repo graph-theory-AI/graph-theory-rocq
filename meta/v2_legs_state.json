@@ -1630,11 +1630,14 @@
    "note": "Authored in X266.v:hall_ratio_degree_weighted_fractional_chromatic_statement. Dvorak, Ossona de Mendez and Wu, Problem 5 of arXiv:1812.07327v2 (no1sub.tex l.161-164; pinned status solved), as its affirmative answer: some p, q > 0 such that for every F some G has chi_f(G) > F (X130), Hall ratio at most p / q over all subgraphs (x266_hall_ratio_le) and alpha_(deg_H)(H) >= (q / p) |E(H)| in every subgraph H (a stable set I of H with q |E(H)| <= p sum_(v in I) deg_H(v)). True at the pin: Steiner, arXiv:2411.16465v1, Theorem 1.5 (main.tex l.140-142), with c = 4 + delta."
   },
   "axv_1812_07327_02": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x297-bounded-expansion-hall-ratio",
+   "package": "minor-theory",
+   "note": "Authored in X297.v:bounded_expansion_shallow_minor_hall_ratio_statement. Problem 8 of Dvorak, Ossona de Mendez and Wu (1812.07327v2, no1sub.tex l.228-230), encoded as its affirmative answer: a class C has bounded expansion (some nat f1 with 2|E(H)| <= f1(r)|V(H)| for every shallow minor H at depth r of a member, internal_shallow_minor) iff some f6 bounds their Hall ratio (|V(K)| <= f6(r) alpha(K) for every subgraph K). The forward direction is clear (l.225); the converse is open at the pin."
   },
   "axv_1812_09215_00": {
    "statement": "todo",
