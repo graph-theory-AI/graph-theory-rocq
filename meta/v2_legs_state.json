@@ -12105,11 +12105,14 @@
    "audit_page": "todo"
   },
   "std_hadwiger_s_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x293-hadwiger-minor-closed-class",
+   "package": "minor-theory",
+   "note": "Authored in X293.v:hadwiger_minor_closed_class_statement. Hadwiger's conjecture as its studies record 1710.02727 states it (v1, IslandsI4.tex l.61-63, Conjecture 1): for t >= 1 and a minor-closed class C (GTBase.minor_classes.minor_closed), every member of C is t-colourable iff K_(t+1) is not in C. The source's classes are proper (l.57); equivalent by g293_proper_equiv. Equivalent to X214's hadwiger_chromatic_clique_minor_statement (bm-041; grounding g293_equiv_X214). Open at the pin; known for t <= 5 (Hadwiger with K_6, 2512.20392v1 l.171-176)."
   },
   "std_haj_s_conjecture_k_5": {
    "statement": "done",
