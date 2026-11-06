@@ -13417,11 +13417,14 @@
    "audit_page": "todo"
   },
   "std_strong_normal_graph_conjecture_de_simone_k_rner": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x295-strong-normal-graph",
+   "package": "graph-theory-misc",
+   "note": "Authored in X295.v:strong_normal_graph_statement. De Simone and Korner's conjecture as 1508.05487v8 states it (Conjecture 1.2, source.tex l.188-191): a graph is strongly normal (every induced subgraph normal, X29's x29_normal_graph) iff neither it nor its complement (compl) has an induced C_5 or C_7. FALSE at the pin: Theorem 1.3 (l.198-200), a non-normal graph of girth at least 8. Pinned open, a literature item."
   },
   "std_suboptimality_of_the_triangle_removal_exponent_c": {
    "statement": "todo",
