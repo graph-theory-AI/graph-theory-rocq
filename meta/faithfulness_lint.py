@@ -138,8 +138,10 @@ def lint_source(path: str, src: str, watchlist: dict[str, list[dict]]) -> list[F
                 "top-level quantification over a Prop-valued predicate can make the row "
                 "stronger, weaker, or vacuous")
 
+        # G may share its binder group with other variables ("forall G H : sgraph", "(G H : sgraph)"):
+        # a literal "G : sgraph" missed those, so the rule never fired on them (LINT-1, 2026-11-06).
         graph_forall = re.search(
-            r"\bforall\b[\s\S]{0,180}?\bG\s*:\s*sgraph\b", body
+            r"\bforall\b[\s\S]{0,180}?\bG\b(?:\s+[A-Za-z_][A-Za-z0-9_']*)*\s*:\s*sgraph\b", body
         )
         if graph_forall and re.search(r"\bexists\s+(?:\([^)]*\)|[A-Za-z_][A-Za-z0-9_']*)",
                                       body[graph_forall.end():]):
@@ -246,6 +248,21 @@ Definition fixture_statement : Prop :=
     if missing:
         print(f"faithfulness-lint self-test FAILED: missing rules {missing}", file=sys.stderr)
         return 1
+    # exists-after-graph-forall reads a binder group that names G together with other variables, also
+    # after other binders; without an existential it stays silent.
+    binders = {
+        "forall G H : sgraph, exists n : nat, n = n": True,
+        "forall (G H : sgraph), exists n : nat, n = n": True,
+        "forall (n : nat) (G H : sgraph), exists m : nat, m = n": True,
+        "forall G H : sgraph, True": False,
+    }
+    for body, want in binders.items():
+        source = f"Definition binder_statement : Prop :=\n  {body}.\n"
+        got = any(f.rule == "exists-after-graph-forall" for f in lint_source("fixture.v", source, {}))
+        if got != want:
+            print(f"faithfulness-lint self-test FAILED: exists-after-graph-forall on {body!r} is {got}, "
+                  f"want {want}", file=sys.stderr)
+            return 1
     # The guard window is the statement's own context, the 12 lines above its Definition: a note
     # in its own doc block counts (own_note), a note of the statement before it does not (borrowed).
     filler = "".join(f"Definition filler_{i} : nat := {i}.\n" for i in range(14))
@@ -281,6 +298,7 @@ Definition fixture_statement : Prop :=
               "allowlist entries of the scanned files", file=sys.stderr)
         return 1
     print(f"faithfulness-lint self-test OK: {len(expected)} rule families exercised; "
+          f"{len(binders)} graph binder forms; "
           "guard window anchored at the statement; --files judges only its files' allowlist entries")
     return 0
 
