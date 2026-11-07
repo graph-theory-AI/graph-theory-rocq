@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Fifty
+corrections are applied explicitly (ERRATA below) since the review files predate them. Fifty-four
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -95,6 +95,12 @@ that is not a prime power). The Normal Graph Conjecture of De Simone and Korner,
 Normal Graph Conjecture, behind wave X295, are refuted in their own record (Harutyunyan, Pastor and Thomasse,
 arXiv:1508.05487v8, Theorem 1.3: a graph of girth at least 8 that is not normal). X29's statement is frozen in the
 migration families complement and stable_sets, and each carries a reviewed restatus repair.
+Four unencoded studies rows from wave X297's selection pool were solved before the corpus pin, each in its own
+record: Seymour's conjecture on 2-connected graphs of large pathwidth (Huynh, Joret, Micek and Wood,
+arXiv:1801.01833v4, (1.2)); Kawarabayashi and Rossman's conjecture and Wood's conjecture on pathwidth and complete
+binary trees (Groenland, Joret, Nadara and Walczak, arXiv:2008.00779v4, Theorem 1.1); and Grytczuk's conjecture on
+the nonrepetitive chromatic number of graphs excluding a fixed minor (Dujmovic, Esperet, Joret, Walczak and Wood,
+arXiv:1904.05269v4, Theorem 3).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -561,7 +567,8 @@ ERRATA = [
      "isomorphic subgraphs', arXiv:1710.07255v3 (14 June 2020): torus-final.tex l.104-106 state Gruslys' conjecture "
      "(Conjecture 1.3 there) as the record states it, l.115 says it is false in general, and Theorem 1.5 (l.117-119) "
      "gives, for every odd k that is not a prime power, an m >= 1 and an induced subgraph H of C_k^m with |V(H)| "
-     "dividing k^m such that C_k^n has no perfect H-packing for any n; G = C_k^m is vertex-transitive and G^n = "
+     "dividing k^m such that C_k^n has no perfect H-packing for any n, hence no perfect induced one (an induced "
+     "H-packing is an H-packing, l.80); G = C_k^m is vertex-transitive and G^n = "
      "C_k^(mn). The smallest case, k = 15, takes an H of 81 vertices in C_15^2 and G = C_15^4 (the proof, l.364-375), "
      "and the claim covers every n, so there is no kernel disproof; wave X294 encodes the conjecture as stated."),
     ("studies", "std_normal_graph_conjecture_de_simone_k_rner", "disproved",
@@ -580,6 +587,31 @@ ERRATA = [
      "not normal, hence not strongly normal. Neither G nor its complement has an induced C_5 or C_7: G has no cycle "
      "shorter than 8, C_5 is self-complementary, and the complement of C_7 has triangles. The proof is probabilistic "
      "(l.203), so there is no kernel disproof; wave X295 encodes the conjecture as stated."),
+    ("studies", "std_seymour_s_pathwidth_conjecture", "solved",
+     "Literature: proved in its own record by Huynh, Joret, Micek and Wood, 'Seymour's conjecture on 2-connected "
+     "graphs of large pathwidth', arXiv:1801.01833v4 (5 February 2020): CombinatoricaSubmission.tex l.176 defines "
+     "apex-forests (H - v is a forest for some vertex v) and outerplanar graphs, (1.2) (SeymourConj, l.179-182) is the "
+     "row's statement, and l.188 says that the paper proves it (an independent proof is Dang and Thomas's, "
+     "arXiv:1712.04549). The environments share one counter per section (l.81-89)."),
+    ("studies", "std_kawarabayashi_rossman_conjecture", "solved",
+     "Literature: proved in its own record by Groenland, Joret, Nadara and Walczak, 'Approximating pathwidth for "
+     "graphs of small treewidth', arXiv:2008.00779v4 (8 December 2022; v3 corrected a serious error of v2, per its "
+     "arXiv comments): arxiv_v4.tex Theorem 1.1 (thm1, l.119-122) says every graph with treewidth t-1 has pathwidth "
+     "at most th+1 or contains a subdivision of a complete binary tree of height h+1; l.127 states Kawarabayashi and "
+     "Rossman's conjecture as the row does, and l.128 says Theorem 1.1 implies it with c = 2 (with t = k and h = k-1, "
+     "pathwidth above k(k-1)+1 forces treewidth at least k or such a subdivision of height k)."),
+    ("studies", "std_wood_s_conjecture_on_pathwidth_and_binary_tree_s", "solved",
+     "Literature: proved in its own record by Groenland, Joret, Nadara and Walczak, arXiv:2008.00779v4 (8 December "
+     "2022): arxiv_v4.tex l.129 names Wood's conjecture of this type (pathwidth at most f(t) * h), the row's "
+     "statement, and Theorem 1.1 (thm1, l.119-122) gives it with f(t) = t + 1: applied with t + 1 and h - 1, a graph "
+     "of treewidth t with no subdivision of a complete binary tree of height h has pathwidth at most "
+     "(t + 1)(h - 1) + 1 <= (t + 1) h when h >= 1, and for h = 0 such a graph has no vertex."),
+    ("studies", "std_grytczuk_s_conjecture_nonrepetitive_chromatic_nu", "solved",
+     "Literature: proved in its own record by Dujmovic, Esperet, Joret, Walczak and Wood, 'Planar graphs have bounded "
+     "nonrepetitive chromatic number', arXiv:1904.05269v4 (20 January 2022): "
+     "NonrepetitivePlanar-AiC-SecondRevision.tex Theorem 3 (MinorPi, l.113-116) is the row's statement (for every "
+     "graph X there is an integer k such that every X-minor-free graph G has pi(G) <= k), and l.106 says the result "
+     "for graphs excluding a fixed minor confirms Grytczuk's conjecture. The theorem counter is global (l.55-57)."),
 ]
 
 
@@ -1188,7 +1220,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 50 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 54 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
