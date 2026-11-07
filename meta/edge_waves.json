@@ -937,8 +937,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Lancelot (Claude Opus 5.5), 2026-11-07: minor-theory implications_X293.v (iff_sym of g293_equiv_X214, grounding_X293.v)",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Arthur (second reader of the X214 Hadwiger <=> X293 Hadwiger over minor-closed classes edge, 2026-11-07)",
+   "reviewed_at": "2026-11-07",
    "note": "Rocq-only edge (no corpus relation), left out of wave X293 for a separate edge item (Lancelot's (574)): the two rows are the same conjecture, and grounding_X293.v proves the equivalence (g293_equiv_X214). X214 => X293: K_(t+1) has chromatic number t+1, and in a minor-closed class without K_(t+1) a graph of chromatic number above t would have K_(t+1) as a minor (of its K_chi minor), hence in the class. X293 => X214: the graphs with no K_k minor form a minor-closed class without K_k, so their chromatic number is below k (k = 0 and 1 directly)."
   },
   "hadwiger_chromatic_clique_minor_statement->seagull_statement:implies": {
