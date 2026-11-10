@@ -14081,6 +14081,42 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Marcol (X297 wave verification, 2026-11-06)",
       "faithfulness_result": "Readback 2026-11-06 (verifier Marcol): 1/1 PASS against the pinned text and the source, at math/arthur-x297-20261106 = a80a3e0744ab78567786db9e89075d53e16c7cba (five commits on work/coordinator 5fbef4fe, the composed audit 72 regeneration after X293 and lit29), after my design read ((432), FAITHFUL 1/1, no required change; packet x297-design-read-by-marcol 8c6f354d) of x297-design-by-arthur r1 (41b0ccde). At a80a3e07 X297.v (4fc3f848) and grounding_X297.v (a9a1ed15) are the packet's byte for byte; waves.X297 = the packet's x297-wave.json (jq -S), the only waves change; no helper (helper_ownership {}, helper_sanity []). arxiv:1812.07327#02 (Problem 8), encoded as its affirmative answer: forall C : sgraph -> Prop, (exists f1 : nat -> nat, forall r G H, C G -> internal_shallow_minor G H r -> 2 * #|E(H)| <= f1 r * #|H|) <-> (exists f6 : nat -> nat, forall r G H K, C G -> internal_shallow_minor G H r -> has_subgraph H K -> #|K| <= f6 r * alpha([set: K])). Left side = bounded expansion (l.178-180): the average degree 2|E(H)|/|V(H)| cross-multiplied; a real f_1 and its nat ceiling (at least 0) bound the same classes; the empty H gives 0 <= 0. Right side = (vi) (l.220-224): the Hall ratio of H (l.47-48, l.92-94) bounded by f6(r) is |V(K)| <= f6(r) alpha(K) for every subgraph K of H, induced or not giving the same maximum, the empty K giving 0 <= 0. internal_shallow_minor G H r (Minor.foundations.shallow_minors) is \"H a depth-r shallow minor of the host G\": minor_rmap branch sets with a centre reaching every vertex of its set by a walk of at most r edges inside the set, which is the source's contracted subgraph of radius at most r (l.174-177; a BFS tree gives the converse); unused host vertices and edges are the deletions; has_subgraph H K is \"K isomorphic to a subgraph of the host H\" (GTBase common.v); host-first orders checked. C ranges over all predicates: both sides depend on a member only through its shallow minors, so isomorphism closure changes nothing; the empty class satisfies both. l.225: the forward direction is clear; the converse is open at the pin (2411.16465 states Problems 4 and 5 only). Grounding: hyp = the edgeless class satisfies both sides (f1 = 0: a shallow minor of an edgeless graph is edgeless, minor_rmap's edge clause; f6 = 1: its subgraphs are edgeless and an edgeless vertex set is stable, stabset_bound), the third conjunct is the statement at that class; ntt: g297_bsh_both (every class satisfies both sides) implies the row and fails at the class of all graphs (K_n its own depth-0 shallow minor, alpha(K_n) <= 1, so f6(0) >= n for every n); each claim names the statement (my emulation of gate_contracts; control g297_hall does not). Lint: quantified-prop-predicate and exists-after-graph-forall (the shipped LINT-1 regexes, re-run in perl; control X293: the first only), allowlisted: allowlist 68 -> 70 = base + the packet's two entries. Metadata at a80a3e07: README 630 / 12 / 39 / 992 -> 631 / 12 / 39 / 991; LANDED \"X297 minor-theory\" after \"X293 minor-theory\"; _CoqProject X297.v and grounding_X297.v after grounding_X293.v; legs: the row done / done, note \"Authored in X297.v:bounded_expansion_shallow_minor_hall_ratio_statement. \" + the wave note (495 <= 600), no other entry changed; no CORPUS_FEEDBACK change; commit messages c1-c3, c5 = the packet's msg files byte for byte. Consumers: no frozen name of any kind (2,372 entries of the 101 specs) and only the canonical short names has_subgraph (subgraph_of) and internal_shallow_minor (shallow_minors) in the two files, so no consumer entry and no committed report change. Dev run 1 (x297-dev-by-arthur 199c11ac, run-x297-1.sh ed0b1706 on a80a3e07): 29 STEP lines, 25 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields (W1 12 / 14, its contract error only the missing verdict, its leg-state error only the row's missing source_verified_by / _at); W2 954 / 954, W3 1 probed 0 FLAGGED, W4 0 active (70 allowlisted), G6 and A12 migration_report --all 101 / 101; no migration report changed, so no report-drift commit. Names: X297, the statement and the 13 g297_ names unused at 5fbef4fe."
+    },
+    "X296": {
+      "phase": "X296",
+      "repo": "minor-theory",
+      "defines_file": "X296.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X296 (A3 verifier Arthur; routing Lancelot (578); selection x296-selection-by-marcol, design x296-design-by-marcol r1), branch math/marcol-x296-20261107, 2026-11-07",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x296-lescure-meyniel-weak-immersion",
+      "rows": {
+        "std_lescure_meyniel_conjecture": {
+          "formal_name": "lescure_meyniel_weak_immersion_statement",
+          "source_hash": "7b0493297235fea6ae17a2f244e9e1f178f412f0c36d83e4d555fc78789cf8f4",
+          "note": "The Lescure-Meyniel conjecture as 2510.05893 states it (Fox, Pach and Suk, Conjecture 1.1, v1 israel2.tex l.103-107): every graph immerses K_(chi(G)), with U7's immersion (edge-disjoint walks that may pass through branch vertices: the weak immersion, l.82-101). Equivalent to U7's coloring_and_immersion_statement (g296_equiv_U7; a CORPUS_FEEDBACK item records the studies row as that row's conjecture). Open at the pin; verified for 4 <= k <= 6 (DeVos, Kawarabayashi, Mohar and Okamura).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g296_lm_hyp_inhabited",
+              "claim": "g296_lm_hyp_claim",
+              "references": [
+                "lescure_meyniel_weak_immersion_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g296_lm_not_trivially_true",
+              "claim": "g296_lm_ntt_claim",
+              "references": [
+                "lescure_meyniel_weak_immersion_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
