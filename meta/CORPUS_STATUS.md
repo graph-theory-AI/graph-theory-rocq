@@ -135,7 +135,7 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Conjecture dependency graph
 
-- **150 edges** — by status {'candidate': 32, 'conditional': 2, 'refuted-direction': 32, 'verified': 84}, by kind {'equiv': 7, 'implies': 143, 'refutes': 0, 'specializes': 0}; 102 Qed-proved relative theorems.
+- **151 edges** — by status {'candidate': 32, 'conditional': 2, 'refuted-direction': 32, 'verified': 85}, by kind {'equiv': 8, 'implies': 143, 'refutes': 0, 'specializes': 0}; 103 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
   - `asymmetric_bipartite_list_colouring_statement` implies `list_chromatic_number_and_maximum_degree_of_bipartit_statement` (atlas/implications_A1.v)
   - `bajnok_brinkmann_six_exceptional_graphs_statement` implies `locke_finitely_many_statement` (atlas/implications_X287.v)
@@ -145,6 +145,7 @@ Area-local foundations (each area builds these on top of `base`):
   - `circular_flow_numbers_of_r_graphs_statement` implies `circular_flow_number_of_regular_class_1_graphs_statement` (cycle-theory/implications_D1.v)
   - `circular_flow_numbers_of_r_graphs_statement` implies `three_flow_statement` (cycle-theory/implications_D1.v)
   - `clique_ramsey_polylog_lower_statement` implies `ramsey_four_cubic_polylog_lower_statement` (extremal-graph-theory/implications_X241.v)
+  - `coloring_and_immersion_statement` equiv `lescure_meyniel_weak_immersion_statement` (minor-theory/implications_X296.v)
   - `cycle_double_covers_containing_predefined_2_regular_statement` implies `cycle_double_cover_statement` (cycle-theory/implications_U6.v)
   - `delta122_hero_k1_plus_dipath2_free_statement` implies `delta122_hero_oriented_complete_multipartite_statement` (digraph-theory/implications_X221.v)
   - `delta122_hero_oriented_complete_multipartite_statement` implies `delta122_hero_k1_plus_dipath2_free_statement` (digraph-theory/implications_X221.v)
@@ -221,13 +222,13 @@ Area-local foundations (each area builds these on top of `base`):
   - `tree_decomposition_leaf_edge_connected_statement` implies `barat_thomassen_tree_decomposition_statement` (atlas/implications_A1.v)
   - `triangle_free_min_degree_log_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
   - `triangle_free_planar_large_induced_two_degenerate_statement` implies `triangle_free_planar_five_sixths_two_degenerate_statement` (chromatic-theory/implications_X219.v)
-- Edge evidence: **84 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
+- Edge evidence: **85 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
 - Conditional edges (with the external assumptions they are relative to):
   - `bounded_layered_treewidth_bounded_queue_number_statement` implies `planar_graphs_bounded_queue_number_statement` — external: `external_layered_treewidth_planar_statement` (atlas/implications_A1.v)
   - `reconstruction_statement` implies `edge_reconstruction_statement` — external: `external_whitney_line_inversion_statement` (reconstruction-theory/implications_U11.v)
 - Edge legs (overlay `edges` state over the non-alias rows of each corpus; derived from the evidence above by `meta/sync_edge_legs.py`):
-  - **opg**: 40 done · 8 partial · 0 blocked · 179 todo  (227 rows)
-  - **v2**: 89 done · 5 partial · 0 blocked · 1579 todo  (1673 rows)
+  - **opg**: 41 done · 8 partial · 0 blocked · 178 todo  (227 rows)
+  - **v2**: 90 done · 5 partial · 0 blocked · 1578 todo  (1673 rows)
 
 ### Documented non-edges (32 `refuted-direction`)
 
@@ -292,7 +293,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 > Programme plan: `meta/V2_FULL_CORPUS_PLAN.md`. A growing corpus: `todo` rows are expected until the M-V2-STATEMENT-COMPLETE release; the gate here checks consistency, not completion.
 
 - **1790 tracked rows** — by corpus tag: arxiv 768, arxiv-studied 568, bm 38, derived 138, erdos 277, others 1; **117 alias rows** (no statement owed).
-- Statement legs over the 1673 non-alias rows: **632 done** · 12 partial · 39 blocked · 990 todo.
+- Statement legs over the 1673 non-alias rows: **634 done** · 12 partial · 39 blocked · 988 todo.
 
 | v2 phase | done | partial | blocked | todo | total |
 |---|--:|--:|--:|--:|--:|
@@ -514,6 +515,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X295 | 1 | 0 | 0 | 0 | 1 |
 | X296 | 1 | 0 | 0 | 0 | 1 |
 | X297 | 1 | 0 | 0 | 0 | 1 |
+| X298 | 2 | 0 | 0 | 0 | 2 |
 | X3 | 13 | 0 | 0 | 0 | 13 |
 | X30 | 1 | 0 | 0 | 0 | 1 |
 | X31 | 1 | 0 | 0 | 0 | 1 |
