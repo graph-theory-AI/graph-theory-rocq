@@ -12358,11 +12358,14 @@
    "audit_page": "todo"
   },
   "std_kawarabayashi_rossman_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x302-kawarabayashi-rossman-pathwidth",
+   "package": "minor-theory",
+   "note": "Authored in X302.v:kawarabayashi_rossman_pathwidth_statement. Kawarabayashi and Rossman's conjecture as 2008.00779v4 states it (Groenland, Joret, Nadara and Walczak, arxiv_v4.tex l.127), with the record's definitions (l.182-203): pathwidth above a * k^c (not pathwidth_at_most; Omega's constant a existential beside c), treewidth at least k (tw_ge), or a subdivision of the complete binary tree of height k (heap-indexed; has_subdivision). Solved in the record: Theorem 1.1 (l.119-122) with t <= k, h = k - 1 gives c = 2, a = 1 (l.128; lit30's ERRATA tuple)."
   },
   "std_keevash_mubayi_sudakov_verstra_te_question_on_ra": {
    "statement": "todo",
