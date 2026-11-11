@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Fifty-four
+corrections are applied explicitly (ERRATA below) since the review files predate them. Fifty-six
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -101,6 +101,12 @@ arXiv:1801.01833v4, (1.2)); Kawarabayashi and Rossman's conjecture and Wood's co
 binary trees (Groenland, Joret, Nadara and Walczak, arXiv:2008.00779v4, Theorem 1.1); and Grytczuk's conjecture on
 the nonrepetitive chromatic number of graphs excluding a fixed minor (Dujmovic, Esperet, Joret, Walczak and Wood,
 arXiv:1904.05269v4, Theorem 3).
+Reed and Seymour's question whether every graph has a chordal partition with bipartite parts, behind wave X299, is
+answered negatively in its own record (Scott, Seymour and Wood, arXiv:1707.04964v2, Theorem NoChordal at k = 3).
+The conjecture of Alon, Grytczuk, Haluszczak and Riordan that planar graphs have bounded nonrepetitive chromatic
+number, behind wave X23, is proved in its own record (Dujmovic, Esperet, Joret, Walczak and Wood, arXiv:1904.05269v4,
+Theorem 1: pi(G) <= 768). X23's statement is frozen in the migration family simple_path, which carries a reviewed
+restatus repair.
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -612,6 +618,22 @@ ERRATA = [
      "NonrepetitivePlanar-AiC-SecondRevision.tex Theorem 3 (MinorPi, l.113-116) is the row's statement (for every "
      "graph X there is an integer k such that every X-minor-free graph G has pi(G) <= k), and l.106 says the result "
      "for graphs excluding a fixed minor confirms Grytczuk's conjecture. The theorem counter is global (l.55-57)."),
+    ("studies", "std_reed_seymour_chordal_partition_question", "disproved",
+     "Literature: answered negatively in its own record by Scott, Seymour and Wood, 'Bad News for Chordal Partitions', "
+     "arXiv:1707.04964v2 (11 April 2018): BadNews.tex l.98 defines partitions, quotients and chordal partitions as the "
+     "record does, l.100-103 state Reed and Seymour's question (Question ChordalPartition) as the record does, l.105 "
+     "says the paper answers it in the negative, and Theorem NoChordal (l.107-112) gives, for every k >= 1, a graph G "
+     "such that every chordal partition of G has a part containing K_k (as an induced subgraph, l.96); at k = 3 that "
+     "part has a triangle, so it is not bipartite. The construction is recursive (Lemma ChordalWork, l.159-219; at "
+     "k = 3 it contains a graph of 4,920 vertices) and the claim covers every chordal partition, so there is no kernel "
+     "disproof; wave X299 encodes the question's affirmative answer as stated."),
+    ("studies", "std_alon_grytczuk_ha_uszczak_riordan_conjecture", "solved",
+     "Literature: proved in its own record by Dujmovic, Esperet, Joret, Walczak and Wood, 'Planar graphs have bounded "
+     "nonrepetitive chromatic number', arXiv:1904.05269v4 (20 January 2022): "
+     "NonrepetitivePlanar-AiC-SecondRevision.tex l.96 says the question whether planar graphs have bounded "
+     "nonrepetitive chromatic number was first asked by Alon, Grytczuk, Haluszczak and Riordan, l.98 says the paper "
+     "proves it, and Theorem 1 (PlanarPi, l.100-103) gives pi(G) <= 768 for every planar graph G. The theorem counter "
+     "is global (l.55-57)."),
 ]
 
 
@@ -1220,7 +1242,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 54 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 56 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
