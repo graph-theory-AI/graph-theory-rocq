@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2261,
-      "cross_file_files": 1119,
+      "cross_file_declarations": 2262,
+      "cross_file_files": 1120,
       "implicit_use": 3,
       "packages_without_project": [
         "graph-theory-base"
@@ -20189,12 +20189,14 @@
             "minor-theory/theories/conjectures/grounding_U7.v:<line 24>",
             "minor-theory/theories/conjectures/grounding_U7.v:path_edges_nil",
             "minor-theory/theories/conjectures/grounding_U7.v:path_edges_pair",
+            "minor-theory/theories/conjectures/grounding_X296.v:<line 50>",
             "minor-theory/theories/migration/clique_counts.v:<line 19>",
             "minor-theory/theories/migration/clique_counts.v:<line 26>"
           ],
           "files": [
             "extremal-graph-theory/theories/migration/edge_count.v",
             "minor-theory/theories/conjectures/grounding_U7.v",
+            "minor-theory/theories/conjectures/grounding_X296.v",
             "minor-theory/theories/migration/clique_counts.v"
           ],
           "statements": [],
@@ -20217,6 +20219,7 @@
         "require_chain": {
           "extremal-graph-theory/theories/migration/edge_count.v": "unknown",
           "minor-theory/theories/conjectures/grounding_U7.v": "unknown",
+          "minor-theory/theories/conjectures/grounding_X296.v": "unknown",
           "minor-theory/theories/migration/clique_counts.v": "no"
         },
         "same_file": {
@@ -25002,12 +25005,12 @@
     ]
   },
   "counts": {
-    "files": 389,
+    "files": 390,
     "helpers": 2776,
     "repeated_body_shapes": 153,
     "repeated_normalized_names": 223,
     "repeated_signature_shapes": 338,
-    "statements_excluded": 911,
+    "statements_excluded": 912,
     "x_wave_helpers": 1615
   },
   "groups": {
