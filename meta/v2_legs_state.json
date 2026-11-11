@@ -5495,11 +5495,14 @@
    "audit_page": "todo"
   },
   "axv_2504_07764_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x298-rooted-complete-minors",
+   "package": "minor-theory",
+   "note": "Authored in X298.v:rooted_minor_free_unrealizable_colourings_statement. Conjecture 4 of Dvorak and Swart (2504.07764v1, main.tex l.102-105): for k >= 3 some X = 'I_n, placed in G injectively, and some set C of k-colourings of X closed under colour permutations (l.38-41) such that no X-rooted-K_k-minor-free graph (minor_rmap, every branch set meeting X, l.75-83) realizes C (l.42). Neither the set of all colourings nor the empty set is a witness (grounding). Open at the pin."
   },
   "axv_2504_08266_00": {
    "statement": "todo",
@@ -13419,11 +13422,14 @@
    "audit_page": "todo"
   },
   "std_strong_hadwiger_s_conjecture_holroyd": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x298-rooted-complete-minors",
+   "package": "minor-theory",
+   "note": "Authored in X298.v:holroyd_strong_hadwiger_statement. Holroyd's Strong Hadwiger conjecture as 2209.00594 states it (Martinsson and Steiner, Conjecture 1.2, v1 source.tex l.137-139): if S is colorful (every proper chi(G)-colouring has all chi(G) colours on S, l.133), G has a K_(chi(G)) minor (minor_rmap, l.122) whose branch sets all meet S. Open at the pin; known for t <= 4 (Holroyd t <= 3, the record t = 4)."
   },
   "std_strong_normal_graph_conjecture_de_simone_k_rner": {
    "statement": "done",
