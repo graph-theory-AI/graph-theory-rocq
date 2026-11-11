@@ -14175,6 +14175,42 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Marcol (X298 wave verification, 2026-11-11)",
       "faithfulness_result": "Readback 2026-11-11 (verifier Marcol): 2/2 PASS against the pinned texts and the sources, at math/arthur-x298-20261107 = fa371b058c10a737cb7d08d88a794213830222c5 (five commits on work/coordinator f51a5c9e, X296's merge; rebuilt from 9d3f1762 on 48a8a018: range-diff c5 patch-equal, c1-c4 differing only in context (the _CoqProject anchor, LANDED after X296, the waves-file context) and the README counts; the chain diffs of X298.v, grounding_X298.v, the waves, the allowlist, the legs and _CoqProject are equal), after my design read ((440), FAITHFUL 2/2 with one wording change R1; packet x298-design-read-by-marcol 29dbbf6d) of x298-design-by-arthur r1 (de6e370b) and my re-read (441) of r2 (x298-design-r2-by-arthur 1127260f: R1 resolved, comments only). At fa371b05 X298.v (6646787f) and grounding_X298.v (fcc02ec8) are the r2 packet's byte for byte; waves.X298 = the packet's x298-wave.json (jq -S), the only waves change; no helper (helper_ownership {}, helper_sanity []). Row 1, studies:std_strong_hadwiger_s_conjecture_holroyd (holroyd_strong_hadwiger_statement), encoded as stated: forall (G : sgraph) (S : {set G}), (forall col : G -> 'I_(chi([set: G])), proper_colouring col -> forall i, exists2 s, s \\in S & col s = i) -> exists phi : 'K_(chi([set: G])) -> {set G}, minor_rmap phi /\\ (forall i, phi i :&: S != set0). t is chi(G); colorful (l.133) is every proper colouring with the colour set [chi(G)] using every colour on S; minor_rmap asks for non-empty, connected (induced), pairwise disjoint branch sets with an edge between the images of adjacent vertices, and the vertices of K_t are pairwise adjacent, so it is l.122's K_t-minor, rooted when every branch set meets S; chi = 0 only for the graph with no vertex, answered by the empty model. Known for t <= 4 (l.141 and the paper's Theorem 1.3); open at the pin. Row 2, arxiv:2504.07764#00 (rooted_minor_free_unrealizable_colourings_statement), encoded as stated: forall k, 3 <= k -> exists (n : nat) (C : {set {ffun 'I_n -> 'I_k}}), C closed under [ffun j => pi (f j)] for every bijective pi /\\ forall (G : sgraph) (x : 'I_n -> G), injective x -> ~ (exists phi : 'K_k -> {set G}, minor_rmap phi /\\ forall i, phi i :&: [set x j | j in 'I_n] != set0) -> ~ (forall f, f \\in C <-> exists2 col : G -> 'I_k, proper_colouring col & forall j, col (x j) = f j). X is chosen before G and lies in V(G) for every realizing graph, so it is finite: 'I_n placed injectively; [k] = 'I_k and the permutations are the bijections of 'I_k (l.38-41); realizes is l.42's iff through the placement; X-rooted-K_k-minor-free is the absence of a minor_rmap of K_k whose branch sets all meet the image (l.75-83: the vertex set of a connected subgraph induces a connected graph and conversely, the edge condition uses only the vertex sets, and a rooted branch set is non-empty); the quantifier order is l.103-104's. Open at the pin; l.99-101: Holroyd's conjecture (row 1) implies it. Grounding: row 1 hyp at K_1 with S = V(K_1) (one colour, met on S; the one vertex is the model), ntt ~ V /\\ (V -> S) with V = every vertex set roots a K_chi model (colourfulness dropped), false at K_1 with S empty; row 2 hyp at k = 3 and n = 1 with the set of all colourings, placed in K_1, which has no K_3 model, ntt ~ V /\\ (V -> S) with V = a witness that is empty or the set of all colourings, refuted for every n at k = 3 by the edgeless graph on X (it realizes every colouring and has no rooted K_k model for k >= 2) and by X beside a disjoint K_4 (no proper 3-colouring, so it realizes the empty set; a rooted branch set stays on the edgeless side, where adjacency needs an edge). Each of the four claims names its statement (my emulation of gate_contracts; control g298_ds_trivial_witness does not), and each Theorem is stated at its claim; my MCP build at the design read (r1; r2 differs in comments only): BUILD OK, 14 proof blocks, Print Assumptions closed for all four certificates. Lint: exists-after-graph-forall on each row (my emulation of the shipped rules), allowlisted: 70 -> 72 = base + the packet's two entries, nothing else in the file changes. Metadata at fa371b05: source hashes recomputed (row 1 sha256(statement_text) f050742c, row 2 sha256(statement + newline + context) of extraction [0] 542098a8), equal to the manifest at f51a5c9e and to the wave; README 632 / 12 / 39 / 990 -> 634 / 12 / 39 / 988; LANDED gains \"X298 minor-theory\" after \"X296 minor-theory\", the Makefile otherwise f51a5c9e's; _CoqProject gains X298.v and grounding_X298.v after grounding_X296.v; legs: both rows done / done, commit x298-rooted-complete-minors, package minor-theory, notes = (\"Authored in X298.v:\" + the formal name + \". \" + the wave note)[:600] (411 and 477 characters), no other entry changed; no CORPUS_FEEDBACK change; the commit messages of c1-c3 and c5 = the packet's msg files byte for byte, c4 the generated README-counts message. Consumers: no frozen name of any kind (2,372 entries of the 101 specs) in either file, only the canonical short names minor_rmap (minor_models), proper_colouring, compl (complement) and sjoin (disjoint_union); no migration spec changes, so no committed report change. Names: X298, the two statements and the 25 g298_ names unused at f51a5c9e. Dev run 1 (x298-dev-by-arthur 451999d4, run-x298-1.sh 9b24b78b on 9d3f1762, before the rebuild): 29 STEP lines, 25 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields (W1 12 / 14: the contract's single error the missing verdict, the leg state only the two rows' missing source_verified_by / _at; Print Assumptions clean on 2 statements + 4 grounding certificates; 20 exact-type probes); W2 956 / 956 (reverse 911 / 911), W3 2 probed 0 FLAGGED, W4 0 active (72 allowlisted), G6 and A12 migration_report --all 101 / 101; no migration report changed, so no report-drift commit. The real run on fa371b05 is the first full gate run of the rebuilt chain."
+    },
+    "X299": {
+      "phase": "X299",
+      "repo": "graph-theory-misc",
+      "defines_file": "X299.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X299 (A3 verifier Arthur; routing Lancelot (638), (639); selection x299-selection-by-marcol, design x299-design-by-marcol r1), branch math/marcol-x299-20261111, 2026-11-11",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x299-reed-seymour-chordal-partition",
+      "rows": {
+        "std_reed_seymour_chordal_partition_question": {
+          "formal_name": "reed_seymour_chordal_partition_statement",
+          "source_hash": "11f4907524881a7312fc893cb0d7ed1f07fd624ab6b9bef1b415d71d1023f26c",
+          "note": "Reed and Seymour's question as 1707.04964v2 states it (Question 1, BadNews.tex l.100-103), encoded as its affirmative answer with the record's definitions (l.98): a partition of V(G) into connected induced parts (the branch sets of a minor_rmap that cover V(G)) whose quotient (the supplied graph H, with exactly the parts' adjacencies) is chordal (chordal_by_cycles), every part bipartite. Answered NO at the pin: Theorem NoChordal (l.107-112), a part containing K_3. Pinned open, a literature item.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g299_hyp_inhabited",
+              "claim": "g299_hyp_claim",
+              "references": [
+                "reed_seymour_chordal_partition_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g299_not_trivially_true",
+              "claim": "g299_ntt_claim",
+              "references": [
+                "reed_seymour_chordal_partition_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
