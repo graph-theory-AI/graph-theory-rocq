@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py simple_path --details /tmp/migr
 
 - Canonical: `GTBase.walks_paths.seq_simple_path`.
 - Baseline: `95cba2c0a2a75104de2c8d0c29ee952da419b9c1`.
-- Scope: 4 helpers, 5 statements, 23 frozen objects, 53 recorded references.
-- Source checks: 183/183 pass; consistent.
+- Scope: 4 helpers, 5 statements, 23 frozen objects, 54 recorded references.
+- Source checks: 184/184 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
