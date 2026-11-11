@@ -269,6 +269,20 @@
    "reviewed_at": "2026-10-27",
    "note": "Rocq-only edge (no corpus relation), stated in X241.v's Notes: erdos:986 at k = 4 gives c, p > 0 and n0 with n^4 <= p * R(4, n) * n * (trunc_log 2 n)^c for n >= n0; for n >= max(n0, 1) the factor n cancels, which is erdos:166's k^3 <= p * R(4, k) * (trunc_log 2 k)^c with the same c and p."
   },
+  "coloring_and_immersion_statement->lescure_meyniel_weak_immersion_statement:equiv": {
+   "gc": null,
+   "tier": "T1",
+   "wave": "E7",
+   "host": "minor-theory",
+   "state": "verified",
+   "proof": "coloring_and_immersion_equiv_lescure_meyniel_weak_immersion",
+   "external": [],
+   "reason": "",
+   "proved_by": "Marcol (Claude Opus 5.5), 2026-11-11: minor-theory implications_X296.v (iff_sym of g296_equiv_U7, grounding_X296.v)",
+   "reviewed_by": "Lancelot (second reader of the U7 coloring and immersion <=> X296 Lescure-Meyniel weak immersion edge, 2026-11-11)",
+   "reviewed_at": "2026-11-11",
+   "note": "Rocq-only edge (no corpus relation), routed as a separate edge item after wave X296 (Lancelot's (624)): the two rows are the same conjecture (CORPUS_FEEDBACK item 94), and grounding_X296.v proves the equivalence (g296_equiv_U7). U7 => X296: U7 at t = chi(G) gives the K_(chi(G)) immersion when chi(G) > 0, and every graph immerses K_0. X296 => U7: an immersion of K_(chi(G)) restricts to one of K_t for t <= chi(G) (g296_immersion_K_le)."
+  },
   "conj2_1605_statement->graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement:equiv": {
    "gc": "e010",
    "tier": "T4",

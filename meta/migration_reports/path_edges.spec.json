@@ -567,6 +567,11 @@
       "path": "minor-theory/theories/conjectures/grounding_X296.v",
       "name": "path_edges",
       "note": "Wave X296 (2026-11-06): g296_immersion_refl unfolds path_edges by name (the edge set of a one-edge walk [:: u; v]); no frozen body is copied. Declared as a cross-module consumer with X296.v."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X296.v",
+      "name": "coloring_and_immersion_statement",
+      "note": "Edge item edge-x296 (2026-11-11, Lancelot's (624)): coloring_and_immersion_equiv_lescure_meyniel_weak_immersion names U7's coloring_and_immersion_statement (the Open Problem Garden row coloring_and_immersion) in its type, as the equivalence edge U7 <=> X296 (iff_sym of g296_equiv_U7); no frozen body is copied. Declared as a cross-module consumer, as grounding_X296.v declares its own."
     }
   ],
   "distinct_variants": [
