@@ -17,20 +17,20 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 153,
+  "edges": 154,
   "by_status": {
    "candidate": 32,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 87
+   "verified": 88
   },
   "by_kind": {
    "equiv": 8,
-   "implies": 145,
+   "implies": 146,
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 105
+  "proved_theorems": 106
  },
  "edges": [
   {
@@ -787,6 +787,19 @@
    "external": [],
    "sources": [
     "chromatic-theory/implications_X213.v"
+   ]
+  },
+  {
+   "from": "grytczuk_minor_free_nonrepetitive_statement",
+   "to": "planar_bounded_nonrepetitive_chromatic_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "",
+   "proof": "grytczuk_minor_free_nonrepetitive_implies_planar_bounded_nonrepetitive_chromatic",
+   "note": "Rocq-only edge (no corpus relation), routed after wave X300 (Lancelot's (667)): X300 at X = K_5, since wagner_planar excludes a K_5 minor; the bound k becomes k + 1 colours by widen_ord (injective, so the halves stay different), and take h (drop h p) = drop h p for a path on 2h vertices.",
+   "external": [],
+   "sources": [
+    "graph-theory-misc/implications_X300.v"
    ]
   },
   {
