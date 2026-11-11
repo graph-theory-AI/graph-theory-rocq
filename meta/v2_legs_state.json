@@ -12006,11 +12006,14 @@
    "note": "Authored in X269.v:hypercube_edge_decomposition_statement. The Gruslys-Leader-Tan conjecture (Gruslys, arXiv:1611.02021v1, Conjecture 11; pinned open), encoded as stated: every subgraph H of Q_k (k >= 1) with an edge (non-empty, the edge-cover reading) edge-decomposes some Q_n, n >= 1. FALSE at the pin: Bonamy, Morrison and Scott, arXiv:1710.07255v3, Theorem 1.7 (k >= 5, Q_(k-1) <= H <= Q_k)."
   },
   "std_grytczuk_s_conjecture_nonrepetitive_chromatic_nu": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x300-grytczuk-nonrepetitive",
+   "package": "minor-theory",
+   "note": "Authored in X300.v:grytczuk_minor_free_nonrepetitive_statement. Grytczuk's conjecture as 1904.05269v4 proves it (Dujmovic, Esperet, Joret, Walczak and Wood, Theorem 3, l.113-116): for every graph X some k bounds pi of every X-minor-free graph (~ minor G X), with the record's definitions (l.85-86): a colouring into 'I_k is nonrepetitive when no path on 2t vertices (seq_simple_path, t > 0) has the same colour sequence on its two halves (take t, drop t). Pinned solved (lit30)."
   },
   "std_guo_kang_zwaneveld_conjecture": {
    "statement": "done",
