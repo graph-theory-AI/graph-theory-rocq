@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2262,
-      "cross_file_files": 1120,
+      "cross_file_declarations": 2264,
+      "cross_file_files": 1122,
       "implicit_use": 3,
       "packages_without_project": [
         "graph-theory-base"
@@ -22261,6 +22261,8 @@
             "extremal-graph-theory/theories/migration/edge_count.v:skokan_thoma_forcing_graph_characterisation_statement",
             "extremal-graph-theory/theories/migration/min_degree_at_least.v:bipartite_induced_min_degree_at_least",
             "extremal-graph-theory/theories/migration/stable_sets.v:erdos_73_statement",
+            "graph-theory-misc/theories/conjectures/X299.v:reed_seymour_chordal_partition_statement",
+            "graph-theory-misc/theories/conjectures/grounding_X299.v:g299_partition",
             "hamiltonicity-theory/theories/conjectures/U2.v:barnettes_statement",
             "hamiltonicity-theory/theories/conjectures/X211.v:grotschel_no_bipartite_hypotraceable_statement",
             "hamiltonicity-theory/theories/conjectures/grounding_U2.v:bipartite_K2",
@@ -22319,6 +22321,8 @@
             "extremal-graph-theory/theories/migration/edge_count.v",
             "extremal-graph-theory/theories/migration/min_degree_at_least.v",
             "extremal-graph-theory/theories/migration/stable_sets.v",
+            "graph-theory-misc/theories/conjectures/X299.v",
+            "graph-theory-misc/theories/conjectures/grounding_X299.v",
             "hamiltonicity-theory/theories/conjectures/U2.v",
             "hamiltonicity-theory/theories/conjectures/X211.v",
             "hamiltonicity-theory/theories/conjectures/grounding_U2.v",
@@ -22357,6 +22361,7 @@
             "extremal-graph-theory/theories/migration/min_degree_at_least.v:large_girth_min_degree_bipartite_induced_statement",
             "extremal-graph-theory/theories/migration/min_degree_at_least.v:min_degree_forces_large_clique_or_bipartite_induced_statement",
             "extremal-graph-theory/theories/migration/stable_sets.v:erdos_73_statement",
+            "graph-theory-misc/theories/conjectures/X299.v:reed_seymour_chordal_partition_statement",
             "hamiltonicity-theory/theories/conjectures/U2.v:barnettes_statement",
             "hamiltonicity-theory/theories/conjectures/X211.v:grotschel_no_bipartite_hypotraceable_statement",
             "minor-theory/theories/conjectures/X5.v:bipartite_average_degree_five_max_six_k5_minor_statement",
@@ -22404,6 +22409,8 @@
           "extremal-graph-theory/theories/migration/edge_count.v": "unknown",
           "extremal-graph-theory/theories/migration/min_degree_at_least.v": "unknown",
           "extremal-graph-theory/theories/migration/stable_sets.v": "no",
+          "graph-theory-misc/theories/conjectures/X299.v": "unknown",
+          "graph-theory-misc/theories/conjectures/grounding_X299.v": "unknown",
           "hamiltonicity-theory/theories/conjectures/U2.v": "unknown",
           "hamiltonicity-theory/theories/conjectures/X211.v": "unknown",
           "hamiltonicity-theory/theories/conjectures/grounding_U2.v": "unknown",
@@ -25005,12 +25012,12 @@
     ]
   },
   "counts": {
-    "files": 391,
+    "files": 392,
     "helpers": 2776,
     "repeated_body_shapes": 153,
     "repeated_normalized_names": 223,
     "repeated_signature_shapes": 338,
-    "statements_excluded": 914,
+    "statements_excluded": 915,
     "x_wave_helpers": 1615
   },
   "groups": {
