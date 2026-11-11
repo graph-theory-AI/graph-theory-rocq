@@ -381,6 +381,11 @@
       "path": "graph-theory-misc/theories/conjectures/X62.v",
       "name": "x14_rainbow_path",
       "note": "Cross-module X62 row (an edge cover by rainbow paths) uses X14's x14_rainbow_path. Frozen as X62Legacy over X14Legacy.rainbow_path; statement text unchanged."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/implications_X300.v",
+      "name": "planar_bounded_nonrepetitive_chromatic_statement",
+      "note": "The Rocq-only edge X300 => X23 (edge-x300) cites X23's planar row by name; the row is unchanged (certified here) and the edge compiles against it."
     }
   ],
   "distinct_variants": [
