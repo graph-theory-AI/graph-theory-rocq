@@ -1067,6 +1067,34 @@
    "reviewed_at": "2026-09-24",
    "note": "Counting: instantiate Hoang-Reed at k = r to get r dicycles whose j-th member meets the union of the earlier ones in at most one vertex; laminar_sum_bound (foundations/cycles.v) turns that into sum of lengths <= #|union| + r - 1 <= n + r - 1, and ltn_ceil then forces some member to have at most (n + r - 1) %/ r vertices. The looplessness hypothesis of the target is not needed; the nonemptiness guard 0 < #|D| and the pointwise delta+ >= r hypothesis are passed on verbatim."
   },
+  "holroyd_strong_hadwiger_statement->hadwiger_chromatic_clique_minor_statement:implies": {
+   "gc": null,
+   "tier": "T1",
+   "wave": "E7",
+   "host": "minor-theory",
+   "state": "verified",
+   "proof": "holroyd_strong_hadwiger_implies_hadwiger_chromatic_clique_minor",
+   "external": [],
+   "reason": "",
+   "proved_by": "Arthur (Claude Opus 5.5), 2026-11-11: minor-theory implications_X298.v (V(G) colorful by x298_chi_lt_missing; the rooted model is a minor by minor_of_rmap)",
+   "reviewed_by": "Marcol (second reader of the Holroyd => Hadwiger (X298 => X214) edge, 2026-11-11)",
+   "reviewed_at": "2026-11-11",
+   "note": "Rocq-only edge (no corpus relation), routed as a separate edge item after wave X298 (Lancelot's (629)): Holroyd's Strong Hadwiger conjecture strengthens Hadwiger's (arXiv:2209.00594v1, l.112), which is its case S = V(G). V(G) is colorful: a proper chi(G)-colouring that misses a colour maps into the other chi(G) - 1 colours, below the chromatic number (x298_chi_lt_missing); the V(G)-rooted model of K_(chi(G)) is a K_(chi(G)) minor (minor_of_rmap)."
+  },
+  "holroyd_strong_hadwiger_statement->rooted_minor_free_unrealizable_colourings_statement:implies": {
+   "gc": null,
+   "tier": "T1",
+   "wave": "E7",
+   "host": "minor-theory",
+   "state": "verified",
+   "proof": "holroyd_strong_hadwiger_implies_rooted_minor_free_unrealizable_colourings",
+   "external": [],
+   "reason": "",
+   "proved_by": "Arthur (Claude Opus 5.5), 2026-11-11: minor-theory implications_X298.v (X = I_k, C = the injective colourings; chi(G) = k by x298_chi_colouring and x298_inj_onto)",
+   "reviewed_by": "Marcol (second reader of the Holroyd => Conjecture 4 (X298) edge, 2026-11-11)",
+   "reviewed_at": "2026-11-11",
+   "note": "Rocq-only edge (no corpus relation), routed as a separate edge item after wave X298 (Lancelot's (629)): the implication arXiv:2504.07764v1 states at l.99-101 (its Conjecture 4 is a weakening of Holroyd's). For each k take X = 'I_k and C = the injective colourings of X, closed under colour permutations. A graph G realizing C has a proper k-colouring, so chi(G) <= k; and chi(G) = k, since an optimal colouring widened to k colours would restrict to a colouring of X in C, injective, hence onto, but missing the colour chi(G). So every proper chi(G)-colouring is onto on X, X is colorful, and Holroyd gives an X-rooted K_k model: G is not X-rooted-K_k-minor-free."
+  },
   "hypergraph_cop_number_sqrt_n_over_k_statement->meyniel_cop_number_sqrt_statement:implies": {
    "gc": "e243",
    "tier": "T2",
