@@ -547,6 +547,26 @@
       "path": "minor-theory/theories/conjectures/grounding_U7.v",
       "name": "immersion",
       "note": "Proof consumer: grounding lemmas immersion_K0 and immersion_refl; statements and proofs unchanged, rebuilt."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X296.v",
+      "name": "immersion",
+      "note": "Wave X296 (2026-11-06): genuine use of U7's immersion by name: X296's row studies:std_lescure_meyniel_conjecture (the Lescure-Meyniel conjecture, record 2510.05893) states it as forall G : sgraph, immersion G 'K_(chi(G)), with U7's weak immersion (edge-disjoint walks that may pass through branch vertices). X296.v copies no frozen body and depends on the predicate only through its name; declared as a cross-module consumer, as X295 declares its own."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X296.v",
+      "name": "immersion",
+      "note": "Wave X296 (2026-11-06): X296's grounding certificates use immersion in their claims and lemmas (g296_immersion_K_le restricts an immersion of K_m to K_t; g296_immersion_refl, g296_immersion_K0); no frozen body is copied. Declared as a cross-module consumer with X296.v."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X296.v",
+      "name": "coloring_and_immersion_statement",
+      "note": "Wave X296 (2026-11-06): g296_equiv_U7 proves X296's row equivalent to U7's coloring_and_immersion_statement (the Open Problem Garden row coloring_and_immersion), naming it in its type; no frozen body is copied. Declared as a cross-module consumer with X296.v."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X296.v",
+      "name": "path_edges",
+      "note": "Wave X296 (2026-11-06): g296_immersion_refl unfolds path_edges by name (the edge set of a one-edge walk [:: u; v]); no frozen body is copied. Declared as a cross-module consumer with X296.v."
     }
   ],
   "distinct_variants": [
