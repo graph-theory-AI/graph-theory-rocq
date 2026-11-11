@@ -13175,11 +13175,14 @@
    "audit_page": "todo"
   },
   "std_reed_seymour_chordal_partition_question": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x299-reed-seymour-chordal-partition",
+   "package": "graph-theory-misc",
+   "note": "Authored in X299.v:reed_seymour_chordal_partition_statement. Reed and Seymour's question as 1707.04964v2 states it (Question 1, BadNews.tex l.100-103), encoded as its affirmative answer with the record's definitions (l.98): a partition of V(G) into connected induced parts (the branch sets of a minor_rmap that cover V(G)) whose quotient (the supplied graph H, with exactly the parts' adjacencies) is chordal (chordal_by_cycles), every part bipartite. Answered NO at the pin: Theorem NoChordal (l.107-112), a part containing K_3. Pinned open, a literature item."
   },
   "std_richter_s_bounded_maximum_degree_conjecture": {
    "statement": "todo",
