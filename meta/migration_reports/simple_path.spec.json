@@ -217,7 +217,16 @@
         "x23_nonrepetitive_colouring": "nonrepetitive_colouring"
       },
       "certificate": "Topological.migration.simple_path.planar_bounded_nonrepetitive_chromatic_statement_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "direction": "restatus",
+        "doc_block_sha256": "0dbbb55b9454375f8d061619b6f5a02964fdb676efc59c222ce7b98eee5f52b8",
+        "record": "meta/CORPUS_FEEDBACK.md",
+        "row_fields": [
+          "status",
+          "status_semantics"
+        ]
+      }
     },
     {
       "kind": "source",
