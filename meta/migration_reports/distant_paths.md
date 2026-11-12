@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py distant_paths --details /tmp/mi
 
 - Canonical: `GTBase.distant_paths.pairwise_distant_seqs`.
 - Baseline: `058da18a5f7867ad874d93cc2d57056dc25537ba`.
-- Scope: 7 helpers, 5 statements, 45 frozen objects, 90 recorded references.
-- Source checks: 296/296 pass; consistent.
+- Scope: 7 helpers, 5 statements, 45 frozen objects, 92 recorded references.
+- Source checks: 298/298 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

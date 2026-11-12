@@ -5,6 +5,11 @@
    "edge": "delta122_hero_k1_plus_dipath2_free_statement->delta122_hero_oriented_complete_multipartite_statement:implies",
    "reason": "The faithfulness audit (meta/X211-X229_faithfulness_audit.md:178) shows that the two Props are logically EQUIVALENT (the two hero classes coincide once the degenerate equalities are discharged), so the corpus statuses cannot both be right: arxiv:2306.04710#02 is listed `open` and arxiv:2202.13306#00 `disproved`. The `open` status of 2306.04710#02 predates Walczak's remark. The Rocq edge (implications_X221.v) proves one direction and is sound; it is the pair of corpus statuses that must be reconciled upstream.",
    "corpus_feedback_item": "e105-status-contradiction: reconcile the statuses of arxiv:2306.04710#02 (open) and arxiv:2202.13306#00 (disproved), which encode equivalent Props — to report upstream (evidence: meta/X211-X229_faithfulness_audit.md:178)"
+  },
+  {
+   "edge": "coarse_menger_ball_separator_statement->coarse_menger_paths_bounded_separator_statement:implies",
+   "reason": "The Rocq edge (graph-theory-misc implications_X116.v, Qed, axiom-free) is sound: X39 states the coarse Menger conjecture with separator radius c * d, c depending only on k, and X116 allows any radius l(k, d), so X39 at k with l = c * d + 1 gives X116. X116 is disproved at the pin (Nguyen, Scott and Seymour, arXiv:2401.06685v2, Theorem 1.3; CORPUS_FEEDBACK item 80), so X39 is refuted by the same theorem, while the corpus records studies:std_coarse_menger_conjecture_georgakopoulos_papasogl open. It is the pair of corpus statuses that must be reconciled upstream.",
+   "corpus_feedback_item": "100: X39 refuted through its implication of X116 (arXiv:2401.06685 Theorem 1.3); record studies:std_coarse_menger_conjecture_georgakopoulos_papasogl disproved upstream"
   }
  ]
 }

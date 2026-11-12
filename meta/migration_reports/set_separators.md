@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py set_separators --details /tmp/m
 
 - Canonical: `GraphTheory.core.connectivity.separator`.
 - Baseline: `a02e1c2108db331363787c099f8fcb99aa4e6b41`.
-- Scope: 2 helpers, 3 statements, 33 frozen objects, 44 recorded references.
-- Source checks: 208/208 pass; consistent.
+- Scope: 2 helpers, 3 statements, 33 frozen objects, 45 recorded references.
+- Source checks: 209/209 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

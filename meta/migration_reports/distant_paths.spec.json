@@ -688,6 +688,16 @@
       "path": "graph-theory-misc/theories/conjectures/X288.v",
       "name": "coarse_menger_paths_bounded_separator_statement",
       "note": "Wave X288 (2026-11-05): genuine use of X116's statement by name: X288's row studies:std_coarse_menger_conjecture_159 is a synonym, coarse_menger_paths_bounded_separator_duplicate_statement := coarse_menger_paths_bounded_separator_statement (X116, frozen here through X116's migrated helpers). X288.v copies no frozen body and depends on the statement only through its name; declared as a cross-module consumer, as X263 / X285 declare theirs."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/implications_X116.v",
+      "name": "coarse_menger_ball_separator_statement",
+      "note": "The Rocq-only edge X39 => X116 (edge-x116) cites both coarse Menger statements by name in its theorem type; the rows are unchanged and the edge compiles against them."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/implications_X116.v",
+      "name": "coarse_menger_paths_bounded_separator_statement",
+      "note": "The Rocq-only edge X39 => X116 (edge-x116) cites both coarse Menger statements by name in its theorem type; the rows are unchanged and the edge compiles against them."
     }
   ],
   "distinct_variants": [
