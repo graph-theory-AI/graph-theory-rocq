@@ -504,6 +504,11 @@
       "path": "graph-theory-misc/theories/conjectures/X40.v",
       "name": "x39_separates_xy",
       "note": "Cross-module row X40, frozen as X40Legacy over Legacy.x39_separates_xy in GTMisc.migration.set_separators and reused end to end as B5's X40Original; statement text unchanged."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/implications_X116.v",
+      "name": "coarse_menger_ball_separator_statement",
+      "note": "The Rocq-only edge X39 => X116 (edge-x116) cites both coarse Menger statements by name in its theorem type; the rows are unchanged and the edge compiles against them."
     }
   ],
   "distinct_variants": [
