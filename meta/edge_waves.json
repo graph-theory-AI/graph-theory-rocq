@@ -997,6 +997,20 @@
    "reviewed_at": "2026-09-23",
    "note": "A graph with independence number at most 2 has every colour class of size at most 2, so its chromatic number is at least ceil(n/2); Hadwiger then yields a K_chi minor, and a K_ceil(n/2) minor by minor-monotonicity of complete graphs."
   },
+  "hadwiger_independence_minor_statement->bounded_independence_clique_minor_statement:equiv": {
+   "gc": null,
+   "tier": "T1",
+   "wave": "E7",
+   "host": "minor-theory",
+   "state": "verified",
+   "proof": "hadwiger_independence_minor_equiv_bounded_independence_clique_minor",
+   "external": [],
+   "reason": "",
+   "proved_by": "Arthur (Claude Opus 5.5), 2026-11-12: minor-theory implications_X5.v (arxiv:1907.12999#00 <=> studies:std_clique_minor_conjecture_for_bounded_independence, both X5)",
+   "reviewed_by": "",
+   "reviewed_at": "",
+   "note": "Rocq-only edge (no corpus relation), routed after edge-x271 (Lancelot's (697), (698)): Dvorak and Yepremyan's Conjecture 1 (arxiv:1907.12999#00; no K_(t+1) minor gives n <= t * alpha(G)) and the clique minor conjecture for bounded independence number (studies:std_clique_minor_conjecture_for_bounded_independence; alpha(G) <= r gives a K_(ceil(n / r)) minor) both say, over every t and r, that every graph has a clique minor on ceil(n / alpha(G)) vertices. Forward: with m = ceil_div n r, the K_0 and K_1 minors for m <= 1, and for m >= 2 minor's decidability (minorNN) with Conjecture 1 at m - 1. Backward: alpha(G) = 0 empties G; otherwise the statement at r = alpha(G) and minor_K_le."
+  },
   "hadwiger_independence_minor_statement->seagull_statement:implies": {
    "gc": "e043",
    "tier": "T1",
