@@ -14391,6 +14391,42 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Arthur (X304 wave verification, 2026-11-12)",
       "faithfulness_result": "Readback 2026-11-12 (verifier Arthur): 1/1 PASS against the pinned text and the sources, at math/marcol-x304-20261112 = 73ee76820b6358a81ea54e67eba6fd321cb8e7d2 (5 commits on work/coordinator 43b40f70, composed audit 81's regeneration of edge-x5's integration on AH79), after my design read ((593), FAITHFUL 1/1, no required change; packet x304-design-read-by-arthur d2799df8) of x304-design-by-marcol r1 (30c60a92). At 73ee76820b6358a81ea54e67eba6fd321cb8e7d2 X304.v (9620466d) and grounding_X304.v (0c9d2ec5) are the packet's byte for byte; waves.X304 = the packet's x304-wave.json; no helper. studies:std_wood_s_conjecture_on_the_maximum_number_of_cliqu (wood_kt_minor_clique_count_statement), encoded as stated: forall t, 2 <= t -> ((forall n, t - 2 <= n -> (forall G : sgraph, #|G| = n -> ~ minor G 'K_t -> all_clique_count G <= 2 ^ (t - 2) * (n + 3 - t)) /\\ (exists G : sgraph, [/\\ #|G| = n, ~ minor G 'K_t & all_clique_count G = 2 ^ (t - 2) * (n + 3 - t)])) <-> t <= 49). The maximum (Wood l.113: cliques(n,t), the maximum number of cliques of a K_t-minor-free graph on n vertices) is an upper bound for every such graph plus one attaining it (X174's form); cliques are counted with the empty one (Wood l.96, l.102, l.117), as all_clique_count = #|cliques [set: G]| does. n is inside the iff, for every n >= t - 2, the range of Wood's results (l.127-132, l.169): with n outside, the conjecture would fail at once at n = t - 2, where the equality holds for every t (l.135), and l.530's examples negate exactly the inner universal (one n for each t >= 50). t >= 2: 2^(t-2) is not a natural number at t = 1, and every graph with a vertex has a K_1 minor; at t = 2 the left side holds (edgeless graphs, n + 1 cliques). n + 3 - t = n - t + 3 under the guard t - 2 <= n, stated in the Notes. K_t-minor-free is ~ minor G 'K_t, coq-graph-theory's minor; 'K_t before the and3's '&' parses as ('K_t) (my MCP: equal by reflexivity to the parenthesised text). One lint finding, exists-after-graph-forall on the attained half, allowlisted with its reason (the attaining graph depends on t and n only; the earlier forall G is the upper bound's sibling conjunct). Status open: Wood proves the equality for t in {3, ..., 9} (Theorem 3, l.168-170); for t >= 50 a K_(c x 2), K_(1, c x 2) or K_(1,1, c x 2) beats the bound (l.530); the 'if' half is open for 10 <= t <= 49. The record (Fox and Wei, arXiv:1603.07056v1, l.77) states the conjecture in the pinned words; its l.749 prints 't >= 49', a slip against l.77 and Wood l.533, named in the Notes. Grounding: hyp [for every t >= 2 and n, KB n 0 has n vertices and no K_t minor; KB n 0 has n + 1 cliques; S gives at t = 2 an attaining K_2-minor-free graph], so every hypothesis of both halves is inhabited for every n; ntt [S gives the t = 2 bound n + 1 under 'no K_2 minor', and without that hypothesis the bound fails: 'K_2 has 4 cliques], the load-bearing hypothesis of EXPANSION_PLAN 4.4; neither is a theorem of type S or ~S, both name the statement. Metadata: source_hash 1/1 recomputed, equal; waves.X304 the only waves change, verifier fields empty before this; the lint allowlist gains exactly the packet's entry (74 -> 75 entries; the file minus its key = the base's); no consumer entry (no frozen name; all_clique_count is the clique-count family's canonical); no CORPUS_FEEDBACK item (the pinned text agrees with both sources); library_primitives, the migration reports, the helper classification, corpus_relations and edge_waves unchanged; legs: the row done / done, note 518 = \"Authored in X304.v:wood_kt_minor_clique_count_statement. \" + the wave note, no other legs entry changed; README 639 / 12 / 39 / 983 -> 640 / 12 / 39 / 982; LANDED gains X304 minor-theory after X303 minor-theory. Dev run 1 (x304-dev-by-marcol 0fd005e7, -c OK, 38 listed = present): run-x304-1.sh 7339ccc5 on 73ee76820b6358a81ea54e67eba6fd321cb8e7d2, JOB 2026-11-12T07:42:02Z-2026-11-12T08:57:43Z, WRAPPER rc 0, RESULT PASS-WITH-EXPECTED, 29 STEP lines, 25 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields; W1 12/14 CHECKS (REJECTED on the two A3-field checks only: the audit + grounding contract, whose single error is the missing faithfulness_verified_by / faithfulness_result, so both grounding claims pass the contract, and the leg state without source_verified_by / _at; hard lint passed with the allowlist entry; package compiles; Print Assumptions clean on 1 statement + 2 grounding certificates; 10 exact-type probes); the builds compiled X304.v and grounding_X304.v, no Error line; W2 963 / 963 documented, reverse coverage 918 / 918; W3 1 probed, 0 FLAGGED; W4 0 active findings (75 allowlisted); W5 / A11 names 103; G6 and A12 101 / 101 OK (no report drift); written: CORPUS_STATUS.md, library_helper_inventory.json and v2_corpus_manifest.json (generated, rule 8, not committed); END HEAD 73ee76820b6358a81ea54e67eba6fd321cb8e7d2."
+    },
+    "X305": {
+      "phase": "X305",
+      "repo": "topological-graph-theory",
+      "defines_file": "X305.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X305 (A3 verifier Marcol; routing Lancelot (703), (704); selection x305-selection-by-arthur, design x305-design-by-arthur r1), branch math/arthur-x305-20261112, 2026-11-12",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x305-earth-moon-chi-le-11",
+      "rows": {
+        "drv_earthmoon_chiem_le_11": {
+          "formal_name": "earth_moon_biplanar_chi_le_11_statement",
+          "source_hash": "37a56cf5cc3510b5cd57c93a93ab9738b09de3ca2def36d5ea3b6176d9ac9e67",
+          "note": "The derived row chiEM-le-11 (folder earth_moon_problem, ledger e62bc77e) as stated: every biplanar finite simple graph has a proper 11-colouring. Biplanar is U13.v's union_of_two_planar with base's wagner_planar (no K_5, no K_(3,3) minor), equal to the record's partition form (grounding_X305.v, g305_union_partition); 11-colourable is chi([set: G]) <= 11, as U13 reads chi. Open: the bracket is 9 <= chi_EM <= 12 (the Open Problem Garden review at the pin).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g305_hyp_inhabited",
+              "claim": "g305_hyp_claim",
+              "references": [
+                "earth_moon_biplanar_chi_le_11_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g305_not_trivially_true",
+              "claim": "g305_ntt_claim",
+              "references": [
+                "earth_moon_biplanar_chi_le_11_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
