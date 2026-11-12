@@ -6939,11 +6939,14 @@
    "audit_page": "todo"
   },
   "drv_earthmoon_chiem_le_11": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x305-earth-moon-chi-le-11",
+   "package": "topological-graph-theory",
+   "note": "Authored in X305.v:earth_moon_biplanar_chi_le_11_statement. The derived row chiEM-le-11 (folder earth_moon_problem, ledger e62bc77e) as stated: every biplanar finite simple graph has a proper 11-colouring. Biplanar is U13.v's union_of_two_planar with base's wagner_planar (no K_5, no K_(3,3) minor), equal to the record's partition form (grounding_X305.v, g305_union_partition); 11-colourable is chi([set: G]) <= 11, as U13 reads chi. Open: the bracket is 9 <= chi_EM <= 12 (the Open Problem Garden review at the pin)."
   },
   "drv_earthmoon_density_6n_11": {
    "statement": "todo",
