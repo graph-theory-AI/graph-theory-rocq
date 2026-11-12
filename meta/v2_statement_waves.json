@@ -14319,6 +14319,42 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Arthur (X302 wave verification, 2026-11-11)",
       "faithfulness_result": "Readback 2026-11-11 (verifier Arthur): 1/1 PASS against the pinned text and the source, at math/marcol-x302-20261111 = e77bc88c406fa316d1e4113e5be128b009b4b7bc (5 commits on work/coordinator 9ad5ea7b, X301's integration on AH77), after my design read ((566), FAITHFUL 1/1, no required change; packet x302-design-read-by-arthur 1bf47994) of x302-design-by-marcol r1 (81bc510c). At e77bc88c406fa316d1e4113e5be128b009b4b7bc X302.v (a65f0eb6) and grounding_X302.v (6d0c2175) are the packet's byte for byte; waves.X302 = the packet's x302-wave.json; no helper. studies:std_kawarabayashi_rossman_conjecture (kawarabayashi_rossman_pathwidth_statement), encoded as stated: exists c a : nat, forall (k : nat) (G : sgraph), ~ pathwidth_at_most G (a * k ^ c) -> tw_ge G k \\/ has_subdivision G (fg_mk_sgraph (fun i j : 'I_(2 ^ k.+1).-1 => (0 < j) && (i == j.-1./2 :> nat))). pathwidth_at_most G m is a path_tree index (is_tree, Delta <= 2) with a bag_decomposition whose bags have at most m + 1 vertices, l.196's pathwidth at most m, so its negation is pathwidth above m; tw_ge G k says every m with tw_le G m (a coq-graph-theory sdecomp over a forest with bags of at most m + 1 vertices, l.189-195's width at most m) has k <= m, i.e. treewidth at least k; the tree is X301's heap-indexed one at height k (fg_mk_sgraph, the symmetric irreflexive closure, on 2^(k+1) - 1 nodes, node j > 0 a child of (j - 1) / 2: every non-leaf has two children and every leaf is at depth k, my count for k = 0..3), l.200-201's complete binary tree up to isomorphism; has_subdivision is subdiv_model, l.203's subdivision contained as a subgraph (l.133, l.240). The Omega reading is equivalent both ways: the record's form (a real alpha > 0, a real c and some k0, for k >= k0) gives this one with c' = ceil(c) and a = max(ceil(alpha), ceil(alpha * k0^c)) (for k < k0 through the k0 case, both outcomes being monotone in k: a subdivided tree of height k0 contains one of every smaller height, and treewidth at least k0 is at least k; k = 0 trivial), and this one gives the record's with alpha = a + 1; the explicit a keeps c the record's exponent. Corners: for k = 0 the conclusion holds (tw_ge G 0), and the graph with no vertex has pathwidth_at_most for every bound (pathwidth_at_most_card), so it never meets the hypothesis. No lint finding and no allowlist entry. Solved in its own record (lit30's ERRATA tuple; l.128): Theorem 1.1 with t = s + 1 <= k and h = k - 1 bounds the pathwidth of a graph of treewidth s <= k - 1 with no subdivided tree of height k by (s + 1)(k - 1) + 1 <= k^2, so c = 2 and a = 1 work. Grounding: hyp [for every c, a, k: ~ pathwidth_at_most K_(a k^c + 2) (a k^c) (g302_complete_above), and S gives those complete graphs treewidth at least k or the subdivided tree], so the hypothesis is met for every choice of constants; ntt ~ V /\\ (V -> S) with V the constant-bound variant (the row with c = 0): V -> S with c := 0 (expn0), ~V at k = a + 2 on K_(a+2) (pathwidth a + 1 > a; treewidth a + 1 < a + 2 by g302_complete_tw_below; 2^(a+3) - 1 tree nodes > a + 2 vertices by g302_tree_large and has_subdivision_card), so the exponent is what the statement adds; neither is a theorem of type S or ~S, both name the statement. Metadata: source_hash 1/1 recomputed, equal; waves.X302 the only waves change, verifier fields empty before this; no consumer entry (no frozen name; pathwidth_at_most is the pathwidth family's canonical), no CORPUS_FEEDBACK item; library_primitives, the migration reports, the helper classification, the lint allowlist, corpus_relations and edge_waves unchanged (no relation names the row); legs: the row done / done, note 558 = \"Authored in X302.v:kawarabayashi_rossman_pathwidth_statement. \" + the wave note, no other legs entry changed; README 637 / 12 / 39 / 985 -> 638 / 12 / 39 / 984; LANDED gains X302 minor-theory after X301 minor-theory. Dev run 1 (x302-dev-by-marcol e3a36e86, -c OK, 38 listed = present): run-x302-1.sh 6e68c5d4 on e77bc88c406fa316d1e4113e5be128b009b4b7bc, JOB 2026-11-11T20:33:08Z-2026-11-11T21:48:36Z, WRAPPER rc 0, RESULT PASS-WITH-EXPECTED, 29 STEP lines, 25 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields; W1 12/14 CHECKS (REJECTED on the two A3-field checks only: the audit + grounding contract, whose single error is the missing faithfulness_verified_by / faithfulness_result, so both grounding claims pass the contract, and the leg state without source_verified_by / _at; package compiles; Print Assumptions clean on 1 statement + 2 grounding certificates; 5 exact-type probes (the row is solved, so only the ~ S shape)); the builds compiled X302.v and grounding_X302.v, no Error line; W2 961 / 961 documented, reverse coverage 916 / 916; W3 1 probed, 0 FLAGGED; W4 0 active findings (74 allowlisted); W5 / A11 names 103; G6 and A12 101 / 101 OK (no report drift); written: CORPUS_STATUS.md, library_helper_inventory.json and v2_corpus_manifest.json (generated, rule 8, not committed); END HEAD e77bc88c406fa316d1e4113e5be128b009b4b7bc."
+    },
+    "X303": {
+      "phase": "X303",
+      "repo": "minor-theory",
+      "defines_file": "X303.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X303 (A3 verifier Arthur; routing Lancelot (685), (687); selection x303-selection-by-marcol, design x303-design-by-marcol r1), branch math/marcol-x303-20261112, 2026-11-12",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x303-seymour-two-connected-pathwidth",
+      "rows": {
+        "std_seymour_s_pathwidth_conjecture": {
+          "formal_name": "seymour_two_connected_pathwidth_statement",
+          "source_hash": "ef1c0c6c62c01586378eed7bbd6c95695debe72bb64efd57b81f976ad47b4016",
+          "note": "Seymour's pathwidth conjecture as 1801.01833v4 states it (Huynh, Joret, Micek and Wood, CombinatoricaSubmission.tex l.179-182), with its definitions (l.176, l.163, l.334): H1 an apex-forest (H1 - v a forest for some v), H2 outerplanar (no K_4 and no K_(2,3) minor), G 2-connected (k_connected G 2) of pathwidth above p (not pathwidth_at_most), minor G H1 or minor G H2; p after H1 and H2. Solved in the record (l.188; lit30's ERRATA tuple); 2604.13700 states another problem (CORPUS_FEEDBACK item 95).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g303_hyp_inhabited",
+              "claim": "g303_hyp_claim",
+              "references": [
+                "seymour_two_connected_pathwidth_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g303_not_trivially_true",
+              "claim": "g303_ntt_claim",
+              "references": [
+                "seymour_two_connected_pathwidth_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
