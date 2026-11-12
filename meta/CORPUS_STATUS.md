@@ -135,7 +135,7 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Conjecture dependency graph
 
-- **154 edges** — by status {'candidate': 32, 'conditional': 2, 'refuted-direction': 32, 'verified': 88}, by kind {'equiv': 8, 'implies': 146, 'refutes': 0, 'specializes': 0}; 106 Qed-proved relative theorems.
+- **157 edges** — by status {'candidate': 32, 'conditional': 2, 'refuted-direction': 32, 'verified': 91}, by kind {'equiv': 9, 'implies': 148, 'refutes': 0, 'specializes': 0}; 109 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
   - `asymmetric_bipartite_list_colouring_statement` implies `list_chromatic_number_and_maximum_degree_of_bipartit_statement` (atlas/implications_A1.v)
   - `bajnok_brinkmann_six_exceptional_graphs_statement` implies `locke_finitely_many_statement` (atlas/implications_X287.v)
@@ -172,10 +172,13 @@ Area-local foundations (each area builds these on top of `base`):
   - `graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement` implies `triangle_free_induced_tree_chi_bounded_statement` (chromatic-theory/implications_X213.v)
   - `grytczuk_minor_free_nonrepetitive_statement` implies `planar_bounded_nonrepetitive_chromatic_statement` (graph-theory-misc/implications_X300.v)
   - `hadwiger_chromatic_clique_minor_statement` implies `fractional_hadwiger_statement` (atlas/implications_A1.v)
+  - `hadwiger_chromatic_clique_minor_statement` implies `h_hadwiger_minor_free_colourable_statement` (minor-theory/implications_X271.v)
   - `hadwiger_chromatic_clique_minor_statement` implies `hadwiger_independence_minor_statement` (minor-theory/implications_X214.v)
   - `hadwiger_chromatic_clique_minor_statement` equiv `hadwiger_minor_closed_class_statement` (minor-theory/implications_X293.v)
   - `hadwiger_chromatic_clique_minor_statement` implies `seagull_statement` (minor-theory/implications_X214.v)
+  - `hadwiger_independence_minor_statement` equiv `bounded_independence_clique_minor_statement` (minor-theory/implications_X5.v)
   - `hadwiger_independence_minor_statement` implies `seagull_statement` (minor-theory/implications_U7.v)
+  - `hajos_k5_k6_subdivision_statement` implies `hajos_k5_subdivision_statement` (minor-theory/implications_X271.v)
   - `half_flow_pair_statement` implies `five_flow_statement` (cycle-theory/implications_X228.v)
   - `hat_guessing_degree_degeneracy_bounds_statement` implies `hat_guessing_degeneracy_bounded_statement` (graph-theory-misc/implications_X227.v)
   - `hoand_reed_statement` implies `caccetta_haggkvist_statement` (digraph-theory/implications_P9.v)
@@ -225,13 +228,13 @@ Area-local foundations (each area builds these on top of `base`):
   - `tree_decomposition_leaf_edge_connected_statement` implies `barat_thomassen_tree_decomposition_statement` (atlas/implications_A1.v)
   - `triangle_free_min_degree_log_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
   - `triangle_free_planar_large_induced_two_degenerate_statement` implies `triangle_free_planar_five_sixths_two_degenerate_statement` (chromatic-theory/implications_X219.v)
-- Edge evidence: **88 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
+- Edge evidence: **91 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
 - Conditional edges (with the external assumptions they are relative to):
   - `bounded_layered_treewidth_bounded_queue_number_statement` implies `planar_graphs_bounded_queue_number_statement` — external: `external_layered_treewidth_planar_statement` (atlas/implications_A1.v)
   - `reconstruction_statement` implies `edge_reconstruction_statement` — external: `external_whitney_line_inversion_statement` (reconstruction-theory/implications_U11.v)
 - Edge legs (overlay `edges` state over the non-alias rows of each corpus; derived from the evidence above by `meta/sync_edge_legs.py`):
   - **opg**: 41 done · 8 partial · 0 blocked · 178 todo  (227 rows)
-  - **v2**: 94 done · 5 partial · 0 blocked · 1574 todo  (1673 rows)
+  - **v2**: 98 done · 5 partial · 0 blocked · 1570 todo  (1673 rows)
 
 ### Documented non-edges (32 `refuted-direction`)
 

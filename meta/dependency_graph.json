@@ -17,20 +17,20 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 154,
+  "edges": 157,
   "by_status": {
    "candidate": 32,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 88
+   "verified": 91
   },
   "by_kind": {
-   "equiv": 8,
-   "implies": 146,
+   "equiv": 9,
+   "implies": 148,
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 106
+  "proved_theorems": 109
  },
  "edges": [
   {
@@ -830,6 +830,19 @@
   },
   {
    "from": "hadwiger_chromatic_clique_minor_statement",
+   "to": "h_hadwiger_minor_free_colourable_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "",
+   "proof": "hadwiger_chromatic_clique_minor_implies_h_hadwiger_minor_free_colourable",
+   "note": "Rocq-only edge (no corpus relation), routed after wave X271 (Lancelot's (685), (686)): Hadwiger's conjecture implies Seymour's H-Hadwiger conjecture for every H (Fischer and Steiner, arXiv:2304.04246v1, text l.73). If G has no H minor and #|H| <= chi(G), Hadwiger at chi(G) gives a minor of the complete graph on chi(G) vertices; H is a subgraph of it (widen_ord after enum_rank, injective, and distinct vertices are adjacent there), so sub_minor and minor_trans give an H minor, a contradiction; otherwise chi(G) <= #|H| - 1. The H with no vertex falls in the first case.",
+   "external": [],
+   "sources": [
+    "minor-theory/implications_X271.v"
+   ]
+  },
+  {
+   "from": "hadwiger_chromatic_clique_minor_statement",
    "to": "hadwiger_independence_minor_statement",
    "kind": "implies",
    "status": "verified",
@@ -869,6 +882,19 @@
   },
   {
    "from": "hadwiger_independence_minor_statement",
+   "to": "bounded_independence_clique_minor_statement",
+   "kind": "equiv",
+   "status": "verified",
+   "cite": "",
+   "proof": "hadwiger_independence_minor_equiv_bounded_independence_clique_minor",
+   "note": "Rocq-only edge (no corpus relation), routed after edge-x271 (Lancelot's (697), (698)): Dvorak and Yepremyan's Conjecture 1 (arxiv:1907.12999#00; no K_(t+1) minor gives n <= t * alpha(G)) and the clique minor conjecture for bounded independence number (studies:std_clique_minor_conjecture_for_bounded_independence; alpha(G) <= r gives a K_(ceil(n / r)) minor) both say, over every t and r, that every graph has a clique minor on ceil(n / alpha(G)) vertices. Forward: with m = ceil_div n r, the K_0 and K_1 minors for m <= 1, and for m >= 2 minor's decidability (minorNN) with Conjecture 1 at m - 1. Backward: alpha(G) = 0 empties G; otherwise the statement at r = alpha(G) and minor_K_le.",
+   "external": [],
+   "sources": [
+    "minor-theory/implications_X5.v"
+   ]
+  },
+  {
+   "from": "hadwiger_independence_minor_statement",
    "to": "seagull_statement",
    "kind": "implies",
    "status": "verified",
@@ -878,6 +904,19 @@
    "external": [],
    "sources": [
     "minor-theory/implications_U7.v"
+   ]
+  },
+  {
+   "from": "hajos_k5_k6_subdivision_statement",
+   "to": "hajos_k5_subdivision_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "",
+   "proof": "hajos_k5_k6_subdivision_implies_hajos_k5_subdivision",
+   "note": "Rocq-only edge (no corpus relation), routed after wave X271 (Lancelot's (685), (686)): bm:bm-042 states Hajos' conjecture for k = 5 and k = 6; its instance k = 5 is studies:std_haj_s_conjecture_k_5, with the same exact chromatic number and the same subdivision containment (has_subdivision); X271's Notes name it a candidate edge.",
+   "external": [],
+   "sources": [
+    "minor-theory/implications_X271.v"
    ]
   },
   {
