@@ -951,8 +951,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (Claude Opus 5.5), 2026-11-12: minor-theory implications_X271.v (Hadwiger at chi(G) and H a subgraph of the complete graph on chi(G) vertices; sub_minor, minor_trans)",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (second reader of the Hadwiger => H-Hadwiger (X214 => X271) edge, 2026-11-12)",
+   "reviewed_at": "2026-11-12",
    "note": "Rocq-only edge (no corpus relation), routed after wave X271 (Lancelot's (685), (686)): Hadwiger's conjecture implies Seymour's H-Hadwiger conjecture for every H (Fischer and Steiner, arXiv:2304.04246v1, text l.73). If G has no H minor and #|H| <= chi(G), Hadwiger at chi(G) gives a minor of the complete graph on chi(G) vertices; H is a subgraph of it (widen_ord after enum_rank, injective, and distinct vertices are adjacent there), so sub_minor and minor_trans give an H minor, a contradiction; otherwise chi(G) <= #|H| - 1. The H with no vertex falls in the first case."
   },
   "hadwiger_chromatic_clique_minor_statement->hadwiger_independence_minor_statement:implies": {
@@ -1021,8 +1021,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (Claude Opus 5.5), 2026-11-12: minor-theory implications_X271.v (bm:bm-042 at k = 5 is studies:std_haj_s_conjecture_k_5)",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (second reader of the Hajos at k = 5 and 6 => Hajos at k = 5 (X214 => X271) edge, 2026-11-12)",
+   "reviewed_at": "2026-11-12",
    "note": "Rocq-only edge (no corpus relation), routed after wave X271 (Lancelot's (685), (686)): bm:bm-042 states Hajos' conjecture for k = 5 and k = 6; its instance k = 5 is studies:std_haj_s_conjecture_k_5, with the same exact chromatic number and the same subdivision containment (has_subdivision); X271's Notes name it a candidate edge."
   },
   "half_flow_pair_statement->five_flow_statement:implies": {
