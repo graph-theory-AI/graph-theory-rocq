@@ -13720,11 +13720,14 @@
    "note": "Authored in X301.v:wood_pathwidth_binary_tree_statement. Wood's conjecture as 2008.00779v4 states it (Groenland, Joret, Nadara and Walczak, arxiv_v4.tex l.129), with the record's definitions (l.182-203): treewidth exactly t (tw_le and tw_ge), no subdivision of the complete binary tree of height h (heap-indexed on its 2^(h+1) - 1 nodes; has_subdivision), pathwidth at most f(t) * h (pathwidth_at_most), one f for every t, h and G. Solved in the record: Theorem 1.1 (l.119-122), with t + 1 and h - 1, gives f(t) = t + 1 (lit30's ERRATA tuple)."
   },
   "std_wood_s_conjecture_on_the_maximum_number_of_cliqu": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x304-wood-kt-minor-clique-count",
+   "package": "minor-theory",
+   "note": "Authored in X304.v:wood_kt_minor_clique_count_statement. Wood's conjecture as 1511.04655v2 states it (CliquesMinors.tex l.532-534, Conjecture 17) and the record 1603.07056v1 restates it (arxiv.tex l.77): for t >= 2, the maximum number of cliques (the empty one counted, all_clique_count) of a K_t-minor-free graph on n vertices is 2^(t-2)(n-t+3) for every n >= t - 2 (an upper bound and an attaining graph) if and only if t <= 49. Open: Wood proves t <= 9 (l.168-170); l.530 gives graphs beating the bound for t >= 50."
   },
   "std_wood_s_open_problem_18_clustered_choosability_of": {
    "statement": "todo",
