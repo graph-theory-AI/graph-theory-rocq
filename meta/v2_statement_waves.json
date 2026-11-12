@@ -14355,6 +14355,42 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Arthur (X303 wave verification, 2026-11-12)",
       "faithfulness_result": "Readback 2026-11-12 (verifier Arthur): 1/1 PASS against the pinned text and the source, at math/marcol-x303-20261112 = 971ad769f8a3960251eaa0500a28412e1e891ca8 (5 commits on work/coordinator 383057f3, X302's integration on AH78), after my design read ((575), FAITHFUL 1/1, no required change; packet x303-design-read-by-arthur 1851e035) of x303-design-by-marcol r1 (2536c561). At 971ad769f8a3960251eaa0500a28412e1e891ca8 X303.v (9a94a503) and grounding_X303.v (c27bee0f) are the packet's byte for byte; waves.X303 = the packet's x303-wave.json; no helper. studies:std_seymour_s_pathwidth_conjecture (seymour_two_connected_pathwidth_statement), encoded as stated: forall H1 H2 : sgraph, (exists v : H1, is_forest ([set: H1] :\\ v)) -> ~ minor H2 'K_4 -> ~ minor H2 (KB 2 3) -> exists p : nat, forall G : sgraph, k_connected G 2 -> ~ pathwidth_at_most G p -> minor G H1 \\/ minor G H2. Apex-forest: is_forest S says that at most one irredundant path inside S joins any two vertices (coq-graph-theory), so is_forest ([set: H1] :\\ v) is 'H1 - v has no cycle' and the existential over v is l.176's apex-forest; the graph with no vertex has no v, as in l.176 (that instance would hold anyway: every graph has it as a minor). Outerplanar: no K_4 and no K_(2,3) minor (KB 2 3 the complete bipartite graph on 'I_2 + 'I_3) is Chartrand and Harary's characterization, exact for finite graphs (their subdivision form equals the minor form for these two graphs of maximum degree 3; outerplanarity is minor-closed), the rendering of X82's x82_outerplanar, here inline. Pathwidth: pathwidth_at_most G p is a path_tree index with a bag_decomposition whose bags have at most p + 1 vertices, l.163's pathwidth at most p, so its negation is pathwidth above p; under the existential p, 'at least p' and 'above p' are equivalent (p, and p + 1 back), and an integer p is a natural one (a p <= 0 only asks more). 2-connected: k_connected G 2 is the Whitney form (more than 2 vertices, connected after deleting any fewer than 2), the standard meaning (the text does not define it); a convention also counting K_2 only adds graphs of pathwidth at most 1, absorbed by p. Minor: coq-graph-theory's minor G H, contraction minors (l.266). The quantifier order is the source's: p depends on H1 and H2. No lint finding and no allowlist entry. Solved in its own record (lit30's ERRATA tuple, CORPUS_FEEDBACK item 90): l.188 ('In this paper we prove' the conjecture; Dang and Thomas's independent proof); l.1195-1196, every 2-connected graph of pathwidth at least 2^(9l^2 - 3l + 2) - 2 contains the two universal graphs of order l as minors. Grounding: hyp [for every p, K_(p+3) is 2-connected with pathwidth above p; K_1 is an apex-forest and outerplanar; S gives every apex-forest / outerplanar pair a complete graph containing one of them], so every hypothesis of both quantifier layers is inhabited; ntt ~ V /\\ (V -> S) with V one uniform p for all H1 and H2: V -> S moves p out, ~V at p on G = K_(p+3) with H1 = H2 = KB (p+4) 0, the graph on p + 4 vertices with no edge (an apex-forest and outerplanar: no K_3, K_4 or K_(2,3) minor; K3_free_forest, sub_forest), too many vertices for a minor of K_(p+3) (minor_card), so the dependence of p on H1 and H2 is what the statement keeps; neither is a theorem of type S or ~S, both name the statement (the control g303_uniform_p does not). Metadata: source_hash 1/1 recomputed, equal; waves.X303 the only waves change, verifier fields empty before this; no consumer entry (no frozen name; pathwidth_at_most is the pathwidth family's canonical), no CORPUS_FEEDBACK item (items 90 and 95 record the status and the record); library_primitives, the migration reports, the helper classification, the lint allowlist, corpus_relations and edge_waves unchanged (no relation names the row); legs: the row done / done, note 563 = \"Authored in X303.v:seymour_two_connected_pathwidth_statement. \" + the wave note, no other legs entry changed; README 638 / 12 / 39 / 984 -> 639 / 12 / 39 / 983; LANDED gains X303 minor-theory after X302 minor-theory. Dev run 1 (x303-dev-by-marcol ce435afa, -c OK, 38 listed = present): run-x303-1.sh 921ec1ed on 971ad769f8a3960251eaa0500a28412e1e891ca8, JOB 2026-11-12T00:18:57Z-2026-11-12T01:34:29Z, WRAPPER rc 0, RESULT PASS-WITH-EXPECTED, 29 STEP lines, 25 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields; W1 12/14 CHECKS (REJECTED on the two A3-field checks only: the audit + grounding contract, whose single error is the missing faithfulness_verified_by / faithfulness_result, so both grounding claims pass the contract, and the leg state without source_verified_by / _at; package compiles; Print Assumptions clean on 1 statement + 2 grounding certificates; 5 exact-type probes (the row is solved, so only the ~ S shape)); the builds compiled X303.v and grounding_X303.v, no Error line; W2 962 / 962 documented, reverse coverage 917 / 917; W3 1 probed, 0 FLAGGED; W4 0 active findings (74 allowlisted); W5 / A11 names 103; G6 and A12 101 / 101 OK (no report drift); written: CORPUS_STATUS.md, library_helper_inventory.json and v2_corpus_manifest.json (generated, rule 8, not committed); END HEAD 971ad769f8a3960251eaa0500a28412e1e891ca8."
+    },
+    "X304": {
+      "phase": "X304",
+      "repo": "minor-theory",
+      "defines_file": "X304.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X304 (A3 verifier Arthur; routing Lancelot (693), (694); selection x304-selection-by-marcol, source reading x304-source-reading-by-marcol, design x304-design-by-marcol r1), branch math/marcol-x304-20261112, 2026-11-12",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x304-wood-kt-minor-clique-count",
+      "rows": {
+        "std_wood_s_conjecture_on_the_maximum_number_of_cliqu": {
+          "formal_name": "wood_kt_minor_clique_count_statement",
+          "source_hash": "b48d4d2a19b51b2bdc6edeac896ced9681d6d3b7a42edb27d0682789e526b736",
+          "note": "Wood's conjecture as 1511.04655v2 states it (CliquesMinors.tex l.532-534, Conjecture 17) and the record 1603.07056v1 restates it (arxiv.tex l.77): for t >= 2, the maximum number of cliques (the empty one counted, all_clique_count) of a K_t-minor-free graph on n vertices is 2^(t-2)(n-t+3) for every n >= t - 2 (an upper bound and an attaining graph) if and only if t <= 49. Open: Wood proves t <= 9 (l.168-170); l.530 gives graphs beating the bound for t >= 50.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g304_hyp_inhabited",
+              "claim": "g304_hyp_claim",
+              "references": [
+                "wood_kt_minor_clique_count_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g304_not_trivially_true",
+              "claim": "g304_ntt_claim",
+              "references": [
+                "wood_kt_minor_clique_count_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
