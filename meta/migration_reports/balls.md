@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py balls --details /tmp/migration-
 
 - Canonical: `GTBase.base.ball`.
 - Baseline: `1b8126b20a10dcf1cf6c6f95c25104acb818c1cb`.
-- Scope: 12 helpers, 8 statements, 65 frozen objects, 181 recorded references.
-- Source checks: 464/464 pass; consistent.
+- Scope: 12 helpers, 8 statements, 65 frozen objects, 183 recorded references.
+- Source checks: 466/466 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
