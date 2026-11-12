@@ -1651,8 +1651,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (Claude Opus 5.5), 2026-11-12: minor-theory implications_X271.v (studies:std_odd_hadwiger_conjecture <=> studies:std_odd_hadwiger_conjecture_411, both X271)",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (second reader of the odd Hadwiger conjecture <=> its colouring phrasing (X271) edge, 2026-11-12)",
+   "reviewed_at": "2026-11-12",
    "note": "Rocq-only edge (no corpus relation), routed after X305 (Lancelot's (712), (714)): the two phrasings of the odd Hadwiger conjecture, studies:std_odd_hadwiger_conjecture (t <= chi(G) gives an odd K_t minor) and studies:std_odd_hadwiger_conjecture_411 (for t >= 2, no odd K_t minor gives chi(G) <= t - 1), over X271's tree model; X271's Notes say that they are one conjecture. Forward: the contrapositive, on nat. Backward: the tree model is decidable on finite graphs (a Boolean form over finite functions); without a model, the empty model at t = 0, a one-vertex model at t = 1, and the second phrasing at t >= 2. Both rows are disproved at the pin."
   },
   "odd_minor_free_defective_clustered_treedepth_statement->clustered_chromatic_minor_class_treedepth_bound_statement:implies": {
