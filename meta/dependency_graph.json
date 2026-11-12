@@ -17,20 +17,20 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 157,
+  "edges": 159,
   "by_status": {
    "candidate": 32,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 91
+   "verified": 93
   },
   "by_kind": {
-   "equiv": 9,
-   "implies": 148,
+   "equiv": 10,
+   "implies": 149,
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 109
+  "proved_theorems": 111
  },
  "edges": [
   {
@@ -241,6 +241,19 @@
    "external": [],
    "sources": [
     "extremal-graph-theory/implications_X241.v"
+   ]
+  },
+  {
+   "from": "coarse_menger_ball_separator_statement",
+   "to": "coarse_menger_paths_bounded_separator_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "",
+   "proof": "coarse_menger_ball_separator_implies_coarse_menger_paths_bounded_separator",
+   "note": "Rocq-only edge (no corpus relation), routed after edge-x271b (Lancelot's (718), (719)): the coarse Menger conjecture with separator radius c * d, c depending only on k (X39, studies:std_coarse_menger_conjecture_georgakopoulos_papasogl), implies it with any radius l(k, d) (X116, studies:std_coarse_menger_conjecture). Given c for k, l = c * d + 1: the paths case is the same proposition, |Z| < k gives |Z| <= k - 1, and a separating (c * d)-ball meets every simple S-T path (seq_separatorP), so its widening does (set_ball_mono). X116 is disproved at the pin (arXiv:2401.06685v2, Theorem 1.3; CORPUS_FEEDBACK item 80), so X39 is refuted too while the corpus records it open: whitelisted in meta/edge_status_exceptions.json, CORPUS_FEEDBACK item 100.",
+   "external": [],
+   "sources": [
+    "graph-theory-misc/implications_X116.v"
    ]
   },
   {
@@ -1360,6 +1373,19 @@
    "external": [],
    "sources": [
     "extremal-graph-theory/implications_X242.v"
+   ]
+  },
+  {
+   "from": "odd_hadwiger_chromatic_odd_minor_statement",
+   "to": "odd_hadwiger_odd_minor_free_colourable_statement",
+   "kind": "equiv",
+   "status": "verified",
+   "cite": "",
+   "proof": "odd_hadwiger_chromatic_odd_minor_equiv_odd_hadwiger_odd_minor_free_colourable",
+   "note": "Rocq-only edge (no corpus relation), routed after X305 (Lancelot's (712), (714)): the two phrasings of the odd Hadwiger conjecture, studies:std_odd_hadwiger_conjecture (t <= chi(G) gives an odd K_t minor) and studies:std_odd_hadwiger_conjecture_411 (for t >= 2, no odd K_t minor gives chi(G) <= t - 1), over X271's tree model; X271's Notes say that they are one conjecture. Forward: the contrapositive, on nat. Backward: the tree model is decidable on finite graphs (a Boolean form over finite functions); without a model, the empty model at t = 0, a one-vertex model at t = 1, and the second phrasing at t >= 2. Both rows are disproved at the pin.",
+   "external": [],
+   "sources": [
+    "minor-theory/implications_X271.v"
    ]
   },
   {
