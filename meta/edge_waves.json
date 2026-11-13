@@ -2292,14 +2292,14 @@
    "tier": "T2",
    "wave": "E7",
    "host": "minor-theory",
-   "state": "candidate",
-   "proof": null,
+   "state": "verified",
+   "proof": "theta_prism_even_wheel_free_bounded_treewidth_implies_even_hole_k4_diamond_free_bounded_treewidth",
    "external": [],
    "reason": "",
-   "proved_by": null,
-   "reviewed_by": null,
-   "reviewed_at": null,
-   "note": "Corpus argument: each of C_4, theta, prism and even wheel contains an even hole, so (even hole, K_4, diamond)-free graphs lie in the class C*_4 and the t = 4 instance of the source bounds their treewidth. FIVE of the six source hypotheses are now PROVED here plus in foundations/hole_containments.v: ~has_induced_copy G (cycle_graph 4) (even_hole_free_no_C4, from four_cycle_hole), ~has_induced_copy G x42_diamond (induced_free_no_copy), theta-freeness (even_hole_free_no_theta, from subdiv_KB23_even_hole: two of the three internally disjoint K_2,3-subdivision paths have equal parity and, subdiv_rep being EXACT, their union is an induced even cycle), prism-freeness (even_hole_free_no_prism, same parity argument on the three matching paths), x220_clique_free G 4 (K4_free_clique_free, via sub_card_exact + clique4_K4); and the treewidth-encoding gap is CLOSED (bridge F1, tw_le_x27). BLOCKED on exactly one containment: even_wheel_has_even_hole, i.e. x220_even_wheel_free G for an even-hole-free diamond-free G. The mathematics is settled (the hole is odd, so k even forces an arc of even length, and that arc plus the wheel centre is an even hole) but it needs the ARC DECOMPOSITION of a cyclic sequence by a subset of its vertices, machinery that neither MathComp path.v/arc.v nor this development provides. Theorem e051_modulo_even_wheel in this file states the edge modulo that single hypothesis, so the gap is exactly pinned."
+   "proved_by": "Arthur (Claude Opus 5.5), 2026-11-13: minor-theory implications_X42.v (arxiv:2203.06775#00 (X220) => arxiv:2001.01607#00 (X42); even_hole_free_even_wheel_free discharges the hypothesis of e051_modulo_even_wheel)",
+   "reviewed_by": "",
+   "reviewed_at": "",
+   "note": "Corpus argument: each of C_4, theta, prism and even wheel contains an even hole, so (even hole, K_4, diamond)-free graphs lie in the class C*_4 and the t = 4 instance of the source bounds their treewidth. All six source hypotheses are proved here and in foundations/hole_containments.v: ~has_induced_copy G (cycle_graph 4) (even_hole_free_no_C4, from four_cycle_hole), ~has_induced_copy G x42_diamond (induced_free_no_copy), theta-freeness (even_hole_free_no_theta, from subdiv_KB23_even_hole), prism-freeness (even_hole_free_no_prism, from prism_even_hole), x220_clique_free G 4 (K4_free_clique_free), and x220_even_wheel_free G (even_hole_free_even_wheel_free, without diamond-freeness: a hole of an even-hole-free graph is odd, so an even number k >= 4 of spokes leaves an arc of even length >= 2 between two consecutive spokes (even_arc, from the run parity lemma odd_block), and that arc plus the centre is an even hole (arc_hole)); the bridge F1 (tw_le_x27) converts the treewidth encoding. The theorem applies e051_modulo_even_wheel to the even-wheel containment."
   },
   "three_flow_statement->five_flow_statement:implies": {
    "gc": null,
