@@ -25012,13 +25012,13 @@
     ]
   },
   "counts": {
-    "files": 398,
-    "helpers": 2776,
+    "files": 399,
+    "helpers": 2777,
     "repeated_body_shapes": 153,
     "repeated_normalized_names": 223,
     "repeated_signature_shapes": 338,
-    "statements_excluded": 921,
-    "x_wave_helpers": 1615
+    "statements_excluded": 922,
+    "x_wave_helpers": 1616
   },
   "groups": {
     "body_shape_hash": {
@@ -28726,7 +28726,8 @@
         "Cycle.conjectures.U6.simple_mgraph",
         "Cycle.conjectures.X184.x184_z5_antisymmetric_flow",
         "Cycle.conjectures.X212.x212_orientable_5_even_double_cover",
-        "Cycle.conjectures.X228.x228_half_flow_pair"
+        "Cycle.conjectures.X228.x228_half_flow_pair",
+        "Cycle.conjectures.X306.x306_z3_connected"
       ],
       "b20ceb7909d2e98f0b74fe25031da57d8f2532735b4be59b37ad77de66c5bb8f": [
         "Hypergraph.conjectures.vocabulary_hypergraph.x104_uniform_equiv_hg_uniform",
@@ -40663,6 +40664,25 @@
       "qualified_name": "Cycle.conjectures.X24.x24_rainbow_cycle",
       "signature": "(G : sgraph) (q : nat) (col : {set G} -> 'I_q) (c : seq G) : Prop",
       "signature_shape_hash": "93f5fa4f7a2246f7af556b4eb6369cd99b99c447765739da9aa995fc7e940703"
+    },
+    {
+      "body_hash": "368bd29952f8e1701ba557c464a7f1377e6b229ca42c45b4bbf7f63df943092e",
+      "body_shape_hash": "368bd29952f8e1701ba557c464a7f1377e6b229ca42c45b4bbf7f63df943092e",
+      "declaration_hash": "e87b2b280310d1236d92f9bee97e9e012bf0a03f44fb28d54eaa638df03a3f2e",
+      "direct_consumers": [
+        "Cycle.conjectures.X306.jlpt_z3_connectivity_statement"
+      ],
+      "kind": "Definition",
+      "line": 20,
+      "local_dependencies": [],
+      "name": "x306_z3_connected",
+      "normalized_name": "z3_connected",
+      "package": "cycle-theory",
+      "path": "cycle-theory/theories/conjectures/X306.v",
+      "phase": "X306",
+      "qualified_name": "Cycle.conjectures.X306.x306_z3_connected",
+      "signature": "(G : mgraph) : Prop",
+      "signature_shape_hash": "b14cf0f39677bd91c15ddbac2c09cd8efab2992b68ea34fd94eb5549d405de6b"
     },
     {
       "body_hash": "9d43fbe99a73e654277934082dbb8bc7e73fef4287b739db225422e2109b3c09",
