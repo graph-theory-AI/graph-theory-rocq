@@ -12292,11 +12292,14 @@
    "audit_page": "todo"
   },
   "std_jaeger_linial_payan_tarsi_z_connectivity_conject": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x306-jlpt-z3-connectivity",
+   "package": "cycle-theory",
+   "note": "Authored in X306.v:jlpt_z3_connectivity_statement. The Jaeger-Linial-Payan-Tarsi conjecture as 2205.07498v3 states it (flowcrit.tex l.196-198, Conjecture 1.8), with its definitions (l.79-89, l.190-191): every 5-edge-connected multigraph (mgraph; edge_connected G 5) is Z_3-connected, a nowhere-zero Z_3-flow for every boundary of zero sum (x306_z3_connected). Loops and the per-component sum change nothing here (Notes). Open: proved for planar and projective-planar graphs (l.200-207); 6-edge-connected graphs are Z_3-connected (l.192-193)."
   },
   "std_jaeger_s_conjecture_high_girth_planar_graphs_and": {
    "statement": "done",
