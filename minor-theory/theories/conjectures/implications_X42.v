@@ -146,15 +146,15 @@ Qed.
       vertices has a four-element subset ([sub_card_exact]), which is again a clique
       ([clique_sub]) and induces a copy of ['K_4] ([clique4_K4]).
 
-    What is LEFT is exactly one containment, [x220_even_wheel_free G]: a hole [c] of an
+    The sixth is the even-wheel containment [x220_even_wheel_free G]: a hole [c] of an
     even-hole-free graph has ODD length, so if a vertex [v] outside [c] had an EVEN
     number [k >= 4] of neighbours on [c], the [k] arcs of [c] cut out by those
     neighbours would have lengths summing to the odd [#|c|], hence one arc would have
-    EVEN length, and that arc together with [v] is an even hole.  Formalising it needs
-    the arc decomposition of a cyclic sequence by a set of its vertices, which is a
-    genuinely new piece of machinery (nothing in [MathComp]'s [path.v] / [arc.v] gives
-    the arc lengths of a hole as a partition of its size).  [e051_modulo_even_wheel]
-    below states the edge modulo exactly that one containment, so the gap is pinned. *)
+    EVEN length, and that arc together with [v] is an even hole.  [e051_modulo_even_wheel]
+    below states the edge modulo that one containment.  The last section of this file
+    proves it ([even_hole_free_even_wheel_free], without diamond-freeness, through the
+    arc parity lemmas [odd_block] / [even_arc] and [arc_hole]), and the edge theorem
+    at its end applies [e051_modulo_even_wheel] to it. *)
 
 (** *** The three even-hole containments *)
 
@@ -207,7 +207,7 @@ exists c => G eh k4 dia; apply: tw_le_x27; apply: Hc.
 - exact: K4_free_clique_free k4.
 Qed.
 
-(*@EDGE from=theta_prism_even_wheel_free_bounded_treewidth_statement to=even_hole_k4_diamond_free_bounded_treewidth_statement kind=implies status=candidate proved=false cite="gc:e051" note="Corpus argument: each of C_4, theta, prism and even wheel contains an even hole, so (even hole, K_4, diamond)-free graphs lie in the class C*_4 and the t = 4 instance of the source bounds their treewidth. FIVE of the six source hypotheses are now PROVED here plus in foundations/hole_containments.v: ~has_induced_copy G (cycle_graph 4) (even_hole_free_no_C4, from four_cycle_hole), ~has_induced_copy G x42_diamond (induced_free_no_copy), theta-freeness (even_hole_free_no_theta, from subdiv_KB23_even_hole: two of the three internally disjoint K_2,3-subdivision paths have equal parity and, subdiv_rep being EXACT, their union is an induced even cycle), prism-freeness (even_hole_free_no_prism, same parity argument on the three matching paths), x220_clique_free G 4 (K4_free_clique_free, via sub_card_exact + clique4_K4); and the treewidth-encoding gap is CLOSED (bridge F1, tw_le_x27). BLOCKED on exactly one containment: even_wheel_has_even_hole, i.e. x220_even_wheel_free G for an even-hole-free diamond-free G. The mathematics is settled (the hole is odd, so k even forces an arc of even length, and that arc plus the wheel centre is an even hole) but it needs the ARC DECOMPOSITION of a cyclic sequence by a subset of its vertices, machinery that neither MathComp path.v/arc.v nor this development provides. Theorem e051_modulo_even_wheel in this file states the edge modulo that single hypothesis, so the gap is exactly pinned." *)
+(*@EDGE from=theta_prism_even_wheel_free_bounded_treewidth_statement to=even_hole_k4_diamond_free_bounded_treewidth_statement kind=implies status=verified proof=theta_prism_even_wheel_free_bounded_treewidth_implies_even_hole_k4_diamond_free_bounded_treewidth cite="gc:e051" note="Corpus argument: each of C_4, theta, prism and even wheel contains an even hole, so (even hole, K_4, diamond)-free graphs lie in the class C*_4 and the t = 4 instance of the source bounds their treewidth. All six source hypotheses are proved here and in foundations/hole_containments.v: ~has_induced_copy G (cycle_graph 4) (even_hole_free_no_C4, from four_cycle_hole), ~has_induced_copy G x42_diamond (induced_free_no_copy), theta-freeness (even_hole_free_no_theta, from subdiv_KB23_even_hole), prism-freeness (even_hole_free_no_prism, from prism_even_hole), x220_clique_free G 4 (K4_free_clique_free), and x220_even_wheel_free G (even_hole_free_even_wheel_free, without diamond-freeness: a hole of an even-hole-free graph is odd, so an even number k >= 4 of spokes leaves an arc of even length >= 2 between two consecutive spokes (even_arc, from the run parity lemma odd_block), and that arc plus the centre is an even hole (arc_hole)); the bridge F1 (tw_le_x27) converts the treewidth encoding. The theorem applies e051_modulo_even_wheel to the even-wheel containment." *)
 
 Print Assumptions tw_le_x27.
 Print Assumptions even_hole_free_no_C4.
@@ -217,3 +217,183 @@ Print Assumptions K4_free_clique_free.
 Print Assumptions e051_modulo_even_wheel.
 Print Assumptions x27_tw_le.
 Print Assumptions even_hole_diamond_free_bounded_tree_alpha_implies_even_hole_k4_diamond_free_bounded_treewidth.
+
+(** ** e051 closed — no even wheel in an even-hole-free graph ****************
+
+    [x220_even_wheel_free G] holds for EVERY even-hole-free [G]; diamond-freeness is
+    not needed.  Let [c] be a hole, so [size c] is odd, and [v] a vertex off [c] whose
+    number of spokes (neighbours on [c]) is even and at least 4.  Read the spokes as
+    the predicate [(. -- v)] on the cyclic sequence [c]: [even_arc] (from the parity
+    lemma [odd_block] on a rotation of [c] that starts at a spoke) finds two spokes [x]
+    and [y] whose run [q] of non-spokes in between has ODD size, with another spoke in
+    the rest of [c].  The arc [x :: q ++ [y]] plus [v] is a hole ([arc_hole]: a chord
+    among the arc's vertices would be a chord of [c], the rest of [c] keeps [x] and
+    [y] apart, and [v] sees only [x] and [y]) on [size q + 3] vertices: an even hole. *)
+
+Section Blocks.
+Variables (T : eqType) (S : pred T).
+
+(** A list ending in an [S] element whose length and number of [S] elements differ in parity has a block
+    -- a run [q] of non-[S] elements followed by an [S] element [y], starting the list or right after an
+    [S] element -- of odd length. *)
+Lemma odd_block (p : seq T) (z : T) :
+  S z -> odd (size (rcons p z)) != odd (count S (rcons p z)) ->
+  exists u q y w, [/\ rcons p z = u ++ q ++ y :: w, u = [::] \/ S (last z u), ~~ has S q, S y
+                    & odd (size q)].
+Proof.
+move: {2}(size p) (leqnn (size p)) => m; elim: m p => [|m IH] p.
+  by rewrite leqn0 size_eq0 => /eqP-> Sz /=; rewrite Sz.
+move=> lep Sz neq.
+case hp: (has S p); last first.
+  exists [::], p, z, [::]; split => //; [by rewrite cats1 | by left | by rewrite hp |].
+  move: neq; rewrite size_rcons -cats1 count_cat /= Sz addn0.
+  by move: hp; rewrite has_count lt0n => /negbFE/eqP->; case: (odd (size p)).
+case: (split_find hp) lep neq => y q w Sy qS lep neq.
+case oq: (odd (size q)).
+  by exists [::], q, y, (rcons w z); split => //; [rewrite -cats1 cat_rcons -catA /= cats1 | left].
+have lew : size w <= m.
+  by move: lep; rewrite size_cat size_rcons addSn ltnS => /(leq_trans (leq_addl _ _)).
+have qS0 : count S q = 0 by apply/eqP; rewrite -leqn0 leqNgt -has_count (negbTE qS).
+have neqw : odd (size (rcons w z)) != odd (count S (rcons w z)).
+  move: neq; rewrite rcons_cat size_cat count_cat size_rcons -[rcons q y]cats1 count_cat qS0 /= Sy.
+  by rewrite !oddD /= oq /=; case: (odd (size (rcons w z))); case: (odd (count S (rcons w z))).
+have [u' [q' [y' [w' [E u'S q'S Sy' oq']]]]] := IH w lew Sz neqw.
+exists (rcons q y ++ u'), q', y', w'; split => //.
+  by rewrite rcons_cat E catA.
+right; rewrite last_cat last_rcons.
+by case: u' E u'S => [|a u'] //= _ [//|].
+Qed.
+
+(** A cyclic sequence of odd length with an even number, at least three, of [S] elements has, up to
+    rotation, the form [x :: q ++ y :: rest] with [x] and [y] in [S], no [S] element in [q], [q] of odd
+    length and an [S] element in [rest].  [P] is any rotation-invariant property of the sequence. *)
+Lemma even_arc (P : seq T -> Prop) (c : seq T) :
+  (forall n s, P (rot n s) <-> P s) -> P c -> odd (size c) -> ~~ odd (count S c) -> 3 <= count S c ->
+  exists x q y rest, [/\ P (x :: q ++ y :: rest), S x && S y, ~~ has S q, odd (size q) & has S rest].
+Proof.
+move=> Prot Pc oc ec c3.
+have hc : has S c by rewrite has_count (leq_trans _ c3).
+have rest_has x q y rest : perm_eq (x :: q ++ y :: rest) c -> S x -> S y -> ~~ has S q -> has S rest.
+  move/permP/(_ S) => cnt Sx Sy qS; move: c3; rewrite -cnt /= count_cat /= Sx Sy.
+  move: qS; rewrite !has_count -leqNgt leqn0 => /eqP->.
+  by rewrite add0n !add1n !ltnS.
+have [x0 [p [Pp pp Sx0]]] : exists x0 p, [/\ P (x0 :: p), perm_eq (x0 :: p) c & S x0].
+  case: (split_find hc) Pc => x0 s1 s2 Sx0 _ Pc; exists x0, (s2 ++ s1).
+  have -> : x0 :: s2 ++ s1 = rot (size s1) (rcons s1 x0 ++ s2) by rewrite -cats1 -catA rot_size_cat.
+  by split => //; [apply/Prot | rewrite perm_rot].
+have Ps : P (rcons p x0) by rewrite -rot1_cons; apply/Prot.
+have ps : perm_eq (rcons p x0) c by rewrite -rot1_cons perm_rot.
+have neq : odd (size (rcons p x0)) != odd (count S (rcons p x0)).
+  by move/permP: (ps) => ->; rewrite (perm_size ps) oc; move: ec; case: (odd (count S c)).
+have [u [q [y [w [E uS qS Sy oq]]]]] := odd_block Sx0 neq.
+case/lastP: u E uS => [|u0 x] E uS.
+  case/lastP: w E => [|w0 z] E.
+    move: E; rewrite /= cats1 => /rcons_inj [pq _]; move/permP/(_ S): pp c3.
+    rewrite pq /= Sx0 => <-; move: qS; rewrite has_count -leqNgt leqn0 => /eqP->.
+    by [].
+  move: E; rewrite /= -rcons_cons -rcons_cat => /rcons_inj [pE _].
+  exists x0, q, y, w0; rewrite -pE Sx0 Sy; split => //.
+  by apply: rest_has Sx0 Sy qS; rewrite -pE.
+have Sx : S x by case: uS => [/eqP|]; [rewrite -size_eq0 size_rcons | rewrite last_rcons].
+have tE : rot (size u0) (rcons p x0) = x :: q ++ y :: (w ++ u0).
+  by rewrite E cat_rcons rot_size_cat /= -catA.
+exists x, q, y, (w ++ u0); rewrite Sx Sy; split => //.
+  by rewrite -tE; apply/Prot.
+by apply: rest_has Sx Sy qS; rewrite -tE perm_rot.
+Qed.
+
+End Blocks.
+
+(** A consecutive pair of [y :: r ++ [:: x]] with [r] nonempty has an end in [r]. *)
+Lemma spairs_inner (T : eqType) (y x : T) (r : seq T) (a b : T) :
+  r != [::] -> (a, b) \in spairs (y :: r ++ [:: x]) -> (a \in r) || (b \in r).
+Proof.
+elim: r y => [//|r1 r IH] y _.
+rewrite cat_cons spairs_cons in_cons xpair_eqE => /orP[/andP[_ /eqP->]|h].
+  by rewrite mem_head orbT.
+case: r IH h => [|r2 r] IH h.
+  by move: h; rewrite /= inE xpair_eqE => /andP[/eqP-> _]; rewrite mem_head.
+by case/orP: (IH r1 isT h) => h'; apply/orP; [left | right]; rewrite in_cons h' orbT.
+Qed.
+
+(** A hole [x :: q ++ y :: rest] and a vertex [v] off it adjacent to [x] and [y] but to no vertex of
+    a nonempty [q], with [rest] nonempty: [v], [x], [q], [y] form a hole. *)
+Lemma arc_hole (G : sgraph) (v x y : G) (q rest : seq G) :
+  induced_cycles.hole (x :: q ++ y :: rest) -> v \notin x :: q ++ y :: rest -> x -- v -> y -- v ->
+  ~~ has (fun u => u -- v) q -> q != [::] -> rest != [::] -> induced_cycles.hole (v :: x :: rcons q y).
+Proof.
+have AE : x :: q ++ y :: rest = (x :: rcons q y) ++ rest by rewrite cat_cons cat_rcons.
+case=> /andP[cyc un] [_ chl] vN xv yv qv q0 r0.
+set A := x :: rcons q y.
+have unA : uniq (A ++ rest) by rewrite -AE.
+have vA : v \notin A by apply: contra vN; rewrite AE mem_cat => ->.
+have pA : path (--) x (rcons q y).
+  by move: cyc; rewrite /= rcons_cat cat_path /= !rcons_path => /and4P[-> -> _ _].
+split; [apply/andP; split|split].
+- by rewrite /= rcons_path pA last_rcons sgP xv yv.
+- by rewrite cons_uniq vA; move: unA; rewrite cat_uniq => /andP[].
+- by rewrite /= size_rcons; case: (q) q0.
+have SpE : spairs (v :: A ++ [:: v]) = (v, x) :: spairs A ++ [:: (y, v)].
+  by rewrite /A cat_cons spairs_cons cats1 -!rcons_cons spairs_rcons2.
+have SpC : spairs (x :: (q ++ y :: rest) ++ [:: x]) = spairs A ++ spairs (y :: rest ++ [:: x]).
+  by rewrite -catA -cat_cons spairs_cat_mid.
+have disj z : z \in A -> z \in rest -> False.
+  move=> zA zr; move: unA; rewrite cat_uniq => /and3P[_ /negP nh _]; apply: nh.
+  by apply/hasP; exists z.
+have oldC a b : a \in A -> b \in A -> a -- b -> ((a, b) \in spairs A) || ((b, a) \in spairs A).
+  move=> aA bA ab; have inC z : z \in A -> z \in x :: q ++ y :: rest by rewrite AE mem_cat => ->.
+  move: (chl a b (inC a aA) (inC b bA) ab); rewrite consec_spairs SpC !mem_cat.
+  rewrite -!orbA => /or4P[h|h|h|h].
+  - by rewrite h.
+  - by case/orP: (spairs_inner r0 h) => hr; [case: (disj a aA hr) | case: (disj b bA hr)].
+  - by rewrite h orbT.
+  - by case/orP: (spairs_inner r0 h) => hr; [case: (disj b bA hr) | case: (disj a aA hr)].
+have vcase b : b \in A -> v -- b ->
+    ((v, b) \in spairs (v :: A ++ [:: v])) || ((b, v) \in spairs (v :: A ++ [:: v])).
+  rewrite SpE => bA vb; move: bA; rewrite /A in_cons => /predU1P[->|]; first by rewrite mem_head.
+  rewrite mem_rcons in_cons => /predU1P[->|bq]; first by rewrite !(in_cons, mem_cat, mem_seq1) eqxx !orbT.
+  by move/negP: qv; case; apply/hasP; exists b => //; rewrite sgP.
+move=> a b; rewrite [a \in _]in_cons [b \in _]in_cons => /predU1P[->|aA] /predU1P[->|bA] ab.
+- by rewrite sg_irrefl in ab.
+- by rewrite consec_spairs; apply: vcase.
+- by rewrite consec_spairs orbC; apply: vcase => //; rewrite sgP.
+- rewrite consec_spairs SpE.
+  by case/orP: (oldC a b aA bA ab) => h; rewrite !in_cons !mem_cat h !orbT.
+Qed.
+
+(** *** Even-hole-free graphs have no even wheel *)
+
+Lemma even_hole_free_even_wheel_free (G : sgraph) :
+  x27_even_hole_free G -> x220_even_wheel_free G.
+Proof.
+move=> eh v c hc vc; have uc : uniq c by case: hc => /andP[].
+have cardE : #|x220_spokes c v| = count (fun u => u -- v) c.
+  rewrite -size_filter; move/card_uniqP: (filter_uniq (fun u => u -- v) uc) => <-.
+  by apply: eq_card => u; rewrite !inE mem_filter andbC.
+rewrite cardE => s3; apply/negPn/negP => ev.
+case oc: (odd (size c)); last by apply: (eh c hc); rewrite oc.
+have Prot n s :
+    (induced_cycles.hole (rot n s) /\ v \notin rot n s) <-> (induced_cycles.hole s /\ v \notin s).
+  rewrite mem_rot; split=> -[h1 h2]; split=> //.
+    exact: (induced_cycles.hole_rot n s).1 h1.
+  exact: (induced_cycles.hole_rot n s).2 h1.
+have [x [q [y [rest [[hq vq] /andP[xv yv] qv oq rh]]]]] :=
+  even_arc (S := fun u => u -- v) (P := fun s => induced_cycles.hole s /\ v \notin s)
+    Prot (conj hc vc) oc ev s3.
+apply: (eh (v :: x :: rcons q y)).
+  by apply: arc_hole hq vq xv yv qv _ _; [case: (q) oq | case: (rest) rh].
+by rewrite /= size_rcons /= !negbK oq.
+Qed.
+
+(** *** The edge *)
+
+Theorem theta_prism_even_wheel_free_bounded_treewidth_implies_even_hole_k4_diamond_free_bounded_treewidth :
+  theta_prism_even_wheel_free_bounded_treewidth_statement ->
+  even_hole_k4_diamond_free_bounded_treewidth_statement.
+Proof.
+apply: e051_modulo_even_wheel => G eh _.
+exact: even_hole_free_even_wheel_free.
+Qed.
+
+Print Assumptions even_hole_free_even_wheel_free.
+Print Assumptions theta_prism_even_wheel_free_bounded_treewidth_implies_even_hole_k4_diamond_free_bounded_treewidth.
