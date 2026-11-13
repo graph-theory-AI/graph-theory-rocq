@@ -17,20 +17,20 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 160,
+  "edges": 162,
   "by_status": {
    "candidate": 32,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 94
+   "verified": 96
   },
   "by_kind": {
-   "equiv": 11,
+   "equiv": 13,
    "implies": 149,
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 112
+  "proved_theorems": 114
  },
  "edges": [
   {
@@ -1584,6 +1584,19 @@
    ]
   },
   {
+   "from": "polynomial_gyarfas_sumner_statement",
+   "to": "forest_free_polynomial_chi_bound_statement",
+   "kind": "equiv",
+   "status": "verified",
+   "cite": "",
+   "proof": "polynomial_gyarfas_sumner_equiv_forest_free_polynomial_chi_bound",
+   "note": "Rocq-only edge (no corpus relation), routed by Lancelot's (729), (731): the polynomial Gyarfas-Sumner conjecture as arxiv:2110.00278#00 (X3: for every forest H some c > 0 with chi <= omega^c on H-free graphs) and as arxiv:2202.05557#00 (X65: any polynomial in omega, which X65's Notes call formally weaker). Forward: the coefficient list nseq c 0 ++ [:: 1] has value omega^c. Backward: from X65's list p (s its coefficient sum, d its size less one), the exponent (s + d).+1: omega = 0 gives no vertex, omega = 1 no edge (chi <= 1), omega >= 2 gives p(omega) <= s * omega^d <= omega^(s + d).+1. Both rows are partial.",
+   "external": [],
+   "sources": [
+    "chromatic-theory/implications_X65.v"
+   ]
+  },
+  {
    "from": "polynomial_gyarfas_sumner_tree_statement",
    "to": "graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement",
    "kind": "implies",
@@ -2051,6 +2064,19 @@
    "external": [],
    "sources": [
     "chromatic-theory/implications_X219.v"
+   ]
+  },
+  {
+   "from": "triangle_packing_transversal_statement",
+   "to": "triangle_packing_vs_triangle_edge_transversal_statement",
+   "kind": "equiv",
+   "status": "verified",
+   "cite": "",
+   "proof": "triangle_packing_transversal_equiv_triangle_packing_vs_triangle_edge_transversal",
+   "note": "Rocq-only edge (no corpus relation), routed by Lancelot's (729), (730): the two encodings of Tuza's conjecture in packing-theory, erdos:167 (X5: a repetition-free list of pairwise edge-disjoint triangles, a transversal of genuine edges) and opg:triangle_packing_vs_triangle_edge_transversal (U9: a set packing, a transversal of any two-element vertex sets); X5's Notes call them twins. Forward: the set of a repetition-free list's members has its size (card_uniqP), and X5's transversal serves U9. Backward: enum P is a repetition-free list of P's members, and S :&: E(G) is a transversal of genuine edges, since a pair inside a clique is an edge (raw_pairs_cliqueE). Both rows are open.",
+   "external": [],
+   "sources": [
+    "packing-theory/implications_X5.v"
    ]
   },
   {
