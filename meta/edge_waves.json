@@ -1861,8 +1861,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Marcol (Claude Opus 5.5), 2026-11-13: cycle-theory implications_U10.v (opg:petersen_coloring_conjecture => opg:intersecting_two_perfect_matchings, the composition of gc:e089 and gc:e092)",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Arthur (second reader of the Petersen colouring => intersecting two perfect matchings edge (U10 Row 2 => Row 3, the composition of gc:e089 and gc:e092), 2026-11-13)",
+   "reviewed_at": "2026-11-13",
    "note": "Composition of the verified gc:e089 (Petersen colouring => Berge-Fulkerson, unconditional through petersen_BF_cover) with the verified gc:e092 (Berge-Fulkerson => intersecting two perfect matchings, through matchings_cuts.pm_meets_odd_cut); the Berge-Fulkerson route ends in the committed odd-edge-cut formulation itself."
   },
   "petersen_coloring_statement->m_n_cycle_covers_statement:implies": {
