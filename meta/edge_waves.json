@@ -1903,8 +1903,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (Claude Opus 5.5), 2026-11-13: chromatic-theory implications_X65.v (arxiv:2110.00278#00 (X3) <=> arxiv:2202.05557#00 (X65))",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (second reader of the polynomial Gyarfas-Sumner conjecture, chi <= omega^c (X3) <=> any polynomial in omega (X65) edge, 2026-11-13)",
+   "reviewed_at": "2026-11-13",
    "note": "Rocq-only edge (no corpus relation), routed by Lancelot's (729), (731): the polynomial Gyarfas-Sumner conjecture as arxiv:2110.00278#00 (X3: for every forest H some c > 0 with chi <= omega^c on H-free graphs) and as arxiv:2202.05557#00 (X65: any polynomial in omega, which X65's Notes call formally weaker). Forward: the coefficient list nseq c 0 ++ [:: 1] has value omega^c. Backward: from X65's list p (s its coefficient sum, d its size less one), the exponent (s + d).+1: omega = 0 gives no vertex, omega = 1 no edge (chi <= 1), omega >= 2 gives p(omega) <= s * omega^d <= omega^(s + d).+1. Both rows are partial."
   },
   "polynomial_gyarfas_sumner_tree_statement->graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement:implies": {
