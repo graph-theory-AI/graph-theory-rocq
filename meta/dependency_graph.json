@@ -17,20 +17,20 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 162,
+  "edges": 164,
   "by_status": {
    "candidate": 32,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 96
+   "verified": 98
   },
   "by_kind": {
    "equiv": 13,
-   "implies": 149,
+   "implies": 151,
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 114
+  "proved_theorems": 116
  },
  "edges": [
   {
@@ -413,6 +413,19 @@
    ]
   },
   {
+   "from": "directed_gyarfas_sumner_oriented_forest_dichromatic_statement",
+   "to": "directed_gyarfas_sumner_tournament_forest_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "",
+   "proof": "directed_gyarfas_sumner_oriented_forest_dichromatic_implies_directed_gyarfas_sumner_tournament_forest",
+   "note": "Rocq-only edge (no corpus relation), routed by Lancelot's (743), (744): the directed Gyarfas-Sumner conjecture with a function of the clique number (X71, studies:std_aboulker_charbit_naserasr_conjecture_directed_gy: for every oriented forest F, f(omega) dicolours every oriented F-free digraph) implies its case with a transitive tournament H also forbidden and one constant bound (X123, studies:std_directed_gy_rf_s_sumner_conjecture_aboulker_char). X123's class is X71's with H forbidden. With h = |H| > 0, a clique of the underlying graph of an oriented D is a tournament; one on at least 2^(h-1) vertices has a transitive h-set (ramsey_transitive), onto which H embeds rank to rank (rank_emb), so omega < 2^(h-1) and the bound is the maximum of f below 2^(h-1) (dicolorableb_monoS, iterated); h = 0 leaves the class empty. Both rows are open.",
+   "external": [],
+   "sources": [
+    "digraph-theory/implications_X123.v"
+   ]
+  },
+  {
    "from": "domination_in_cubic_graphs_statement",
    "to": "domination_in_plane_triangulations_statement",
    "kind": "implies",
@@ -475,6 +488,19 @@
    "external": [],
    "sources": [
     "extremal-graph-theory/implications_X223.v"
+   ]
+  },
+  {
+   "from": "erdos_kr_graphs_unbounded_statement",
+   "to": "erdos_944_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "",
+   "proof": "erdos_kr_graphs_unbounded_implies_erdos_944",
+   "note": "Rocq-only edge (no corpus relation), routed by Lancelot's (739), (740) and named a candidate in X276's Notes: (k,r)-graphs on every large order (X276, studies:std_erd_s_problem_on_k_r_graphs) imply that (k,r)-graphs exist (XE1, erdos:944). XE1's helpers are X276's inlined conditions (xe1_delete_edges is del_edge_set, xe1_edge_set is E(G)); take n := n0 and X276's graph G: chi(G) = k and vertex criticality carry over, and an edge set F with chi(G - F) < k and #|F| <= r would contradict k <= chi(G - F), so r < #|F|. Both rows are open.",
+   "external": [],
+   "sources": [
+    "atlas/implications_X276.v"
    ]
   },
   {
@@ -2147,7 +2173,7 @@
  ],
  "legacy": {
   "repo": "digraph-theory (absorbed)",
-  "implies_theorems_in_source": 65,
+  "implies_theorems_in_source": 66,
   "committed_dependency_graph_edges": 34,
   "note": "Legacy digraph-only graph: source _implies_ theorem count vs the committed graph differ (theorem-name pattern includes helper lemmas; the old extractor filtered). Reconcile within digraph-theory separately; it does NOT define the federation format."
  }

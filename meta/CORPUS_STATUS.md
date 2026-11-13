@@ -135,7 +135,7 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Conjecture dependency graph
 
-- **162 edges** — by status {'candidate': 32, 'conditional': 2, 'refuted-direction': 32, 'verified': 96}, by kind {'equiv': 13, 'implies': 149, 'refutes': 0, 'specializes': 0}; 114 Qed-proved relative theorems.
+- **164 edges** — by status {'candidate': 32, 'conditional': 2, 'refuted-direction': 32, 'verified': 98}, by kind {'equiv': 13, 'implies': 151, 'refutes': 0, 'specializes': 0}; 116 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
   - `alon_pach_solymosi_tournament_erdos_hajnal_statement` equiv `erdos_hajnal_tournament_transitive_subtournament_statement` (digraph-theory/implications_X136.v)
   - `asymmetric_bipartite_list_colouring_statement` implies `list_chromatic_number_and_maximum_degree_of_bipartit_statement` (atlas/implications_A1.v)
@@ -151,8 +151,10 @@ Area-local foundations (each area builds these on top of `base`):
   - `cycle_double_covers_containing_predefined_2_regular_statement` implies `cycle_double_cover_statement` (cycle-theory/implications_U6.v)
   - `delta122_hero_k1_plus_dipath2_free_statement` implies `delta122_hero_oriented_complete_multipartite_statement` (digraph-theory/implications_X221.v)
   - `delta122_hero_oriented_complete_multipartite_statement` implies `delta122_hero_k1_plus_dipath2_free_statement` (digraph-theory/implications_X221.v)
+  - `directed_gyarfas_sumner_oriented_forest_dichromatic_statement` implies `directed_gyarfas_sumner_tournament_forest_statement` (digraph-theory/implications_X123.v)
   - `edge_list_coloring_statement` implies `list_chromatic_index_even_clique_statement` (chromatic-theory/implications_X219.v)
   - `epsilon_bounded_h_free_anticomplete_pair_statement` implies `triangle_free_eps_bounded_anticomplete_pair_statement` (extremal-graph-theory/implications_X223.v)
+  - `erdos_kr_graphs_unbounded_statement` implies `erdos_944_statement` (atlas/implications_X276.v)
   - `erdos_lovasz_tihany_statement` implies `double_critical_graph_statement` (chromatic-theory/implications_U1.v)
   - `erdos_sos_tree_embedding_statement` implies `burr_erdos_tree_ramsey_statement` (extremal-graph-theory/implications_X215.v)
   - `eta_bounded_forest_free_classes_statement` implies `eta_bounded_path_free_classes_statement` (packing-theory/implications_X226.v)
@@ -233,13 +235,13 @@ Area-local foundations (each area builds these on top of `base`):
   - `triangle_free_min_degree_log_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
   - `triangle_free_planar_large_induced_two_degenerate_statement` implies `triangle_free_planar_five_sixths_two_degenerate_statement` (chromatic-theory/implications_X219.v)
   - `triangle_packing_transversal_statement` equiv `triangle_packing_vs_triangle_edge_transversal_statement` (packing-theory/implications_X5.v)
-- Edge evidence: **96 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
+- Edge evidence: **98 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
 - Conditional edges (with the external assumptions they are relative to):
   - `bounded_layered_treewidth_bounded_queue_number_statement` implies `planar_graphs_bounded_queue_number_statement` — external: `external_layered_treewidth_planar_statement` (atlas/implications_A1.v)
   - `reconstruction_statement` implies `edge_reconstruction_statement` — external: `external_whitney_line_inversion_statement` (reconstruction-theory/implications_U11.v)
 - Edge legs (overlay `edges` state over the non-alias rows of each corpus; derived from the evidence above by `meta/sync_edge_legs.py`):
   - **opg**: 42 done · 8 partial · 0 blocked · 177 todo  (227 rows)
-  - **v2**: 106 done · 5 partial · 0 blocked · 1562 todo  (1673 rows)
+  - **v2**: 110 done · 5 partial · 0 blocked · 1558 todo  (1673 rows)
 
 ### Documented non-edges (32 `refuted-direction`)
 
