@@ -2297,8 +2297,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (Claude Opus 5.5), 2026-11-13: minor-theory implications_X42.v (arxiv:2203.06775#00 (X220) => arxiv:2001.01607#00 (X42); even_hole_free_even_wheel_free discharges the hypothesis of e051_modulo_even_wheel)",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (second reader of the theta / prism / even-wheel-free (X220) => even-hole / K_4 / diamond-free (X42) edge, gc:e051, 2026-11-13)",
+   "reviewed_at": "2026-11-13",
    "note": "Corpus argument: each of C_4, theta, prism and even wheel contains an even hole, so (even hole, K_4, diamond)-free graphs lie in the class C*_4 and the t = 4 instance of the source bounds their treewidth. All six source hypotheses are proved here and in foundations/hole_containments.v: ~has_induced_copy G (cycle_graph 4) (even_hole_free_no_C4, from four_cycle_hole), ~has_induced_copy G x42_diamond (induced_free_no_copy), theta-freeness (even_hole_free_no_theta, from subdiv_KB23_even_hole), prism-freeness (even_hole_free_no_prism, from prism_even_hole), x220_clique_free G 4 (K4_free_clique_free), and x220_even_wheel_free G (even_hole_free_even_wheel_free, without diamond-freeness: a hole of an even-hole-free graph is odd, so an even number k >= 4 of spokes leaves an arc of even length >= 2 between two consecutive spokes (even_arc, from the run parity lemma odd_block), and that arc plus the centre is an even hole (arc_hole)); the bridge F1 (tw_le_x27) converts the treewidth encoding. The theorem applies e051_modulo_even_wheel to the even-wheel containment."
   },
   "three_flow_statement->five_flow_statement:implies": {
