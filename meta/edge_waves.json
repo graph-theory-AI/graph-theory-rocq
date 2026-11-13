@@ -2399,6 +2399,20 @@
    "reviewed_at": "2026-09-23",
    "note": "Corpus relation e082 (confirmed): identical hypothesis class (triangle-free planar) and identical conclusion type (an induced 2-degenerate subgraph on a prescribed fraction of the vertices), with a monotone parameter, 7/8 >= 5/6. The same vertex set S witnesses both bounds; the whole content is the cross-multiplied arithmetic 8|S| >= 7n implies 6|S| >= 5n."
   },
+  "triangle_packing_transversal_statement->triangle_packing_vs_triangle_edge_transversal_statement:equiv": {
+   "gc": null,
+   "tier": "T1",
+   "wave": "E7",
+   "host": "packing-theory",
+   "state": "verified",
+   "proof": "triangle_packing_transversal_equiv_triangle_packing_vs_triangle_edge_transversal",
+   "external": [],
+   "reason": "",
+   "proved_by": "Marcol (Claude Opus 5.5), 2026-11-13: packing-theory implications_X5.v (erdos:167 (X5) <=> opg:triangle_packing_vs_triangle_edge_transversal (U9))",
+   "reviewed_by": "",
+   "reviewed_at": "",
+   "note": "Rocq-only edge (no corpus relation), routed by Lancelot's (729), (730): the two encodings of Tuza's conjecture in packing-theory, erdos:167 (X5: a repetition-free list of pairwise edge-disjoint triangles, a transversal of genuine edges) and opg:triangle_packing_vs_triangle_edge_transversal (U9: a set packing, a transversal of any two-element vertex sets); X5's Notes call them twins. Forward: the set of a repetition-free list's members has its size (card_uniqP), and X5's transversal serves U9. Backward: enum P is a repetition-free list of P's members, and S :&: E(G) is a transversal of genuine edges, since a pair inside a clique is an edge (raw_pairs_cliqueE). Both rows are open."
+  },
   "triangle_packing_vs_triangle_edge_transversal_statement->jones_statement:implies": {
    "gc": null,
    "tier": "T4",
