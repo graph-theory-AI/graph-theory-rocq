@@ -6,7 +6,9 @@ Verifies, against the live opam switch `digraph`:
   2. the milestone .v files are listed in the package _CoqProject;
   3. the package compiles (coq_makefile + make);
   4. Print Assumptions is clean (Closed under the global context) for every statement node;
-  5. no top-level Axiom / Parameter / Admitted / Conjecture / Hypothesis (outside comments);
+  5. no Axiom / Parameter / Conjecture (any spelling) or Declare Instance / Module, no Variable /
+     Hypothesis / Context outside a Section, no Admitted / admit, Sections and Modules balanced
+     (outside comments and strings; gate_contracts.assumption_findings);
   6. each non-todo leg in the corpus overlay (meta/opg_legs_state.json or meta/v2_legs_state.json,
      routed by phase via meta/corpus_registry.py) is justified by an artifact + carries provenance;
      for source-verified corpora (v2), a statement leg may be `done` only with a complete
@@ -308,13 +310,16 @@ chk(compiles, compile_label,
     (f"dependency build failed: {dep_fail}" if dep_fail and mk.returncode == 0
      else (mk.stdout + mk.stderr)[-500:]))
 
-# 5) no top-level axioms/admits (outside comments)
-axiom_re = re.compile(r"^\s*(Axiom|Parameter|Admitted|Conjecture|Hypothesis|admit)\b", re.M)
+# 5) no axiom-like command and no admission (outside comments and strings): Axiom /
+# Parameter / Conjecture in any spelling and Declare Instance / Module anywhere,
+# Variable / Hypothesis / Context outside a Section, any Admitted / admit, and a
+# balanced Section / Module structure (gate_contracts.assumption_findings; a
+# Section-local Hypothesis is discharged at End and passes, a plural Axioms fails).
 ax_hits = []
 for p in (stmt, grounding, implications):
     if os.path.exists(p):
-        for m in axiom_re.finditer(strip_comments(open(p).read())):
-            ax_hits.append(f"{os.path.basename(p)}:{m.group(1)}")
+        for finding in CONTRACTS.assumption_findings(open(p).read()):
+            ax_hits.append(f"{os.path.basename(p)}:{finding}")
 chk(not ax_hits, "no top-level Axiom/Parameter/Admitted", f"found: {ax_hits}" if ax_hits else "")
 
 # 4) Print Assumptions clean for every statement node (probe compiled against the built .vo)
