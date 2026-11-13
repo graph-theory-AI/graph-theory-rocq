@@ -135,8 +135,9 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Conjecture dependency graph
 
-- **159 edges** — by status {'candidate': 32, 'conditional': 2, 'refuted-direction': 32, 'verified': 93}, by kind {'equiv': 10, 'implies': 149, 'refutes': 0, 'specializes': 0}; 111 Qed-proved relative theorems.
+- **160 edges** — by status {'candidate': 32, 'conditional': 2, 'refuted-direction': 32, 'verified': 94}, by kind {'equiv': 11, 'implies': 149, 'refutes': 0, 'specializes': 0}; 112 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
+  - `alon_pach_solymosi_tournament_erdos_hajnal_statement` equiv `erdos_hajnal_tournament_transitive_subtournament_statement` (digraph-theory/implications_X136.v)
   - `asymmetric_bipartite_list_colouring_statement` implies `list_chromatic_number_and_maximum_degree_of_bipartit_statement` (atlas/implications_A1.v)
   - `bajnok_brinkmann_six_exceptional_graphs_statement` implies `locke_finitely_many_statement` (atlas/implications_X287.v)
   - `bipartite_digraph_asymmetric_outdegree_girth_statement` implies `bipartite_digraph_outdegree_girth_statement` (digraph-theory/implications_X46.v)
@@ -230,13 +231,13 @@ Area-local foundations (each area builds these on top of `base`):
   - `tree_decomposition_leaf_edge_connected_statement` implies `barat_thomassen_tree_decomposition_statement` (atlas/implications_A1.v)
   - `triangle_free_min_degree_log_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
   - `triangle_free_planar_large_induced_two_degenerate_statement` implies `triangle_free_planar_five_sixths_two_degenerate_statement` (chromatic-theory/implications_X219.v)
-- Edge evidence: **93 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
+- Edge evidence: **94 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
 - Conditional edges (with the external assumptions they are relative to):
   - `bounded_layered_treewidth_bounded_queue_number_statement` implies `planar_graphs_bounded_queue_number_statement` — external: `external_layered_treewidth_planar_statement` (atlas/implications_A1.v)
   - `reconstruction_statement` implies `edge_reconstruction_statement` — external: `external_whitney_line_inversion_statement` (reconstruction-theory/implications_U11.v)
 - Edge legs (overlay `edges` state over the non-alias rows of each corpus; derived from the evidence above by `meta/sync_edge_legs.py`):
   - **opg**: 41 done · 8 partial · 0 blocked · 178 todo  (227 rows)
-  - **v2**: 102 done · 5 partial · 0 blocked · 1566 todo  (1673 rows)
+  - **v2**: 104 done · 5 partial · 0 blocked · 1564 todo  (1673 rows)
 
 ### Documented non-edges (32 `refuted-direction`)
 
