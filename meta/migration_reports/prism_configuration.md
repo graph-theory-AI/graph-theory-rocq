@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py prism_configuration --details /
 
 - Canonical: `Minor.foundations.prism_configurations.prism_configuration`.
 - Baseline: `29336a8c9d22d7016d665c696c444bfb15dbefb5`.
-- Scope: 2 helpers, 1 statements, 12 frozen objects, 21 recorded references.
-- Source checks: 94/94 pass; consistent.
+- Scope: 2 helpers, 1 statements, 12 frozen objects, 22 recorded references.
+- Source checks: 95/95 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

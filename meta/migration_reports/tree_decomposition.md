@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py tree_decomposition --details /t
 
 - Canonical: `GTBase.bag_decompositions.bag_decomposition`.
 - Baseline: `58d6d6090cfe12c200bc4ab64f86858074098294`.
-- Scope: 4 helpers, 11 statements, 64 frozen objects, 149 recorded references.
-- Source checks: 452/452 pass; consistent.
+- Scope: 4 helpers, 11 statements, 64 frozen objects, 150 recorded references.
+- Source checks: 453/453 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

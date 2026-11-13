@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py model_support --details /tmp/mi
 
 - Canonical: `GTBase.model_support.model_support`.
 - Baseline: `bb0bf3cd7c1d14e014704ebd5e24b03e4c475cb8`.
-- Scope: 3 helpers, 4 statements, 24 frozen objects, 147 recorded references.
-- Source checks: 203/203 pass; consistent.
+- Scope: 3 helpers, 4 statements, 24 frozen objects, 148 recorded references.
+- Source checks: 204/204 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
