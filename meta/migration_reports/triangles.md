@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py triangles --details /tmp/migrat
 
 - Canonical: `GTBase.triangles.triangle`.
 - Baseline: `748b76ad48b537fef8e5cf78400423d661f869ee`.
-- Scope: 7 helpers, 7 statements, 37 frozen objects, 72 recorded references.
-- Source checks: 270/270 pass; consistent.
+- Scope: 7 helpers, 7 statements, 37 frozen objects, 74 recorded references.
+- Source checks: 272/272 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
