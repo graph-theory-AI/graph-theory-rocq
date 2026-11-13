@@ -1,6 +1,20 @@
 {
  "_README": "Registry of every implication/equivalence edge between conjecture statements (plan 2026-09-24 'prove all implication relations'). Key: '<from>-><to>:<kind>' with formal names as in the manifests and kind in {implies, equiv, specializes}. Fields: gc = corpus relation id (meta/corpus_relations.json) or null for Rocq-only edges; tier T0 (syntactic instance) .. T4 (do not attempt), 'done' for edges verified before this plan; wave = E1..E9 (area proof waves), A1/A2 (atlas cross-package), V (vocabulary), M (metadata only), 'prior'; host = package whose implications_*.v holds the theorem; state in {verified, conditional, candidate, refuted-direction, blocked} (conditional = Qed under registered external theorems listed in `external`, see meta/external_theorems.json); proof = theorem name; reason is mandatory for refuted-direction/blocked; proved_by/reviewed_by must differ (second reader); note = free text. Agents flip only state/proof/external/reason/proved_by/reviewed_by/reviewed_at/note of their own wave's entries via keyed edits; meta/check_edges.py --registry checks consistency with meta/dependency_graph.json.",
  "edges": {
+  "alon_pach_solymosi_tournament_erdos_hajnal_statement->erdos_hajnal_tournament_transitive_subtournament_statement:equiv": {
+   "gc": null,
+   "tier": "T1",
+   "wave": "E7",
+   "host": "digraph-theory",
+   "state": "verified",
+   "proof": "alon_pach_solymosi_tournament_erdos_hajnal_equiv_erdos_hajnal_tournament_transitive_subtournament",
+   "external": [],
+   "reason": "",
+   "proved_by": "Arthur (Claude Opus 5.5), 2026-11-13: digraph-theory implications_X136.v (studies:std_alon_pach_solymosi_conjecture (X79) <=> studies:std_erd_s_hajnal_conjecture_for_tournaments (X136))",
+   "reviewed_by": "",
+   "reviewed_at": "",
+   "note": "Rocq-only edge (no corpus relation), routed after edge-x116 (Lancelot's (724), (725)): the two encodings of the Erdos-Hajnal conjecture for tournaments, studies:std_alon_pach_solymosi_conjecture (X79: a transitive subtournament on at least a vertices with |T|^en <= a^ed) and studies:std_erd_s_hajnal_conjecture_for_tournaments (X136: a vertex set S inducing a transitive subtournament with |G|^a <= |S|^b); X79's Notes say that they are one conjecture. Forward: the same exponents and the same S, since a <= |S| gives a^ed <= |S|^ed (leq_exp2r, 0 < ed). Backward: the same exponents, with a = |S|. Both rows are open."
+  },
   "approximation_ratio_for_maximum_edge_disjoint_paths_statement->finding_k_edge_outerplanar_graph_embeddings_statement:implies": {
    "gc": null,
    "tier": "T4",
