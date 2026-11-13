@@ -57,13 +57,13 @@
     Berge–Fulkerson).  Status: verified-literature.
 
     ────────────────────────────────────────────────────────────────────────────
-    AUDIT of the other U10 node pairs (recorded as candidates, NOT scheduled — no
-    verified-literature edge between them appears in the plan's §6 table):
-      • Berge–Fulkerson ⟹ Fan–Raspaud (Row 3) and Petersen ⟹ Fan–Raspaud are
-        plausible literature implications, but the committed Row-3 statement is the
-        "M1 ∩ M2 contains no odd edge-cut" formulation (not the three-matchings
-        empty-intersection form), so the exact endpoint match must be re-derived
-        before scheduling; left as candidates below.
+    AUDIT of the other U10 node pairs (first recorded as candidates, NOT scheduled
+    then, since no verified-literature edge between them is in the plan's §6 table):
+      • Berge–Fulkerson ⟹ Fan–Raspaud (Row 3) is VERIFIED below (gc:e092) on the
+        committed "M1 ∩ M2 contains no odd edge-cut" formulation itself (not the
+        three-matchings empty-intersection form), through pm_meets_odd_cut;
+      • Petersen ⟹ Fan–Raspaud is VERIFIED below as its composition with the
+        scheduled edge, so no endpoint match is left to re-derive.
     ──────────────────────────────────────────────────────────────────────────── *)
 
 From GraphTheory Require Import mgraph sgraph.
@@ -243,5 +243,19 @@ rewrite inE in e12; have [e1 e2] := andP e12.
 by move: (Htwice e); rewrite HL /= e1 e2 e3.
 Qed.
 
-(** ── Audited candidate (non-scheduled) edges (machine-readable) ── *)
-(*@EDGE from=petersen_coloring_statement to=intersecting_two_perfect_matchings_statement kind=implies status=candidate proved=false cite="snark-colouring literature" note="Petersen colouring is expected to imply the Fan-Raspaud-type Row 3, but only via the Berge-Fulkerson route whose endpoint match to the committed odd-edge-cut formulation is unverified" *)
+(** ================================================================= *)
+(** ** Petersen colouring =>  intersecting two perfect matchings (Row 2 => Row 3)
+
+    The composition of the two verified edges above: the scheduled Petersen
+    colouring => Berge-Fulkerson edge (gc:e089, unconditional through the
+    Petersen graph's own cover [petersen_BF_cover]) and Berge-Fulkerson =>
+    intersecting two perfect matchings (gc:e092).  The Berge-Fulkerson route
+    ends in the committed odd-edge-cut formulation itself. *)
+
+(*@EDGE from=petersen_coloring_statement to=intersecting_two_perfect_matchings_statement kind=implies status=verified proof=unconditional_petersen_coloring_implies_intersecting_two_perfect_matchings cite="snark-colouring literature" note="Composition of the verified gc:e089 (Petersen colouring => Berge-Fulkerson, unconditional through petersen_BF_cover) with the verified gc:e092 (Berge-Fulkerson => intersecting two perfect matchings, through matchings_cuts.pm_meets_odd_cut); the Berge-Fulkerson route ends in the committed odd-edge-cut formulation itself." *)
+Theorem unconditional_petersen_coloring_implies_intersecting_two_perfect_matchings :
+  petersen_coloring_statement -> intersecting_two_perfect_matchings_statement.
+Proof.
+move=> HP; apply: the_berge_fulkerson_implies_intersecting_two_perfect_matchings.
+exact: unconditional_petersen_coloring_implies_berge_fulkerson HP.
+Qed.
