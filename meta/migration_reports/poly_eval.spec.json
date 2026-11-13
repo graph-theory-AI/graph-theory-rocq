@@ -185,6 +185,11 @@
       "path": "minor-theory/theories/conjectures/grounding_X250.v",
       "name": "x220_polynomial_expansion",
       "note": "Wave X250 (2026-10-28): g250_edgeless_poly_expansion and g250_hyp_claim use the predicate at its exact type with the witness polynomial [::]; the proof shows E(H) = set0 and closes 0 <= x220_poly_eval [::] r * #|H| without unfolding the evaluation."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X65.v",
+      "name": "forest_free_polynomial_chi_bound_statement",
+      "note": "The Rocq-only edge X3 <=> X65 (edge-x65) cites X65's statement by name in its theorem type; the row is unchanged and the edge compiles against it."
     }
   ],
   "distinct_variants": [],

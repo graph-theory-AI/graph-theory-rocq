@@ -170,6 +170,11 @@
       "path": "chromatic-theory/theories/conjectures/implications_X66.v",
       "name": "good_trees_disjoint_union_good_statement",
       "note": "implications_X66 compiles unchanged; its poly_chi_bounded_x3W apply line works as before. X66's x66_good is frozen as X66Legacy.x66_good; the live disjoint union is untouched (A28 pending, not claimed)."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X65.v",
+      "name": "forest_free_polynomial_chi_bound_statement",
+      "note": "The Rocq-only edge X3 <=> X65 (edge-x65) cites X65's statement by name in its theorem type; the row is unchanged and the edge compiles against it."
     }
   ],
   "known_stale_snapshots": {

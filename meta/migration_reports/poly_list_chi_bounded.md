@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py poly_list_chi_bounded --details
 
 - Canonical: `Chromatic.foundations.chi_bounding.poly_list_chi_bounded`.
 - Baseline: `0449699300e18f2ddf0773ede1c81976e632a284`.
-- Scope: 2 helpers, 4 statements, 10 frozen objects, 42 recorded references.
-- Source checks: 94/94 pass; consistent.
+- Scope: 2 helpers, 4 statements, 10 frozen objects, 43 recorded references.
+- Source checks: 95/95 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
