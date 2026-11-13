@@ -11,8 +11,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (Claude Opus 5.5), 2026-11-13: digraph-theory implications_X136.v (studies:std_alon_pach_solymosi_conjecture (X79) <=> studies:std_erd_s_hajnal_conjecture_for_tournaments (X136))",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (second reader of the Erdos-Hajnal conjecture for tournaments, size witness (X79) <=> vertex set (X136) edge, 2026-11-13)",
+   "reviewed_at": "2026-11-13",
    "note": "Rocq-only edge (no corpus relation), routed after edge-x116 (Lancelot's (724), (725)): the two encodings of the Erdos-Hajnal conjecture for tournaments, studies:std_alon_pach_solymosi_conjecture (X79: a transitive subtournament on at least a vertices with |T|^en <= a^ed) and studies:std_erd_s_hajnal_conjecture_for_tournaments (X136: a vertex set S inducing a transitive subtournament with |G|^a <= |S|^b); X79's Notes say that they are one conjecture. Forward: the same exponents and the same S, since a <= |S| gives a^ed <= |S|^ed (leq_exp2r, 0 < ed). Backward: the same exponents, with a = |S|. Both rows are open."
   },
   "approximation_ratio_for_maximum_edge_disjoint_paths_statement->finding_k_edge_outerplanar_graph_embeddings_statement:implies": {
