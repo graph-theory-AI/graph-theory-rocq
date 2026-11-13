@@ -1195,7 +1195,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "theta_prism_even_wheel_free_bounded_treewidth_statement->even_hole_k4_diamond_free_bounded_treewidth_statement:implies:candidate",
+   "rocq_edge": "theta_prism_even_wheel_free_bounded_treewidth_statement->even_hole_k4_diamond_free_bounded_treewidth_statement:implies:verified",
    "argument": "Each of C_4, theta, prism, even wheel contains an even hole: C_4 is itself one; in a theta two of the three internally disjoint paths share parity and form an even induced cycle; in a prism two same-parity paths P_i, P_j plus the two triangle edges form an even hole of length l_i + l_j + 2 >= 4; in an even wheel either some sector between consecutive spokes has even length (even hole through the center) or all sectors are odd and, the number of spokes being even, the rim itself is an even hole. Hence (even hole, K_4, diamond)-free is contained in C*_4 = (C_4, diamond, theta, prism, even wheel, K_4)-free, and the t = 4 instance of the source bounds its treewidth (hence cliquewidth), answering the target. One sketch mis-phrases this as 'the t=4 case of the target', but the claimed direction source -> target is correct.",
    "citations": []
   },
