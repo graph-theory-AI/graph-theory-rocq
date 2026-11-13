@@ -475,8 +475,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (Claude Opus 5.5), 2026-11-13: digraph-theory implications_X123.v (studies:std_aboulker_charbit_naserasr_conjecture_directed_gy => studies:std_directed_gy_rf_s_sumner_conjecture_aboulker_char, X71 => X123)",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (second reader of the directed Gyarfas-Sumner edge, a bound by a function of the clique number (X71) => one constant bound with a transitive tournament also forbidden (X123), 2026-11-13)",
+   "reviewed_at": "2026-11-13",
    "note": "Rocq-only edge (no corpus relation), routed by Lancelot's (743), (744): the directed Gyarfas-Sumner conjecture with a function of the clique number (X71, studies:std_aboulker_charbit_naserasr_conjecture_directed_gy: for every oriented forest F, f(omega) dicolours every oriented F-free digraph) implies its case with a transitive tournament H also forbidden and one constant bound (X123, studies:std_directed_gy_rf_s_sumner_conjecture_aboulker_char). X123's class is X71's with H forbidden. With h = |H| > 0, a clique of the underlying graph of an oriented D is a tournament; one on at least 2^(h-1) vertices has a transitive h-set (ramsey_transitive), onto which H embeds rank to rank (rank_emb), so omega < 2^(h-1) and the bound is the maximum of f below 2^(h-1) (dicolorableb_monoS, iterated); h = 0 leaves the class empty. Both rows are open."
   },
   "domination_in_cubic_graphs_statement->domination_in_plane_triangulations_statement:implies": {
