@@ -14427,6 +14427,55 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Marcol (X305 wave verification, 2026-11-12)",
       "faithfulness_result": "Readback 2026-11-12 (verifier Marcol): 1/1 PASS against the pinned text, at math/arthur-x305-20261112 = 62bb58f2b3bd1991ac3c0f39a1169173ba2818b4 (five commits on 43b40f70, composed audit 81's regeneration = AUDITED-HEAD 80), after my design read ((498), FAITHFUL 1/1, no required change; packet x305-design-read-by-marcol 974b5ac0) of x305-design-by-arthur r1 (abcda171). At 62bb58f2 X305.v (7fca0097) and grounding_X305.v (29719549) are the packet's byte for byte; waves.X305 = the packet's x305-wave.json (jq -S), the only waves change; no helper (helper_ownership {}, no helper_sanity). The row, derived:drv_earthmoon_chiem_le_11 (earth_moon_biplanar_chi_le_11_statement), encoded as stated: forall G : sgraph, union_of_two_planar wagner_planar G -> χ([set: G]) <= 11. A finite simple graph is an sgraph. Biplanar (E = E1 + E2 with both (V, Ei) planar) is U13's shared union_of_two_planar wagner_planar (two symmetric irreflexive relations on G's vertices, each Wagner-planar as an sgraph on the same vertices, with x -- y = e1 x y || e2 x y; U13.v and grounding_U13.v unchanged by the branch): the record partitions E and U13 takes a union that may overlap, and the grounding proves them equivalent (g305_union_partition: delete from the second layer the edges of the first; a layer with fewer edges on the same vertices has only minors of the original, so stays Wagner-planar, g305_wagner_sub). Planar is wagner_planar (no K_5 and no K_{3,3} minor, GTBase), the record's own \"equivalently\" (Wagner's theorem for finite graphs), as U13's earth_moon_statement. A proper vertex colouring into {1, ..., 11} is χ([set: G]) <= 11: χ is the size of a least colouring (a partition into stable sets), color_bound gives χ <= #|P| for every colouring P, so χ <= 11 exactly when an 11-colouring exists (colour maps to 11 values and partitions into at most 11 stable sets are interchangeable); the graph with no vertex has χ = 0. \"Equivalently chi_EM <= 11\" is the same claim over all biplanar graphs; no quantifier is moved. Open: the OPG review at the pin gives 9 <= chi_EM <= 12, unchanged, and Gethner's conjecture that the answer is 11; the row is the upper sub-bracket. Grounding: hyp = 'K_4 is biplanar (both layers 'K_4, Wagner-planar by minor_card) and S bounds χ('K_4); ntt ~ V /\\ (V -> S) with V = every graph has χ <= 11 (g305_all_chi_le_11, the statement with biplanarity dropped), refuted at 'K_12 (χ = 12), and V -> S by weakening. Each claim names its statement (my emulation of gate_contracts; control g305_all_chi_le_11 does not), each Theorem is stated at its claim, and there is no theorem of type S or ~ S; my MCP build at the design read: BUILD OK, 6 proof blocks, Print Assumptions closed for both certificates. Lint: no finding on the statement body (no exists, no subtraction, no Prop quantifier; my emulation of the shipped rules); the allowlist is unchanged. Metadata at 62bb58f2: source hash recomputed (sha256(statement_text) 37a56cf5), equal to the manifest at 43b40f70, to the derived record and to the wave; README 639 / 12 / 39 / 983 -> 640 / 12 / 39 / 982; LANDED gains \"X305 topological-graph-theory\" after \"X303 minor-theory\", the Makefile otherwise 43b40f70's; _CoqProject gains X305.v and grounding_X305.v after implications_X228.v; legs: the row done / done, commit x305-earth-moon-chi-le-11, package topological-graph-theory, note = (\"Authored in X305.v:\" + the formal name + \". \" + the wave note)[:600] (518 characters), no other entry changed; no change to CORPUS_FEEDBACK, library_primitives, the helper classification, corpus_relations, edge_waves, v2_derived_rows or any migration report or spec; the commit messages of c1-c3 and c5 = the packet's build/msg files byte for byte, c4 the generated README-counts message. Consumers: no frozen name of any kind and no canonical short name (2,372 frozen and 101 canonical entries of the specs) in either file; no committed report change. Names: X305, the statement and the 10 g305_ names unused at 43b40f70 (control union_of_two_planar: 4 files). Dev run 1 (x305-dev-by-arthur 600c5e2a, -c OK, 43 listed = present; run-x305-1.sh ab02ce59 on 62bb58f2, JOB 09:02:23Z-10:18:04Z, WRAPPER rc 0): 29 STEP lines, 25 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields (W1 12 / 14: the contract's single error the missing verdict, the leg state only the row's missing source_verified_by / _at; the package compiles against U13; Print Assumptions clean on 1 statement + 2 grounding certificates; 10 forbidden shapes tested); B2 compiled X305.v and grounding_X305.v; W2 963 / 963 (reverse 918 / 918), W3 1 probed 0 FLAGGED, W4 75 files 0 active (74 allowlisted, none for X305), W5 / A11 names 103, G6 and A12 migration_report --all 101 / 101 with no report written; written only the three generated files (not committed). These fields are written on 62bb58f2, the chain verified here. By Lancelot's order note (707) X304 integrates first; Arthur then rebuilds c1-c5 on that head and commits these fields verbatim there (Arthur's (600)): X305.v, grounding_X305.v and the wave entry are to stay byte-identical across the rebuild, while its README counts and LANDED neighbour will differ from those quoted above for 62bb58f2. The real run on the rebuilt chain is the first gate run with these fields."
+    },
+    "X306": {
+      "phase": "X306",
+      "repo": "cycle-theory",
+      "defines_file": "X306.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X306 (A3 verifier Arthur; routing Lancelot (712), (713), (753); selection x306-selection-by-marcol, source reading x306-source-reading-by-marcol, design x306-design-by-marcol r1), branch math/marcol-x306-20261113, 2026-11-13",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x306-jlpt-z3-connectivity",
+      "rows": {
+        "std_jaeger_linial_payan_tarsi_z_connectivity_conject": {
+          "formal_name": "jlpt_z3_connectivity_statement",
+          "source_hash": "7a7eb92fd6b134d16ae86def12b4738ceefc0f9f46b3557b0403803e728b6cae",
+          "note": "The Jaeger-Linial-Payan-Tarsi conjecture as 2205.07498v3 states it (flowcrit.tex l.196-198, Conjecture 1.8), with its definitions (l.79-89, l.190-191): every 5-edge-connected multigraph (mgraph; edge_connected G 5) is Z_3-connected, a nowhere-zero Z_3-flow for every boundary of zero sum (x306_z3_connected). Loops and the per-component sum change nothing here (Notes). Open: proved for planar and projective-planar graphs (l.200-207); 6-edge-connected graphs are Z_3-connected (l.192-193).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g306_hyp_inhabited",
+              "claim": "g306_hyp_claim",
+              "references": [
+                "jlpt_z3_connectivity_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g306_not_trivially_true",
+              "claim": "g306_ntt_claim",
+              "references": [
+                "jlpt_z3_connectivity_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g306_helper_sanity",
+                "claim": "g306_helper_claim",
+                "references": [
+                  "x306_z3_connected"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x306_z3_connected": {
+          "classification": "paper_specific",
+          "reason": "Z_3-connectivity (group connectivity over Z_3) as Dvorak and Mohar define it after Jaeger, Linial, Payan and Tarsi (arXiv:2205.07498v3, flowcrit.tex l.80-89, l.190-191): for every Z_3-boundary a nowhere-zero Z_3-flow with that boundary, the antisymmetric flow on the symmetric orientation written on the multigraph's reference orientation."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
