@@ -492,6 +492,26 @@ Definition x125_almost_all
         note="replaces ratio-to-one whp with a fixed 9/10 event threshold",
         detector="lint",
     ),
+    Mutant(
+        name="x212_top_level_plural_axioms",
+        phase="X212",
+        package="cycle-theory",
+        replacements=(),
+        appendices=(
+            Appendix(
+                "cycle-theory/theories/conjectures/grounding_X212.v",
+                """
+
+Axioms rule5_canary_a rule5_canary_b : nat.
+""",
+            ),
+        ),
+        expected_signature="[FAIL] no top-level Axiom/Parameter/Admitted",
+        note=("appends a top-level PLURAL Axioms command (two unused constants) to "
+              "grounding_X212.v: rule 5's former line regex matched only singular spellings and let "
+              "it pass (Marcol's (537), 2026-11-13); killed by gate_contracts.assumption_findings, "
+              "which reads every spelling at any depth"),
+    ),
 ]
 
 

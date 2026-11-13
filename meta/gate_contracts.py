@@ -278,6 +278,200 @@ def validate_grounding_contract(
     return checks, errors
 
 
+def strip_comments_and_strings(src: str) -> str:
+    """:func:`strip_comments`, and string literals blanked too (offsets and line numbers kept).
+
+    A ``"`` opens a string in code and, as the Rocq lexer reads it, inside a comment; ``""`` is
+    an escaped quote. So ``"(*"`` opens no comment and a keyword inside a string is no command.
+    """
+    out: list[str] = []
+    i = depth = 0
+    n = len(src)
+    while i < n:
+        if src[i] == '"':
+            j = i + 1
+            while j < n:
+                if src[j] == '"':
+                    if src.startswith('""', j):
+                        j += 2
+                        continue
+                    break
+                j += 1
+            end = min(j + 1, n)
+            out.extend("\n" if c == "\n" else " " for c in src[i:end])
+            i = end
+        elif src.startswith("(*", i):
+            depth += 1
+            out.extend("  ")
+            i += 2
+        elif depth and src.startswith("*)", i):
+            depth -= 1
+            out.extend("  ")
+            i += 2
+        elif depth:
+            out.append("\n" if src[i] == "\n" else " ")
+            i += 1
+        else:
+            out.append(src[i])
+            i += 1
+    return "".join(out)
+
+
+# A sentence ends at a period followed by whitespace or the end of the text (not the second
+# period of "..", which only occurs in notations).
+SENTENCE_END_RE = re.compile(r"(?<!\.)\.(?=\s|$)")
+# Proof bullets and braces that can precede the first word of a sentence.
+SENTENCE_LEAD_RE = re.compile(r"^[-+*{}\s]+")
+# Attributes, localities and Rocq's control prefixes, which run the command they prefix (Time,
+# Timeout N, Redirect "file", Instructions, Profile; strings are blanked before matching). Fail and
+# Succeed are not prefixes here: no declaration survives either.
+COMMAND_PREFIX = (r"(?:#\[[^\]]*\]\s*"
+                  r"|(?:Local|Global|Polymorphic|Monomorphic|Cumulative|NonCumulative|Private"
+                  r"|Program|Time|Instructions|Profile|Redirect|Timeout\s+\d+)\s+)*")
+# Assumptions that stay global wherever they are declared, a Section included.
+GLOBAL_ASSUMPTION_RE = re.compile(
+    rf"^{COMMAND_PREFIX}(Axioms?|Parameters?|Conjectures?|Declare\s+Instance|Declare\s+Module)"
+    rf"(?![{IDENT_CHARS}])"
+)
+# Section-local assumptions: discharged at the Section's End, axioms anywhere else.
+LOCAL_ASSUMPTION_RE = re.compile(
+    rf"^{COMMAND_PREFIX}(Variables?|Hypothesis|Hypotheses|Context)(?![{IDENT_CHARS}])"
+)
+ADMISSION_RE = re.compile(
+    rf"(?<![{IDENT_CHARS}])(Admitted|admit|Admit\s+Obligations)(?![{IDENT_CHARS}])"
+)
+SECTION_OPEN_RE = re.compile(rf"^Section\s+({IDENT})$")
+MODULE_OPEN_RE = re.compile(
+    rf"^Module(?:\s+Type)?(?:\s+(?:Import|Export))?\s+({IDENT})(?![{IDENT_CHARS}])"
+)
+BLOCK_END_RE = re.compile(rf"^End\s+({IDENT})$")
+
+
+def rocq_sentences(clean: str) -> list[tuple[int, str]]:
+    """``(line, text)`` of each sentence of comment- and string-free source.
+
+    ``line`` is the line of the sentence's first non-blank character; ``text`` has its
+    whitespace collapsed and its leading proof bullets and braces removed.
+    """
+    sentences: list[tuple[int, str]] = []
+    start = 0
+    ends = [m.start() for m in SENTENCE_END_RE.finditer(clean)] + [len(clean)]
+    for end in ends:
+        piece = clean[start:end]
+        lead = len(piece) - len(piece.lstrip())
+        text = SENTENCE_LEAD_RE.sub("", " ".join(piece.split()))
+        if text:
+            sentences.append((clean.count("\n", 0, start + lead) + 1, text))
+        start = end + 1
+    return sentences
+
+
+def assumption_findings(src: str) -> list[str]:
+    """check_milestone rule 5 on one Rocq source; ``[]`` when it passes.
+
+    Findings, each ``line N: <command>`` or a structure note:
+    - an Axiom / Parameter / Conjecture command (singular or plural) or a Declare Instance /
+      Declare Module, at any depth (these stay global inside a Section);
+    - a Variable(s) / Hypothesis / Hypotheses / Context command outside every Section (inside a
+      Section it is discharged at End; a Module is not a Section);
+    - every Admitted, admit or Admit Obligations token, anywhere;
+    - an End that closes no open Section or Module, and a Section or Module left open.
+    Commands are read after any attributes, Local / Global / Polymorphic / Monomorphic /
+    Cumulative / NonCumulative / Private / Program prefixes and the control prefixes Time /
+    Timeout N / Redirect / Instructions / Profile; comments and strings are ignored.
+    """
+    clean = strip_comments_and_strings(src)
+    findings = [
+        f"line {clean.count(chr(10), 0, m.start()) + 1}: {' '.join(m.group(1).split())}"
+        for m in ADMISSION_RE.finditer(clean)
+    ]
+    stack: list[tuple[str, str]] = []
+    for line, text in rocq_sentences(clean):
+        opened = SECTION_OPEN_RE.match(text)
+        if opened:
+            stack.append(("Section", opened.group(1)))
+            continue
+        opened = MODULE_OPEN_RE.match(text)
+        if opened and ":=" not in text:
+            stack.append(("Module", opened.group(1)))
+            continue
+        closed = BLOCK_END_RE.match(text)
+        if closed:
+            if stack and stack[-1][1] == closed.group(1):
+                stack.pop()
+            else:
+                findings.append(
+                    f"line {line}: End {closed.group(1)} closes no open Section or Module")
+            continue
+        found = GLOBAL_ASSUMPTION_RE.match(text)
+        if not found and not any(kind == "Section" for kind, _name in stack):
+            found = LOCAL_ASSUMPTION_RE.match(text)
+        if found:
+            findings.append(f"line {line}: {' '.join(found.group(1).split())}")
+    findings.extend(f"end of file: {kind} {name} is not closed" for kind, name in stack)
+    return findings
+
+
+ASSUMPTION_REJECT_FIXTURES = [
+    # (source, a substring every rejection must contain)
+    ("Axioms a b : nat.", "Axioms"),
+    ("Parameters p q : nat.", "Parameters"),
+    ("Conjectures c : True.", "Conjectures"),
+    ("Axiom a : False.", "Axiom"),
+    ("Hypothesis h : True.", "Hypothesis"),
+    ("Hypotheses (h1 : True) (h2 : True).", "Hypotheses"),
+    ("Variable v : nat.", "Variable"),
+    ("Variables (x y : nat).", "Variables"),
+    ("#[local] Context (c : nat).", "Context"),
+    ("Section S. Axiom a : False. End S.", "Axiom"),
+    ("Section S. Parameters p q : nat. End S.", "Parameters"),
+    ("Polymorphic Axiom a : Type.", "Axiom"),
+    ("Local Parameter p : nat.", "Parameter"),
+    ("Declare Instance i : Inhabited nat.", "Declare Instance"),
+    ("Lemma l : True. Proof. admit. Admitted.", "Admitted"),
+    ("Lemma l : True /\\ True. Proof. split; admit. Qed.", "admit"),
+    ("Section S. Variable x : nat.", "not closed"),
+    ("End T.", "closes no open"),
+    ("Module M. Variable v : nat. End M.", "Variable"),
+    ("Section T. Variable z : nat. End T. Axiom a : False.", "Axiom"),
+    ("Lemma l : True. Proof. exact I. Qed. Variable v : nat.", "Variable"),
+    ("Time Axiom a : False.", "Axiom"),
+    ("Timeout 5 Parameters p q : nat.", "Parameters"),
+    ("Redirect \"log\" Axiom a : False.", "Axiom"),
+    # Deliberately fail-closed: a Parameter in a Module Type is a signature field, not an axiom,
+    # but a Module is not a Section, so it is rejected (no Module Type in the corpus).
+    ("Module Type T. Parameter p : nat. End T.", "Parameter"),
+]
+ASSUMPTION_ACCEPT_FIXTURES = [
+    "Section S. Variable x : nat. Hypothesis h : x = x. Hypotheses (h1 : True) (h2 : True).\n"
+    "Variables (a b : nat). #[local] Context (c : nat). End S.",
+    "(* Axiom a : False. Hypothesis h : True. admit *) Definition d := 0.",
+    "Definition s := \"(* Axiom a : False.\".\nDefinition t := 1.",
+    "Section A. Section B. Variable x : nat. End B. Hypothesis h : True. End A.",
+    "Module M. Section S. Variable x : nat. End S. End M.",
+    "Definition Axioms_count := 0. Definition admitted := 1.",
+    "Lemma l : True. Proof. - exact I. Qed.",
+    "Module N := M. Definition d := 0.",
+    # Fail and Succeed leave no declaration behind.
+    "Fail Axiom a : False.",
+    "Succeed Axiom a : False.",
+]
+
+
+def assumption_self_test() -> tuple[bool, list[str]]:
+    """Every reject fixture has a finding with its substring; every accept fixture has none."""
+    problems: list[str] = []
+    for source, want in ASSUMPTION_REJECT_FIXTURES:
+        found = assumption_findings(source)
+        if not any(want in finding for finding in found):
+            problems.append(f"reject fixture passed or wrong finding: {source!r} -> {found}")
+    for source in ASSUMPTION_ACCEPT_FIXTURES:
+        found = assumption_findings(source)
+        if found:
+            problems.append(f"accept fixture rejected: {source!r} -> {found}")
+    return not problems, problems
+
+
 def validate_self_test() -> int:
     alias_source = """
 Definition open_statement : Prop := True.
@@ -327,11 +521,16 @@ Definition unrelated_number : nat := 0.
     )
     grounding_ok = len(checks) == 3 and not good_errors \
         and any("not a proof declaration" in error for error in bad_errors)
-    ok = alias_ok and grounding_ok
-    print(f"gate-contract self-test {'OK' if ok else 'FAILED'}")
+    assumption_ok, assumption_problems = assumption_self_test()
+    ok = alias_ok and grounding_ok and assumption_ok
+    print(f"gate-contract self-test {'OK' if ok else 'FAILED'} "
+          f"(assumption fixtures: {len(ASSUMPTION_REJECT_FIXTURES)} reject, "
+          f"{len(ASSUMPTION_ACCEPT_FIXTURES)} accept)")
     if not ok:
         print(f"  alias_ok={alias_ok} good_errors={good_errors} bad_errors={bad_errors}",
               file=sys.stderr)
+        for problem in assumption_problems:
+            print(f"  {problem}", file=sys.stderr)
     return 0 if ok else 1
 
 
