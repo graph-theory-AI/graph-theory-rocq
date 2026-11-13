@@ -535,6 +535,20 @@
    "reviewed_at": "2026-09-23",
    "note": ""
   },
+  "erdos_kr_graphs_unbounded_statement->erdos_944_statement:implies": {
+   "gc": null,
+   "tier": "T1",
+   "wave": "E7",
+   "host": "atlas",
+   "state": "verified",
+   "proof": "erdos_kr_graphs_unbounded_implies_erdos_944",
+   "external": [],
+   "reason": "",
+   "proved_by": "Marcol (Claude Opus 5.5), 2026-11-13: atlas implications_X276.v (studies:std_erd_s_problem_on_k_r_graphs (X276) => erdos:944 (XE1))",
+   "reviewed_by": "Arthur (second reader of the Erdos (k,r)-graphs edge, (k,r)-graphs on every large order (X276) => (k,r)-graphs exist (erdos:944, XE1), 2026-11-13)",
+   "reviewed_at": "2026-11-13",
+   "note": "Rocq-only edge (no corpus relation), routed by Lancelot's (739), (740) and named a candidate in X276's Notes: (k,r)-graphs on every large order (X276, studies:std_erd_s_problem_on_k_r_graphs) imply that (k,r)-graphs exist (XE1, erdos:944). XE1's helpers are X276's inlined conditions (xe1_delete_edges is del_edge_set, xe1_edge_set is E(G)); take n := n0 and X276's graph G: chi(G) = k and vertex criticality carry over, and an edge set F with chi(G - F) < k and #|F| <= r would contradict k <= chi(G - F), so r < #|F|. Both rows are open."
+  },
   "erdos_lovasz_tihany_statement->double_critical_graph_statement:implies": {
    "gc": "e228",
    "tier": "T2",

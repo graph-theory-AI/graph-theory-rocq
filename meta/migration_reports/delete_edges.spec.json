@@ -393,6 +393,11 @@
       "path": "extremal-graph-theory/theories/conjectures/XE2.v",
       "name": "xe1_delete_edges",
       "note": "xe2_bipartite_plus_bounded_degree and xe2_diameter_critical_two (and through them erdos_613_statement and erdos_742_statement) use the extremal XE1 helper; XE2.v is unchanged and its chains are frozen in Extremal.migration.delete_edges.XE2Legacy."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_X276.v",
+      "name": "erdos_944_statement",
+      "note": "The Rocq-only edge X276 => erdos:944 (edge-x276) cites XE1's erdos_944_statement by name in its theorem type; the row is unchanged and the edge compiles against it."
     }
   ],
   "distinct_variants": [
