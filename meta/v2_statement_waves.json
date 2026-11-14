@@ -14512,6 +14512,103 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Arthur (X307 wave verification, 2026-11-14)",
       "faithfulness_result": "Readback 2026-11-14 (verifier Arthur): 1/1 PASS against the pinned text and the source, at math/marcol-x307r2-20261114 = 5982259714325797f9e2b839f656bf4ea1442e92 (5 commits on work/coordinator 036f13c7 = AUDITED-HEAD 90; c1 / c2 = r1's f2116d46 / 6874620d), after my design read ((668), SOUND, no required change; packet x307-design-read-by-arthur bc3f1e5e) of x307-design-by-marcol r1 (81c38021; Lancelot's review APPROVE, (775)) and my delta read ((669), SOUND; packet x307-design-r2-read-by-arthur ea5ba631) of x307-design-r2-by-marcol (54685ff4; Lancelot APPROVE, (776)), which added the foundation-fidelity allowlist entry after dev run 1 (x307-dev-by-marcol b92f0777) failed W4 on it. At 5982259714325797f9e2b839f656bf4ea1442e92 X307.v (70db5b8c) and grounding_X307.v (d2525485) are the packet's byte for byte; waves.X307 = the packet's x307-wave.json; no helper. studies:std_gr_nbaum_s_conjecture_torus_cubic_graphs (grunbaum_torus_cubic_statement), encoded as stated: forall G : sgraph, k_connected G 2 -> regular G 3 -> surface_embeddable 1 G -> ~ (exists col : {set G} -> 'I_3, proper_edge_colouring col) -> exists e1 e2 : {set G}, e1 \\in E(G), e2 \\in E(G), e1 != e2 and wagner_planar (del_edge_set G [set e1; e2]). Torus: surface_embeddable 1 G is a rotation system with (2 + E - V - F) %/ 2 <= 1, the orientable genus on a connected graph (sphere or torus, never the projective plane); k_connected G 2 gives connected [set: G] (g307_k2_connected), the guard the count needs; it equals the package's toroidal G (g307_surface_embeddable_genus, for every genus); genus 0 adds no graph, since a 2-connected cubic planar graph is 3-edge-colourable (l.135-137). Conclusion: del_edge_set keeps every vertex and removes exactly the listed pairs; wagner_planar (no K_5 and no K_3,3 minor) is planarity of a finite graph (Wagner); surface_embeddable 0 would be weaker, because the count over c components is 1 - c + the sum of their genera, so a 2-edge cut leaving a toroidal and a planar component would count 0. Two distinct edges of E(G); wagner_planar is closed under edge deletion (g307_planar_del) and a cubic vertex has two edges (g307_two_edges), so \"at most two\" is the same statement. k_connected G 2 (more than 2 vertices, no cut vertex; a cubic graph has at least 4 vertices) and regular G 3 (every vertex has 3 neighbours) are GTBase's. proper_edge_colouring constrains exactly two distinct edges at a common vertex, so no proper col : {set G} -> 'I_3 is \"not 3-edge-colorable\". Simple graphs: the source writes \"(multi)graph\" for multigraphs (l.99, l.101) and \"graph\" here; the Notes say the multigraph reading is not encoded, and my design read sketched why it adds no counterexample (a digon suppresses to an edge keeping cubic, toroidal and colourability; Lancelot's call (2026-11-14T15:44:13Z): statement leg done, no Notes change). The Notes are right: l.155-161 (Kochol at genus 5, smaller genera open, Vodopivec's snarks), main.bbl l.49-53 (Grunbaum 1968, Conjecture 6), the record's \"Conjecture 2\", status open. Lint: exactly two findings, both covered by new allowlist entries: exists-after-graph-forall (the two deleted edges of G) and foundation-fidelity (surface_embeddable is LIGHTWEIGHT, GTBase.surface; the entry answers its note: connectedness from k_connected G 2, and for a connected graph a rotation system is a cellular orientable embedding whose count is its genus, the minimum being the orientable genus, so surface_embeddable 1 G is embeddability in the torus); watchlist re-derived (309 enrolled, 14 non-FAITHFUL, X307 hits exactly surface_embeddable); check_milestone's rule 5: no assumption command, one Section (Colouring) with its Variable discharged at End, no admission. Grounding: hyp g307_hyp_claim [the Petersen graph is 2-connected, 3-regular, toroidal (an explicit rotation system with 5 faces, count (2 + 15 - 10 - 5) %/ 2 = 1) and not 3-edge-colourable (a pruned search over colour lists of its 15 edges), and the statement's conclusion for it], so the hypothesis is inhabited; ntt g307_ntt_claim [~ V /\\ (V -> S), V := every such graph is Wagner-planar: the Petersen graph has a K_5 minor (its spokes contracted)], so the edge deletion does the work; no helper_sanity (no helper); neither is a theorem of type S or ~S, both claims name the statement. MCP (my design read, Rocq 9.2): embedding.v at the base and X307.v as modules, then the grounding verbatim: BUILD OK 91 blocks, Print Assumptions closed for g307_hyp_inhabited, g307_not_trivially_true, g307_surface_embeddable_genus and g307_k2_connected. Metadata: source_hash 1/1 recomputed, equal; waves.X307 the only waves change, verifier fields empty before this; helper_ownership {}; no consumer entry (canonical names only), no CORPUS_FEEDBACK item (the pinned text agrees with the source); the lint allowlist gains exactly the two entries, last and in order (75 -> 77); legs: the row statement done / grounding done / edges todo, note 519, no other legs entry changed; README 642 / 12 / 39 / 980 -> 643 / 12 / 39 / 979; LANDED gains X307 topological-graph-theory after X306 cycle-theory; _CoqProject: X307.v after X305.v, grounding_X307.v after grounding_X305.v. Dev run 1b (x307-dev1b-by-marcol dc3abd87, -c OK, 47 listed = present): run-x307-1b.sh 7553e13b on 5982259714325797f9e2b839f656bf4ea1442e92, JOB 2026-11-14T17:15:16Z-2026-11-14T18:33:54Z, WRAPPER rc 0, RESULT PASS-WITH-EXPECTED, 31 STEP lines, 27 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields (W1 REJECTED 12/14 on exactly the audit + grounding contract, missing faithfulness_verified_by / faithfulness_result, and the leg state without source_verified_by; A3a / A3: \"X307: prospective wave lacks independent faithfulness verdict\"; A10: the two source_verified_by / source_verified_at tuple violations); the plans guarded EMPTY before the builds (base 0 files, topological-graph-theory 0 files, because dev run 1, x307-dev-by-marcol b92f0777 on r1 c5 758d5cec with the same X307.v and grounding_X307.v, compiled exactly these two files, no Error line); W1 other 12 checks pass (prospective helper ownership and hard lint; package compiles; no top-level Axiom/Parameter/Admitted; Print Assumptions clean on 1 statement + 2 grounding certificates; 10 exact-type probes); W2 966 / 966 documented, reverse coverage 921 / 921; W3 1 probed, 0 FLAGGED; W4 0 active findings (77 allowlisted); W5 / A11 names 103; G6 and A12 101 / 101 OK (no report drift); written: CORPUS_STATUS.md, library_helper_inventory.json and v2_corpus_manifest.json (generated, rule 8, not committed); END HEAD 5982259714325797f9e2b839f656bf4ea1442e92."
+    },
+    "X308": {
+      "phase": "X308",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X308.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X308 (A3 verifier Arthur; routing Lancelot (771), (773), (777); selection x308-selection-by-marcol, source reading x308-source-reading-by-marcol, design x308-design-by-marcol r1), branch math/marcol-x308-20261114, 2026-11-14",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x308-engbers-connected",
+      "rows": {
+        "std_engbers_question_on_h_colourings_of_connected_gr": {
+          "formal_name": "engbers_connected_h_colouring_maximisation_statement",
+          "source_hash": "cd0b71136305466b6fcf1c0887a0a9b032577923c0c06792d38d990171aa4c88",
+          "note": "Engbers' question on H-colourings of connected graphs, as its own record answers it (Guggiari and Scott, arXiv:1611.02911v2, source.tex l.71-74, Corollary 1.2): for delta >= 3 and every H (an sgraph with looped vertices L), K_(delta,n-delta) maximises hom(G, H) over connected G of minimum degree >= delta for n large, strictly against every G not isomorphic to it when H has a non-trivial component neither complete looped nor complete balanced bipartite. The literal question (uniquely, every H) fails at H = K_2.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g308_hyp_inhabited",
+              "claim": "g308_hyp_claim",
+              "references": [
+                "engbers_connected_h_colouring_maximisation_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g308_not_trivially_true",
+              "claim": "g308_ntt_claim",
+              "references": [
+                "engbers_connected_h_colouring_maximisation_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g308_helper_sanity",
+                "claim": "g308_helper_claim",
+                "references": [
+                  "x308_lhom_count",
+                  "x308_complete_looped",
+                  "x308_complete_balanced_bipartite",
+                  "x308_uniqueness_hyp"
+                ]
+              }
+            ]
+          }
+        },
+        "std_engbers_question_on_maximising_proper_q_colourin": {
+          "formal_name": "engbers_connected_q_colouring_uniqueness_statement",
+          "source_hash": "c4482c70cbf907eedc0d5a93d3827f8168babc86131ad408edbce6ef707d615f",
+          "note": "Engbers' question on proper q-colourings of connected graphs as its record states and answers it (Guggiari and Scott, arXiv:1611.02911v2, source.tex l.78-80, Corollary 1.3): for delta >= 3 and q > 2, K_(delta,n-delta) uniquely maximises the number of proper q-colourings (maps G -> 'I_q) over connected G of minimum degree >= delta for n large: strictly against every G of the class not isomorphic to it.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g308_q_hyp_inhabited",
+              "claim": "g308_q_hyp_claim",
+              "references": [
+                "engbers_connected_q_colouring_uniqueness_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g308_q_not_trivially_true",
+              "claim": "g308_q_ntt_claim",
+              "references": [
+                "engbers_connected_q_colouring_uniqueness_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g308_helper_sanity",
+                "claim": "g308_helper_claim",
+                "references": [
+                  "x308_lhom_count",
+                  "x308_complete_looped",
+                  "x308_complete_balanced_bipartite",
+                  "x308_uniqueness_hyp"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x308_lhom_count": {
+          "classification": "paper_specific",
+          "reason": "hom(G, H) for a target H that may have loops (arXiv:1611.02911v2, source.tex l.56: \"H a simple graph, possibly with loops\"), H represented as an sgraph with a set L of looped vertices: maps f with x -- y -> f x -- f y or (f x = f y and f x in L). The corpus hom counts (D2tur.hom_count, x135_hom_count) are loopless."
+        },
+        "x308_complete_looped": {
+          "classification": "paper_specific",
+          "reason": "the exception \"complete looped graph\" of Corollary 1.2 (source.tex l.71-74; l.151-153) on a vertex set C of H with loops L: every vertex of C looped, distinct vertices of C adjacent."
+        },
+        "x308_complete_balanced_bipartite": {
+          "classification": "paper_specific",
+          "reason": "the exception \"complete balanced bipartite graph\" K_(l,l) of Corollary 1.2 (source.tex l.71-74; l.155-157) on a vertex set C of H with loops L: no loop in C and a part A with #|A| = #|C :\\: A|, adjacency inside C exactly across the parts (as GTBase complete_bipartite, restricted to C)."
+        },
+        "x308_uniqueness_hyp": {
+          "classification": "paper_specific",
+          "reason": "the uniqueness condition of Corollary 1.2 (source.tex l.71-74) with the non-trivial guard (l.178; the proof treats maximum degree k >= 1, l.149, l.159, l.407): a component of H (nonempty, connected, closed under adjacency) with an edge or a loop that is neither complete looped nor complete balanced bipartite."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
