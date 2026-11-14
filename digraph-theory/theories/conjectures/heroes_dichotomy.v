@@ -138,8 +138,13 @@ Definition conj_4_4 : Prop :=
       For every hero H and every oriented forest F, the class of oriented digraphs with no
       induced copy of H and no induced copy of F has bounded dichromatic number IF AND ONLY IF F
       is a disjoint union of oriented stars or H is a transitive tournament.
-    Definitions: [hero H] - H is a hero, the class of digraphs with no induced copy of H having
-      bounded dichromatic number (conjectures/heroes.v); [oriented_forest F] and
+    Definitions: [hero H] - H is a hero: built from K1 by the recursion of conjectures/heroes.v
+      (hero_K1, hero_djoin, hero_c3L, hero_c3R: domination joins of two heroes, and the
+      directed-triangle substitutions C3(H, TT_k, K1) and C3(TT_k, H, K1) of a hero H), which
+      by Berger et al.'s Theorem 2.2 (an external result, stated but not proved here as
+      berger_characterization in conjectures/heroes.v) agrees with the semantic notion: the
+      class of tournaments with no induced copy of H has bounded dichromatic number;
+      [oriented_forest F] and
       [union_of_oriented_stars F] - oriented forest, resp. oriented forest with no path on four
       vertices (this file); [transitive_tournament H] - tournament with transitive arc relation
       (this file); [ind_free] (conjectures/heroes.v); [dichromatic_bounded]
