@@ -867,8 +867,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Marcol (Claude Opus 5.5), 2026-11-14: minor-theory implications_X220.v (arxiv:2109.01310#00 => arxiv:2305.16258#01; the two wall containments of e052_modulo_wall: kch_hole, the 15-vertex wall theta and its parity, the line graph through holes)",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Arthur (second reader of the four-family-free logarithmic treewidth (arxiv:2109.01310#00) => even-hole and K_t-free logarithmic treewidth (arxiv:2305.16258#01) edge, X220, gc:e052, 2026-11-14)",
+   "reviewed_at": "2026-11-14",
    "note": "Rocq-only, by e052_modulo_wall (this file) and its two wall containments, both proved here. (H1) e052_wall_even_hole: every subdivision W of x220_wall s, s >= 5, has an even hole. The 15-vertex theta of x220_wall 5 (branch vertices (2,1) and (2,3), paths of lengths 2, 4 and 10) gives three holes on 6, 12 and 14 vertices (by computation), carried into x220_wall s by an induced embedding and into W by kch_hole (fch_hole generalised to holes of any length: the image of a hole of K under an exact subdiv_model is a hole). Each theta edge lies on two of the three cycles, so the three image sizes add up to an even number and one hole is even. (H2) e052_line_even_hole: a hole on n >= 4 vertices of W gives the hole of its n edges in sline_graph W (e052_line_hole), so no prism is needed."
   },
   "four_flow_statement->five_flow_statement:implies": {
