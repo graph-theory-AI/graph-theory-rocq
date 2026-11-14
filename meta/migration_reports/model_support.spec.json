@@ -474,6 +474,11 @@
       "path": "minor-theory/theories/examples/prism_configurations.v",
       "name": "is_subdivision_of",
       "note": "Since 2026-10-08 (prism-configuration): the same example is a subdivision of prism_base (prism_split_is_subdivision) that is not a prism configuration."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X220.v",
+      "name": "subdiv_rep",
+      "note": "Since 2026-11-14 (edge e052): kch_hole and its lemmas take subdiv_rep m as an explicit premise (the image of a hole of K under an exact subdivision model is a hole of the host), and e052_wall_even_hole destructs is_subdivision_of into it."
     }
   ],
   "distinct_variants": []
