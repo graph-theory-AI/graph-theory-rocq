@@ -338,7 +338,17 @@
     {
       "path": "digraph-theory/theories/conjectures/implications_X221.v",
       "name": "unvd",
-      "note": "Module import line naming unvd (lexical match of the module name only)."
+      "note": "Import line, and e106_kext_bound, whose statement takes conj_9's unvd hypotheses (gc:e106); new code, unvd unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X221.v",
+      "name": "conj_9",
+      "note": "conj_9_implies_kextension_linear_unavoidability (gc:e106) takes conj_9 as its hypothesis; new code, conj_9 unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X221.v",
+      "name": "kextension_linear_unavoidability_statement",
+      "note": "conj_9_implies_kextension_linear_unavoidability (gc:e106) concludes it; new code, the statement unchanged."
     },
     {
       "path": "digraph-theory/theories/conjectures/reals_growth.v",
