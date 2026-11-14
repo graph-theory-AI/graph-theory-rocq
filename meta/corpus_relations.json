@@ -2539,7 +2539,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "conj_9->kextension_linear_unavoidability_statement:implies:candidate",
+   "rocq_edge": "conj_9->kextension_linear_unavoidability_statement:implies:verified",
    "argument": "The target's context states explicitly that it 'would follow from Conjecture 9' (the source). The argument is a standard k-fold application: a k-extension E of D in F is obtained by adding k vertices; deleting them one at a time and applying unvd(E) <= C * unvd(E - v) at each step gives unvd(E) <= C^k * unvd(D). If F is linearly unavoidable, unvd(D) <= c|V(D)| <= c|V(E)|, so unvd(E) <= (C^k c)|V(E)|, a linear bound with constant depending only on k and F. (Unavoidability, and hence the whole setting, concerns acyclic digraphs, matching the hypothesis of the source.) Direction as claimed; the converse is not asserted.",
    "citations": [
     "https://arxiv.org/abs/2410.23566"

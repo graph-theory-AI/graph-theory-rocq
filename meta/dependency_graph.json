@@ -19,10 +19,10 @@
  "totals": {
   "edges": 165,
   "by_status": {
-   "candidate": 28,
+   "candidate": 27,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 103
+   "verified": 104
   },
   "by_kind": {
    "equiv": 13,
@@ -30,7 +30,7 @@
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 121
+  "proved_theorems": 122
  },
  "edges": [
   {
@@ -325,10 +325,10 @@
    "from": "conj_9",
    "to": "kextension_linear_unavoidability_statement",
    "kind": "implies",
-   "status": "candidate",
+   "status": "verified",
    "cite": "gc:e106",
-   "proof": "",
-   "note": "Literature argument (the target's own context says it 'would follow from Conjecture 9'): delete the k added vertices one at a time and apply unvd(E) <= C * unvd(E-v) at each step, giving unvd(E) <= C^k * unvd(D) <= C^k * c * |V(E)|. Over the RELATIONAL unvd of conjectures/unvd.v this needs, for each intermediate digraph, that an unavoidability value EXISTS and that deleting a vertex of the k-set keeps the digraph acyclic and lands in the chain; neither is derivable from the two Props alone, so the edge is not Qed-closed here.",
+   "proof": "conj_9_implies_kextension_linear_unavoidability",
+   "note": "Proved: every acyclic digraph has a pinned unavoidability value (tournament unavoidability is decidable over relations on 'I_M through the foundation's tournament_unavoidable_unbundledE, and 2^|V| vertices suffice by a transitive subtournament, implications_X123's ramsey_transitive, along a topological order, subdivision's acyclic_topo_embed); acyclicity passes to induced subdigraphs; deleting the k added vertices one at a time is an isomorphism chain, so conj_9's C at each step gives unvd(E) <= max(C,1)^k * max(c,1) * |V(E)|, and a digraph with at most one vertex has value at most its order.",
    "external": [],
    "sources": [
     "digraph-theory/implications_X221.v"
@@ -2186,7 +2186,7 @@
  ],
  "legacy": {
   "repo": "digraph-theory (absorbed)",
-  "implies_theorems_in_source": 69,
+  "implies_theorems_in_source": 70,
   "committed_dependency_graph_edges": 34,
   "note": "Legacy digraph-only graph: source _implies_ theorem count vs the committed graph differ (theorem-name pattern includes helper lemmas; the old extractor filtered). Reconcile within digraph-theory separately; it does NOT define the federation format."
  }
