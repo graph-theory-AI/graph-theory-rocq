@@ -11392,11 +11392,14 @@
    "note": "PARTIAL (proxy) — Fresh-rows independent adversarial audit (wf_bdaea8ab, 2026-07-18): Encoding is an exact rendering of the extracted statement (Conj 1.4 of arXiv 1611.02911 Guggiari-Scott, attrib. Engbers): quantifier order forall delta,H -> exists N=c(delta,H) -> forall n>=N, |G|=n, mindeg>=delta correct; K_{delta+1}=Kn(delta.+1), K_{delta,delta}=KB delta delta, K_{delta,n-delta}=KB delta (n-delta) all verified; fractional exponents cleared exactly by raising to D=2*delta*(delta+1) giving integral exponents 2*d Authored in X135.v:engbers_homomorphism_count_maximisation_statement."
   },
   "std_engbers_question_on_h_colourings_of_connected_gr": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x308-engbers-connected",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X308.v:engbers_connected_h_colouring_maximisation_statement. Engbers' question on H-colourings of connected graphs, as its own record answers it (Guggiari and Scott, arXiv:1611.02911v2, source.tex l.71-74, Corollary 1.2): for delta >= 3 and every H (an sgraph with looped vertices L), K_(delta,n-delta) maximises hom(G, H) over connected G of minimum degree >= delta for n large, strictly against every G not isomorphic to it when H has a non-trivial component neither complete looped nor complete balanced bipartite. The literal question (uniquely, every H) fails at H = K_2."
   },
   "std_engbers_question_on_maximising_h_colourings_with": {
    "statement": "todo",
@@ -11406,11 +11409,14 @@
    "audit_page": "todo"
   },
   "std_engbers_question_on_maximising_proper_q_colourin": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x308-engbers-connected",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X308.v:engbers_connected_q_colouring_uniqueness_statement. Engbers' question on proper q-colourings of connected graphs as its record states and answers it (Guggiari and Scott, arXiv:1611.02911v2, source.tex l.78-80, Corollary 1.3): for delta >= 3 and q > 2, K_(delta,n-delta) uniquely maximises the number of proper q-colourings (maps G -> 'I_q) over connected G of minimum degree >= delta for n large: strictly against every G of the class not isomorphic to it."
   },
   "std_eppstein_s_open_problem_1_linear_subgraph_charac": {
    "statement": "todo",
