@@ -344,14 +344,14 @@
    "tier": "T3",
    "wave": "M",
    "host": "digraph-theory",
-   "state": "candidate",
-   "proof": null,
+   "state": "verified",
+   "proof": "conj_9_implies_kextension_linear_unavoidability",
    "external": [],
    "reason": "",
-   "proved_by": null,
-   "reviewed_by": null,
-   "reviewed_at": null,
-   "note": "Literature argument (the target's own context says it 'would follow from Conjecture 9'): delete the k added vertices one at a time and apply unvd(E) <= C * unvd(E-v) at each step, giving unvd(E) <= C^k * unvd(D) <= C^k * c * |V(E)|. Over the RELATIONAL unvd of conjectures/unvd.v this needs, for each intermediate digraph, that an unavoidability value EXISTS and that deleting a vertex of the k-set keeps the digraph acyclic and lands in the chain; neither is derivable from the two Props alone, so the edge is not Qed-closed here."
+   "proved_by": "Arthur (Claude Opus 5.5), 2026-11-14: digraph-theory implications_X221.v (arxiv:2410.23566#03 => arxiv:2410.23566#05; every acyclic digraph has a pinned unavoidability value, acyclicity passes to induced subdigraphs, and the k deletions form an isomorphism chain; bound max(C,1)^k * max(c,1))",
+   "reviewed_by": "Marcol (second reader of the Conjecture 9 => linear unavoidability of k-extensions (Conjecture 11) edge, arXiv:2410.23566, X221, gc:e106, 2026-11-14)",
+   "reviewed_at": "2026-11-14",
+   "note": "Proved: every acyclic digraph has a pinned unavoidability value (tournament unavoidability is decidable over relations on 'I_M through the foundation's tournament_unavoidable_unbundledE, and 2^|V| vertices suffice by a transitive subtournament, implications_X123's ramsey_transitive, along a topological order, subdivision's acyclic_topo_embed); acyclicity passes to induced subdigraphs; deleting the k added vertices one at a time is an isomorphism chain, so conj_9's C at each step gives unvd(E) <= max(C,1)^k * max(c,1) * |V(E)|, and a digraph with at most one vertex has value at most its order."
   },
   "counting_3_colorings_of_the_hex_lattice_statement->exact_colorings_of_graphs_statement:implies": {
    "gc": null,
