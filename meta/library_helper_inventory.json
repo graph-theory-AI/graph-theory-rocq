@@ -25019,13 +25019,13 @@
     ]
   },
   "counts": {
-    "files": 399,
-    "helpers": 2777,
+    "files": 401,
+    "helpers": 2781,
     "repeated_body_shapes": 153,
     "repeated_normalized_names": 223,
-    "repeated_signature_shapes": 338,
-    "statements_excluded": 922,
-    "x_wave_helpers": 1616
+    "repeated_signature_shapes": 339,
+    "statements_excluded": 925,
+    "x_wave_helpers": 1620
   },
   "groups": {
     "body_shape_hash": {
@@ -27822,6 +27822,10 @@
         "Packing.conjectures.X47.x47_edge_connected",
         "Topological.conjectures.D3D6_unblocked.obstacle_number_at_most",
         "Topological.conjectures.X202.x202_cop_number"
+      ],
+      "2d0dd7d9e7050e442770b210450e87fd7468250c65895cdacad781ecf69c4fd0": [
+        "Extremal.conjectures.X308.x308_complete_balanced_bipartite",
+        "Extremal.conjectures.X308.x308_complete_looped"
       ],
       "2d2ba99afb6352521678a4783f8f4e2987abd9b45e353d95d0c92302b5da996d": [
         "Chromatic.conjectures.X28.x28_no_cycle_length_between",
@@ -60671,6 +60675,85 @@
       "qualified_name": "Extremal.conjectures.X30.x30_bipartite_induced_log_min_degree",
       "signature": "(G : sgraph) (cnum cden d : nat) : Prop",
       "signature_shape_hash": "7bd76beb6d908ff5f279e458a9ca528bad1742a9d019a2f56d175a8eb98752a2"
+    },
+    {
+      "body_hash": "6ef79fd6401224f376332227c010de96c11a9bfd1de931b64fc11685facd7638",
+      "body_shape_hash": "6ef79fd6401224f376332227c010de96c11a9bfd1de931b64fc11685facd7638",
+      "declaration_hash": "57103ae6bc26bb455173641fb0d99ebd67ebc3bcf56df80713fd5929aadb46ab",
+      "direct_consumers": [
+        "Extremal.conjectures.X308.engbers_connected_h_colouring_maximisation_statement"
+      ],
+      "kind": "Definition",
+      "line": 12,
+      "local_dependencies": [],
+      "name": "x308_lhom_count",
+      "normalized_name": "lhom_count",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X308.v",
+      "phase": "X308",
+      "qualified_name": "Extremal.conjectures.X308.x308_lhom_count",
+      "signature": "(G H : sgraph) (L : {set H}) : nat",
+      "signature_shape_hash": "e7c82ec5b7d1cf98788529a2d6d901e793c8b1eccc2337f6709f2af6d2ae963f"
+    },
+    {
+      "body_hash": "1d39fdbd8d56e97e4bf32b72970b9fd66621c1e473a0f1c0d9f261a512314d3a",
+      "body_shape_hash": "1d39fdbd8d56e97e4bf32b72970b9fd66621c1e473a0f1c0d9f261a512314d3a",
+      "declaration_hash": "f187e838cacf660756f6f46e1c553d7e6928e2917aca2a02fbaec75ad1d53425",
+      "direct_consumers": [
+        "Extremal.conjectures.X308.x308_uniqueness_hyp"
+      ],
+      "kind": "Definition",
+      "line": 23,
+      "local_dependencies": [],
+      "name": "x308_complete_looped",
+      "normalized_name": "complete_looped",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X308.v",
+      "phase": "X308",
+      "qualified_name": "Extremal.conjectures.X308.x308_complete_looped",
+      "signature": "(H : sgraph) (L : {set H}) (C : {set H}) : Prop",
+      "signature_shape_hash": "2d0dd7d9e7050e442770b210450e87fd7468250c65895cdacad781ecf69c4fd0"
+    },
+    {
+      "body_hash": "24a4a3595226c54c1799a379d1fb3c1fa84c9f26be7357d06b2fdfb36c917a2d",
+      "body_shape_hash": "24a4a3595226c54c1799a379d1fb3c1fa84c9f26be7357d06b2fdfb36c917a2d",
+      "declaration_hash": "aaa19ab55ca89083e3d540942aeb2c166ecb76487bca62bb06da31e407239ffb",
+      "direct_consumers": [
+        "Extremal.conjectures.X308.x308_uniqueness_hyp"
+      ],
+      "kind": "Definition",
+      "line": 28,
+      "local_dependencies": [],
+      "name": "x308_complete_balanced_bipartite",
+      "normalized_name": "complete_balanced_bipartite",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X308.v",
+      "phase": "X308",
+      "qualified_name": "Extremal.conjectures.X308.x308_complete_balanced_bipartite",
+      "signature": "(H : sgraph) (L : {set H}) (C : {set H}) : Prop",
+      "signature_shape_hash": "2d0dd7d9e7050e442770b210450e87fd7468250c65895cdacad781ecf69c4fd0"
+    },
+    {
+      "body_hash": "26ef7bcdce0d376dbe30eabbfc1b0bdf99d0fb9a8024b22d6218ff33b4690680",
+      "body_shape_hash": "35fb3e322381a8796ce7df0f23759c383ff6da87f5501106360f0231553b8348",
+      "declaration_hash": "e6c8c4c9c112b6c3e8bfd448132088208f546cf8b63b7d22566ef8de4376b50a",
+      "direct_consumers": [
+        "Extremal.conjectures.X308.engbers_connected_h_colouring_maximisation_statement"
+      ],
+      "kind": "Definition",
+      "line": 37,
+      "local_dependencies": [
+        "x308_complete_balanced_bipartite",
+        "x308_complete_looped"
+      ],
+      "name": "x308_uniqueness_hyp",
+      "normalized_name": "uniqueness_hyp",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X308.v",
+      "phase": "X308",
+      "qualified_name": "Extremal.conjectures.X308.x308_uniqueness_hyp",
+      "signature": "(H : sgraph) (L : {set H}) : Prop",
+      "signature_shape_hash": "fe55a6ec4b143ceb5613e4b2e2a0005583f6e7810eda1a83c09c7f39a8368dd7"
     },
     {
       "body_hash": "e4408f2db71d93537093e7dd2dd69aaf55568e65fbe5e1ab1bf5f48158bdd073",
