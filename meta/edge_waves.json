@@ -62,14 +62,14 @@
    "tier": "T3",
    "wave": "E3",
    "host": "digraph-theory",
-   "state": "candidate",
-   "proof": null,
+   "state": "verified",
+   "proof": "bang_jensen_yeo_SAD_implies_arc_disjoint_out_branching_and_in_branching",
    "external": [],
    "reason": "",
-   "proved_by": null,
-   "reviewed_by": null,
-   "reviewed_at": null,
-   "note": "CONDITIONAL planned: Edmonds' branching theorem (k-arc-strong => k arc-disjoint out-branchings)"
+   "proved_by": "Arthur (Claude Opus 5.5), 2026-11-14: digraph-theory implications_P9.v (opg:arc_disjoint_strongly_connected_spanning_subdigraphs => opg:arc_disjoint_out_branching_and_in_branching; one shortest-walk branching in each SAD part, no Edmonds)",
+   "reviewed_by": "",
+   "reviewed_at": "",
+   "note": "Rocq-only, no Edmonds: take k := K. karcstrong D K gives 0 < #|D| and arc_strong D K (the same cuts), so SAD gives disjoint spanning strong arc sets A1 and A2. Parents on shortest A1-walks from u give an out-branching and on shortest A2-walks to v an in-branching (acyclic: the walk length is strictly monotone along kept arcs). They are arc-disjoint because A1 and A2 are."
   },
   "bene_conjecture_graph_theoretic_form_0_statement->shuffle_exchange_conjecture_statement:implies": {
    "gc": null,
