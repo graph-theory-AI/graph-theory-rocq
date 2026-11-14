@@ -330,14 +330,14 @@
    "tier": "T2",
    "wave": "E3",
    "host": "digraph-theory",
-   "state": "candidate",
-   "proof": null,
+   "state": "verified",
+   "proof": "conj_4_2_implies_conj_4_4_unconditional",
    "external": [],
    "reason": "",
-   "proved_by": null,
-   "reviewed_by": null,
-   "reviewed_at": null,
-   "note": "CONDITIONAL planned: needs the external theorem 'every transitive tournament TT_l is a hero' (Berger-Choromanski-Chudnovsky-Fox-Loebl-Scott-Seymour-Thomasse 2013). [hero H] of conjectures/heroes.v is the Prop 'the H-free oriented digraphs have bounded dichromatic number', NOT a syntactic property of H, so the instance H := TT l of conj_4_2 cannot be taken without it; the rest of the argument IS formalized in conjectures/implications.v as conj_4_2_implies_conj_4_4, which carries (forall l, hero (TT l)) as an explicit hypothesis (plus the class inclusion no_induced_Kl l D -> ind_free (TT l) D)."
+   "proved_by": "Arthur (Claude Opus 5.5), 2026-11-14: digraph-theory implications_X1.v (arxiv:2009.13319#01 => arxiv:2009.13319#02; conj_4_2 takes the inductive hero, K1 joined l times is a hero and a transitive tournament, no Berger theorem)",
+   "reviewed_by": "Marcol (second reader of the hero dichotomy (Conjecture 4.2) => {digon, K_k, F} heroic for oriented forests F (Conjecture 4.4) edge, gc:e104, 2026-11-14)",
+   "reviewed_at": "2026-11-14",
+   "note": "Rocq-only, without Berger's theorem: conj_4_2 quantifies over the INDUCTIVE hero of heroes.v (K1, djoin, c3sub), and K1 joined l times in front of K1 is such a hero and a transitive tournament on l + 1 vertices (oriented by the new instance on djoin), so the right disjunct of conj_4_2 bounds the dichromatic number of the class with that hero and F forbidden, which contains the class of conj_4_4 at l + 1 (a tournament on l + 1 vertices is l + 1 pairwise adjacent vertices); at l = 0 the class is empty. The conditional conj_4_2_implies_conj_4_4 of implications.v, whose hypothesis forall l, hero (TT l) fails at l = 0, is not this edge's proof."
   },
   "conj_9->kextension_linear_unavoidability_statement:implies": {
    "gc": "e106",
