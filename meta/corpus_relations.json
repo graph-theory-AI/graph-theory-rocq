@@ -1219,7 +1219,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "four_family_free_logarithmic_treewidth_statement->even_hole_kt_free_logarithmic_treewidth_statement:implies:candidate",
+   "rocq_edge": "four_family_free_logarithmic_treewidth_statement->even_hole_kt_free_logarithmic_treewidth_statement:implies:verified",
    "argument": "Hypothesis-class containment holds: an (even hole, K_t)-free graph satisfies the four-family hypothesis with parameter s = max(t,2). It has no K_s; K_{s,s} contains C_4 (an even hole); every induced subdivision of W_{sxs} contains an induced theta (two adjacent bricks share an edge, giving three internally disjoint paths between two branch vertices), and any theta contains an even hole since two of its three paths have equal parity; the line graph of such a subdivision contains an induced prism (line graph of the theta, induced-ness preserved under taking line graphs of edge subsets), which contains an even hole by the same parity argument. Hence the source conjecture yields tw = O(log n) for the target class. The source paper states this motivation explicitly per its context.",
    "citations": [
     "https://arxiv.org/abs/2109.01310"
@@ -2486,7 +2486,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "conj_4_2->conj_4_4:implies:candidate",
+   "rocq_edge": "conj_4_2->conj_4_4:implies:verified",
    "argument": "Instantiate the full characterization (Conjecture 4.2) with H = TT_k: TT_k is itself a transitive tournament, so the second disjunct of the 'if' condition holds trivially and the instance reduces to '{digon, TT_k, F} is heroic for every oriented forest F and every k'. The paper explicitly states (in the target's own context) that this special case is equivalent to the target conjecture about {digon, K_k, F}, via the Ramsey fact that every tournament on 2^k vertices contains TT_k, which makes forbidding the edgeless K_k interchangeable with forbidding TT_k in digon-free digraphs. Full conjecture implies its instance implies the target; direction as claimed (source is the general characterization, target a special case).",
    "citations": [
     "https://arxiv.org/abs/2009.13319"
