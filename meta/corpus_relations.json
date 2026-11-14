@@ -2462,7 +2462,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": null,
+   "rocq_edge": "bang_jensen_yeo_SAD_statement->arc_disjoint_out_branching_and_in_branching_statement:implies:verified",
    "argument": "Suppose k witnesses the source conjecture, and let D be a k-arc-strong digraph with specified vertices u, v. Then D contains arc-disjoint strongly connected spanning subdigraphs D1 and D2. Any strong spanning subdigraph contains, for every choice of root, both an out-branching and an in-branching (take a BFS out-tree from the root, resp. an in-tree to the root, which exist by strong connectivity and spanning-ness). Take an out-branching rooted at u inside D1 and an in-branching rooted at v inside D2; they are arc-disjoint because D1 and D2 are. Hence the same k witnesses the target conjecture. Both OPG pages cross-reference each other as similar questions but the implication in this direction is rigorous and self-contained.",
    "citations": []
   },

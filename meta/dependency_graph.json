@@ -17,20 +17,20 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 164,
+  "edges": 165,
   "by_status": {
    "candidate": 30,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 100
+   "verified": 101
   },
   "by_kind": {
    "equiv": 13,
-   "implies": 151,
+   "implies": 152,
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 118
+  "proved_theorems": 119
  },
  "edges": [
   {
@@ -83,6 +83,19 @@
    "external": [],
    "sources": [
     "atlas/implications_X287.v"
+   ]
+  },
+  {
+   "from": "bang_jensen_yeo_SAD_statement",
+   "to": "arc_disjoint_out_branching_and_in_branching_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e103",
+   "proof": "bang_jensen_yeo_SAD_implies_arc_disjoint_out_branching_and_in_branching",
+   "note": "Rocq-only, no Edmonds: take k := K. karcstrong D K gives 0 < #|D| and arc_strong D K (the same cuts), so SAD gives disjoint spanning strong arc sets A1 and A2. Parents on shortest A1-walks from u give an out-branching and on shortest A2-walks to v an in-branching (acyclic: the walk length is strictly monotone along kept arcs). They are arc-disjoint because A1 and A2 are.",
+   "external": [],
+   "sources": [
+    "digraph-theory/implications_P9.v"
    ]
   },
   {
@@ -2173,7 +2186,7 @@
  ],
  "legacy": {
   "repo": "digraph-theory (absorbed)",
-  "implies_theorems_in_source": 66,
+  "implies_theorems_in_source": 67,
   "committed_dependency_graph_edges": 34,
   "note": "Legacy digraph-only graph: source _implies_ theorem count vs the committed graph differ (theorem-name pattern includes helper lemmas; the old extractor filtered). Reconcile within digraph-theory separately; it does NOT define the federation format."
  }
