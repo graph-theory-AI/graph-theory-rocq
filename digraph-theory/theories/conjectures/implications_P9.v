@@ -46,18 +46,18 @@
         small critical subgraph).  So there is NO implication in EITHER direction;
         this is a thematic relation only and is deliberately NOT recorded as an edge.
 
-    UPDATE (wave E3).  One verified edge IS now scheduled, between a P9 row and a
-    row of conjectures/classic_core.v (corpus e172): Hoàng-Reed implies
-    Caccetta-Häggkvist.  The counting step is
-    [foundations/cycles.v: laminar_sum_bound].
+    UPDATE (wave E3).  Two verified edges ARE now scheduled.  Hoàng-Reed implies
+    Caccetta-Häggkvist (corpus e172, a row of conjectures/classic_core.v), by the
+    counting step [foundations/cycles.v: laminar_sum_bound].  Bang-Jensen-Yeo SAD
+    (conjectures/sad.v) implies Row 13 (corpus e103), without Edmonds (see there).
 
-    Apart from it this file schedules no verified [Qed] edge and carries only the two
+    Apart from them this file schedules no verified [Qed] edge and carries only the two
     machine-readable candidate annotations below (proved=false).  Adding any of the
     above as a forced theorem would either fail to compile or smuggle in the
     conclusion as an "external" hypothesis — both are forbidden by §6.
 
-    The file still [Require]s [P9] so the [from]/[to] endpoint names resolve and the
-    annotations are checked against real constants. *)
+    The file still [Require]s [P9] and [sad] so the [from]/[to] endpoint names
+    resolve and the annotations are checked against real constants. *)
 
 From HB Require Import structures.
 From mathcomp Require Import all_boot.
@@ -66,6 +66,7 @@ From Digraph Require Import classic_core dichromatic packing colouring_variants 
 From Digraph Require Import interop_graph_theory chi_bounded.
 From Digraph Require Import cycles.
 From Digraph Require Import P9.
+From Digraph Require Import sad.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -124,6 +125,143 @@ Qed.
 
 (*@EDGE from=bipartite_digraph_asymmetric_outdegree_girth_statement to=caccetta_haggkvist_statement kind=implies status=candidate proved=false cite="gc:e101" note="BLOCKED on ONE missing general lemma, not on a mathematical gap: the corpus reduction is explicit and self-contained. Construction (checked on the bodies): for D loopless with 0 < #|D| = n and minimum out-degree r >= 1, let H be the bipartite double cover on the carrier D * bool with arcs (v,false) --> (v,true) for every v and (u,true) --> (v,false) whenever u --> v; then A := [set x | ~~ x.2] and B := [set x | x.2] satisfy x53_bipartition, #|A| = #|B| = n, and x53_out_to B x = 1 for x in A while x53_out_to A x = outdeg x.1 >= r for x in B. So the source applies with alpha = r/n, beta = 1/n and k := (n + r - 1) %/ r >= 1, the condition k*alpha + beta > 1 reducing (after clearing denominators) to n <= k * r, which is divn_eq plus ltn_pmod. MISSING: the projection lemma - a dicycle of H of size at most 2k yields a dicycle of D of size at most k. On paper it is immediate (a dicycle of H alternates sides, and its B-vertices in cyclic order form the D-cycle). Formally it is a new foundations lemma; the route, using core/dipath.v, is: g := next c \o next c is injective (prev_next) and maps the B-part of the dicycle c into itself (dicycle_next plus the arc structure of H), orbit g x0 is a duplicate-free fcycle (cycle_orbit, orbit_uniq) whose image under fst is a dicycle of D (arc transfer along g), and 2 * size (orbit g x0) <= size c because orbit g x0 and its image under next c are disjoint equinumerous subsets of c. Estimated 200 lines of new machinery, outside this wave's budget; nothing about the two bodies blocks it." *)
 
+(** ** e103: Bang-Jensen-Yeo SAD (conjectures/sad.v, row
+    opg:arc_disjoint_strongly_connected_spanning_subdigraphs) ==> arc-disjoint
+    out-branching and in-branching (P9 Row 13,
+    opg:arc_disjoint_out_branching_and_in_branching).
+
+    Take k := K, the SAD constant.  A [karcstrong D K] digraph has at least two
+    vertices and every cut of [arc_strong D K], so SAD splits its arcs into disjoint
+    spanning strong parts A1 and A2.  Every vertex is reachable from u inside A1: give
+    each other vertex the last arc of a shortest A1-walk from u.  These arcs form an
+    out-branching at u, acyclic because the walk length increases along them.
+    Shortest A2-walks to v give an in-branching at v in the same way.  The
+    out-branching uses arcs of A1 and the in-branching arcs of A2, so they share no
+    arc.  Edmonds' branching theorem is not needed: each part carries one branching. *)
+
+(*@EDGE from=bang_jensen_yeo_SAD_statement to=arc_disjoint_out_branching_and_in_branching_statement kind=implies status=verified proof=bang_jensen_yeo_SAD_implies_arc_disjoint_out_branching_and_in_branching cite="gc:e103" note="Rocq-only, no Edmonds: take k := K. karcstrong D K gives 0 < #|D| and arc_strong D K (the same cuts), so SAD gives disjoint spanning strong arc sets A1 and A2. Parents on shortest A1-walks from u give an out-branching and on shortest A2-walks to v an in-branching (acyclic: the walk length is strictly monotone along kept arcs). They are arc-disjoint because A1 and A2 are." *)
+
+(** A rank that increases along every arc does not decrease along walks. *)
+Lemma connect_rank_mono (T : finType) (e : rel T) (h : T -> nat) :
+  (forall x y, e x y -> h x < h y) -> forall x y, connect e x y -> h x <= h y.
+Proof.
+move=> eh x y /connectP[s]; elim: s x => [|z s IH] x /=; first by move=> _ ->.
+by case/andP=> exz pz yl; apply: leq_trans (ltnW (eh _ _ exz)) (IH z pz yl).
+Qed.
+
+(** Shortest-walk parents: if every vertex is reachable from [u], each other vertex
+    [x] has a predecessor [p x] (an arc from [p x] to [x]) of smaller rank, the rank
+    being the length of a shortest walk from [u]. *)
+Lemma shortest_walk_parents (T : finType) (e : rel T) (u : T) :
+  (forall x, connect e u x) ->
+  exists (p : T -> T) (h : T -> nat), forall x, x != u -> e (p x) x /\ h (p x) < h x.
+Proof.
+move=> conn.
+pose P x n := [exists t : n.-tuple T, path e u t && (last u t == x)].
+have exP x : exists n, P x n.
+  have /connectP[t pt ->] := conn x.
+  by exists (size t); apply/existsP; exists (in_tuple t); rewrite /= pt eqxx.
+pose h x := ex_minn (exP x).
+have hle x n : P x n -> h x <= n.
+  by rewrite /h; case: (ex_minnP (exP x)) => m _ /[apply].
+have step x : exists y, x != u -> e y x && (h y < h x).
+  case: (boolP (x == u)) => [_|xu]; first by exists u.
+  rewrite {2}/h; case: (ex_minnP (exP x)) => n /existsP[t /andP[pt /eqP lt]] _.
+  move: (size_tuple t) pt lt; case/lastP: (tval t) => [|s y] sz.
+    by move=> _ /= lt; move: xu; rewrite -lt eqxx.
+  rewrite rcons_path last_rcons => /andP[ps ey] yx.
+  exists (last u s) => _; rewrite -yx ey /=.
+  have Ps : P (last u s) (size s).
+    by apply/existsP; exists (in_tuple s); rewrite /= ps eqxx.
+  by apply: leq_ltn_trans (hle _ _ Ps) _; rewrite -sz size_rcons.
+have [p hp] := fin_all_exists step.
+by exists p, h => x /hp /andP[].
+Qed.
+
+(** [karcstrong] gives the hypotheses of the SAD statement: a nonempty digraph, and
+    the same cut sizes. *)
+Lemma karcstrong_arc_strong (D : diGraphType) (k : nat) :
+  karcstrong D k -> 0 < #|D| /\ arc_strong D k.
+Proof.
+case/andP=> D1 /forallP hk; split; first exact: ltnW.
+move=> X X0 XT; have := hk X; rewrite X0 XT /= => /leq_trans; apply.
+apply: subset_leq_card; apply/subsetP=> -[a b]; rewrite in_outcutE inE /=.
+by case/and3P=> aX bX ab; apply/and3P.
+Qed.
+
+(** A spanning strong arc set contains an out-branching at any root. *)
+Lemma spanning_strong_out_branching (D : diGraphType) (A : {set D * D}) (u : D) :
+  spanning_strong A -> exists f : D -> {set D},
+    out_branching f u /\ forall a b, b \in f a -> (a, b) \in A.
+Proof.
+case=> Asub Aconn.
+have [p [h ph]] := shortest_walk_parents (fun x => Aconn u x).
+pose f a := [set b | (b != u) && (p b == a)].
+have fA a b : b \in f a -> (a, b) \in A.
+  by rewrite inE => /andP[bu /eqP <-]; case: (ph b bu).
+have fh a b : b \in f a -> h a < h b.
+  by rewrite inE => /andP[bu /eqP <-]; case: (ph b bu).
+exists f; split=> //; apply/and4P; split.
+- apply/forallP=> a; apply/forallP=> b; apply/implyP=> /fA.
+  by move/(subsetP Asub); rewrite in_arcsetE.
+- rewrite /selindeg (_ : [set a | u \in f a] = set0) ?cards0 //.
+  by apply/setP=> a; rewrite !inE eqxx.
+- apply/forallP=> v; apply/implyP=> vu.
+  rewrite /selindeg (_ : [set a | v \in f a] = [set p v]) ?cards1 //.
+  by apply/setP=> a; rewrite !inE vu eq_sym.
+- apply/forallP=> a; apply/forallP=> b; apply/implyP.
+  rewrite outsel_arcE => /andP[/fh ab _]; apply/negP=> ba.
+  have mono (x y : outsel f) : x --> y -> h x < h y.
+    by rewrite outsel_arcE => /andP[/fh].
+  by have := connect_rank_mono mono ba; rewrite leqNgt ab.
+Qed.
+
+(** A spanning strong arc set contains an in-branching at any root (shortest walks
+    TO the root). *)
+Lemma spanning_strong_in_branching (D : diGraphType) (A : {set D * D}) (v : D) :
+  spanning_strong A -> exists g : D -> {set D},
+    in_branching g v /\ forall a b, b \in g a -> (a, b) \in A.
+Proof.
+case=> Asub Aconn.
+have conn x : connect [rel a b | subrel_of A b a] v x by rewrite connect_rev; exact: Aconn.
+have [p [h ph]] := shortest_walk_parents conn.
+pose g a := if a == v then set0 else [set p a].
+have gA a b : b \in g a -> (a, b) \in A.
+  rewrite /g; case: eqP=> [_|/eqP av]; first by rewrite inE.
+  by rewrite inE => /eqP ->; case: (ph a av).
+have gh a b : b \in g a -> h b < h a.
+  rewrite /g; case: eqP=> [_|/eqP av]; first by rewrite inE.
+  by rewrite inE => /eqP ->; case: (ph a av).
+exists g; split=> //; apply/and4P; split.
+- apply/forallP=> a; apply/forallP=> b; apply/implyP=> /gA.
+  by move/(subsetP Asub); rewrite in_arcsetE.
+- by rewrite /g eqxx cards0.
+- by apply/forallP=> a; apply/implyP=> av; rewrite /g (negbTE av) cards1.
+- apply/forallP=> a; apply/forallP=> b; apply/implyP.
+  rewrite outsel_arcE => /andP[/gh ba _]; apply/negP=> ab.
+  have mono (x y : outsel g) : x --> y -> h y < h x.
+    by rewrite outsel_arcE => /andP[/gh].
+  have rconn : connect [rel x y | (y : outsel g) --> x] a b by rewrite connect_rev.
+  have := connect_rank_mono (e := [rel x y | (y : outsel g) --> x]) (h := h) _ rconn.
+  by move=> /(_ (fun x y => mono y x)); rewrite leqNgt ba.
+Qed.
+
+Theorem bang_jensen_yeo_SAD_implies_arc_disjoint_out_branching_and_in_branching :
+  bang_jensen_yeo_SAD_statement -> arc_disjoint_out_branching_and_in_branching_statement.
+Proof.
+move=> [K HK]; exists K => D u v kD.
+have [D0 DK] := karcstrong_arc_strong kD.
+have [A1 [A2 [dis _ s1 s2]]] := HK D D0 DK.
+have [f [fo fA]] := spanning_strong_out_branching u s1.
+have [g [gi gA]] := spanning_strong_in_branching v s2.
+exists f, g; split=> //.
+apply/forallP=> a; apply/forallP=> b; apply/negP=> /andP[/fA h1 /gA h2].
+by rewrite (disjointFr dis h1) in h2.
+Qed.
+
 (** ** Print Assumptions audit *)
 
 Print Assumptions hoand_reed_implies_caccetta_haggkvist.
+Print Assumptions bang_jensen_yeo_SAD_implies_arc_disjoint_out_branching_and_in_branching.
+Print Assumptions spanning_strong_out_branching.
+Print Assumptions spanning_strong_in_branching.
