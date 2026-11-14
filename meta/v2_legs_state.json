@@ -11933,11 +11933,14 @@
    "audit_page": "todo"
   },
   "std_gr_nbaum_s_conjecture_torus_cubic_graphs": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x307-grunbaum-torus-cubic",
+   "package": "topological-graph-theory",
+   "note": "Authored in X307.v:grunbaum_torus_cubic_statement. Grunbaum's torus conjecture for cubic graphs (Proc. Third Waterloo Conf., 1968) as Inoue, Kawarabayashi, Miyashita, Mohar and Sonobe state it (arXiv:2405.16586v1, main.tex l.163-165): a 2-connected cubic graph (k_connected G 2, regular G 3) with an embedding of orientable genus at most 1 (surface_embeddable 1 G, the package's toroidal) that is not 3-edge-colourable has two distinct edges whose deletion leaves a Wagner-planar graph. Simple graphs. Open (l.155-161)."
   },
   "std_gr_nbaum_s_conjecture_torus_cubic_graphs_refined": {
    "statement": "todo",
