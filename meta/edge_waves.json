@@ -181,8 +181,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Marcol (Claude Opus 5.5), 2026-11-15: extremal-graph-theory implications_X310.v (studies:std_cames_van_batenburg_et_al_conjecture_fractional (X310) => studies:std_fraughnaugh_locke_conjectures_independence_in_tr (X309))",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Arthur (second reader of the fractional 8/3 => Fraughnaugh-Locke edge, (a:b)-fold colourings with a/b <= 8/3 (X310) => alpha >= 3n/8 (X309), arXiv:1911.12471, 2026-11-15)",
+   "reviewed_at": "2026-11-15",
    "note": "Rocq-only edge (no corpus relation), routed by Lancelot's NOTE 2026-11-15T12:15:05Z: the fractional 8/3 conjecture (X310) implies the Fraughnaugh-Locke statement (X309), as arXiv:1911.12471v2 l.2062 and l.2072-2076 say (n / alpha <= chi_f, and the conjecture extends the main theorem l.243-246 to fractional colourings). For G meeting the three common hypotheses, X310 gives an (a:b)-fold colouring with 0 < b and 3 a <= 8 b; grounding_X310's g310_bfold_n_alpha gives #|G| * b <= a * alpha(G), so 3 #|G| b <= 3 a alpha(G) <= 8 b alpha(G), and 3 #|G| <= 8 alpha(G) since b > 0. X309 is true before the pin (Theorem 7 of arXiv:1911.12471v2); X310 is open."
   },
   "chen_chvatal_metric_lines_statement->chen_chvatal_guarded_metric_lines_statement:equiv": {
