@@ -32,7 +32,7 @@ Unset Printing Implicit Defensive.
       "Hitting all maximum independent sets", arXiv:2103.05998v2 (4 April 2021), main.tex l.75-92.  Status: pinned
       open, but refuted at the pin in its own record: "Here we show that this is false for every fixed alpha in
       (0,1/2) even if the requirement (2) is omitted, but that the assertion does hold for any alpha > 1/2"
-      (l.93-95); Theorems 1.2 and 1.3 (l.113-126; "counterexamples", l.127-128): the shift graph G_k on 2k(2k-1)
+      (l.93-95); Theorems 1.3 and 1.4 (l.113-126; "counterexamples", l.127-128): the shift graph G_k on 2k(2k-1)
       vertices with independence number k^2 and no set of k vertices meeting all its maximum independent sets
       (l.197-224), and a Cayley graph of Z_2^m.  No kernel disproof here.  The status correction is a separate
       corpus item. *)
