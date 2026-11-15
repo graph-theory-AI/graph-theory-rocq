@@ -171,6 +171,20 @@
    "reviewed_at": null,
    "note": "BLOCKED: the reduction is NOT an instantiation of the source, and the corpus argument itself records that the confirmation rests on the source paper's abstract rather than on a one-line derivation. Applying caccetta_haggkvist_statement to the bipartite host D itself (2n vertices, minimum out-degree r with n < (k+1) * r forced by the target premise) yields a dicycle of size at most (2n + r - 1) %/ r, which is about 2(k+1) = 2k+2, not 2k; and the evenness of dicycles in a bipartite digraph does not close the gap, since 2k+2 is already even. Seymour and Spirkl derive their Conjecture 1.2 from Caccetta-Haggkvist through an AUXILIARY digraph (arXiv:1809.08324), which the corpus argument does not reproduce. Missing ingredients: that auxiliary construction on one side of the bipartition, the lower bound on its minimum out-degree, and the transfer of a short dicycle of it back to a dicycle of length at most 2k in D. The converse direction is available and verified as corpus e102 above."
   },
+  "cames_van_batenburg_forbidden_subgraph_fractional_statement->fraughnaugh_locke_forbidden_subgraph_independence_statement:implies": {
+   "gc": null,
+   "tier": "T1",
+   "wave": "E7",
+   "host": "extremal-graph-theory",
+   "state": "verified",
+   "proof": "cames_van_batenburg_forbidden_subgraph_fractional_implies_fraughnaugh_locke_forbidden_subgraph_independence",
+   "external": [],
+   "reason": "",
+   "proved_by": "Marcol (Claude Opus 5.5), 2026-11-15: extremal-graph-theory implications_X310.v (studies:std_cames_van_batenburg_et_al_conjecture_fractional (X310) => studies:std_fraughnaugh_locke_conjectures_independence_in_tr (X309))",
+   "reviewed_by": "",
+   "reviewed_at": "",
+   "note": "Rocq-only edge (no corpus relation), routed by Lancelot's NOTE 2026-11-15T12:15:05Z: the fractional 8/3 conjecture (X310) implies the Fraughnaugh-Locke statement (X309), as arXiv:1911.12471v2 l.2062 and l.2072-2076 say (n / alpha <= chi_f, and the conjecture extends the main theorem l.243-246 to fractional colourings). For G meeting the three common hypotheses, X310 gives an (a:b)-fold colouring with 0 < b and 3 a <= 8 b; grounding_X310's g310_bfold_n_alpha gives #|G| * b <= a * alpha(G), so 3 #|G| b <= 3 a alpha(G) <= 8 b alpha(G), and 3 #|G| <= 8 alpha(G) since b > 0. X309 is true before the pin (Theorem 7 of arXiv:1911.12471v2); X310 is open."
+  },
   "chen_chvatal_metric_lines_statement->chen_chvatal_guarded_metric_lines_statement:equiv": {
    "gc": null,
    "tier": "T0",
