@@ -17,20 +17,20 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 166,
+  "edges": 167,
   "by_status": {
    "candidate": 27,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 105
+   "verified": 106
   },
   "by_kind": {
    "equiv": 13,
-   "implies": 153,
+   "implies": 154,
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 123
+  "proved_theorems": 124
  },
  "edges": [
   {
@@ -189,6 +189,19 @@
    "external": [],
    "sources": [
     "digraph-theory/implications_X46.v"
+   ]
+  },
+  {
+   "from": "cames_van_batenburg_forbidden_subgraph_fractional_statement",
+   "to": "fraughnaugh_locke_forbidden_subgraph_independence_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "",
+   "proof": "cames_van_batenburg_forbidden_subgraph_fractional_implies_fraughnaugh_locke_forbidden_subgraph_independence",
+   "note": "Rocq-only edge (no corpus relation), routed by Lancelot's NOTE 2026-11-15T12:15:05Z: the fractional 8/3 conjecture (X310) implies the Fraughnaugh-Locke statement (X309), as arXiv:1911.12471v2 l.2062 and l.2072-2076 say (n / alpha <= chi_f, and the conjecture extends the main theorem l.243-246 to fractional colourings). For G meeting the three common hypotheses, X310 gives an (a:b)-fold colouring with 0 < b and 3 a <= 8 b; grounding_X310's g310_bfold_n_alpha gives #|G| * b <= a * alpha(G), so 3 #|G| b <= 3 a alpha(G) <= 8 b alpha(G), and 3 #|G| <= 8 alpha(G) since b > 0. X309 is true before the pin (Theorem 7 of arXiv:1911.12471v2); X310 is open.",
+   "external": [],
+   "sources": [
+    "extremal-graph-theory/implications_X310.v"
    ]
   },
   {
