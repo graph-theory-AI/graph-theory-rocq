@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Fifty-six
+corrections are applied explicitly (ERRATA below) since the review files predate them. Fifty-seven
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -107,6 +107,9 @@ The conjecture of Alon, Grytczuk, Haluszczak and Riordan that planar graphs have
 number, behind wave X23, is proved in its own record (Dujmovic, Esperet, Joret, Walczak and Wood, arXiv:1904.05269v4,
 Theorem 1: pi(G) <= 768). X23's statement is frozen in the migration family simple_path, which carries a reviewed
 restatus repair.
+The conjecture of Fraughnaugh and Locke that a triangle-free subcubic n-vertex graph with none of the six graphs
+F_11, F_14^(1), F_14^(2), F_19^(1), F_19^(2), F_22 as a subgraph has alpha(G) >= 3n/8, behind wave X309, is proved in
+its own record (Cames van Batenburg, Goedgebeur and Joret, arXiv:1911.12471v2, Theorem 7).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -634,6 +637,13 @@ ERRATA = [
      "nonrepetitive chromatic number was first asked by Alon, Grytczuk, Haluszczak and Riordan, l.98 says the paper "
      "proves it, and Theorem 1 (PlanarPi, l.100-103) gives pi(G) <= 768 for every planar graph G. The theorem counter "
      "is global (l.55-57)."),
+    ("studies", "std_fraughnaugh_locke_conjectures_independence_in_tr", "solved",
+     "Literature: proved in its own record by Cames van Batenburg, Goedgebeur and Joret, 'Large independent sets in "
+     "triangle-free cubic graphs: beyond planarity', arXiv:1911.12471v2 (8 July 2020): "
+     "Revision_IndependenceRatio8over3.tex l.225-227 state the conjecture of Fraughnaugh and Locke (Conjecture 5) as "
+     "the record does, and the paper's main theorem, Theorem 7 (l.243-246), is that statement: every triangle-free "
+     "subcubic n-vertex graph containing none of F_11, F_14^(1), F_14^(2), F_19^(1), F_19^(2), F_22 as a subgraph has "
+     "alpha(G) >= 3n/8. The theorem counter is global (l.19-27)."),
 ]
 
 
@@ -1242,7 +1252,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 56 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 57 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
