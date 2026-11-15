@@ -1,5 +1,5 @@
 {
- "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — deterministic; regenerate + diff to review changes. Status uses the exact-type-gate vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 56 literature errata applied). b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. source_text currently holds the extractor's statement; REC/implementation replaces it with our normalized statement (licensing: LICENSE-DATA.md). Corpus tags: arxiv, erdos, derived, arxiv-studied, bm (Bondy–Murty Appendix A records bm-NNN) and others (curated data/others_conjectures.json records). site_url/review_url are derived from row_id by corpus_registry.row_urls() (null for erdos/derived/studies rows, which have no public per-record page). Legs merge in from meta/v2_legs_state.json (the source of truth). Classifier fields (bucket/topic/formalizability/repo/phase/formal_name) come from the hand-maintained meta/v2_classification.json (edit there, then rebuild — never hand-edit this file) and from wave planning.",
+ "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — deterministic; regenerate + diff to review changes. Status uses the exact-type-gate vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 57 literature errata applied). b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. source_text currently holds the extractor's statement; REC/implementation replaces it with our normalized statement (licensing: LICENSE-DATA.md). Corpus tags: arxiv, erdos, derived, arxiv-studied, bm (Bondy–Murty Appendix A records bm-NNN) and others (curated data/others_conjectures.json records). site_url/review_url are derived from row_id by corpus_registry.row_urls() (null for erdos/derived/studies rows, which have no public per-record page). Legs merge in from meta/v2_legs_state.json (the source of truth). Classifier fields (bucket/topic/formalizability/repo/phase/formal_name) come from the hand-maintained meta/v2_classification.json (edit there, then rebuild — never hand-edit this file) and from wave planning.",
  "schema_version": 1,
  "provenance": {
   "graph_conjectures_commit": "b72c5857060addbe4523016e88ae3aa626e958fd",
@@ -26,9 +26,9 @@
   },
   "by_status": {
    "disproved": 107,
-   "open": 1301,
+   "open": 1300,
    "partial": 152,
-   "solved": 230
+   "solved": 231
   },
   "by_kind": {
    "Conjecture": 659,
@@ -96239,8 +96239,8 @@
    "source_verified_at": "2026-11-15",
    "verification_note": "Authored in X309.v:fraughnaugh_locke_forbidden_subgraph_independence_statement. Fraughnaugh and Locke's conjecture as its own record states and proves it (Cames van Batenburg, Goedgebeur and Joret, arXiv:1911.12471v2, Revision_IndependenceRatio8over3.tex l.225-227, Conjecture 5; Theorem 7, l.243-247): a triangle-free subcubic G containing none of the six graphs F_11, F_14^(1), F_14^(2), F_19^(1), F_19^(2), F_22 (X287's x287_bb_graph) as a subgraph (has_subgraph) has 3 * #|G| <= 8 * alpha(G). Solved in its own record before the pin; the pinned status is open.",
    "status_verified_at": null,
-   "status": "open",
-   "status_semantics": null,
+   "status": "solved",
+   "status_semantics": "Literature: proved in its own record by Cames van Batenburg, Goedgebeur and Joret, 'Large independent sets in triangle-free cubic graphs: beyond planarity', arXiv:1911.12471v2 (8 July 2020): Revision_IndependenceRatio8over3.tex l.225-227 state the conjecture of Fraughnaugh and Locke (Conjecture 5) as the record does, and the paper's main theorem, Theorem 7 (l.243-246), is that statement: every triangle-free subcubic n-vertex graph containing none of F_11, F_14^(1), F_14^(2), F_19^(1), F_19^(2), F_22 as a subgraph has alpha(G) >= 3n/8. The theorem counter is global (l.19-27).",
    "review_status": "open",
    "review_date": null,
    "recovery": "none",
@@ -96263,7 +96263,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },

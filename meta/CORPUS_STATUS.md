@@ -135,7 +135,7 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Conjecture dependency graph
 
-- **165 edges** — by status {'candidate': 27, 'conditional': 2, 'refuted-direction': 32, 'verified': 104}, by kind {'equiv': 13, 'implies': 152, 'refutes': 0, 'specializes': 0}; 122 Qed-proved relative theorems.
+- **166 edges** — by status {'candidate': 27, 'conditional': 2, 'refuted-direction': 32, 'verified': 105}, by kind {'equiv': 13, 'implies': 153, 'refutes': 0, 'specializes': 0}; 123 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
   - `alon_pach_solymosi_tournament_erdos_hajnal_statement` equiv `erdos_hajnal_tournament_transitive_subtournament_statement` (digraph-theory/implications_X136.v)
   - `asymmetric_bipartite_list_colouring_statement` implies `list_chromatic_number_and_maximum_degree_of_bipartit_statement` (atlas/implications_A1.v)
@@ -176,6 +176,7 @@ Area-local foundations (each area builds these on top of `base`):
   - `four_family_free_logarithmic_treewidth_statement` implies `even_hole_kt_free_logarithmic_treewidth_statement` (minor-theory/implications_X220.v)
   - `fractional_hadwiger_statement` implies `hadwiger_independence_minor_statement` (atlas/implications_A1.v)
   - `fractional_hadwiger_statement` implies `seagull_statement` (atlas/implications_A1.v)
+  - `fraughnaugh_locke_forbidden_subgraph_independence_statement` implies `bajnok_brinkmann_six_exceptional_graphs_statement` (extremal-graph-theory/implications_X309.v)
   - `goldbergs_statement` implies `seymours_r_graph_statement` (chromatic-theory/implications_U5.v)
   - `graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement` implies `triangle_free_induced_tree_chi_bounded_statement` (chromatic-theory/implications_X213.v)
   - `grytczuk_minor_free_nonrepetitive_statement` implies `planar_bounded_nonrepetitive_chromatic_statement` (graph-theory-misc/implications_X300.v)
@@ -241,13 +242,13 @@ Area-local foundations (each area builds these on top of `base`):
   - `triangle_free_min_degree_log_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
   - `triangle_free_planar_large_induced_two_degenerate_statement` implies `triangle_free_planar_five_sixths_two_degenerate_statement` (chromatic-theory/implications_X219.v)
   - `triangle_packing_transversal_statement` equiv `triangle_packing_vs_triangle_edge_transversal_statement` (packing-theory/implications_X5.v)
-- Edge evidence: **104 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
+- Edge evidence: **105 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
 - Conditional edges (with the external assumptions they are relative to):
   - `bounded_layered_treewidth_bounded_queue_number_statement` implies `planar_graphs_bounded_queue_number_statement` — external: `external_layered_treewidth_planar_statement` (atlas/implications_A1.v)
   - `reconstruction_statement` implies `edge_reconstruction_statement` — external: `external_whitney_line_inversion_statement` (reconstruction-theory/implications_U11.v)
 - Edge legs (overlay `edges` state over the non-alias rows of each corpus; derived from the evidence above by `meta/sync_edge_legs.py`):
   - **opg**: 44 done · 8 partial · 0 blocked · 175 todo  (227 rows)
-  - **v2**: 118 done · 4 partial · 0 blocked · 1551 todo  (1673 rows)
+  - **v2**: 119 done · 4 partial · 0 blocked · 1550 todo  (1673 rows)
 
 ### Documented non-edges (32 `refuted-direction`)
 
