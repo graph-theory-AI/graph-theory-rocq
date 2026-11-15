@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Fifty-seven
+corrections are applied explicitly (ERRATA below) since the review files predate them. Fifty-eight
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -110,6 +110,9 @@ restatus repair.
 The conjecture of Fraughnaugh and Locke that a triangle-free subcubic n-vertex graph with none of the six graphs
 F_11, F_14^(1), F_14^(2), F_19^(1), F_19^(2), F_22 as a subgraph has alpha(G) >= 3n/8, behind wave X309, is proved in
 its own record (Cames van Batenburg, Goedgebeur and Joret, arXiv:1911.12471v2, Theorem 7).
+Friedgut, Kalai and Kindler's conjecture that pairwise disjoint k-sets covering a positive fraction of the vertices can
+each meet every maximum independent set, behind wave X311, is refuted in its own record (Alon, arXiv:2103.05998v2,
+Theorems 1.3 and 1.4).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -644,6 +647,15 @@ ERRATA = [
      "the record does, and the paper's main theorem, Theorem 7 (l.243-246), is that statement: every triangle-free "
      "subcubic n-vertex graph containing none of F_11, F_14^(1), F_14^(2), F_19^(1), F_19^(2), F_22 as a subgraph has "
      "alpha(G) >= 3n/8. The theorem counter is global (l.19-27)."),
+    ("studies", "std_friedgut_kalai_kindler_conjectures", "disproved",
+     "Literature: refuted in its own record by Alon, 'Hitting all maximum independent sets', arXiv:2103.05998v2 (4 "
+     "April 2021): main.tex l.75-92 state Friedgut, Kalai and Kindler's Conjecture 3.1 as the record does, l.93-95 say "
+     "the paper shows it false for every fixed alpha in (0,1/2) even without requirement (2), and l.127-128 say that "
+     "Theorems 1.3 and 1.4 (l.113-126) are counterexamples: for every k a graph G_k on 2k(2k-1) vertices with "
+     "alpha(G) = k^2 and h(G) = k+1 (the shift graph, l.197-224), and graphs G_{m,t} with h(G) = Theta(t^2), where "
+     "h(G) is the least size of a vertex set meeting every maximum independent set (l.98-100). Each A_i must meet "
+     "every maximum independent set, so a fixed k fails once h(G) > k. The constructions are families over every k, "
+     "so there is no kernel disproof; wave X311 encodes the conjecture as stated."),
 ]
 
 
@@ -1252,7 +1264,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 57 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 58 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
