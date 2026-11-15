@@ -913,6 +913,20 @@
    "reviewed_at": "2026-09-24",
    "note": "Part (a) only. As for e003, the attained optima exist (fractional.frac_chromatic_exists, fractional.frac_hadwiger_exists, hadwiger_exists) and n <= chi_f * alpha <= had * alpha (fractional.frac_chi_n_alpha + source part (a)); with alpha <= 2 this is n <= 2 * had, hence ceil_div n 2 <= had, and the K_had minor gives a K_(ceil_div n 2) minor (minor_dec.minor_K_le). Wave E10, after the D2chr guard repair."
   },
+  "fraughnaugh_locke_forbidden_subgraph_independence_statement->bajnok_brinkmann_six_exceptional_graphs_statement:implies": {
+   "gc": null,
+   "tier": "T1",
+   "wave": "E7",
+   "host": "extremal-graph-theory",
+   "state": "verified",
+   "proof": "fraughnaugh_locke_forbidden_subgraph_independence_implies_bajnok_brinkmann_six_exceptional_graphs",
+   "external": [],
+   "reason": "",
+   "proved_by": "Marcol (Claude Opus 5.5), 2026-11-15: extremal-graph-theory implications_X309.v (studies:std_fraughnaugh_locke_conjectures_independence_in_tr (X309) => studies:std_bajnok_brinkmann_conjecture_triangle_free_subcub (X287))",
+   "reviewed_by": "",
+   "reviewed_at": "",
+   "note": "Rocq-only edge (no corpus relation), routed by Lancelot's NOTE 2026-11-15T05:12:42Z and (786): Fraughnaugh and Locke's conjecture (X309) implies the Bajnok-Brinkmann statement (X287), as arXiv:1911.12471v2 l.229-230 says. Clause 1: for a 2-connected triangle-free subcubic G with 8 alpha(G) < 3n, X309 gives some x287_bb_graph i as a subgraph (has_subgraph decided by a boolean reflection), and e309_iso_of_copy makes G isomorphic to it: every vertex of the copy but one has three neighbours, so their images have no other neighbour, an extra neighbour of the remaining image is impossible inside the copy and makes it a cut vertex outside it, and the copy, closed under adjacency in a connected G, is all of G. Clauses 2 and 3 are closed facts about the tables, proved outright: clause 2 by vm_compute on explicit vertex lists, clause 3 by the order and, for the two pairs of equal order, the closed 5-walks and closed 7-walks an isomorphism preserves. Both statements are true before the pin (Theorem 7 and Corollary 8 of arXiv:1911.12471v2)."
+  },
   "geodesic_cycles_and_tuttes_theorem_statement->covering_powers_of_cycles_with_equivalence_subgraphs_statement:implies": {
    "gc": null,
    "tier": "T4",
