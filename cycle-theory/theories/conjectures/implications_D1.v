@@ -1550,6 +1550,208 @@ Theorem unconditional_circular_flow_numbers_of_r_graphs_implies_three_flow :
   circular_flow_numbers_of_r_graphs_statement -> three_flow_statement.
 Proof. exact: circular_flow_numbers_of_r_graphs_implies_three_flow steffen_3flow_5graphs. Qed.
 
+(** ================================================================= *)
+(** ** gc:e032: Petersen colouring => three 4-flows (Jaeger's reformulation)
+
+    Jaeger's argument, in-repo and unconditional:
+    - F1 (a finite certificate on codes): the 15 Petersen edges split into
+      three classes B1, B2, B3 ([e032_cls]), and for each class i two edge
+      sets C(i,1), C(i,2) ([e032_C]) meet every claw of the Petersen graph
+      evenly ([e032_claw_check]) and together cover exactly the edges outside
+      B_i ([e032_cover_check]).  B2 = {01-34, 02-14, 03-24}, B3 = {01-24,
+      02-34, 03-14} (two 3-edge matchings), B1 the other nine edges; P \ B1
+      is the 6-cycle B2 + B3.
+    - F2: a claw-even predicate on Petersen edges pulls back along a Petersen
+      colouring of a cubic multigraph to an even edge set
+      ([e032_pull_even], the proof of [implications_U6.ppull_even]).
+    - F3: the cubic reduction of [implications_U6] (the inflation [infG]: cubic
+      and bridgeless for a bridgeless G; its copies [inl e] of the edges of G
+      keep evenness, [inf_contract_even]).
+    - F4: two even sets covering exactly the complement of A give a
+      nowhere-zero integer 4-flow of G \ A, phi = osgn C1 d1 + 2 osgn C2 d2
+      ([e032_flow_del], the proof of [class1_cubic_nz_4flow]).
+    The partition of [three_4_flows_statement] is the pull-back of B1, B2, B3
+    along a Petersen colouring of the inflation, restricted to the copies of
+    the edges of G. *)
+
+(* [U10] and [implications_U6] are only Required here (see the header); their
+   names are used through these abbreviations. *)
+Local Notation Pedge := U10.Pedge.
+Local Notation Padj := U10.Padj.
+Local Notation psupp := U10.psupp.
+Local Notation petersenV := U10.petersenV.
+Local Notation pmut_adj3 := U10.mut_adj3.
+Local Notation pcode := implications_U6.pcode.
+Local Notation pnbr := implications_U6.pnbr.
+Local Notation pC2 := implications_U6.pC2.
+
+(** *** F1: the certificate, on the codes of [implications_U6] *)
+
+(** The class (1, 2 or 3) of the Petersen edge with end codes a < b. *)
+Definition e032_B2 : seq (nat * nat) := [:: (3, 24); (5, 18); (9, 20)].
+Definition e032_B3 : seq (nat * nat) := [:: (3, 20); (5, 24); (9, 18)].
+Definition e032_cls (a b : nat) : nat :=
+  if (a, b) \in e032_B2 then 2 else if (a, b) \in e032_B3 then 3 else 1.
+
+(** The two even sets C(i,1), C(i,2) of class i, as lists of code pairs a < b. *)
+Definition e032_C (i j : nat) : seq (nat * nat) :=
+  match i, j with
+  | 1, 2 => [:: (3, 20); (3, 24); (5, 18); (5, 24); (9, 18); (9, 20)]
+  | 2, 1 => [:: (3, 12); (3, 20); (5, 10); (5, 24); (6, 17); (12, 17); (6, 24); (10, 20)]
+  | 2, 2 => [:: (5, 10); (5, 24); (6, 9); (9, 18); (10, 17); (12, 17); (6, 24); (12, 18)]
+  | 3, 1 => [:: (3, 12); (3, 24); (6, 9); (9, 20); (10, 17); (12, 17); (6, 24); (10, 20)]
+  | 3, 2 => [:: (3, 12); (3, 24); (5, 10); (5, 18); (6, 17); (10, 17); (6, 24); (12, 18)]
+  | _, _ => [::]
+  end.
+
+Definition e032_clsc (a b : nat) : nat := e032_cls (minn a b) (maxn a b).
+Definition e032_inC (i j a b : nat) : bool := (minn a b, maxn a b) \in e032_C i j.
+
+Lemma e032_cover_check :
+  all (fun c => all (fun d => all (fun i =>
+      (e032_inC i 1 c d || e032_inC i 2 c d) == (e032_clsc c d != i))
+    [:: 1; 2; 3]%N) (pnbr c)) pC2.
+Proof. by compute. Qed.
+
+Lemma e032_claw_check :
+  all (fun c => all (fun d1 => all (fun d2 => all (fun d3 =>
+      [&& d1 != d2, d2 != d3 & d1 != d3] ==>
+      all (fun i => all (fun j =>
+          ~~ odd (e032_inC i j c d1 + e032_inC i j c d2 + e032_inC i j c d3)%N)
+        [:: 1; 2]%N) [:: 1; 2; 3]%N)
+    (pnbr c)) (pnbr c)) (pnbr c)) pC2.
+Proof. by compute. Qed.
+
+(** The certificate on Petersen edges. *)
+Definition e032_code (q : Pedge) : nat * nat :=
+  (pcode (val (val q).1), pcode (val (val q).2)).
+Definition e032_B (i : nat) (q : Pedge) : bool :=
+  e032_clsc (e032_code q).1 (e032_code q).2 == i.
+Definition e032_Cq (i j : nat) (q : Pedge) : bool :=
+  e032_inC i j (e032_code q).1 (e032_code q).2.
+
+Lemma e032_inCC (i j a b : nat) : e032_inC i j a b = e032_inC i j b a.
+Proof. by rewrite /e032_inC minnC maxnC. Qed.
+
+Lemma e032_Cq_supp (i j : nat) (q : Pedge) (p y : petersenV) :
+  psupp q = [set p; y] -> e032_Cq i j q = e032_inC i j (pcode (val p)) (pcode (val y)).
+Proof.
+move=> e.
+have a : U10.padj (val q).1 (val q).2 := valP q.
+have n : (val q).1 != (val q).2 := implications_U6.padj_neq a.
+have h1 : (val q).1 \in [set p; y] by rewrite -e /psupp set21.
+have h2 : (val q).2 \in [set p; y] by rewrite -e /psupp set22.
+rewrite /e032_Cq /e032_code /=; move: h1 h2 n; rewrite !inE => /orP[] /eqP -> /orP[] /eqP ->;
+  rewrite ?eqxx // => _.
+exact: e032_inCC.
+Qed.
+
+(** Each C(i,j) meets every claw of the Petersen graph evenly. *)
+Lemma e032_claw_even (i j : nat) (q1 q2 q3 : Pedge) :
+  (i \in [:: 1; 2; 3]%N) -> (j \in [:: 1; 2]%N) ->
+  pmut_adj3 Padj q1 q2 q3 -> ~~ odd (e032_Cq i j q1 + e032_Cq i j q2 + e032_Cq i j q3)%N.
+Proof.
+move=> hi hj /implications_U6.petersen_claw [p [y1 [y2 [y3 [e1 e2 e3 [a1 a2 a3] [d12 d23 d13]]]]]].
+rewrite (e032_Cq_supp i j e1) (e032_Cq_supp i j e2) (e032_Cq_supp i j e3).
+have hd : forall y y' : petersenV, y != y' -> pcode (val y) != pcode (val y').
+  by move=> y y'; apply: contraNneq => /implications_U6.pcode_inj/val_inj ->.
+move/allP: e032_claw_check => /(_ _ (implications_U6.pcode_V p)) /allP
+  /(_ _ (implications_U6.pcode_nbr a1)) /allP /(_ _ (implications_U6.pcode_nbr a2))
+  /allP /(_ _ (implications_U6.pcode_nbr a3)) /implyP H.
+have := H (introT and3P (And3 (hd _ _ d12) (hd _ _ d23) (hd _ _ d13))).
+by move/allP/(_ _ hi)/allP/(_ _ hj).
+Qed.
+
+(** The classes partition the Petersen edges, and C(i,1), C(i,2) cover
+    exactly the edges outside B_i. *)
+Lemma e032_cls_range (q : Pedge) : e032_B 1 q || e032_B 2 q || e032_B 3 q.
+Proof. by rewrite /e032_B /e032_clsc /e032_cls; case: ifP => _ //; case: ifP. Qed.
+
+Lemma e032_Cq_cover (i : nat) (q : Pedge) :
+  (i \in [:: 1; 2; 3]%N) -> (e032_Cq i 1 q || e032_Cq i 2 q) = ~~ e032_B i q.
+Proof.
+move=> hi.
+have a : U10.padj (val q).1 (val q).2 := valP q.
+move/allP: e032_cover_check => /(_ _ (implications_U6.pcode_V (val q).1)) /allP
+  /(_ _ (implications_U6.pcode_nbr a)) /allP /(_ _ hi) /eqP.
+by rewrite /e032_Cq /e032_B.
+Qed.
+
+(** *** F2: claw-even predicates pull back to even edge sets *)
+
+Lemma e032_pull_even (G : mgraph) (f : edge G -> Pedge) (P : pred Pedge) :
+  U6.cubic G -> implications_U6.pcol f ->
+  (forall q1 q2 q3, pmut_adj3 Padj q1 q2 q3 -> ~~ odd (P q1 + P q2 + P q3)%N) ->
+  forall v : G, ~~ odd (subdeg [set e | P (f e)] v).
+Proof.
+move=> Gcubic fcol hP v; case: (Gcubic) => hll _.
+have [e1 [e2 [e3 [hE n12 n23 n13]]]] := implications_U6.cubic_edges_at Gcubic v.
+have hinc : forall e, e \in (e1 |: [set e2; e3]) -> incident v e.
+  by move=> e; rewrite -hE inE.
+have ladj : forall a b, a \in (e1 |: [set e2; e3]) -> b \in (e1 |: [set e2; e3]) ->
+    a != b -> line_rel a b.
+  move=> a b ha hb nab; rewrite /line_rel nab /=.
+  by apply/existsP; exists v; rewrite !hinc.
+have hm : pmut_adj3 (@line_rel G) e1 e2 e3.
+  by apply/and3P; split; apply: ladj; rewrite ?inE ?eqxx ?orbT.
+have := hP _ _ _ (fcol _ _ _ hm).
+rewrite (subdeg_loopless _ _ hll) hE card_setI_sum.
+rewrite big_setU1 /=; last by rewrite !inE negb_or n12 n13.
+rewrite big_setU1 /=; last by rewrite inE.
+by rewrite big_set1 !inE addnA.
+Qed.
+
+(** *** F4: two even sets covering the complement of A give a nz 4-flow of G \ A *)
+
+Lemma e032_flow_del (G : mgraph) (A C1 C2 : {set edge G}) :
+  (forall v : G, ~~ odd (subdeg C1 v)) -> (forall v : G, ~~ odd (subdeg C2 v)) ->
+  (forall e : edge G, (e \in C1) || (e \in C2) = (e \notin A)) ->
+  has_nz_kflow_del A 4.
+Proof.
+move=> h1 h2 hc.
+have [d1 hb1] := even_balanced h1.
+have [d2 hb2] := even_balanced h2.
+exists (fun e => osgn C1 d1 e + 2%:R * osgn C2 d2 e); split.
+- move=> v; rewrite !big_split /= -!mulr_sumr.
+  by rewrite (osgn_conservative hb1 v) (osgn_conservative hb2 v).
+- move=> e eA; have := hc e; rewrite eA /= => /norP[n1 n2].
+  by rewrite /osgn (negbTE n1) (negbTE n2) mulr0 addr0.
+- move=> e eA; have := hc e; rewrite eA /osgn.
+  case: (e \in C1); case: (e \in C2) => //= _;
+    by case: (d1 e); case: (d2 e).
+Qed.
+
+(** *** F5: the edge *)
+
+(*@EDGE from=petersen_coloring_statement to=three_4_flows_statement kind=implies status=verified proof=e032_petersen_coloring_implies_three_4_flows cite="gc:e032" note="Unconditional (Jaeger's reformulation). F1: the Petersen edges split into B1, B2, B3 (B2, B3 two 3-edge matchings, P minus B1 the 6-cycle B2 + B3), and for each i two edge sets meeting every claw evenly cover exactly the edges outside B_i (e032_cover_check, e032_claw_check, computed on the codes of implications_U6). F2: claw-even predicates pull back along a Petersen colouring of a cubic multigraph to even edge sets (e032_pull_even). F3: the inflation infG of implications_U6 is cubic and bridgeless for a bridgeless G, and the copies of the edges of G keep evenness (inf_contract_even). F4: two even sets covering exactly the complement of A give phi = osgn C1 d1 + 2 osgn C2 d2, a nowhere-zero integer 4-flow of G minus A (e032_flow_del, after class1_cubic_nz_4flow). The partition is the pull-back of B1, B2, B3 along a Petersen colouring of infG G, on the copies of the edges of G." *)
+Theorem e032_petersen_coloring_implies_three_4_flows :
+  U10.petersen_coloring_statement -> three_4_flows_statement.
+Proof.
+move=> HP G hE hbl.
+have hH : (0 < #|implications_U6.infG G|)%N.
+  by rewrite card_prod mulnC card_bool muln_gt0 hE.
+have [f hf] := HP _ hH (conj (implications_U6.inf_cubic hbl) (implications_U6.inf_bridgeless hbl)).
+have hcub : U6.cubic (implications_U6.infG G) := implications_U6.inf_cubic hbl.
+pose A (i : nat) := [set e : edge G | e032_B i (f (inl e))].
+pose C (i j : nat) := [set e : edge G | e032_Cq i j (f (inl e))].
+have hev : forall i j, (i \in [:: 1; 2; 3]%N) -> (j \in [:: 1; 2]%N) ->
+    forall v : G, ~~ odd (subdeg (C i j) v).
+  move=> i j hi hj.
+  have -> : C i j = implications_U6.inf_contract [set e | e032_Cq i j (f e)].
+    by apply/setP => e; rewrite !inE.
+  apply: implications_U6.inf_contract_even.
+  exact: e032_pull_even hcub hf (fun q1 q2 q3 => e032_claw_even hi hj).
+have hfl : forall i, (i \in [:: 1; 2; 3]%N) -> has_nz_kflow_del (A i) 4.
+  move=> i hi; apply: (e032_flow_del (hev i 1%N hi isT) (hev i 2%N hi isT)).
+  by move=> e; rewrite !inE (e032_Cq_cover _ hi).
+exists (A 1%N), (A 2%N), (A 3%N); split.
+- by rewrite -setI_eq0; apply/eqP/setP => e; rewrite !inE /e032_B; case: eqP => // ->.
+- by rewrite -setI_eq0; apply/eqP/setP => e; rewrite !inE /e032_B; case: eqP => // ->.
+- by rewrite -setI_eq0; apply/eqP/setP => e; rewrite !inE /e032_B; case: eqP => // ->.
+- by apply/setP => e; rewrite !inE; exact: e032_cls_range.
+- by split; apply: hfl.
+Qed.
+
 (** ── Audited non-edges (machine-readable; extracted by build_edge_graph.py) ── *)
 
 
@@ -1576,3 +1778,7 @@ Print Assumptions unconditional_jaegers_modular_orientation_implies_three_flow.
 
 Print Assumptions steffen_3flow_5graphs.
 Print Assumptions unconditional_circular_flow_numbers_of_r_graphs_implies_three_flow.
+
+(** ** Axiom audit (gc:e032) *)
+
+Print Assumptions e032_petersen_coloring_implies_three_4_flows.
