@@ -1931,8 +1931,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (Claude Opus 5.5), 2026-11-15: cycle-theory implications_D1.v (opg:petersen_coloring_conjecture => opg:three_4_flows_conjecture; Jaeger's reformulation, unconditional: a finite certificate on the Petersen graph, the pull-back of claw-even edge sets along a Petersen colouring, the inflation infG of implications_U6, and phi = osgn C1 d1 + 2 osgn C2 d2)",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (second reader of the Petersen colouring => three 4-flows (Jaeger's reformulation) edge, gc:e032, 2026-11-15)",
+   "reviewed_at": "2026-11-15",
    "note": "Unconditional (Jaeger's reformulation). F1: the Petersen edges split into B1, B2, B3 (B2, B3 two 3-edge matchings, P minus B1 the 6-cycle B2 + B3), and for each i two edge sets meeting every claw evenly cover exactly the edges outside B_i (e032_cover_check, e032_claw_check, computed on the codes of implications_U6). F2: claw-even predicates pull back along a Petersen colouring of a cubic multigraph to even edge sets (e032_pull_even). F3: the inflation infG of implications_U6 is cubic and bridgeless for a bridgeless G, and the copies of the edges of G keep evenness (inf_contract_even). F4: two even sets covering exactly the complement of A give phi = osgn C1 d1 + 2 osgn C2 d2, a nowhere-zero integer 4-flow of G minus A (e032_flow_del, after class1_cubic_nz_4flow). The partition is the pull-back of B1, B2, B3 along a Petersen colouring of infG G, on the copies of the edges of G."
   },
   "planar_fractional_vertex_arboricity_two_statement->large_induced_forest_in_a_planar_graph_statement:implies": {
