@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2271,
-      "cross_file_files": 1122,
+      "cross_file_declarations": 2277,
+      "cross_file_files": 1124,
       "implicit_use": 3,
       "packages_without_project": [
         "graph-theory-base"
@@ -7769,7 +7769,13 @@
             "atlas/theories/foundations/fractional.v:bfold_n_alpha",
             "atlas/theories/foundations/fractional.v:colouring_feas",
             "atlas/theories/foundations/fractional.v:colouring_of",
+            "extremal-graph-theory/theories/conjectures/X310.v:cames_van_batenburg_forbidden_subgraph_fractional_statement",
             "extremal-graph-theory/theories/conjectures/grounding_D2chr.v:bfold_colouring_trivial",
+            "extremal-graph-theory/theories/conjectures/grounding_X310.v:<line 37>",
+            "extremal-graph-theory/theories/conjectures/grounding_X310.v:g310_bfold_n_alpha",
+            "extremal-graph-theory/theories/conjectures/grounding_X310.v:g310_col_bfold",
+            "extremal-graph-theory/theories/conjectures/grounding_X310.v:g310_hyp_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X310.v:g310_without_forbidden",
             "extremal-graph-theory/theories/examples/fractional_colouring.v:example_b0_not_a_witness",
             "extremal-graph-theory/theories/foundations/fractional_colouring.v:is_fractional_chromatic",
             "extremal-graph-theory/theories/foundations/fractional_colouring.v:is_fractional_chromatic_attained",
@@ -7782,13 +7788,16 @@
           ],
           "files": [
             "atlas/theories/foundations/fractional.v",
+            "extremal-graph-theory/theories/conjectures/X310.v",
             "extremal-graph-theory/theories/conjectures/grounding_D2chr.v",
+            "extremal-graph-theory/theories/conjectures/grounding_X310.v",
             "extremal-graph-theory/theories/examples/fractional_colouring.v",
             "extremal-graph-theory/theories/foundations/fractional_colouring.v",
             "extremal-graph-theory/theories/migration/fractional_chromatic.v",
             "extremal-graph-theory/theories/migration/fractional_clique_minor.v"
           ],
           "statements": [
+            "extremal-graph-theory/theories/conjectures/X310.v:cames_van_batenburg_forbidden_subgraph_fractional_statement",
             "extremal-graph-theory/theories/migration/fractional_chromatic.v:fractional_hadwiger_statement"
           ],
           "undecided": [],
@@ -7810,7 +7819,9 @@
         "provider_unlisted": false,
         "require_chain": {
           "atlas/theories/foundations/fractional.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/X310.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_D2chr.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/grounding_X310.v": "no",
           "extremal-graph-theory/theories/examples/fractional_colouring.v": "unknown",
           "extremal-graph-theory/theories/foundations/fractional_colouring.v": "unknown",
           "extremal-graph-theory/theories/migration/fractional_chromatic.v": "unknown",
@@ -25019,12 +25030,12 @@
     ]
   },
   "counts": {
-    "files": 402,
+    "files": 403,
     "helpers": 2781,
     "repeated_body_shapes": 153,
     "repeated_normalized_names": 223,
     "repeated_signature_shapes": 339,
-    "statements_excluded": 926,
+    "statements_excluded": 927,
     "x_wave_helpers": 1620
   },
   "groups": {
