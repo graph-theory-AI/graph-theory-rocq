@@ -334,6 +334,16 @@
       "path": "chromatic-theory/theories/conjectures/grounding_X272.v",
       "name": "bfold_colouring",
       "note": "Grounding of X272: g272_bfold_K_le (an (a:b)-fold colouring of K_n has n b <= a, grounding_X262's argument) is stated with the canonical GTBase bfold_colouring, a direct use of the canonical (as X236 / X262 / X270), no copy."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X310.v",
+      "name": "bfold_colouring",
+      "note": "Wave X310 (Marcol, 2026-11-15): the fractional 8/3 conjecture of Cames van Batenburg et al. (studies:std_cames_van_batenburg_et_al_conjecture_fractional) reads \"fractionally 8/3-colorable\" as an (a:b)-fold colouring with 0 < b and a * 3 <= 8 * b through the canonical GTBase bfold_colouring, as arXiv:2204.12683v3 l.185-196 define it; a direct use of the canonical, no copy (extremal-graph-theory cannot import X130 x130_frac_chi_le)."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X310.v",
+      "name": "bfold_colouring",
+      "note": "Grounding of X310: g310_col_bfold (the (5:2)-fold colouring of C_5), g310_bfold_n_alpha (an (a:b)-fold colouring has n b <= a alpha, the argument of Atlas.foundations.fractional bfold_n_alpha) and the certificates are stated with the canonical GTBase bfold_colouring, a direct use of the canonical (as X236 / X270 / X272), no copy."
     }
   ],
   "distinct_variants": [
