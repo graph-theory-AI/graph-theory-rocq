@@ -25060,13 +25060,13 @@
     ]
   },
   "counts": {
-    "files": 404,
-    "helpers": 2781,
+    "files": 405,
+    "helpers": 2782,
     "repeated_body_shapes": 153,
     "repeated_normalized_names": 223,
     "repeated_signature_shapes": 339,
-    "statements_excluded": 928,
-    "x_wave_helpers": 1620
+    "statements_excluded": 931,
+    "x_wave_helpers": 1621
   },
   "groups": {
     "body_shape_hash": {
@@ -70562,6 +70562,25 @@
       "qualified_name": "GTMisc.conjectures.X29.x29_has_induced_cycle",
       "signature": "(G : sgraph) (n : nat) : Prop",
       "signature_shape_hash": "8132fcc3efd0edfc0a0ee46117d09167c57afed296030284e623c7a2b16bddf0"
+    },
+    {
+      "body_hash": "b1402c770fa26e6667c766d122ac5ffc40b554d90c5f5f972d0b22af44465e0b",
+      "body_shape_hash": "b1402c770fa26e6667c766d122ac5ffc40b554d90c5f5f972d0b22af44465e0b",
+      "declaration_hash": "93d8a14b8b413d2a29fc13b6beae810a25898ab25b55a2f76694c76790486043",
+      "direct_consumers": [
+        "GTMisc.conjectures.X312.subcubic_domination_packing_statement"
+      ],
+      "kind": "Definition",
+      "line": 14,
+      "local_dependencies": [],
+      "name": "x312_packing",
+      "normalized_name": "packing",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X312.v",
+      "phase": "X312",
+      "qualified_name": "GTMisc.conjectures.X312.x312_packing",
+      "signature": "(G : sgraph) (P : {set G}) : Prop",
+      "signature_shape_hash": "e11a6e93dc7ad7569e3192fb12a8152bed6a4f13569141f7c5241c449cc443f4"
     },
     {
       "body_hash": "e4408f2db71d93537093e7dd2dd69aaf55568e65fbe5e1ab1bf5f48158bdd073",
