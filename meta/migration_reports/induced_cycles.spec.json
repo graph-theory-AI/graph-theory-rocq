@@ -832,6 +832,11 @@
       "path": "graph-theory-misc/theories/applications/avoidable_paths_disproof.v",
       "name": "x91_avoidable_path",
       "note": "X312 R5 kernel disproof (Marcol, 2026-11-16; PROGRAMME A6): bad_not_avoidable and no_two_disjoint_avoidable state avoidability with X91's live x91_avoidable_path to refute two_disjoint_avoidable_paths_statement (arxiv:1908.03788#00), a direct use of the helper, no copy."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/implications_X312.v",
+      "name": "even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "note": "Target of the Rocq-only edge X312 R2 => X42 (Marcol, 2026-11-16): even_hole_diamond_kt_free_bounded_treewidth_implies_even_hole_k4_diamond_free_bounded_treewidth concludes X42's live statement from X312's Sintiari-Trotignon statement at t = 4; the statement is used as is, no copy."
     }
   ],
   "distinct_variants": [

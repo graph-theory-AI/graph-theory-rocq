@@ -647,6 +647,20 @@
    "reviewed_at": "2026-09-24",
    "note": "Hypothesis-class containment plus Ramsey: (even hole, K_4, diamond)-free graphs are (even hole, diamond)-free, so the source bounds the independence number of every bag of some tree decomposition by k; no induced K_4 forbids a clique of size 4 inside a bag, so finite Ramsey (foundations/ramsey_small.v, ramsey_bound at s=4, a=k) bounds every bag by N(4,k), hence the width; the bridge F1 (tw_le_x27, built on foundations/width_params.v tw_le_tree) converts the forest-indexed sdecomp into the tree-indexed x27_treewidth_at_most. Constant c := N(4,k)."
   },
+  "even_hole_diamond_kt_free_bounded_treewidth_statement->even_hole_k4_diamond_free_bounded_treewidth_statement:implies": {
+   "gc": null,
+   "tier": "T1",
+   "wave": "E7",
+   "host": "graph-theory-misc",
+   "state": "verified",
+   "proof": "even_hole_diamond_kt_free_bounded_treewidth_implies_even_hole_k4_diamond_free_bounded_treewidth",
+   "external": [],
+   "reason": "",
+   "proved_by": "Marcol (Claude Opus 5.5), 2026-11-16: graph-theory-misc implications_X312.v (studies:std_sintiari_trotignon_conjecture_bounded_treewidth (X312 R2) => arxiv:2001.01607#00 (X42))",
+   "reviewed_by": "",
+   "reviewed_at": "",
+   "note": "Rocq-only edge (no corpus relation): the Sintiari-Trotignon conjecture (X312, every t: every graph with every hole odd, no induced diamond and no induced K_t has treewidth at most c(t)) at t = 4 gives X42 (every even-hole, K_4 and diamond-free graph has treewidth at most c). The hypotheses agree: x27_even_hole_free G (no x27_hole of even size, x27_hole = hole) gives every hole odd, x42_induced_free is induced_free, and implications_X42 tw_le_x27 turns tw_le G c into x27_treewidth_at_most G c. It is a relative theorem and resolves neither endpoint (X312 R2 open, X42 partial in the corpus)."
+  },
   "every_4_connected_toroidal_graph_has_a_hamilton_cycl_statement->hamiltonian_cycles_in_line_graphs_statement:implies": {
    "gc": null,
    "tier": "T4",
