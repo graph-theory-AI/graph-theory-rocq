@@ -827,6 +827,11 @@
       "path": "graph-theory-misc/theories/conjectures/grounding_X312.v",
       "name": "x91_avoidable_path",
       "note": "Grounding of X312: g312_two_avoidable and g312_single_avoidable (behind g312_tdap_hyp_inhabited and g312_tdap_not_trivially_true) state avoidability with X91's live x91_avoidable_path, a direct use, no copy."
+    },
+    {
+      "path": "graph-theory-misc/theories/applications/avoidable_paths_disproof.v",
+      "name": "x91_avoidable_path",
+      "note": "X312 R5 kernel disproof (Marcol, 2026-11-16; PROGRAMME A6): bad_not_avoidable and no_two_disjoint_avoidable state avoidability with X91's live x91_avoidable_path to refute two_disjoint_avoidable_paths_statement (arxiv:1908.03788#00), a direct use of the helper, no copy."
     }
   ],
   "distinct_variants": [
