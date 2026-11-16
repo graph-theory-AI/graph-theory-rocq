@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py induced_paths --details /tmp/mi
 
 - Canonical: `GTBase.induced_paths.induced_path_between`.
 - Baseline: `00e59d190216a0cf26724bb6334d3aceee0f3b68`.
-- Scope: 8 helpers, 8 statements, 31 frozen objects, 155 recorded references.
-- Source checks: 302/302 pass; consistent.
+- Scope: 8 helpers, 8 statements, 31 frozen objects, 158 recorded references.
+- Source checks: 305/305 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
