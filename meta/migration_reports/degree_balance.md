@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py degree_balance --details /tmp/m
 
 - Canonical: `Digraph.foundations.degree_balance.balanced`.
 - Baseline: `298112264b7c31820acf889c6da29b710fd39c9a`.
-- Scope: 4 helpers, 8 statements, 17 frozen objects, 156 recorded references.
-- Source checks: 283/283 pass; consistent.
+- Scope: 4 helpers, 8 statements, 17 frozen objects, 160 recorded references.
+- Source checks: 287/287 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
