@@ -1002,14 +1002,14 @@
    "tier": "T3",
    "wave": "M",
    "host": "extremal-graph-theory",
-   "state": "candidate",
-   "proof": null,
+   "state": "verified",
+   "proof": "e077_h_free_eps_bounded_sparse_pair_implies_epsilon_bounded_h_free_anticomplete_pair",
    "external": [],
    "reason": "",
-   "proved_by": null,
-   "reviewed_by": null,
-   "reviewed_at": null,
-   "note": "Literature-stated (the paper asserts 3.3 => 3.4 => 1.4). Not the c=0 instantiation: at c=0 the A-side bound eps*c^s*|G| collapses to 0. Needs the cleaning argument turning a sparse pair into an anticomplete one, which is not in scope here."
+   "proved_by": "Arthur (Claude Opus 5.5), 2026-11-16: extremal-graph-theory implications_X223.v (arxiv:1810.00058#02 => arxiv:1810.00058#00, Conjecture 3.4 => Conjecture 1.4; unconditional: the record's own proof in nat with eps = 1/D, a vertex against its non-neighbours for small graphs, otherwise the source at c = 1/(2t) with t = ceil(2r/D) for the integer D-th root r of n, then a variant of the record's sparsetoanti at c x = 1/2)",
+   "reviewed_by": "Marcol (second reader of the sparse pairs => anticomplete pairs edge, gc:e077, 2026-11-16)",
+   "reviewed_at": "2026-11-16",
+   "note": "Unconditional. The record's own proof (arXiv:1810.00058v2 tex l.334-366) in nat, with eps = 1/D for D = max(6, s + 1, 3d %/ p + 1) from the source's p, d, s. Graphs with n <= D^D: a vertex against its non-neighbours (e077_small; X58's D Delta(G) < n gives D |B| >= n). Otherwise r, the integer D-th root of n (e077_iroot, r >= D), and t = ceil(2r/D) (e077_ceil); X58's maximum-degree bound gives X223's closed-neighbourhood bound for these n (e077_eps_transfer); the source at c = 1/(2t) gives a c-sparse pair (A, B) with |A| >= t (e077_exp_bound: d (2t)^s t <= p r^(s+1) <= p n) and d |B| >= p n; the t vertices of A with the fewest neighbours in B meet at most |B|/2 of B (e077_avg, e077_sparse_to_anticomplete: a variant of the record's lemma sparsetoanti, tex l.373-381, at c x = 1/2 instead of 1/4); then (D t)^D >= (2r)^D > n (e077_A_bound) and D |B'| >= n (e077_B_bound)."
   },
   "hadwiger_chromatic_clique_minor_statement->fractional_hadwiger_statement:implies": {
    "gc": "e223",
