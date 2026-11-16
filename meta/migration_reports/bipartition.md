@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py bipartition --details /tmp/migr
 
 - Canonical: `GraphTheory.connectivity.bipartition`.
 - Baseline: `2e0fb67f54a33409311c2a36cdf1e1d5240e3577`.
-- Scope: 7 helpers, 8 statements, 29 frozen objects, 53 recorded references.
-- Source checks: 244/244 pass; consistent.
+- Scope: 7 helpers, 8 statements, 29 frozen objects, 55 recorded references.
+- Source checks: 246/246 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
