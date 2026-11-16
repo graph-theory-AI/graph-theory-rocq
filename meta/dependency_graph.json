@@ -17,20 +17,20 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 167,
+  "edges": 169,
   "by_status": {
    "candidate": 27,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 106
+   "verified": 108
   },
   "by_kind": {
    "equiv": 13,
-   "implies": 154,
+   "implies": 156,
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 124
+  "proved_theorems": 126
  },
  "edges": [
   {
@@ -251,6 +251,19 @@
    "cite": "gc:e096",
    "proof": "unconditional_circular_flow_numbers_of_r_graphs_implies_circular_flow_number_of_regular_class_1_graphs",
    "note": "For t>1 the hypothesis class is contained: class1_is_2t1 turns loopless + (2t+1)-regular + class 1 into a (2t+1)-graph, via the 2t+1 colour classes being perfect matchings (matchings_cuts.class1_pm_partition) each meeting every odd cut in an odd number of edges (matchings_cuts.pm_cut_parity), so Row 1 applies verbatim. The residual t=1 case, which Row 1 (1<t) does not cover, is Tutte's characterization of cubic graphs with flow number 4, proved as tutte_class1_cubic: the complements A, B of two colour classes are 2-regular, balanced orientations of them (from closed routes) give osgn A dA + 2 osgn B dB, a nowhere-zero integer 4-flow, hence a rational r-flow for every r > 4",
+   "external": [],
+   "sources": [
+    "cycle-theory/implications_D1.v"
+   ]
+  },
+  {
+   "from": "circular_flow_numbers_of_r_graphs_statement",
+   "to": "five_flow_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e185",
+   "proof": "e185_circular_flow_numbers_of_r_graphs_implies_five_flow",
+   "note": "Unconditional: the t = 4 instance of Row 1 and Tutte's mod-5 step. F1-F3: for a bridgeless G with an edge, the inflation infG G of implications_U6 is loopless, cubic and bridgeless; there every odd vertex set has a cut of at least 3 edges (e185_odd_cut3), so the graph with every edge tripled is a 9-graph (e185_tripled_2t1). F4: Row 1 at t = 4 gives it a nowhere-zero rational r-flow for r = (5 + 1/(m+1))/2, which orients the edges so that 2 out(S) <= 3 in(S) for every vertex set S (e185_rflow_cut_orientation). F5: odiff_demand_cut turns the orientation into an integer circulation with values +-2 and +-3 (e185_cut_orientation_flow23). F6: the sums over the three copies form a circulation of infG G that is never 0 mod 5 (e185_tripled_sum). F7: Tutte's step (odiff_demand_cut at the intrinsic orientation with a = phi div 5) gives a nowhere-zero 5-flow (e185_mod5_flow). F8: the values on the copies of the edges of G form a nowhere-zero 5-flow of G (e185_inf_contract_flow).",
    "external": [],
    "sources": [
     "cycle-theory/implications_D1.v"
@@ -1633,6 +1646,19 @@
    "external": [],
    "sources": [
     "cycle-theory/implications_U10.v"
+   ]
+  },
+  {
+   "from": "petersen_coloring_statement",
+   "to": "three_4_flows_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e032",
+   "proof": "e032_petersen_coloring_implies_three_4_flows",
+   "note": "Unconditional (Jaeger's reformulation). F1: the Petersen edges split into B1, B2, B3 (B2, B3 two 3-edge matchings, P minus B1 the 6-cycle B2 + B3), and for each i two edge sets meeting every claw evenly cover exactly the edges outside B_i (e032_cover_check, e032_claw_check, computed on the codes of implications_U6). F2: claw-even predicates pull back along a Petersen colouring of a cubic multigraph to even edge sets (e032_pull_even). F3: the inflation infG of implications_U6 is cubic and bridgeless for a bridgeless G, and the copies of the edges of G keep evenness (inf_contract_even). F4: two even sets covering exactly the complement of A give phi = osgn C1 d1 + 2 osgn C2 d2, a nowhere-zero integer 4-flow of G minus A (e032_flow_del, after class1_cubic_nz_4flow). The partition is the pull-back of B1, B2, B3 along a Petersen colouring of infG G, on the copies of the edges of G.",
+   "external": [],
+   "sources": [
+    "cycle-theory/implications_D1.v"
    ]
   },
   {
