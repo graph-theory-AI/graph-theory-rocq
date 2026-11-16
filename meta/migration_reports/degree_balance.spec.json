@@ -473,6 +473,16 @@
       "path": "cycle-theory/theories/conjectures/grounding_U6.v",
       "name": "eulerian",
       "note": "Proof consumers of U6's multigraph helper (B17): eulerian_unit (one isolated vertex), eulerian_mconnected (the connectivity projection), eulerian_Gd (the digon), eulerian_G2loop (one vertex with two loops, degree 4) and u6_decomposing_eulerian_G2loop (every hypothesis and the conclusion of row 6 on that carrier); theorem types and proofs unchanged, the alias is transparent."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_D1.v",
+      "name": "eulerian",
+      "note": "e187_doubled_eulerian (gc:e187) proves U6's eulerian for the graph with every edge doubled, the premise's hypothesis; new code, eulerian unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_D1.v",
+      "name": "decomposing_eulerian_graphs_statement",
+      "note": "e187_cdc_3cut, e187_reduce and e187_decomposing_eulerian_graphs_implies_cycle_double_cover (gc:e187) take decomposing_eulerian_graphs_statement as their hypothesis; new code, the statement unchanged."
     }
   ],
   "distinct_variants": [
