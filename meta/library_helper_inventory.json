@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2291,
-      "cross_file_files": 1132,
+      "cross_file_declarations": 2293,
+      "cross_file_files": 1133,
       "implicit_use": 4,
       "packages_without_project": [
         "graph-theory-base"
@@ -10653,9 +10653,12 @@
             "induced-free"
           ],
           "declarations": [
+            "extremal-graph-theory/theories/conjectures/implications_X223.v:e077_small",
+            "extremal-graph-theory/theories/conjectures/implications_X223.v:e077_sparse_to_anticomplete",
             "extremal-graph-theory/theories/migration/induced_free.v:statement"
           ],
           "files": [
+            "extremal-graph-theory/theories/conjectures/implications_X223.v",
             "extremal-graph-theory/theories/migration/induced_free.v"
           ],
           "statements": [],
@@ -10676,6 +10679,7 @@
         },
         "provider_unlisted": false,
         "require_chain": {
+          "extremal-graph-theory/theories/conjectures/implications_X223.v": "unknown",
           "extremal-graph-theory/theories/migration/induced_free.v": "unknown"
         },
         "same_file": {

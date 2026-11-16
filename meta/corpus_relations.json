@@ -1821,7 +1821,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "h_free_eps_bounded_sparse_pair_statement->epsilon_bounded_h_free_anticomplete_pair_statement:implies:candidate",
+   "rocq_edge": "h_free_eps_bounded_sparse_pair_statement->epsilon_bounded_h_free_anticomplete_pair_statement:implies:verified",
    "argument": "The source's own context text explicitly states 'The implications 3.3 => 3.4 => 1.4 hold', where 3.4 is the source (c-sparse pairs in H-free epsilon-bounded graphs) and 1.4 is the target (anticomplete linear pairs). The direction matches the claim. Note the implication is not the trivial c=0 instantiation (at c=0 the guaranteed pair size epsilon*c^s*|G| degenerates to 0); it requires the paper's cleaning argument turning sparse pairs into anticomplete pairs, but since the paper itself asserts the implication, this is a literature-stated relation, not just a sketch. Both statements quantify over the same class (H-free epsilon-bounded graphs), so no hypothesis-class mismatch.",
    "citations": [
     "https://arxiv.org/abs/1810.00058"
