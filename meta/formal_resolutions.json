@@ -86,6 +86,27 @@
       }
     },
     {
+      "record_key": "1908.03788__00",
+      "row_id": "arxiv:1908.03788#00",
+      "source_hash": "3c7cb026f3efc586aa2da73d3a5b66d431ad83410bc2813cabe8b05a0c5c15c4",
+      "source_text": "For every positive integer $k$, does every graph $G$ either not contain two disjoint $P_k$, or contain two disjoint avoidable $P_k$?",
+      "source_locator": "arXiv:1908.03788 — Question 1.12 | Rocq: graph-theory-misc/theories/conjectures/X312.v#two_disjoint_avoidable_paths_statement",
+      "corpus": "v2",
+      "package": "graph-theory-misc",
+      "direction": "disprove",
+      "statement": "GTMisc.conjectures.X312.two_disjoint_avoidable_paths_statement",
+      "statement_file": "graph-theory-misc/theories/conjectures/X312.v",
+      "statement_sha256": "933bd3c17e4474383a53e6e3de5473dc168e1d706f60c0f36ebc461a4fdafb90",
+      "theorem": "GTMisc.applications.avoidable_paths_disproof.two_disjoint_avoidable_paths_disproved",
+      "theorem_file": "graph-theory-misc/theories/applications/avoidable_paths_disproof.v",
+      "correspondence": {
+        "explanation": "The row statement (X312.v, wave X312) is Question 1.12 of arXiv:1908.03788 (Bonamy, Defrain, Hatzel and Thiebaut, Avoidable paths in graphs) as a proposition: for every k > 0 and every graph G, either G has no two vertex-disjoint induced paths on k vertices, or it has two vertex-disjoint avoidable ones (X91's x91_avoidable_path, the paper's Definitions 1.5-1.7). The refutation is the paper's own counterexample (arXiv:1908.03788v1 l.118-126) at k = 3: the cycle 0-1-2-3-4-0 with a vertex 5 adjacent to 0 and 1. [1; 2; 3] and [4; 0; 5] are disjoint induced P_3; every induced P_3 is one of 14 sequences, and in every disjoint pair of them one is [1; 2; 3], [0; 4; 3] or a reverse, the path holding exactly one vertex of the triangle {0, 1, 5}; its extension [5; 1; 2; 3; 4] (resp. [5; 0; 4; 3; 2]) is an induced path whose vertices lie in no chordless cycle, since such a cycle is a hole in which the two cycle neighbours of 4 (resp. 2) are its two graph neighbours, putting 0 (resp. 1) on the hole with the triangle. Caveat: the kernel proof covers k = 3, which refutes the universally quantified question; the paper's family for every k >= 3 is not formalized. The upstream status (disproved) is unchanged.",
+        "implemented_by": "Marcol (Claude Opus 5.5, mathematics programme, X312 R5 kernel disproof, 2026-11-16)",
+        "reviewed_by": "",
+        "reviewed_at": ""
+      }
+    },
+    {
       "record_key": "2103.15175__00",
       "row_id": "arxiv:2103.15175#00",
       "source_hash": "535d4a72e1dc3f9bb52adccf4ae3b9f5bbaf55de5275a5f497cc6ecdf9e32d31",
