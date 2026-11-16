@@ -486,6 +486,16 @@
       "path": "packing-theory/theories/conjectures/grounding_U9.v",
       "name": "del_bipartite",
       "note": "Consumer statement types remain unchanged; affected proof bodies use the public equivalence API where required."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_P9.v",
+      "name": "x53_bipartition",
+      "note": "e101_bipartition (gc:e101) states the double cover's sides with x53_bipartition, and the edge theorem applies the source statement to them; new code, x53_bipartition unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_P9.v",
+      "name": "bipartite_digraph_asymmetric_outdegree_girth_statement",
+      "note": "e101_bipartite_digraph_asymmetric_outdegree_girth_implies_caccetta_haggkvist (gc:e101) takes the source statement as its hypothesis; new code, the statement unchanged."
     }
   ],
   "distinct_variants": [
