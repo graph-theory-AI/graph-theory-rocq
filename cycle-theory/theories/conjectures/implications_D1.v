@@ -1752,6 +1752,442 @@ exists (A 1%N), (A 2%N), (A 3%N); split.
 - by split; apply: hfl.
 Qed.
 
+(** ================================================================= *)
+(** ** gc:e185: Row 1 (circular flow numbers of (2t+1)-graphs) => the 5-flow conjecture
+
+    The t = 4 instance of Row 1 with Tutte's mod-5 step, in-repo and unconditional:
+    - F1-F3: in a loopless cubic multigraph a cut is odd exactly when its side is, and with
+      bridgelessness an odd side has a cut of at least three edges ([e185_odd_cut3]); so for a
+      loopless cubic bridgeless H the graph with every edge tripled ([e185_tripled]) is a 9-graph
+      ([e185_tripled_2t1]).
+    - F4: Row 1 at t = 4 gives the tripled graph a nowhere-zero rational r-flow for
+      r = (5 + 1/(m+1))/2, which orients its edges with 2 out(S) <= 3 in(S) for every vertex set S
+      ([e185_rflow_cut_orientation], the argument of [rflow_cut_orientation]).
+    - F5: [odiff_demand_cut] turns that orientation into an integer circulation with values +-2
+      and +-3 ([e185_cut_orientation_flow23], the argument of [cut_orientation_flow3]).
+    - F6: the sums over the three copies of each edge form a circulation of H that is never
+      0 mod 5 ([e185_tripled_sum]).
+    - F7: Tutte's step: an integer circulation never 0 mod 5 gives a nowhere-zero 5-flow
+      ([e185_mod5_flow], [odiff_demand_cut] at the intrinsic orientation).
+    - F8: H is the inflation [implications_U6.infG] of a bridgeless G (loopless, cubic and
+      bridgeless: [inf_loopless], [inf_cubic], [inf_bridgeless]); the values on the copies of the
+      edges of G form a nowhere-zero 5-flow of G ([e185_inf_contract_flow], the argument of
+      [inf2_contract_flow]). *)
+
+(** *** F1: tripling every edge *)
+
+Definition e185_tripled (H : mgraph) : mgraph :=
+  @Graph unit unit H (edge H * 'I_3)%type (fun b f => endpoint b f.1) (fun _ => tt) (fun _ => tt).
+
+Lemma e185_tripled_ends (H : mgraph) (b : bool) (v : H) :
+  #|ends_at [set: edge (e185_tripled H)] b (v : e185_tripled H)|
+  = (3 * #|ends_at [set: edge H] b v|)%N.
+Proof.
+have -> : ends_at [set: edge (e185_tripled H)] b (v : e185_tripled H)
+          = setX (ends_at [set: edge H] b v) [set: 'I_3].
+  by apply/setP => -[e i]; rewrite /ends_at in_setX !inE /= andbT.
+by rewrite cardsX cardsT card_ord mulnC.
+Qed.
+
+Lemma e185_tripled_mdeg (H : mgraph) (v : H) :
+  mdeg (v : e185_tripled H) = (3 * mdeg v)%N.
+Proof. by rewrite /mdeg /subdeg !e185_tripled_ends mulnDr. Qed.
+
+Lemma e185_tripled_cut (H : mgraph) (X : {set H}) :
+  #|cut (X : {set e185_tripled H})| = (3 * #|cut X|)%N.
+Proof.
+have -> : cut (X : {set e185_tripled H}) = setX (cut X) [set: 'I_3].
+  by apply/setP => -[e i]; rewrite /cut in_setX !inE /= andbT.
+by rewrite cardsX cardsT card_ord mulnC.
+Qed.
+
+(** *** F2: odd cuts of a loopless bridgeless cubic multigraph have at least three edges *)
+
+Lemma e185_sum_ends (H : mgraph) (b : bool) (X : {set H}) :
+  (\sum_(v in X) #|ends_at [set: edge H] b v|)%N = #|[set e : edge H | endpoint b e \in X]|.
+Proof.
+rewrite -sum1_card (partition_big (fun e => endpoint b e) (mem X)) /=;
+  last by move=> e; rewrite inE.
+apply: eq_bigr => v vX; rewrite sum1_card; apply: eq_card => e; rewrite !inE.
+rewrite unfold_in /= !inE; case: (endpoint b e =P v) => [->|_]; by rewrite ?vX ?andbF.
+Qed.
+
+Lemma e185_sum_mdeg (H : mgraph) (X : {set H}) :
+  (\sum_(v in X) mdeg v)%N
+  = (#|[set e : edge H | source e \in X]| + #|[set e : edge H | target e \in X]|)%N.
+Proof. by rewrite big_split /= !e185_sum_ends. Qed.
+
+Lemma e185_ends_cut (H : mgraph) (X : {set H}) :
+  (#|[set e : edge H | source e \in X]| + #|[set e : edge H | target e \in X]|)%N
+  = (#|cut X| + 2 * #|[set e : edge H | (source e \in X) && (target e \in X)]|)%N.
+Proof.
+set A := [set e : edge H | source e \in X]; set B := [set e : edge H | target e \in X].
+have hI : [set e : edge H | (source e \in X) && (target e \in X)] = A :&: B.
+  by apply/setP => e; rewrite !inE.
+have hU : A :|: B = cut X :|: (A :&: B).
+  by apply/setP => e; rewrite !inE; case: (source e \in X); case: (target e \in X).
+have hD : cut X :&: (A :&: B) = set0.
+  by apply/setP => e; rewrite !inE; case: (source e \in X); case: (target e \in X).
+rewrite hI -cardsUI hU cardsU hD cards0 subn0.
+by rewrite -addnA addnn mul2n.
+Qed.
+
+(** In a loopless cubic multigraph [3 |X| = 2 e(X) + |cut X|]: a cut is odd iff its side is. *)
+Lemma e185_cut_odd (H : mgraph) (X : {set H}) :
+  loopless_cubic H -> odd #|cut X| = odd #|X|.
+Proof.
+move=> [ll hc].
+have h3 : (\sum_(v in X) mdeg v)%N = (3 * #|X|)%N.
+  by rewrite (eq_bigr (fun _ => 3%N)) => [|v _];
+    [rewrite sum_nat_const mulnC | rewrite mdeg_loopless // hc].
+move: h3; rewrite e185_sum_mdeg e185_ends_cut => /(congr1 odd).
+by rewrite oddD !oddM /= addbF.
+Qed.
+
+(** With bridgelessness ([implications_U6.bridgeless_cut2]), an odd side has a cut of at least
+    three edges. *)
+Lemma e185_odd_cut3 (H : mgraph) (X : {set H}) :
+  loopless_cubic H -> bridgeless H -> odd #|X| -> (3 <= #|cut X|)%N.
+Proof.
+move=> hc hb hX.
+have hodd : odd #|cut X| by rewrite e185_cut_odd.
+have [e he] : exists e, e \in cut X.
+  by apply/set0Pn; apply: contraTneq hodd => ->; rewrite cards0.
+have h2 := implications_U6.bridgeless_cut2 hb he.
+move: hodd h2; case: #|cut X| => [|[|[|n]]] //.
+Qed.
+
+(** *** F3: the tripled graph is a 9-graph *)
+
+Lemma e185_tripled_2t1 (H : mgraph) :
+  loopless_cubic H -> bridgeless H -> is_2t1_graph (e185_tripled H) 4.
+Proof.
+move=> hc hb; split.
+- move=> v; rewrite (e185_tripled_mdeg (v : H)) mdeg_loopless; first by rewrite hc.2.
+  exact: hc.1.
+- move=> X hX; rewrite (e185_tripled_cut (X : {set H})).
+  by rewrite (leq_mul2l 3 3) /=; exact: e185_odd_cut3.
+Qed.
+
+(** *** F4: rounding at ratio 3/2 (the argument of [rflow_cut_orientation]) *)
+
+(** A nowhere-zero rational [r]-flow with [r = (5 + 1/(m+1)) / 2], [m] the number of edges, orients
+    the edges (along the sign of the flow) so that every set has [2 out <= 3 in]: over a cut the
+    absolute values leaving and entering balance, each lies in [[1, (3 + 1/(m+1)) / 2]], and at most
+    [m] edges enter. *)
+Lemma e185_rflow_cut_orientation (H : mgraph) :
+  has_nz_rflow H ((5%:R + (#|edge H|.+1)%:R^-1) / 2%:R) ->
+  exists o : edge H -> bool, forall S : {set H},
+    (2 * #|[set e | (otail o e \in S) && (ohead o e \notin S)]|
+     <= 3 * #|[set e | (ohead o e \in S) && (otail o e \notin S)]|)%N.
+Proof.
+move=> [phi [hcons hb]].
+pose o e := 0 < phi e.
+exists o => S.
+(* Conservation summed over [S]: the flow on the edges with source in [S] equals the flow on the
+   edges with target in [S]. *)
+have hend : forall b : bool,
+    \sum_(v in S) \sum_(e | endpoint b e == v) phi e = \sum_(e | endpoint b e \in S) phi e.
+  move=> b; rewrite [RHS](partition_big (fun e => endpoint b e) (mem S)) //=.
+  apply: eq_bigr => v hv; apply: eq_bigl => e.
+  by case: (endpoint b e =P v) => [->|]; rewrite ?hv ?andbF ?andbT.
+have hST : \sum_(e | source e \in S) phi e = \sum_(e | target e \in S) phi e.
+  by rewrite -(hend false) -(hend true); apply: eq_bigr => v _; exact: hcons.
+set Out := [set e | otail o e \in S & ohead o e \notin S].
+set In := [set e | ohead o e \in S & otail o e \notin S].
+(* Along [o], that difference is the absolute flow leaving [S] minus the one entering it. *)
+have hpt : forall e, (if source e \in S then phi e else 0) - (if target e \in S then phi e else 0)
+    = (if e \in Out then `|phi e| else 0) - (if e \in In then `|phi e| else 0).
+  move=> e; rewrite !inE /otail /ohead /o.
+  case: (boolP (0 < phi e)) => hp.
+    rewrite (gtr0_norm hp).
+    by case: (source e \in S); case: (target e \in S); rewrite /= ?subr0 ?sub0r ?subrr.
+  rewrite (ler0_norm (_ : phi e <= 0)); last by rewrite order.Order.TotalTheory.leNgt.
+  by case: (source e \in S); case: (target e \in S); rewrite /= ?subr0 ?sub0r ?subrr ?opprK.
+have hbal : \sum_(e in Out) `|phi e| = \sum_(e in In) `|phi e|.
+  apply/eqP; rewrite -subr_eq0 big_mkcond [X in _ - X]big_mkcond -sumrB.
+  rewrite -(eq_bigr _ (fun e _ => hpt e)) sumrB -!big_mkcond /=.
+  by rewrite hST subrr.
+(* Each absolute value lies in [[1, (3 + 1/(m+1)) / 2]], and fewer than [m+1] edges enter [S]. *)
+set m := #|edge H|.
+have hlo : (#|Out|%:R : rat) <= \sum_(e in Out) `|phi e|.
+  have -> : (#|Out|%:R : rat) = \sum_(e in Out) 1 by rewrite sumr_const.
+  by apply: ler_sum => e _; exact: (hb e).1.
+have h52 : ((5%:R + m.+1%:R^-1) / 2%:R - 1 : rat) = (3%:R + m.+1%:R^-1) / 2%:R.
+  apply/eqP; rewrite subr_eq -[1 in X in _ == X](@divff _ 2%:R) ?pnatr_eq0 //.
+  by rewrite -mulrDl addrAC -natrD.
+have hhi : \sum_(e in In) `|phi e| <= #|In|%:R * ((3%:R + m.+1%:R^-1) / 2%:R).
+  have -> : #|In|%:R * ((3%:R + m.+1%:R^-1) / 2%:R)
+            = \sum_(e in In) ((3%:R + m.+1%:R^-1) / 2%:R : rat).
+    by rewrite sumr_const mulr_natl.
+  by apply: ler_sum => e _; rewrite -h52; exact: (hb e).2.
+have hIn : (#|In| < m.+1)%N by rewrite ltnS /m; exact: max_card.
+have hfrac : (#|In|%:R : rat) * m.+1%:R^-1 < 1.
+  by rewrite ltr_pdivrMr ?ltr0n // mul1r ltr_nat.
+have h2 : ((2 * #|Out|)%:R : rat) <= 2%:R * \sum_(e in In) `|phi e|.
+  by rewrite natrM ler_pM2l ?ltr0n // -hbal.
+have h3 : (2%:R : rat) * \sum_(e in In) `|phi e| <= #|In|%:R * (3%:R + m.+1%:R^-1).
+  apply: (order.Order.POrderTheory.le_trans
+            (_ : _ <= 2%:R * (#|In|%:R * ((3%:R + m.+1%:R^-1) / 2%:R)))).
+    by rewrite ler_pM2l ?ltr0n.
+  by rewrite (mulrC 2%:R) -!mulrA mulVf ?pnatr_eq0 // mulr1.
+have h4 : (#|In|%:R : rat) * (3%:R + m.+1%:R^-1) < (3 * #|In|).+1%:R.
+  rewrite mulrDr -[(3 * #|In|).+1]addn1 natrD natrM (mulrC 3%:R) ltrD2l.
+  exact: hfrac.
+have : ((2 * #|Out|)%:R : rat) < (3 * #|In|).+1%:R.
+  exact: order.Order.POrderTheory.le_lt_trans h2 (order.Order.POrderTheory.le_lt_trans h3 h4).
+by rewrite ltr_nat ltnS.
+Qed.
+
+(** *** F5: from [2 out <= 3 in] on every set, a circulation with values 2 and 3 *)
+
+(** The demands [- 2 imbalance] meet the cut condition exactly when [2 out <= 3 in], so some [X]
+    meets them ([odiff_demand_cut]), and [2 + [e in X]] along [o] is conservative
+    ([cut_orientation_flow3]'s argument). *)
+Lemma e185_cut_orientation_flow23 (G : mgraph) (o : edge G -> bool) :
+  (forall S : {set G},
+     (2 * #|[set e | (otail o e \in S) && (ohead o e \notin S)]|
+      <= 3 * #|[set e | (ohead o e \in S) && (otail o e \notin S)]|)%N) ->
+  exists h : edge G -> int, iconservative h /\ forall e, (`|h e| == 2) || (`|h e| == 3).
+Proof.
+move=> hcut.
+pose q v : int := - (2%:R * imbalance o v).
+have hq0 : \sum_v q v = 0.
+  rewrite /q sumrN -mulr_sumr (eq_bigr _ (fun v _ => imbalance_odiff o v)) odiff_sum.
+  by rewrite mulr0 oppr0.
+have hqcut : forall S : {set G}, \sum_(v in S) q v
+    <= #|[set e | (ohead o e \in S) && (otail o e \notin S)]|%:R.
+  move=> S; rewrite /q sumrN -mulr_sumr imbalance_cut mulrBr opprB lerBlDr.
+  rewrite -!(natrM _ 2) -natrD ler_nat -mulSn; exact: hcut.
+have [X hX] := odiff_demand_cut hq0 hqcut.
+(* Along [o], the value is [2] off [X] and [3] on [X]. *)
+pose a e : int := 2%:R + (e \in X)%:R.
+exists (fun e => if o e then a e else - a e); split.
+  move=> v; apply/eqP; rewrite -subr_eq0.
+  have hc : forall (C : {set edge G}) (P : pred (edge G)),
+      \sum_e ((e \in C) && P e)%:R = #|[set e in C | P e]|%:R :> int.
+    move=> C P; rewrite -sum_indz [RHS]big_mkcond; apply: eq_bigr => e _.
+    by case: (P e); case: (e \in C).
+  have hc' : forall P : pred (edge G),
+      \sum_e (P e)%:R = #|[set e | P e]|%:R :> int.
+    move=> P; rewrite -(_ : [set e in [set: edge G] | P e] = [set e | P e]);
+      last by apply/setP => e; rewrite !inE.
+    by rewrite -hc; apply: eq_bigr => e _; rewrite in_setT.
+  rewrite (big_mkcond (fun e => source e == v)).
+  rewrite (big_mkcond (fun e => target e == v)) -sumrB.
+  rewrite (eq_bigr (fun e => 2%:R * ((otail o e == v)%:R - (ohead o e == v)%:R)
+    + (((e \in X) && (otail o e == v))%:R
+       - ((e \in X) && (ohead o e == v))%:R))); last first.
+    move=> e _.
+    have h1 : forall (b : bool) (x : int), (if b then x else 0) = x * b%:R.
+      by move=> [] x; rewrite ?mulr1 ?mulr0.
+    have h2 : (if o e then a e else - a e)
+                * ((source e == v)%:R - (target e == v)%:R)
+              = a e * ((otail o e == v)%:R - (ohead o e == v)%:R).
+      by rewrite /otail /ohead; case: (o e); rewrite // mulNr -mulrN opprB.
+    have h3 : forall b1 b2 : bool, ((b1 && b2)%:R : int) = b1%:R * b2%:R.
+      by move=> [] []; rewrite ?mulr1 ?mulr0.
+    by rewrite !h1 -mulrBr h2 !h3 -mulrBr /a mulrDl.
+  rewrite big_split /= -mulr_sumr !sumrB !hc !hc'.
+  have e1 : (#|[set e | otail o e == v]|%:R
+             - #|[set e | ohead o e == v]|%:R : int) = - imbalance o v.
+    by rewrite /imbalance opprB.
+  have e2 : (#|[set e in X | otail o e == v]|%:R
+             - #|[set e in X | ohead o e == v]|%:R : int) = 2%:R * imbalance o v.
+    have := hX v; rewrite /odiff /q => hv.
+    by rewrite -[RHS]opprK -hv opprB.
+  by rewrite e1 e2 mulrN addNr.
+move=> e /=.
+have -> : `|if o e then a e else - a e| = `|a e| by case: (o e); rewrite ?normrN.
+by rewrite /a; case: (e \in X).
+Qed.
+
+(** *** F6: the sums over the three copies, a circulation never 0 mod 5 *)
+
+Lemma e185_norm23 (x : int) : (`|x| == 2) || (`|x| == 3) -> x \in [:: 2; -2; 3; -3].
+Proof. by case: x => [[|[|[|[|n]]]]|[|[|[|n]]]]. Qed.
+
+(** A sum of three values in [{+-2, +-3}] lies in [{+-1, +-2, +-3, +-4, +-6, +-7, +-8, +-9}]: never
+    a multiple of 5 (the 64 cases). *)
+Lemma e185_sum3_mod5 (x y z : int) :
+  x \in [:: 2; -2; 3; -3] -> y \in [:: 2; -2; 3; -3] -> z \in [:: 2; -2; 3; -3] ->
+  ~~ (5 %| x + y + z)%Z.
+Proof. by rewrite !inE => /or4P[] /eqP-> /or4P[] /eqP-> /or4P[] /eqP->. Qed.
+
+Lemma e185_tripled_sum (H : mgraph) (h : edge (e185_tripled H) -> int) :
+  iconservative h -> (forall f, (`|h f| == 2) || (`|h f| == 3)) ->
+  let phi := fun e : edge H => \sum_(i < 3) h (e, i) in
+  iconservative phi /\ forall e, ~~ (5 %| phi e)%Z.
+Proof.
+move=> hc hv phi; split.
+- move=> v; have hcv := hc (v : e185_tripled H).
+  rewrite /phi !(pair_big_dep _ (fun _ _ => true)) /=.
+  have hp : forall b, \sum_(p | (endpoint b p.1 == v) && true) h (p.1, p.2)
+                      = \sum_(f : edge (e185_tripled H) | endpoint b f == v) h f.
+    by move=> b; apply: eq_big => [[e i]|[e i] _] /=; rewrite ?andbT.
+  by rewrite (hp false) (hp true).
+- move=> e; rewrite /phi !big_ord_recl big_ord0 addr0 addrA.
+  by apply: e185_sum3_mod5; apply: e185_norm23.
+Qed.
+
+(** *** F7: Tutte's step, an integer circulation nowhere 0 mod 5 gives a nowhere-zero 5-flow *)
+
+(** With [a = phi %/ 5] (so [5 a <= phi <= 5 a + 5] on every edge), the demands
+    [q v = a(out v) - a(in v)] meet the cut condition along the intrinsic orientation, since
+    [phi / 5] is a fractional circulation within [[a, a + 1]]; [odiff_demand_cut] gives [X] with
+    [a + [e in X]] conservative, and [phi - 5 (a + [e in X])] is a circulation with values
+    [phi mod 5] or [phi mod 5 - 5], so between 1 and 4 in absolute value. *)
+Lemma e185_mod5_flow (H : mgraph) (phi : edge H -> int) :
+  iconservative phi -> (forall e, ~~ (5 %| phi e)%Z) -> has_nz_kflow H 5.
+Proof.
+move=> hc hnd.
+pose a e : int := (phi e %/ 5)%Z.
+pose r e : int := (phi e %% 5)%Z.
+have hr : forall e, phi e = a e * 5 + r e by move=> e; exact: divz_eq.
+have hr1 : forall e, (1 <= r e) && (r e <= 4).
+  move=> e; have h0 : 0 <= r e by exact: modz_ge0.
+  have h5 : r e < 5 by exact: ltz_pmod.
+  have hn0 : r e != 0 by apply: contra (hnd e) => /eqP h; apply/dvdz_mod0P.
+  by move: h0 h5 hn0; rewrite /r; case: (phi e %% 5)%Z => [[|[|[|[|[|n]]]]]|n].
+(* Sums over the vertices of [S] of the edges leaving / entering them, as a sum over the edges. *)
+have hend : forall (w : edge H -> int) (b : bool) (S : {set H}),
+    \sum_(v in S) \sum_(e | endpoint b e == v) w e = \sum_e w e * (endpoint b e \in S)%:R.
+  move=> w b S.
+  have -> : \sum_e w e * (endpoint b e \in S)%:R = \sum_(e | endpoint b e \in S) w e.
+    rewrite [RHS]big_mkcond.
+    by apply: eq_bigr => e _; case: (endpoint b e \in S); rewrite ?mulr1 ?mulr0.
+  rewrite [RHS](partition_big (fun e => endpoint b e) (mem S)) //=.
+  apply: eq_bigr => v hv; apply: eq_bigl => e.
+  by case: (endpoint b e =P v) => [->|]; rewrite ?hv ?andbF ?andbT.
+pose o := fun _ : edge H => true.
+pose q v : int := \sum_(e | source e == v) a e - \sum_(e | target e == v) a e.
+have hdiff : forall (w : edge H -> int) (S : {set H}),
+    \sum_(v in S) (\sum_(e | source e == v) w e - \sum_(e | target e == v) w e)
+    = \sum_e w e * ((source e \in S)%:R - (target e \in S)%:R).
+  move=> w S; rewrite sumrB (hend w false S) (hend w true S) -sumrB.
+  by apply: eq_bigr => e _; rewrite mulrBr.
+have hq0 : \sum_v q v = 0.
+  have := hdiff a [set: H].
+  rewrite (eq_bigl (fun v => true)) => [|v]; last by rewrite in_setT.
+  move=> ->.
+  by apply: big1 => e _; rewrite !in_setT subrr mulr0.
+(* The cut condition: edge by edge, [5 a c <= phi c + 5 [e enters S]], and [phi c] sums to 0 over
+   [S]. *)
+have hqcut : forall S : {set H}, \sum_(v in S) q v
+    <= #|[set e | (ohead o e \in S) && (otail o e \notin S)]|%:R.
+  move=> S; rewrite /q (hdiff a S).
+  have hphi : \sum_e phi e * ((source e \in S)%:R - (target e \in S)%:R) = 0.
+    by rewrite -hdiff; apply: big1 => v _; rewrite (hc v) subrr.
+  have hin : (#|[set e | (ohead o e \in S) && (otail o e \notin S)]|%:R : int)
+             = \sum_e ((target e \in S) && (source e \notin S))%:R.
+    rewrite -sum1_card natr_sum big_mkcond /=.
+    apply: eq_bigr => e _.
+    by rewrite inE /ohead /otail /o /=; case: (target e \in S); case: (source e \in S).
+  rewrite hin -(ler_pM2l (_ : (0 : int) < 5)) // !mulr_sumr.
+  apply: (order.Order.POrderTheory.le_trans
+            (_ : _ <= \sum_e (phi e * ((source e \in S)%:R - (target e \in S)%:R)
+                              + 5 * ((target e \in S) && (source e \notin S))%:R))); last first.
+    by rewrite big_split /= hphi add0r.
+  apply: ler_sum => e _.
+  move: (hr1 e) => /andP[h1 h4]; rewrite (hr e).
+  case: (source e \in S); case: (target e \in S) => /=.
+  - by rewrite subrr !mulr0 addr0.
+  - by rewrite subr0 !mulr1 mulr0 addr0 mulrC lerDl (order.Order.POrderTheory.le_trans _ h1).
+  - rewrite sub0r !mulrN1 mulr1 opprD -addrA mulrN mulrC lerDl.
+    by rewrite addrC subr_ge0 (order.Order.POrderTheory.le_trans h4).
+  - by rewrite subrr !mulr0 addr0.
+have [X hX] := odiff_demand_cut hq0 hqcut.
+exists (fun e => r e - 5 * (e \in X)%:R); split.
+  move=> v.
+  have hrp : forall e, r e = phi e - a e * 5 by move=> e; rewrite (hr e) addrC addKr.
+  have hXc : forall b : bool, \sum_(e | endpoint b e == v) (e \in X)%:R
+                              = #|[set e in X | endpoint b e == v]|%:R :> int.
+    move=> b; rewrite -sum1_card natr_sum [RHS]big_mkcond [LHS]big_mkcond /=.
+    by apply: eq_bigr => e _; rewrite inE; case: (e \in X); case: (endpoint b e == v).
+  have hf : forall b : bool, \sum_(e | endpoint b e == v) (r e - 5 * (e \in X)%:R)
+      = \sum_(e | endpoint b e == v) phi e - (\sum_(e | endpoint b e == v) a e) * 5
+        - 5 * #|[set e in X | endpoint b e == v]|%:R.
+    move=> b; rewrite sumrB -mulr_sumr hXc (eq_bigr _ (fun e _ => hrp e)) sumrB -mulr_suml.
+    by [].
+  have hXv := hX v; rewrite /odiff /q /ohead /otail /o /= in hXv.
+  have hcv := hc v.
+  move: (hf false) (hf true) => /= -> ->.
+  move: hXv hcv.
+  set A1 := \sum_(e | source e == v) a e; set A2 := \sum_(e | target e == v) a e.
+  set P1 := \sum_(e | source e == v) phi e; set P2 := \sum_(e | target e == v) phi e.
+  set N1 := (#|[set e in X | source e == v]|%:R : int).
+  set N2 := (#|[set e in X | target e == v]|%:R : int).
+  move=> h1 h2; rewrite h2 -!addrA; congr (_ + _); rewrite -!opprD; congr (- _).
+  rewrite ![_ * 5]mulrC -!mulrDr; congr (5 * _).
+  by rewrite -(subrK A2 A1) -h1 addrAC subrK addrC.
+move=> e /=; move: (hr1 e) => /andP[h1 h4].
+case: (e \in X) => /=; split.
+all: by case: (r e) h1 h4 => [n|n] //; case: n => [|[|[|[|[|n]]]]].
+Qed.
+
+(** *** F8: contracting the cycles of the inflation (the argument of [inf2_contract_flow]) *)
+
+(** The values on the copies [inl e] of a flow of [implications_U6.infG G] form a flow of [G]:
+    summed over the ends of [v], conservation counts every cycle edge of [v] once leaving and once
+    entering, so they cancel. *)
+Lemma e185_inf_contract_flow (G : mgraph) (k : nat) :
+  has_nz_kflow (implications_U6.infG G) k -> has_nz_kflow G k.
+Proof.
+move=> [phi2 [hcons hbnd]].
+exists (fun e => phi2 (inl e)); split; last by move=> e; exact: hbnd.
+move=> v.
+(* Gather the edges of [infG G] by the vertex of [G] at their [b]-end. *)
+have hside : forall b : bool,
+    \sum_(a : implications_U6.infG G | implications_U6.inf_end a == v)
+       \sum_(f : edge (implications_U6.infG G) | endpoint b f == a) phi2 f
+    = \sum_(f : edge (implications_U6.infG G) | implications_U6.inf_end (endpoint b f) == v) phi2 f.
+  move=> b; rewrite [RHS](partition_big (fun f => endpoint b f)
+                            (fun a : implications_U6.infG G => implications_U6.inf_end a == v)) //=.
+  apply: eq_bigr => a /eqP ha; apply: eq_bigl => f.
+  by case: (implications_U6.inf_endpoint b f =P a) => [->|]; rewrite ?ha ?eqxx ?andbF ?andbT.
+(* The copies give the [b]-side sum of [G]; the cycle edges of [v] give the same sum on both
+   sides. *)
+have hsplit : forall b : bool,
+    \sum_(f : edge (implications_U6.infG G) | implications_U6.inf_end (endpoint b f) == v) phi2 f
+    = \sum_(e : edge G | endpoint b e == v) phi2 (inl e)
+      + \sum_(p : edge G * bool | implications_U6.inf_end p == v) phi2 (inr p).
+  move=> b; rewrite big_mkcond big_sumType /=; congr (_ + _).
+    by rewrite [RHS]big_mkcond; apply: eq_bigr => e _.
+  rewrite [RHS]big_mkcond; apply: eq_bigr => p _.
+  by case: b => //=; rewrite implications_U6.inf_end_nxt.
+have hc : \sum_(a : implications_U6.infG G | implications_U6.inf_end a == v)
+            \sum_(f : edge (implications_U6.infG G) | endpoint false f == a) phi2 f
+        = \sum_(a : implications_U6.infG G | implications_U6.inf_end a == v)
+            \sum_(f : edge (implications_U6.infG G) | endpoint true f == a) phi2 f.
+  by apply: eq_bigr => a _; exact: hcons a.
+by move: hc; rewrite !hside !hsplit => /addIr.
+Qed.
+
+(** *** F9: the edge *)
+
+(*@EDGE from=circular_flow_numbers_of_r_graphs_statement to=five_flow_statement kind=implies status=verified proof=e185_circular_flow_numbers_of_r_graphs_implies_five_flow cite="gc:e185" note="Unconditional: the t = 4 instance of Row 1 and Tutte's mod-5 step. F1-F3: for a bridgeless G with an edge, the inflation infG G of implications_U6 is loopless, cubic and bridgeless; there every odd vertex set has a cut of at least 3 edges (e185_odd_cut3), so the graph with every edge tripled is a 9-graph (e185_tripled_2t1). F4: Row 1 at t = 4 gives it a nowhere-zero rational r-flow for r = (5 + 1/(m+1))/2, which orients the edges so that 2 out(S) <= 3 in(S) for every vertex set S (e185_rflow_cut_orientation). F5: odiff_demand_cut turns the orientation into an integer circulation with values +-2 and +-3 (e185_cut_orientation_flow23). F6: the sums over the three copies form a circulation of infG G that is never 0 mod 5 (e185_tripled_sum). F7: Tutte's step (odiff_demand_cut at the intrinsic orientation with a = phi div 5) gives a nowhere-zero 5-flow (e185_mod5_flow). F8: the values on the copies of the edges of G form a nowhere-zero 5-flow of G (e185_inf_contract_flow)." *)
+Theorem e185_circular_flow_numbers_of_r_graphs_implies_five_flow :
+  circular_flow_numbers_of_r_graphs_statement -> five_flow_statement.
+Proof.
+move=> HR G hE hbl.
+apply: e185_inf_contract_flow.
+have hcub : loopless_cubic (implications_U6.infG G) := implications_U6.inf_cubic hbl.
+have hbH : bridgeless (implications_U6.infG G) := implications_U6.inf_bridgeless hbl.
+have hT : (0 < #|e185_tripled (implications_U6.infG G)|)%N.
+  by rewrite card_prod mulnC card_bool muln_gt0 hE.
+have hcf := HR 4%N _ isT hT (e185_tripled_2t1 hcub hbH).
+have hr : (2%:R + 2%:R / 4%:R : rat)
+          < (5%:R + (#|edge (e185_tripled (implications_U6.infG G))|.+1)%:R^-1) / 2%:R.
+  move: (#|edge _|) => m; rewrite (ltr_pdivlMr _ _ (ltr0n _ 2)).
+  have -> : (2 + 2 / 4) * 2 = 5 :> rat.
+    by rewrite mulrDl mulrAC -natrM divff // -natrM -natrD.
+  by rewrite ltrDl invr_gt0 ltr0n.
+have [o ho] := e185_rflow_cut_orientation (hcf _ hr).
+have [h [hc hv]] := e185_cut_orientation_flow23 ho.
+have [hphi hnd] := e185_tripled_sum hc hv.
+exact: e185_mod5_flow hphi hnd.
+Qed.
+
 (** ── Audited non-edges (machine-readable; extracted by build_edge_graph.py) ── *)
 
 
@@ -1782,3 +2218,7 @@ Print Assumptions unconditional_circular_flow_numbers_of_r_graphs_implies_three_
 (** ** Axiom audit (gc:e032) *)
 
 Print Assumptions e032_petersen_coloring_implies_three_4_flows.
+
+(** ** Axiom audit (gc:e185) *)
+
+Print Assumptions e185_circular_flow_numbers_of_r_graphs_implies_five_flow.
