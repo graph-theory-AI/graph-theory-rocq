@@ -5,7 +5,7 @@ upstream conjecture catalog. Its source statuses, manifests, snapshots and
 statement-formalization legs remain unchanged. A source row can therefore still
 say `open` or `partial` while this registry records a checked proof or disproof.
 
-The registry holds twelve entries:
+The registry holds thirteen entries:
 
 | Record key | Direction | Result (section below) |
 |---|---|---|
@@ -13,6 +13,7 @@ The registry holds twelve entries:
 | `1812.02420__03` | disprove | Directed Kneser nonexistence |
 | `1904.12273__01` | disprove | Heavy paths in shortest long odd holes |
 | `1907.12091` | disprove | Király's 4-regular cycle bound |
+| `1908.03788__00` | disprove | Two disjoint avoidable paths |
 | `2103.15175__00` | prove | List Ramsey numbers |
 | `2209.09107__00` | disprove | Alon–Tarsi orientation counterexample |
 | `2304.03567__04` | disprove | Forward covers of strong digraphs |
@@ -386,6 +387,30 @@ Caveat: only the literal universal inequality is refuted. The asymptotic form ho
 Theorem 3 of arXiv:1907.12091 gives `O(1.365^m)` cycles at average degree 4, which the paper
 says proves Király's conjecture. The row's corpus status was already `disproved` (an ERRATA
 entry); this entry adds the kernel check.
+
+## Two disjoint avoidable paths
+
+For source record `1908.03788__00` (row `arxiv:1908.03788#00`),
+`GTMisc.applications.avoidable_paths_disproof.two_disjoint_avoidable_paths_disproved`
+refutes `GTMisc.conjectures.X312.two_disjoint_avoidable_paths_statement`, Question 1.12 of
+arXiv:1908.03788 (Bonamy, Defrain, Hatzel and Thiebaut, "Avoidable paths in graphs") as a
+proposition: for every `k > 0` and every graph `G`, either `G` has no two vertex-disjoint
+induced paths on `k` vertices, or it has two vertex-disjoint avoidable ones (X91's
+`x91_avoidable_path`, the paper's Definitions 1.5-1.7).
+
+The refutation is the paper's own counterexample (arXiv:1908.03788v1 l.118-126) at `k = 3`:
+the cycle `0-1-2-3-4-0` with a vertex `5` adjacent to `0` and `1`. `[1; 2; 3]` and
+`[4; 0; 5]` are disjoint induced paths on three vertices. Every induced path on three
+vertices is one of 14 sequences, and in every disjoint pair of them one is `[1; 2; 3]`,
+`[0; 4; 3]` or a reverse, the path holding exactly one vertex of the triangle `{0, 1, 5}`.
+Its extension `[5; 1; 2; 3; 4]` (resp. `[5; 0; 4; 3; 2]`) is an induced path whose vertices
+lie in no chordless cycle: such a cycle is a hole, the two cycle neighbours of `4` (resp. `2`)
+are its two graph neighbours, so `0` (resp. `1`) lies on the hole with the triangle, which a
+hole cannot contain (`hole_no_triangle` of the heavy-path development).
+
+Caveat: the kernel proof covers `k = 3`, which refutes the universally quantified question;
+the paper's family for every `k >= 3` is not formalized. The row's corpus status was already
+`disproved`; this entry adds the kernel check.
 
 ## Regression tests
 
