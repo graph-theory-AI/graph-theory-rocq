@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py set_pairs --details /tmp/migrat
 
 - Canonical: `GTBase.set_pairs.anticomplete`.
 - Baseline: `229f2959f7726f1c0b1b3c72da4537245cb9919c`.
-- Scope: 10 helpers, 9 statements, 41 frozen objects, 77 recorded references.
-- Source checks: 313/313 pass; consistent.
+- Scope: 10 helpers, 9 statements, 41 frozen objects, 80 recorded references.
+- Source checks: 316/316 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

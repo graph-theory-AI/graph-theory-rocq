@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py edges_between --details /tmp/mi
 
 - Canonical: `GTBase.common.edges_between`.
 - Baseline: `842ff4d456f543db4030b424a3c53d5c22fd70c9`.
-- Scope: 4 helpers, 4 statements, 14 frozen objects, 37 recorded references.
-- Source checks: 135/135 pass; consistent.
+- Scope: 4 helpers, 4 statements, 14 frozen objects, 38 recorded references.
+- Source checks: 136/136 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
