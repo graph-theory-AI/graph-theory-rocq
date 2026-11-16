@@ -3892,7 +3892,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": null,
+   "rocq_edge": "jaegers_modular_orientation_statement->five_flow_statement:implies:verified",
    "argument": "The implication is explicitly stated in the source's own OPG context: 'for k=2, Jaeger showed that this conjecture (if true) would imply the 5-flow conjecture.' The full modular orientation conjecture (all k) contains the k=2 case (every 8-edge-connected graph has a modular 5-orientation, equivalently a 5/2-flow), and Jaeger's reduction derives nowhere-zero 5-flows for all bridgeless graphs from it, so truth of the source forces truth of the target. Direction correct. Note the source conjecture has since been disproved (for k >= 3, by Han, Li, Wu, Zhang), but that does not affect the validity of the conditional implication, and the k=2 case relevant to the reduction remains open.",
    "citations": [
     "http://www.openproblemgarden.org/op/jaegers_modular_orientation_conjecture",
@@ -4396,7 +4396,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": null,
+   "rocq_edge": "decomposing_eulerian_graphs_statement->cycle_double_cover_statement:implies:verified",
    "argument": "DIRECTION FLIPPED from the seed edge (which listed CDC as source). The Decomposing-Eulerian-graphs page states explicitly: \"the above conjecture would imply the cycle double cover conjecture\", and gives the argument: CDC reduces to 3-edge-connected graphs; replacing each edge of such a G by two parallel edges yields a 6-edge-connected Eulerian graph G' with the 2-transition system P pairing the parallel copies at each endpoint; a compatible decomposition of (G',P) uses at most one copy of each parallel pair per cycle, so projecting back to G gives a list of cycles covering every edge exactly twice, i.e., a CDC. The converse is not claimed anywhere, so this is a one-way implication: Decomposing Eulerian graphs is the stronger statement.",
    "citations": [
     "http://www.openproblemgarden.org/op/decomposing_eulerian_graphs"

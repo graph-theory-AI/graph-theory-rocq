@@ -17,20 +17,20 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 169,
+  "edges": 171,
   "by_status": {
    "candidate": 27,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 108
+   "verified": 110
   },
   "by_kind": {
    "equiv": 13,
-   "implies": 156,
+   "implies": 158,
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 126
+  "proved_theorems": 128
  },
  "edges": [
   {
@@ -384,6 +384,19 @@
    "external": [],
    "sources": [
     "cycle-theory/implications_U6.v"
+   ]
+  },
+  {
+   "from": "decomposing_eulerian_graphs_statement",
+   "to": "cycle_double_cover_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e187",
+   "proof": "e187_decomposing_eulerian_graphs_implies_cycle_double_cover",
+   "note": "Unconditional. A: if every cut separating two vertices has at least 3 edges, the graph with every edge doubled (e187_doubled) has separating cuts of at least 6 edges, so it is 6-edge-connected (e167_cut_edge_connected), connected and of even degrees, hence eulerian (e187_doubled_eulerian); pairing the two copies of each edge at each vertex is a 2-transition system (e187_P_system), and the premise gives a compatible decomposition into circuits; no compatible circuit holds both copies of an edge (e187_one_copy: at a non-loop's end they would form its transition, a loop would have degree 4), so the projected members are circuits of G covering every edge exactly twice (e187_cdc_proj, e187_cdc_3cut). B: otherwise some cut separating two vertices has 0 or 2 edges (bridgeless excludes 1); identifying two vertices across it (e167_ident, still bridgeless by e167_ident_bridgeless) leaves one vertex fewer and the same edges, and a double cover of the identified graph by even subgraphs (e187_edc) lifts to G unchanged across an empty cut (e187_even_lift0) and, across a two-edge cut {e, f}, with e toggled in the members holding exactly one of e and f, the parities following from the degree sum over the side (e187_even_lift2); strong induction on the number of vertices (e187_reduce). C: the even members split into circuits with the same multiplicities (even_list_circuit_decomposition).",
+   "external": [],
+   "sources": [
+    "cycle-theory/implications_D1.v"
    ]
   },
   {
@@ -1138,6 +1151,19 @@
    "external": [],
    "sources": [
     "graph-theory-misc/implications_X227.v"
+   ]
+  },
+  {
+   "from": "jaegers_modular_orientation_statement",
+   "to": "five_flow_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "gc:e167",
+   "proof": "e167_jaegers_modular_orientation_implies_five_flow",
+   "note": "Unconditional, by Jaeger's conjecture at k = 2 only. A: if every cut separating two vertices has at least 3 edges, the graph with every edge tripled (e185_tripled) has separating cuts of at least 9 edges, so it is 8-edge-connected (e167_cut_edge_connected); Jaeger at k = 2 orients it with every imbalance a multiple of 5, odiff_demand (as in modular_orientation_to_flow) turns that orientation into an integer circulation with values 1 or -4 along it (e167_mod_circ), the sums over the three copies form a circulation of G that is never 0 mod 5 (e167_tripled_sum, e167_sum3_mod5), and Tutte's step e185_mod5_flow gives a nowhere-zero 5-flow (e167_flow_3cut). B: otherwise some cut separating two vertices has 0 or 2 edges (bridgeless excludes 1); identifying two vertices across it (e167_ident, still bridgeless by e167_ident_bridgeless) leaves one vertex fewer and the same edges, and a nowhere-zero 5-flow of the identified graph lifts to G unchanged across an empty cut (e167_lift0), and across a two-edge cut {e, f} with the value of e corrected by the imbalance at its end, where the sum over the side gives |value(e)| = |value(f)| (e167_lift2); strong induction on the number of vertices (e167_reduce).",
+   "external": [],
+   "sources": [
+    "cycle-theory/implications_D1.v"
    ]
   },
   {

@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2288,
-      "cross_file_files": 1129,
+      "cross_file_declarations": 2291,
+      "cross_file_files": 1132,
       "implicit_use": 4,
       "packages_without_project": [
         "graph-theory-base"
@@ -4940,6 +4940,7 @@
             "cycle-theory/theories/conjectures/grounding_U6.v:eulerian_mconnected",
             "cycle-theory/theories/conjectures/grounding_U6.v:eulerian_unit",
             "cycle-theory/theories/conjectures/grounding_U6.v:u6_decomposing_eulerian_G2loop",
+            "cycle-theory/theories/conjectures/implications_D1.v:e187_doubled_eulerian",
             "cycle-theory/theories/examples/eulerian.v:<line 10>",
             "cycle-theory/theories/examples/eulerian.v:a_loop_is_eulerian",
             "cycle-theory/theories/examples/eulerian.v:a_single_edge_is_not_eulerian",
@@ -4956,6 +4957,7 @@
           ],
           "files": [
             "cycle-theory/theories/conjectures/grounding_U6.v",
+            "cycle-theory/theories/conjectures/implications_D1.v",
             "cycle-theory/theories/examples/eulerian.v",
             "digraph-theory/theories/migration/directed_neighbourhood.v"
           ],
@@ -4981,6 +4983,7 @@
         "provider_unlisted": false,
         "require_chain": {
           "cycle-theory/theories/conjectures/grounding_U6.v": "no",
+          "cycle-theory/theories/conjectures/implications_D1.v": "no",
           "cycle-theory/theories/examples/eulerian.v": "no",
           "digraph-theory/theories/migration/directed_neighbourhood.v": "no"
         },
@@ -7088,6 +7091,7 @@
           ],
           "declarations": [
             "cycle-theory/theories/conjectures/U6.v:eulerian",
+            "cycle-theory/theories/conjectures/implications_D1.v:e187_doubled_eulerian",
             "digraph-theory/theories/conjectures/grounding_chi_col.v:eulerian_C3",
             "digraph-theory/theories/conjectures/grounding_chi_col.v:majority_eulerian_loopless_class_inhabited",
             "digraph-theory/theories/conjectures/grounding_chi_col.v:not_eulerian_TT2",
@@ -7096,6 +7100,7 @@
           ],
           "files": [
             "cycle-theory/theories/conjectures/U6.v",
+            "cycle-theory/theories/conjectures/implications_D1.v",
             "digraph-theory/theories/conjectures/grounding_chi_col.v",
             "digraph-theory/theories/conjectures/grounding_reals2.v",
             "digraph-theory/theories/migration/directed_neighbourhood.v"
@@ -7125,6 +7130,7 @@
         "provider_unlisted": false,
         "require_chain": {
           "cycle-theory/theories/conjectures/U6.v": "no",
+          "cycle-theory/theories/conjectures/implications_D1.v": "no",
           "digraph-theory/theories/conjectures/grounding_chi_col.v": "no",
           "digraph-theory/theories/conjectures/grounding_reals2.v": "no",
           "digraph-theory/theories/migration/directed_neighbourhood.v": "no"
@@ -7331,6 +7337,7 @@
           ],
           "declarations": [
             "cycle-theory/theories/conjectures/U6.v:eulerian",
+            "cycle-theory/theories/conjectures/implications_D1.v:e187_doubled_eulerian",
             "digraph-theory/theories/conjectures/grounding_chi_col.v:eulerian_C3",
             "digraph-theory/theories/conjectures/grounding_chi_col.v:majority_eulerian_loopless_class_inhabited",
             "digraph-theory/theories/conjectures/grounding_chi_col.v:not_eulerian_TT2",
@@ -7339,6 +7346,7 @@
           ],
           "files": [
             "cycle-theory/theories/conjectures/U6.v",
+            "cycle-theory/theories/conjectures/implications_D1.v",
             "digraph-theory/theories/conjectures/grounding_chi_col.v",
             "digraph-theory/theories/conjectures/grounding_reals2.v",
             "digraph-theory/theories/migration/directed_neighbourhood.v"
@@ -7368,6 +7376,7 @@
         "provider_unlisted": false,
         "require_chain": {
           "cycle-theory/theories/conjectures/U6.v": "no",
+          "cycle-theory/theories/conjectures/implications_D1.v": "no",
           "digraph-theory/theories/conjectures/grounding_chi_col.v": "no",
           "digraph-theory/theories/conjectures/grounding_reals2.v": "no",
           "digraph-theory/theories/migration/directed_neighbourhood.v": "no"

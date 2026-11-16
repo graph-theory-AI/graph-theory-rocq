@@ -135,7 +135,7 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Conjecture dependency graph
 
-- **169 edges** — by status {'candidate': 27, 'conditional': 2, 'refuted-direction': 32, 'verified': 108}, by kind {'equiv': 13, 'implies': 156, 'refutes': 0, 'specializes': 0}; 126 Qed-proved relative theorems.
+- **171 edges** — by status {'candidate': 27, 'conditional': 2, 'refuted-direction': 32, 'verified': 110}, by kind {'equiv': 13, 'implies': 158, 'refutes': 0, 'specializes': 0}; 128 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
   - `alon_pach_solymosi_tournament_erdos_hajnal_statement` equiv `erdos_hajnal_tournament_transitive_subtournament_statement` (digraph-theory/implications_X136.v)
   - `asymmetric_bipartite_list_colouring_statement` implies `list_chromatic_number_and_maximum_degree_of_bipartit_statement` (atlas/implications_A1.v)
@@ -154,6 +154,7 @@ Area-local foundations (each area builds these on top of `base`):
   - `conj_4_2` implies `conj_4_4` (digraph-theory/implications_X1.v)
   - `conj_9` implies `kextension_linear_unavoidability_statement` (digraph-theory/implications_X221.v)
   - `cycle_double_covers_containing_predefined_2_regular_statement` implies `cycle_double_cover_statement` (cycle-theory/implications_U6.v)
+  - `decomposing_eulerian_graphs_statement` implies `cycle_double_cover_statement` (cycle-theory/implications_D1.v)
   - `delta122_hero_k1_plus_dipath2_free_statement` implies `delta122_hero_oriented_complete_multipartite_statement` (digraph-theory/implications_X221.v)
   - `delta122_hero_oriented_complete_multipartite_statement` implies `delta122_hero_k1_plus_dipath2_free_statement` (digraph-theory/implications_X221.v)
   - `directed_gyarfas_sumner_oriented_forest_dichromatic_statement` implies `directed_gyarfas_sumner_tournament_forest_statement` (digraph-theory/implications_X123.v)
@@ -196,6 +197,7 @@ Area-local foundations (each area builds these on top of `base`):
   - `holroyd_strong_hadwiger_statement` implies `hadwiger_chromatic_clique_minor_statement` (minor-theory/implications_X298.v)
   - `holroyd_strong_hadwiger_statement` implies `rooted_minor_free_unrealizable_colourings_statement` (minor-theory/implications_X298.v)
   - `hypergraph_cop_number_sqrt_n_over_k_statement` implies `meyniel_cop_number_sqrt_statement` (atlas/implications_A1.v)
+  - `jaegers_modular_orientation_statement` implies `five_flow_statement` (cycle-theory/implications_D1.v)
   - `jaegers_modular_orientation_statement` implies `three_flow_statement` (cycle-theory/implications_D1.v)
   - `kt_minor_free_hypergraph_chromatic_three_halves_statement` implies `k3_minor_free_hypergraph_three_colourable_statement` (hypergraph-theory/implications_X225.v)
   - `kt_minor_free_two_s_plus_t_choosable_statement` implies `list_hadwiger_statement` (atlas/implications_A1.v)
@@ -245,12 +247,12 @@ Area-local foundations (each area builds these on top of `base`):
   - `triangle_free_min_degree_log_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
   - `triangle_free_planar_large_induced_two_degenerate_statement` implies `triangle_free_planar_five_sixths_two_degenerate_statement` (chromatic-theory/implications_X219.v)
   - `triangle_packing_transversal_statement` equiv `triangle_packing_vs_triangle_edge_transversal_statement` (packing-theory/implications_X5.v)
-- Edge evidence: **108 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
+- Edge evidence: **110 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
 - Conditional edges (with the external assumptions they are relative to):
   - `bounded_layered_treewidth_bounded_queue_number_statement` implies `planar_graphs_bounded_queue_number_statement` — external: `external_layered_treewidth_planar_statement` (atlas/implications_A1.v)
   - `reconstruction_statement` implies `edge_reconstruction_statement` — external: `external_whitney_line_inversion_statement` (reconstruction-theory/implications_U11.v)
 - Edge legs (overlay `edges` state over the non-alias rows of each corpus; derived from the evidence above by `meta/sync_edge_legs.py`):
-  - **opg**: 46 done · 7 partial · 0 blocked · 174 todo  (227 rows)
+  - **opg**: 49 done · 5 partial · 0 blocked · 173 todo  (227 rows)
   - **v2**: 120 done · 4 partial · 0 blocked · 1549 todo  (1673 rows)
 
 ### Documented non-edges (32 `refuted-direction`)
@@ -638,6 +640,6 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 
 - **225 edges** from clone `b72c585` — by relation equivalent_to 8, implies 159, related_only 42, same_conjecture 16; by verdict confirmed 214, plausible 11; 0 endpoints without a manifest row.
 - **114 of the 167 implies/equivalent_to edges have both endpoints formalized** (both rows own a statement whose leg is done) — the candidate pool for `implications_X2nn.v`.
-- **111 edges are already mirrored by a Rocq `@EDGE`** (implies→`implies`, equivalent_to→`equiv`; `same_conjecture`/`related_only` are never mirrored).
+- **113 edges are already mirrored by a Rocq `@EDGE`** (implies→`implies`, equivalent_to→`equiv`; `same_conjecture`/`related_only` are never mirrored).
 - **76 distinct endpoints of *confirmed* implies/equivalent_to edges own no done statement** — each is a row whose formalization would unlock at least one cross-check.
 
