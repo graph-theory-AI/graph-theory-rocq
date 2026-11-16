@@ -657,8 +657,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Marcol (Claude Opus 5.5), 2026-11-16: graph-theory-misc implications_X312.v (studies:std_sintiari_trotignon_conjecture_bounded_treewidth (X312 R2) => arxiv:2001.01607#00 (X42))",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Arthur (second reader of the Sintiari-Trotignon => even hole, K_4 and diamond-free bounded treewidth edge, X312 R2 => X42, 2026-11-16)",
+   "reviewed_at": "2026-11-16",
    "note": "Rocq-only edge (no corpus relation): the Sintiari-Trotignon conjecture (X312, every t: every graph with every hole odd, no induced diamond and no induced K_t has treewidth at most c(t)) at t = 4 gives X42 (every even-hole, K_4 and diamond-free graph has treewidth at most c). The hypotheses agree: x27_even_hole_free G (no x27_hole of even size, x27_hole = hole) gives every hole odd, x42_induced_free is induced_free, and implications_X42 tw_le_x27 turns tw_le G c into x27_treewidth_at_most G c. It is a relative theorem and resolves neither endpoint (X312 R2 open, X42 partial in the corpus)."
   },
   "every_4_connected_toroidal_graph_has_a_hamilton_cycl_statement->hamiltonian_cycles_in_line_graphs_statement:implies": {
