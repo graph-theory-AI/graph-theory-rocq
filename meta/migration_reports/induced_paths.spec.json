@@ -551,6 +551,16 @@
       "path": "chromatic-theory/theories/conjectures/grounding_X254.v",
       "name": "induced_subdivision",
       "note": "Wave X254 (Arthur, 2026-10-28): the grounding certificates of the Scott and Trotignon-Vuskovic rows use GTBase induced_subdivision (K_1 has no induced subdivision of K_2 or K_4, from the injective branch map); a direct use of the public wrapper, no copy."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/X312.v",
+      "name": "x91_avoidable_path",
+      "note": "Wave X312 (Marcol, 2026-11-16): two_disjoint_avoidable_paths_statement (arxiv:1908.03788#00, Question 1.12) states the avoidable P_k with X91's live x91_avoidable_path, a direct use of the helper, no copy (Lancelot's r1 ruling: reuse it)."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_X312.v",
+      "name": "x91_avoidable_path",
+      "note": "Grounding of X312: g312_two_avoidable and g312_single_avoidable (behind g312_tdap_hyp_inhabited and g312_tdap_not_trivially_true) state avoidability with X91's live x91_avoidable_path, a direct use, no copy."
     }
   ],
   "distinct_variants": [

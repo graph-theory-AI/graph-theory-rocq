@@ -14717,6 +14717,116 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Arthur (X311 wave verification, 2026-11-15)",
       "faithfulness_result": "Readback 2026-11-15 (verifier Arthur): 1/1 PASS against the pinned text and the source, at math/marcol-x311-20261115 = e6368452575567a18abddd05b6e8a68a088105ec (5 commits on work/coordinator 56f16df0), after my design read ((689), SOUND, no required change; packet x311-design-read-by-arthur 1467c257) of x311-design-by-marcol r1 (ee5b1a9c; Lancelot's review APPROVE). At e6368452575567a18abddd05b6e8a68a088105ec X311.v (977afa27) and grounding_X311.v (0da8082e) are the packet's byte for byte; waves.X311 = the packet's x311-wave.json; no helper (helper_ownership {}, helper_sanity []). The row studies:std_friedgut_kalai_kindler_conjectures (friedgut_kalai_kindler_maximum_independent_set_hitting_statement) = arXiv:2103.05998v2 l.77-92 (FKK Conjecture 3.1, the pinned text word for word): forall p q, 0 < p -> 2 * p < q -> exists k s t, [/\\ 0 < k, 0 < s, 0 < t & forall G : sgraph, q * alpha([set: G]) = p * #|G| -> exists F : {set {set G}}, [/\\ the members of F pairwise disjoint, each of size k, s * #|G| <= t * #|cover F| & every stable S with #|S| = alpha([set: G]) meets every member of F]]. k and tau come before G and the family after G, as the text says. alpha in (0, 1/2) is p / q with 0 < p and 2p < q: alpha(G) / n is rational, so an irrational alpha admits only the empty graph, where the empty family serves; tau = s / t > 0 is exact, a smaller positive tau only weakening (2); 0 < k loses nothing, since k = 0 serves no nonempty graph and every p / q has a nonempty graph of that ratio (disjoint cliques). The family A_1, ..., A_r is a set of pairwise disjoint vertex sets whose union is cover F, r unconstrained as in the text; \"maximum independent set\" is a stable S (stable S = [disjoint NS(S) & S]) with #|S| = alpha([set: G]), alpha the largest stable set; the binder annotations : {set G} change no meaning. Status: refuted in its own record before the pin (l.58-63, l.93-95, Theorems l.113-126, l.127-128; the shift graph l.197-224), pinned open: X299's precedent; the Notes say so, with no kernel disproof, and the status correction is a separate corpus item. The Notes' line citations are right. Lint: exactly one finding, exists-after-graph-forall, justified (the family F depends on G, while k and tau come before G), and the one allowlist entry in X310's form; no foundation-fidelity watchlist name in X311.v or grounding_X311.v; check_milestone's rule 5: no assumption command, no Section, no admission. Grounding: hyp g311_hyp_claim [alpha = 1/3; K_3 meets 3 * alpha = 1 * n (g311_K3_alpha); the family {V(K_3)} with k = 3 and s = t = 1 meets (1)-(3); and the statement gives a family at K_3]; ntt g311_ntt_claim [~ V /\\ (V -> S) with V = the statement at k = 1 (g311_at_k1), X299's form: V fails at K_3, a single vertex missing another vertex's singleton maximum independent set, so the family is empty and s * 3 <= 0 contradicts 0 < s]; no helper_sanity (no helper); no theorem of type S or ~S; each claim names the statement. MCP (my design read, Rocq 9.2): X311.v and the grounding as modules, Print Assumptions of g311_hyp_inhabited, g311_not_trivially_true and g311_K3_alpha closed; compile check 3 (4f77dc29) closes the statement, both certificates and g311_K3_alpha. Metadata: the source_hash recomputed, equal (ad7b59fc...); waves.X311 the only waves change, verifier fields empty before this; helper_ownership {}; no consumer entry (no frozen spec name in either file, by my own scan; stable is canonical); the lint allowlist gains exactly the one entry; legs: the row statement done / grounding done / edges todo, no other legs entry changed; README 647 / 12 / 39 / 975 -> 648 / 12 / 39 / 974; LANDED gains X311 extremal-graph-theory after X310 extremal-graph-theory; _CoqProject: the X311 block after implications_X310.v. Dev run 1 (x311-dev-by-marcol 07b03a05, -c OK, 55 listed = present): run-x311-1.sh 8c1277e7 on c5 e6368452575567a18abddd05b6e8a68a088105ec, JOB 2026-11-15T16:55:04Z-2026-11-15T18:14:03Z, WRAPPER rc 0, RESULT PASS-WITH-EXPECTED, 33 STEP lines, 29 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields (W1 REJECTED 12/14 on exactly the audit + grounding contract, missing faithfulness_verified_by / faithfulness_result, and the leg state without source_verified_by / source_verified_at; A3a / A3: \"X311: prospective wave lacks independent faithfulness verdict\"; A10: the row's two source_verified_by / source_verified_at tuple violations); the plans guarded before the builds (base 0 files, minor-theory 0 files, extremal-graph-theory exactly X311.v and grounding_X311.v, which B3 compiled, no Error line); W1 other 12 checks pass (prospective helper ownership and hard lint; package compiles; no top-level Axiom/Parameter/Admitted; Print Assumptions clean on 1 statement + 2 grounding certificates; 10 exact-type probes); W2 971 / 971 documented, reverse coverage 926/926; W3 1 probed, 0 FLAGGED; W4 0 active findings (79 allowlisted, the X311 entry among them); A13 225 edges, no drift; G6 101 OK, rewriting no migration report (no consumer entry); A12 101 OK; written: CORPUS_STATUS.md, dependency_graph.json, library_helper_inventory.json, v2_corpus_manifest.json (generated, rule 8, not committed; 4 files changed, 38 insertions(+), 22 deletions(-), the dependency graph also catching up with the integrated edge X310 => X309); END HEAD c5 e6368452575567a18abddd05b6e8a68a088105ec."
+    },
+    "X312": {
+      "phase": "X312",
+      "repo": "graph-theory-misc",
+      "defines_file": "X312.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X312 (A3 verifier Arthur; routing Lancelot NOTE 2026-11-16T00:46:25Z; selection x312-selection-r1-by-marcol, design x312-design-by-marcol, review x312-design-review-by-lancelot), branch math/marcol-x312-20261116, 2026-11-16",
+      "source_verified_by": "Arthur (X312 wave verifier, A3: pinned records re-read: the studies rows' statements in meta/v2_studies_rows.json, R1 cid 310 (\"Let $G$ be a connected graph with $\\Delta(G)\\leqslant 3$, then $\\gamma(G)\\leqslant 2\\rho(G)+1$. The equality holds only for three well-defined graphs, one of which being the Petersen graph.\") = 5365bef55437fd193f977a6611e3eb23a2be20314a4de9e3e59c41d32027cf6c and R2 cid 494 (\"For every integer $t$, there exists a constant $c_{t}$ such that every even-hole-free graph $G$ with no diamond and no clique of size $t$ satisfies $\\operatorname{tw}(G)\\leq c_{t}$.\") = 63db4c0e8e423ab2283781a1b171f115f6aa106b432fd9c5528351fbc3513d48, both promoted, attributed to Henning, Loewenstein and Rautenbach and to Sintiari and Trotignon; R5 arxiv:1908.03788#00 (Question 1.12, \"For every positive integer $k$, does every graph $G$ either not contain two disjoint $P_k$, or contain two disjoint avoidable $P_k$?\") = 3c7cb026f3efc586aa2da73d3a5b66d431ad83410bc2813cabe8b05a0c5c15c4 (statement and context, build_v2_manifest's arXiv form); corpus pin graph-conjectures b72c5857; each equal to its manifest row's and the wave's source_hash; statuses at the pin open, open and disproved; the deposit coordination/sources/x312-source-mac-20261116 (SHA256SUMS 7274a06f, -c OK; line numbers of its .txt renderings): arXiv:2503.05562v1 l.24-26 and l.58 (packing), l.107-108 (Conjecture 1.2 [HLR11], the pinned text word for word), l.243-246 and l.951-961 (Theorem 1.12: the second sentence fails), l.990-995 (the ring construction), l.1103-1104 (the first sentence open); arXiv:2307.13684v3 l.33-35 (contains = induced), l.85-86 (Conjecture 1.1, the pinned text word for word), l.89-90 (t = 4 in [21]; proved in [6]), l.1141-1142 ([6] a manuscript); arXiv:2203.06775v2 l.10-11 and l.14-15 (hole, even hole, diamond, H-free), l.131 (Conjecture 1.5, t = 4); arXiv:1908.03788v1 l.60-68 (Definitions 1.5-1.7), l.70 (P_k), l.115-116 (Question 1.12, the pinned text), l.118-126 (yes for k in {1, 2}, no for every k >= 3); statements read, proofs not verified.)",
+      "source_verified_at": "2026-11-16",
+      "commit": "x312-domination-packing-treewidth-avoidable-paths",
+      "rows": {
+        "std_henning_l_wenstein_rautenbach_conjecture": {
+          "formal_name": "subcubic_domination_packing_statement",
+          "source_hash": "5365bef55437fd193f977a6611e3eb23a2be20314a4de9e3e59c41d32027cf6c",
+          "state": "partial",
+          "partial_reason": "The first sentence is encoded: every connected G with maximum degree at most 3 (subcubic) has a dominating D and a packing P (x312_packing: distinct members have disjoint closed neighbourhoods) with #|D| <= 2 * #|P| + 1, that is gamma(G) <= 2 rho(G) + 1 (arXiv:2503.05562v1 l.107, Conjecture 1.2). The second (equality only for three graphs, one the Petersen graph) is not: the graphs are named only in [HLR11], and the record refutes it (Theorem 1.12, l.243-246). Open at the pin.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g312_hlr_hyp_inhabited",
+              "claim": "g312_hlr_hyp_claim",
+              "references": [
+                "subcubic_domination_packing_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g312_hlr_not_trivially_true",
+              "claim": "g312_hlr_ntt_claim",
+              "references": [
+                "subcubic_domination_packing_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g312_helper_sanity",
+                "claim": "g312_helper_claim",
+                "references": [
+                  "x312_packing"
+                ]
+              }
+            ]
+          }
+        },
+        "std_sintiari_trotignon_conjecture_bounded_treewidth": {
+          "formal_name": "even_hole_diamond_kt_free_bounded_treewidth_statement",
+          "source_hash": "63db4c0e8e423ab2283781a1b171f115f6aa106b432fd9c5528351fbc3513d48",
+          "note": "Sintiari and Trotignon's conjecture as arXiv:2307.13684v3 states it (Conjecture 1.1, l.85-86): for every t some c such that every G whose holes (GTBase hole) all have odd length, with no induced diamond (X42's x42_diamond) and no induced 'K_t, has tw_le G c (treewidth at most c). [21] states it for t = 4 (l.89; arXiv:2203.06775v2 Conjecture 1.5, l.131; X42's statement). The record reports a proof in [6] (l.89-90, a manuscript); the pinned status is open.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g312_st_hyp_inhabited",
+              "claim": "g312_st_hyp_claim",
+              "references": [
+                "even_hole_diamond_kt_free_bounded_treewidth_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g312_st_not_trivially_true",
+              "claim": "g312_st_ntt_claim",
+              "references": [
+                "even_hole_diamond_kt_free_bounded_treewidth_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g312_helper_sanity",
+                "claim": "g312_helper_claim",
+                "references": [
+                  "x312_packing"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_1908_03788_00": {
+          "formal_name": "two_disjoint_avoidable_paths_statement",
+          "source_hash": "3c7cb026f3efc586aa2da73d3a5b66d431ad83410bc2813cabe8b05a0c5c15c4",
+          "note": "Question 1.12 of Bonamy, Defrain, Hatzel and Thiebaut (arXiv:1908.03788v1 l.115-116), encoded as stated: for every k > 0 and every G, either G has no two vertex-disjoint induced paths on k vertices (nonempty_induced_path), or it has two vertex-disjoint avoidable ones (X91's x91_avoidable_path). The record answers yes for k in {1, 2} and no for every k >= 3 (l.118-129); the row is disproved at the pin.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g312_tdap_hyp_inhabited",
+              "claim": "g312_tdap_hyp_claim",
+              "references": [
+                "two_disjoint_avoidable_paths_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g312_tdap_not_trivially_true",
+              "claim": "g312_tdap_ntt_claim",
+              "references": [
+                "two_disjoint_avoidable_paths_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g312_helper_sanity",
+                "claim": "g312_helper_claim",
+                "references": [
+                  "x312_packing"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x312_packing": {
+          "classification": "paper_specific",
+          "reason": "A packing as Henning, Loewenstein and Rautenbach's record defines it (arXiv:2503.05562v1, l.24-26, l.58): a vertex set whose closed neighbourhoods are pairwise disjoint, over coq-graph-theory's closed neighbourhood N[u]; the packing number rho(G) is the largest size of one."
+        }
+      },
+      "faithfulness_verified_by": "Arthur (X312 wave verification, 2026-11-16)",
+      "faithfulness_result": "Readback 2026-11-16 (verifier Arthur): 3/3 PASS against the pinned texts and the sources, at math/marcol-x312-20261116 = c6b86fbc35ea7de9e7ee2a4f81080c8f03b17c6a (7 commits on work/coordinator 0af9c1da), after my kit A3 read ((724), SOUND, one required doc fix RC1; packet x312-kit-a3-read-by-arthur 55a46cfd) of x312-kit-by-marcol (f2f17185) and its r2 x312-kit-r2-by-marcol (b9820601: RC1 and my two observations applied, comment and metadata text only, checked in my NOTE of 10:09Z); design x312-design-by-marcol (69efdb8c; Lancelot's review APPROVE). At c6b86fbc35ea7de9e7ee2a4f81080c8f03b17c6a X312.v (309a4855) and grounding_X312.v (f1474cf2) are r2's byte for byte; waves.X312 = r2's x312-wave.json. R1 studies:std_henning_l_wenstein_rautenbach_conjecture (subcubic_domination_packing_statement, PARTIAL) = the first sentence of 2503.05562v1 Conjecture 1.2 (l.107): forall G, connected [set: G] -> subcubic G (every vertex has at most three neighbours, Delta <= 3) -> exists D P, [/\\ dominating D, x312_packing P & #|D| <= 2 * #|P| + 1]; this is gamma(G) <= 2 rho(G) + 1 (a minimum dominating set and a maximum packing give it; gamma <= #|D| and #|P| <= rho give the converse); x312_packing P: distinct members have disjoint closed neighbourhoods N[u] (l.58), the one helper, paper_specific. The second sentence (\"equality only for three well-defined graphs, one the Petersen graph\") is not encoded: the three graphs are named only in [HLR11], and the record proves the clause false (Theorem 1.12, l.243-246, Section 8.1 l.951-961; the family is connected by its ring construction, l.990-995); the first sentence is open in the record (l.1103-1104); the partial_reason says so. R2 studies:std_sintiari_trotignon_conjecture_bounded_treewidth (even_hole_diamond_kt_free_bounded_treewidth_statement) = 2307.13684v3 Conjecture 1.1 (l.85-86): forall t, exists c, forall G, (forall h, hole h -> odd (size h)) -> induced_free G x42_diamond -> induced_free G 'K_t -> tw_le G c. c depends on t only; GTBase's hole is a chordless cycle on at least four vertices whose size is its length, so \"every hole odd\" is even-hole-free (2203.06775v2 l.10-11); the records' \"contains\" is induced (2307.13684v3 l.33-35), so no diamond and no clique of size t are induced_free G x42_diamond and induced_free G 'K_t (a t-clique induces 'K_t); tw_le G c is a tree decomposition with bags of at most c + 1 vertices, tw(G) <= c. The t = 4 form is X42's (l.89; 2203.06775v2 Conjecture 1.5, l.131); the record reports a proof in [6], a manuscript (l.89-90, l.1141-1142), a separate literature item; pinned open. R5 arxiv:1908.03788#00 (two_disjoint_avoidable_paths_statement) = Question 1.12 (l.115-116) as a proposition: forall k, 0 < k -> forall G, ~ (two vertex-disjoint P_k) \\/ (two vertex-disjoint avoidable P_k), P_k a sequence of k vertices with nonempty_induced_path (uniq, a path, no chord: an induced path on k vertices, l.70) and avoidable = X91's x91_avoidable_path (Definitions 1.5-1.7, l.60-68: induced, and every induced extension u p v lies in an induced cycle; for an induced cycle, holding the vertices of u p v is holding the path); [disjoint p & q] = no common vertex. The record answers yes for k in {1, 2} and no for every k >= 3 (l.118-126): the row's disproved status, the kernel disproof a later item (X311's precedent). The Notes' line citations are right (after RC1). Grounding: R1 hyp g312_hlr_hyp_claim [the Petersen graph is connected and subcubic, meets the bound (gamma 3 <= 2 * 1 + 1), and the statement gives the bound there]; R1 ntt g312_hlr_ntt_claim [~ V /\\ (V -> S), V the strict variant #|D| <= 2 #|P|, false at Petersen: no set of at most two vertices dominates it and every packing has at most one vertex]; R2 hyp g312_st_hyp_claim ['K_3 in the t = 4 class with tw_le 'K_3 2]; R2 ntt g312_st_ntt_claim ['K_2 in the t = 3 class, so every c that works at t = 3 has 1 <= c, and the statement gives such a c]; R5 hyp g312_tdap_hyp_claim [on 'K_2 at k = 1 both two disjoint P_1 and two disjoint avoidable P_1]; R5 ntt g312_tdap_ntt_claim [~ V /\\ (V -> S), V \"every graph has two disjoint avoidable P_k\", false on 'K_1]; helper_sanity g312_helper_claim [set0 and every singleton are packings, {0, 1} of Petersen is not], named in every row; no theorem of type S or ~S; each claim names its statement. No assumption command, Section or admission in either file (my comment-stripped scan). Metadata: the three source_hash values recomputed, equal to the manifest's; waves.X312 the only waves change, verifier fields empty before this; R1 state partial with its partial_reason, R2 and R5 done; helper_ownership x312_packing paper_specific; the lint allowlist gains exactly the two exists-after-graph-forall entries (R1's D and P, R5's p and q depend on G by nature); the four specs consecutive_in_cycle, consecutive_in_path, induced_cycles and induced_paths gain exactly the kit's two x91_avoidable_path consumer entries each; c7 c6b86fbc carries exactly the four reports the probe's G6 wrote, byte for byte (recorded references consecutive_in_cycle 259 -> 262, consecutive_in_path 176 -> 179, induced_cycles 167 -> 170, induced_paths 155 -> 158; each Source checks line +3, consistent); legs: R1 statement partial / grounding todo / edges todo, R2 and R5 statement done / grounding done / edges todo, no other legs entry changed; README 648 / 12 / 39 / 974 -> 650 / 13 / 39 / 971; LANDED gains X312 graph-theory-misc after X311 extremal-graph-theory; _CoqProject: X312.v and grounding_X312.v after implications_X300.v. Probe 1 (x312-probe1-by-marcol e5e3eb0f, -c OK, 71 listed = present): run-x312-1.sh 4a08e2d5 on c6 e1621dbd54b6cb13c808fc45372e6e679de56c3c, JOB 2026-11-16T10:40:51Z-2026-11-16T11:59:37Z, WRAPPER rc 0, RESULT PASS-WITH-EXPECTED, 36 STEP lines, 32 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields (W1 REJECTED 12/14 on exactly the audit + grounding contract, missing faithfulness_verified_by / faithfulness_result, and the leg state of the two done rows without source_verified_by / source_verified_at; A3a / A3: \"X312: prospective wave lacks independent faithfulness verdict\"; A10: the two done rows' four source_verified_by / source_verified_at tuple violations); the plans guarded before the builds (base 0 files, topological-graph-theory 0 files, minor-theory 0 files, graph-theory-misc exactly X312.v and grounding_X312.v, which B4 compiled, K4 the same two, no Error line); W1 other 12 checks pass (prospective helper ownership and hard lint; 3/3 formal names Defined; package compiles; no top-level Axiom/Parameter/Admitted; Print Assumptions clean (3/3 statements + 6 grounding certificates); faithfulness exact-type probes (20 forbidden shapes tested)); W2 974 / 974 documented, reverse coverage 929/929; W3 3 probed, 0 FLAGGED; W4 0 active findings (81 allowlisted, the two X312 entries among them); W5 rc 0; A13 225 edges, no drift; G6 101 OK, writing exactly the four reports c7 carries; A12 101 OK; written: CORPUS_STATUS.md, library_helper_inventory.json, migration_reports/consecutive_in_cycle.md, migration_reports/consecutive_in_path.md, migration_reports/induced_cycles.md, migration_reports/induced_paths.md, v2_corpus_manifest.json (the four reports in c7; the rest generated, rule 8, not committed; 7 files changed, 67 insertions(+), 44 deletions(-); the manifest also carries lit37's std_gy_rf_s_long_odd_hole_conjecture status open -> solved, 0af9c1da's committed generated files predating its regeneration); END HEAD c6 e1621dbd54b6cb13c808fc45372e6e679de56c3c."
     }
   }
 }

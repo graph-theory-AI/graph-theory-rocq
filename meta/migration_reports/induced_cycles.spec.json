@@ -817,6 +817,16 @@
       "path": "graph-theory-misc/theories/conjectures/grounding_U13.v",
       "name": "has_induced_cycle",
       "note": "grounding_U13's has_induced_cycle_0 (the empty map is an induced 0-cycle of every graph) states the live wrapper, since B24 an alias of GTBase.induced_cycles.has_ordinal_induced_cycle by conversion: unchanged proof and theorem type, recompiled; the public has_ordinal_induced_cycle0 is the same fact."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/X312.v",
+      "name": "x91_avoidable_path",
+      "note": "Wave X312 (Marcol, 2026-11-16): two_disjoint_avoidable_paths_statement (arxiv:1908.03788#00, Question 1.12) states the avoidable P_k with X91's live x91_avoidable_path, a direct use of the helper, no copy (Lancelot's r1 ruling: reuse it)."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_X312.v",
+      "name": "x91_avoidable_path",
+      "note": "Grounding of X312: g312_two_avoidable and g312_single_avoidable (behind g312_tdap_hyp_inhabited and g312_tdap_not_trivially_true) state avoidability with X91's live x91_avoidable_path, a direct use, no copy."
     }
   ],
   "distinct_variants": [
