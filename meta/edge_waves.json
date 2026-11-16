@@ -400,14 +400,14 @@
    "tier": "T3",
    "wave": "M",
    "host": "cycle-theory",
-   "state": "candidate",
-   "proof": null,
+   "state": "verified",
+   "proof": "e187_decomposing_eulerian_graphs_implies_cycle_double_cover",
    "external": [],
    "reason": "",
-   "proved_by": null,
-   "reviewed_by": null,
-   "reviewed_at": null,
-   "note": "keep candidate: Jaeger's Eulerian reduction (long)"
+   "proved_by": "Arthur (Claude Opus 5.5), 2026-11-16: cycle-theory implications_D1.v (opg:decomposing_eulerian_graphs => opg:cycle_double_cover_conjecture; unconditional: when every separating cut has at least 3 edges the doubled graph is 6-edge-connected and eulerian, and a compatible decomposition for the transition system pairing the two copies of each edge projects to a cycle double cover; otherwise two vertices are identified across a cut of 0 or 2 edges and an even-subgraph double cover lifts back, by strong induction on the number of vertices, then splits into circuits)",
+   "reviewed_by": "",
+   "reviewed_at": "",
+   "note": "Unconditional. A: if every cut separating two vertices has at least 3 edges, the graph with every edge doubled (e187_doubled) has separating cuts of at least 6 edges, so it is 6-edge-connected (e167_cut_edge_connected), connected and of even degrees, hence eulerian (e187_doubled_eulerian); pairing the two copies of each edge at each vertex is a 2-transition system (e187_P_system), and the premise gives a compatible decomposition into circuits; no compatible circuit holds both copies of an edge (e187_one_copy: at a non-loop's end they would form its transition, a loop would have degree 4), so the projected members are circuits of G covering every edge exactly twice (e187_cdc_proj, e187_cdc_3cut). B: otherwise some cut separating two vertices has 0 or 2 edges (bridgeless excludes 1); identifying two vertices across it (e167_ident, still bridgeless by e167_ident_bridgeless) leaves one vertex fewer and the same edges, and a double cover of the identified graph by even subgraphs (e187_edc) lifts to G unchanged across an empty cut (e187_even_lift0) and, across a two-edge cut {e, f}, with e toggled in the members holding exactly one of e and f, the parities following from the degree sum over the side (e187_even_lift2); strong induction on the number of vertices (e187_reduce). C: the even members split into circuits with the same multiplicities (even_list_circuit_decomposition)."
   },
   "decomposing_k_arc_strong_tournament_into_k_spanning_statement->arc_disjoint_out_branching_and_in_branching_statement:implies": {
    "gc": null,

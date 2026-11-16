@@ -2604,6 +2604,455 @@ Theorem e167_jaegers_modular_orientation_implies_five_flow :
   jaegers_modular_orientation_statement -> five_flow_statement.
 Proof. by move=> HJ G hE hbl; exact: (e167_reduce HJ (leqnn #|G|) hE hbl). Qed.
 
+(** ================================================================= *)
+(** ** gc:e187: Decomposing eulerian graphs => the cycle double cover conjecture
+
+    The relation's argument, in-repo and unconditional:
+    - A1-A5, when every cut separating two vertices has at least 3 edges: the graph with every
+      edge doubled ([e187_doubled]) is eulerian and 6-edge-connected; the premise gives the
+      transition system pairing the two copies of each edge ([e187_P]) a compatible
+      decomposition, no member of which holds both copies of an edge ([e187_one_copy]);
+      projected, the members are circuits of [G] covering every edge twice ([e187_cdc_proj],
+      [e187_cdc_3cut]).
+    - B1-B4, the reduction to that case by strong induction on the number of vertices
+      ([e187_reduce]), carrying even-subgraph double covers ([e187_edc]) since identification
+      does not keep circuits: a bridgeless graph with a cut of 0 or 2 edges ([bridgeless_cut2]
+      excludes 1) identifies two vertices across it ([e167_ident]); an even double cover lifts
+      back unchanged across an empty cut ([e187_even_lift0]) and, across a two-edge cut
+      [{e, f}], with [e] toggled in the members holding exactly one of [e] and [f]
+      ([e187_even_lift2]).
+    - C: the members split into circuits with the same multiplicities
+      ([even_list_circuit_decomposition]). *)
+
+(** *** A1: doubling every edge *)
+
+Definition e187_doubled (H : mgraph) : mgraph :=
+  @Graph unit unit H (edge H * bool)%type (fun b f => endpoint b f.1) (fun _ => tt) (fun _ => tt).
+
+Lemma e187_doubled_ends (H : mgraph) (b : bool) (v : H) :
+  #|ends_at [set: edge (e187_doubled H)] b (v : e187_doubled H)|
+  = (2 * #|ends_at [set: edge H] b v|)%N.
+Proof.
+have -> : ends_at [set: edge (e187_doubled H)] b (v : e187_doubled H)
+          = setX (ends_at [set: edge H] b v) [set: bool].
+  by apply/setP => -[e i]; rewrite /ends_at in_setX !inE /= andbT.
+by rewrite cardsX cardsT card_bool mulnC.
+Qed.
+
+Lemma e187_doubled_mdeg (H : mgraph) (v : H) :
+  mdeg (v : e187_doubled H) = (2 * mdeg v)%N.
+Proof. by rewrite /mdeg /subdeg !e187_doubled_ends mulnDr. Qed.
+
+Lemma e187_doubled_cut (H : mgraph) (X : {set H}) :
+  #|cut (X : {set e187_doubled H})| = (2 * #|cut X|)%N.
+Proof.
+have -> : cut (X : {set e187_doubled H}) = setX (cut X) [set: bool].
+  by apply/setP => -[e i]; rewrite /cut in_setX !inE /= andbT.
+by rewrite cardsX cardsT card_bool mulnC.
+Qed.
+
+(** *** A2: separating cuts of at least 3 edges make the doubled graph eulerian, 6-edge-connected *)
+
+Lemma e187_doubled_ec6 (G : mgraph) :
+  (forall (S : {set G}) (x y : G), x \in S -> y \notin S -> (3 <= #|cut S|)%N) ->
+  edge_connected (e187_doubled G) 6.
+Proof.
+move=> hcut; apply: e167_cut_edge_connected => S x y hx hy.
+rewrite (e187_doubled_cut (S : {set G})).
+apply: (@leq_trans (2 * 3)) => //; rewrite leq_mul2l /=.
+exact: hcut hx hy.
+Qed.
+
+Lemma e187_doubled_eulerian (G : mgraph) :
+  (forall (S : {set G}) (x y : G), x \in S -> y \notin S -> (3 <= #|cut S|)%N) ->
+  U6.eulerian (e187_doubled G).
+Proof.
+move=> hcut; have hec := e187_doubled_ec6 hcut; split.
+- move=> x y.
+  have h0 : (#|(set0 : {set edge (e187_doubled G)})| < 6)%N by rewrite cards0.
+  by have [w [hw _]] := hec set0 h0 x y; exists w.
+- by move=> v; rewrite e187_doubled_mdeg oddM.
+Qed.
+
+(** *** A3: the transition system pairing the two copies of each edge *)
+
+Definition e187_P (G : mgraph) (v : e187_doubled G) : {set {set edge (e187_doubled G)}} :=
+  [set [set ((g, false) : edge (e187_doubled G)); (g, true)] | g in edges_at (v : G)].
+
+Lemma e187_doubled_incident (G : mgraph) (v : G) (g : edge G) (b : bool) :
+  incident (v : e187_doubled G) ((g, b) : edge (e187_doubled G)) = incident v g.
+Proof. by []. Qed.
+
+Lemma e187_P_system (G : mgraph) : U6.transition2_system (@e187_P G).
+Proof.
+split => [v|v T]; last first.
+  by case/imsetP => g _ ->; rewrite cards2 xpair_eqE eqxx andTb.
+have hdisj : {in edges_at (v : G) &, forall i j, j != i ->
+    [disjoint [set ((i, false) : edge (e187_doubled G)); (i, true)]
+     & [set ((j, false) : edge (e187_doubled G)); (j, true)]]}.
+  move=> i j _ _ hji; rewrite -setI_eq0; apply/eqP/setP => -[g b]; rewrite !inE !xpair_eqE.
+  by case: (g =P i) => [->|_] /=; rewrite ?(eq_sym i j) ?(negbTE hji) ?andFb ?orbF ?andbF.
+have h0 : set0 \notin e187_P v.
+  by apply/imsetP => -[g _ /setP/(_ (g, false))]; rewrite !inE eqxx.
+have [hT _] := trivIimset hdisj h0.
+apply/and3P; split => //.
+apply/eqP/setP => -[g b]; apply/bigcupP/idP => [[T /imsetP[g' hg' ->]]|hg].
+  by rewrite !inE !xpair_eqE => /orP[] /andP[/eqP -> _]; move: hg'; rewrite inE.
+exists [set ((g, false) : edge (e187_doubled G)); (g, true)].
+  by apply/imsetP; exists g => //; move: hg; rewrite !inE.
+by rewrite !inE; case: (b) => /=; rewrite eqxx ?orbT.
+Qed.
+
+(** *** A4: projecting a compatible decomposition of the doubled graph *)
+
+Definition e187_proj (G : mgraph) (C : {set edge (e187_doubled G)}) : {set edge G} :=
+  [set g | ((g, false) \in C) || ((g, true) \in C)].
+
+(** A compatible circuit holds at most one copy of each edge: both copies of a non-loop [g] would
+    be its two edges at [source g], the transition of [g]; both copies of a loop would give degree
+    4. *)
+Lemma e187_one_copy (G : mgraph) (C : {set edge (e187_doubled G)}) :
+  is_circuit C -> (forall v : e187_doubled G, (edges_at v :&: C) \notin e187_P v) ->
+  forall g : edge G, ~~ (((g, false) \in C) && ((g, true) \in C)).
+Proof.
+move=> [_ hreg _] hcomp g; apply/negP => /andP[h0 h1].
+pose v : e187_doubled G := source g.
+pose pr : {set edge (e187_doubled G)} := [set ((g, false) : edge (e187_doubled G)); (g, true)].
+have hpr2 : #|pr| = 2%N by rewrite cards2 xpair_eqE eqxx andTb.
+have hsubF : pr \subset ends_at C false v.
+  by apply/subsetP => f; rewrite !inE => /orP[] /eqP ->; rewrite /= eqxx ?h0 ?h1.
+have hgeF : (2 <= #|ends_at C false v|)%N by rewrite -hpr2; exact: subset_leq_card.
+have hdeg := hreg v; rewrite /subdeg in hdeg.
+case: (boolP (target g == source g)) => hloop.
+  (* a loop: both copies end twice at [v], degree at least 4 *)
+  have hsubT : pr \subset ends_at C true v.
+    by apply/subsetP => f; rewrite !inE => /orP[] /eqP ->; rewrite /= hloop ?h0 ?h1.
+  have hgeT : (2 <= #|ends_at C true v|)%N by rewrite -hpr2; exact: subset_leq_card.
+  by case: hdeg => hd; move: (leq_add hgeF hgeT); rewrite hd.
+(* a non-loop: degree 2 at [v] from the two copies, so the trace at [v] is the transition of [g] *)
+case: hdeg => hd.
+  by move: (leq_trans hgeF (leq_addr #|ends_at C true v| _)); rewrite hd.
+have hF2 : #|ends_at C false v| = 2%N.
+  by apply/anti_leq; rewrite hgeF andbT -hd leq_addr.
+have hT0 : #|ends_at C true v| = 0%N.
+  by move/eqP: hd; rewrite hF2 -{2}(addn0 2%N) eqn_add2l => /eqP.
+have hFeq : ends_at C false v = pr.
+  by apply/eqP; rewrite eq_sym eqEcard hsubF hF2 hpr2 leqnn.
+have htr : edges_at v :&: C = pr by rewrite -ends_atU hFeq (cards0_eq hT0) setU0.
+move: (hcomp v); rewrite htr => /negP; apply; apply/imsetP; exists g => //.
+by rewrite inE; apply/existsP; exists false.
+Qed.
+
+(** With one copy at most, projection keeps the ends at every vertex. *)
+Lemma e187_proj_ends (G : mgraph) (C : {set edge (e187_doubled G)}) (b : bool) (v : G) :
+  (forall g, ~~ (((g, false) \in C) && ((g, true) \in C))) ->
+  #|ends_at (e187_proj C) b v| = #|ends_at C b (v : e187_doubled G)|.
+Proof.
+move=> h1.
+have -> : ends_at (e187_proj C) b v = [set f.1 | f in ends_at C b (v : e187_doubled G)].
+  apply/setP => g; apply/idP/imsetP => [|[[g' b'] hf ->]].
+    rewrite !inE => /andP[/orP[hg|hg] hv]; [exists (g, false) | exists (g, true)] => //.
+      by rewrite !inE hg.
+    by rewrite !inE hg.
+  by move: hf; rewrite !inE => /andP[hf hv]; rewrite hv andbT; case: (b') hf => ->; rewrite ?orbT.
+rewrite card_in_imset //.
+move=> [g1 b1] [g2 b2]; rewrite !inE /= => /andP[h1c _] /andP[h2c _] heq.
+move: h1c h2c; rewrite heq => h1c h2c; congr (_, _).
+by move: (h1 g2); case: (b1) h1c; case: (b2) h2c => // -> ->.
+Qed.
+
+Lemma e187_uwalk_fst (G : mgraph) (x y : G) (w : seq (edge (e187_doubled G))) :
+  @uwalk (e187_doubled G) x y w -> uwalk x y (map (fun f => f.1) w).
+Proof.
+by elim: w x => [x|f w IH x] //= /orP[] /andP[hs hw]; apply/orP; [left|right]; rewrite hs IH.
+Qed.
+
+Lemma e187_proj_circuit (G : mgraph) (C : {set edge (e187_doubled G)}) :
+  is_circuit C -> (forall g, ~~ (((g, false) \in C) && ((g, true) \in C))) ->
+  is_circuit (e187_proj C).
+Proof.
+move=> [hn hreg hcon] h1; split.
+- case/set0Pn: hn => -[g b] hgb; apply/set0Pn; exists g; rewrite inE.
+  by case: (b) hgb => ->; rewrite ?orbT.
+- by move=> v; rewrite /subdeg !e187_proj_ends //; exact: hreg v.
+- move=> x y hx hy.
+  have hinc : forall z : G, H_inc (e187_proj C) z -> @H_inc (e187_doubled G) C z.
+    move=> z /existsP[g /andP[]]; rewrite inE => /orP[hg|hg] hz; apply/existsP.
+      by exists (g, false); rewrite hg.
+    by exists (g, true); rewrite hg.
+  have [w /andP[hw hall]] := hcon x y (hinc x hx) (hinc y hy).
+  exists (map (fun f => f.1) w); apply/andP; split; first exact: e187_uwalk_fst hw.
+  apply/allP => g /mapP[[g' b] hf ->] /=; rewrite inE.
+  by move: (allP hall _ hf); case: (b) => ->; rewrite ?orbT.
+Qed.
+
+Lemma e187_cdc_proj (G : mgraph) (D : seq {set edge (e187_doubled G)}) :
+  U6.compatible_decomposition (@e187_P G) D -> U6.cdc (map (@e187_proj G) D).
+Proof.
+move=> [[hcirc hpart] hcomp].
+have h1 : forall C, C \in D -> forall g, ~~ (((g, false) \in C) && ((g, true) \in C)).
+  by move=> C hC; apply: e187_one_copy; [exact: hcirc C hC | exact: hcomp C hC].
+split.
+- move=> C' /mapP[C hC ->]; exact: e187_proj_circuit (hcirc C hC) (h1 C hC).
+- (* each edge lies in the two members holding its two copies, never the same member *)
+  move=> g; rewrite count_map.
+  pose a : pred {set edge (e187_doubled G)} := fun C => ((g, false) : edge (e187_doubled G)) \in C.
+  pose b : pred {set edge (e187_doubled G)} := fun C => ((g, true) : edge (e187_doubled G)) \in C.
+  have hI : count (predI a b) D = 0%N.
+    apply/eqP; rewrite -leqn0 leqNgt -has_count; apply/hasPn => C hC.
+    exact: (h1 C hC g).
+  have := count_predUI a b D.
+  rewrite hI addn0 (hpart (g, false)) (hpart (g, true)) => hU.
+  rewrite -[2%N]/(1 + 1)%N -hU.
+  by apply: eq_count => C; rewrite /= inE.
+Qed.
+
+(** *** A5: every separating cut of at least 3 edges *)
+
+Lemma e187_cdc_3cut (G : mgraph) :
+  U6.decomposing_eulerian_graphs_statement -> (0 < #|G|)%N -> (0 < #|edge G|)%N ->
+  (forall (S : {set G}) (x y : G), x \in S -> y \notin S -> (3 <= #|cut S|)%N) ->
+  exists L : seq {set edge G}, U6.cdc L.
+Proof.
+move=> HD hV hE hcut.
+have hE2 : (0 < #|edge (e187_doubled G)|)%N by rewrite card_prod card_bool muln_gt0 hE.
+have [D hD] := HD (e187_doubled G) (@e187_P G) hV hE2 (e187_doubled_ec6 hcut)
+                 (e187_doubled_eulerian hcut) (e187_P_system G).
+by exists (map (@e187_proj G) D); exact: e187_cdc_proj hD.
+Qed.
+
+(** *** B1: even-subgraph double covers, and degrees under identification and toggling *)
+
+(** Every member even, every edge in exactly two members. *)
+Definition e187_edc (G : mgraph) (L : seq {set edge G}) : Prop :=
+  (forall C, C \in L -> forall v : G, ~~ odd (subdeg C v)) /\
+  (forall e : edge G, count (fun C : {set edge G} => e \in C) L = 2%N).
+
+(** In the identified graph the ends at [v] are [G]'s, plus [G]'s at [w] when [v = u]. *)
+Lemma e187_ident_ends (G : mgraph) (u w : G) (huw : u != w) (C : {set edge G}) (b : bool) (v : G)
+    (hv : v != w) :
+  #|@ends_at (e167_ident huw) C b (e167_prj huw v)|
+  = (#|ends_at C b v| + (v == u) * #|ends_at C b w|)%N.
+Proof.
+have hset : @ends_at (e167_ident huw) C b (e167_prj huw v)
+            = ends_at C b v :|: (if v == u then ends_at C b w else set0).
+  apply/setP => e; rewrite !inE -val_eqE /= /e167_pr (negbTE hv).
+  case: ifP => hew; case: (v =P u) => [hvu|hvu]; rewrite ?inE ?hew ?andbF ?orbF //=.
+    by rewrite hvu eqxx !andbT; case: (e \in C); rewrite ?orbT.
+  have -> : (u == v) = false by apply/eqP => h; apply: hvu; rewrite h.
+  by move/eqP: hew => ->; rewrite eq_sym (negbTE hv).
+rewrite hset; case: (v =P u) => [hvu|hvu] /=; last by rewrite setU0 mul0n addn0.
+rewrite mul1n cardsU.
+have -> : ends_at C b v :&: ends_at C b w = set0.
+  apply/setP => e; rewrite !inE; case: (endpoint b e =P v) => [->|]; last by rewrite !andbF.
+  by rewrite (negbTE hv) !andbF.
+by rewrite cards0 subn0.
+Qed.
+
+Lemma e187_ident_subdeg (G : mgraph) (u w : G) (huw : u != w) (C : {set edge G}) (v : G)
+    (hv : v != w) :
+  @subdeg (e167_ident huw) C (e167_prj huw v) = (subdeg C v + (v == u) * subdeg C w)%N.
+Proof.
+by rewrite /subdeg !e187_ident_ends // mulnDr addnACA.
+Qed.
+
+(** Removing an edge from [X] lowers the degree at [v] by its ends at [v]. *)
+Lemma e187_subdeg_D1 (G : mgraph) (X : {set edge G}) (e : edge G) (v : G) :
+  subdeg X v = (subdeg (X :\ e) v + (e \in X) * ((source e == v) + (target e == v)))%N.
+Proof.
+have hb : forall b : bool,
+    #|ends_at X b v| = ((e \in X) && (endpoint b e == v) + #|ends_at (X :\ e) b v|)%N.
+  move=> b; rewrite (cardsD1 e) [in LHS]inE.
+  by congr (_ + _)%N; apply: eq_card => g; rewrite !inE andbA.
+rewrite /subdeg (hb false) (hb true) /= mulnDr.
+by case: (e \in X); rewrite /= ?mul1n ?mul0n ?add0n ?addn0 // addnACA addnC.
+Qed.
+
+(** The parity of a sum over [S] whose terms are all even off [u]. *)
+Lemma e187_sum_parity (G : mgraph) (S : {set G}) (u : G) (f : G -> nat) :
+  u \in S -> (forall v, v \in S -> v != u -> ~~ odd (f v)) ->
+  odd (\sum_(v in S) f v) = odd (f u).
+Proof.
+move=> hu hoth; rewrite (bigD1 u) //= oddD.
+have -> : odd (\sum_(v in S | v != u) f v) = false.
+  apply/negbTE; elim/big_ind: _ => //.
+    by move=> x y hx hy; rewrite oddD (negbTE hx) (negbTE hy).
+  by move=> v /andP[hv hvu]; exact: hoth.
+by rewrite addbF.
+Qed.
+
+(** *** B2: across an empty cut, an even subgraph of the identified graph is even in [G] *)
+
+Lemma e187_even_lift0 (G : mgraph) (u w : G) (huw : u != w) (S : {set G}) (C : {set edge G}) :
+  u \in S -> w \notin S -> cut S = set0 ->
+  (forall a : e167_ident huw, ~~ odd (@subdeg (e167_ident huw) C a)) ->
+  forall v : G, ~~ odd (subdeg C v).
+Proof.
+move=> hu hw h0 hH.
+have hH' : forall v, v != w -> ~~ odd (subdeg C v + (v == u) * subdeg C w)%N.
+  by move=> v hv; rewrite -(e187_ident_subdeg huw C hv); exact: hH.
+have hoth : forall v, v != u -> v != w -> ~~ odd (subdeg C v).
+  by move=> v hvu hvw; have := hH' v hvw; rewrite (negbTE hvu) mul0n addn0.
+have hu0 : ~~ odd (subdeg C u).
+  have := sum_subdeg_cut C S; rewrite h0 setI0 cards0 addn0 => hs.
+  rewrite -(e187_sum_parity (f := subdeg C) hu) ?hs ?oddM //.
+  by move=> v hv hvu; apply: hoth => //; apply: contraNneq hw => <-.
+move=> v; case: (v =P u) => [->|/eqP hvu] //; case: (v =P w) => [->|/eqP hvw]; last exact: hoth.
+by have := hH' u huw; rewrite eqxx mul1n oddD (negbTE hu0).
+Qed.
+
+(** *** B3: across a two-edge cut [{e, f}], toggling [e] where exactly one of [e, f] lies *)
+
+Definition e187_tog (G : mgraph) (e f : edge G) (C : {set edge G}) : {set edge G} :=
+  if (e \in C) == (f \in C) then C else (if e \in C then C :\ e else e |: C).
+
+Lemma e187_tog_mem (G : mgraph) (e f g : edge G) (C : {set edge G}) :
+  g != e -> (g \in e187_tog e f C) = (g \in C).
+Proof. by move=> hge; rewrite /e187_tog; do 2 case: ifP => //; rewrite !inE (negbTE hge). Qed.
+
+Lemma e187_tog_e (G : mgraph) (e f : edge G) (C : {set edge G}) :
+  e != f -> (e \in e187_tog e f C) = (f \in C).
+Proof.
+move=> hef; rewrite /e187_tog; case: ifP => [/eqP //|].
+by case: (e \in C); case: (f \in C); rewrite //= !inE eqxx.
+Qed.
+
+Lemma e187_tog_D1 (G : mgraph) (e f : edge G) (C : {set edge G}) :
+  e187_tog e f C :\ e = C :\ e.
+Proof. by apply/setP => g; rewrite !inE; case: (g =P e) => [//|/eqP hge]; rewrite e187_tog_mem. Qed.
+
+Lemma e187_even_lift2 (G : mgraph) (u w : G) (huw : u != w) (S : {set G}) (e f : edge G)
+    (C : {set edge G}) :
+  u \in S -> w \notin S -> cut S = [set e; f] -> e != f ->
+  ((source e == u) && (target e == w)) || ((source e == w) && (target e == u)) ->
+  (forall a : e167_ident huw, ~~ odd (@subdeg (e167_ident huw) C a)) ->
+  forall v : G, ~~ odd (subdeg (e187_tog e f C) v).
+Proof.
+move=> hu hw hcut hef hends hH.
+have hH' : forall v, v != w -> ~~ odd (subdeg C v + (v == u) * subdeg C w)%N.
+  by move=> v hv; rewrite -(e187_ident_subdeg huw C hv); exact: hH.
+(* the degrees of [C] and of its toggle, through [C :\ e] and the ends [i v] of [e] at [v] *)
+pose i v := ((source e == v) + (target e == v))%N.
+have hdC : forall v, subdeg C v = (subdeg (C :\ e) v + (e \in C) * i v)%N.
+  by move=> v; exact: e187_subdeg_D1.
+have hdC' : forall v,
+    subdeg (e187_tog e f C) v = (subdeg (C :\ e) v + (e \in e187_tog e f C) * i v)%N.
+  by move=> v; rewrite (e187_subdeg_D1 (e187_tog e f C) e v) e187_tog_D1.
+have hwu : (w == u) = false by rewrite eq_sym (negbTE huw).
+have hi0 : forall v, v != u -> v != w -> i v = 0%N.
+  move=> v hvu hvw; have hu' : (u == v) = false by rewrite eq_sym (negbTE hvu).
+  have hw' : (w == v) = false by rewrite eq_sym (negbTE hvw).
+  by rewrite /i; case/orP: hends => /andP[/eqP -> /eqP ->]; rewrite hu' hw'.
+have hiuw : (i u + i w = 2)%N.
+  by rewrite /i; case/orP: hends => /andP[/eqP -> /eqP ->]; rewrite !eqxx ?(negbTE huw) ?hwu.
+(* off [u] and [w] nothing changes *)
+have hoth : forall v, v != u -> v != w -> ~~ odd (subdeg (e187_tog e f C) v).
+  move=> v hvu hvw; rewrite hdC' hi0 // muln0 addn0.
+  by have := hH' v hvw; rewrite (negbTE hvu) mul0n addn0 hdC hi0 // muln0 addn0.
+(* [u]: summed over [S], the toggle meets the cut [{e, f}] in 0 or 2 edges *)
+have hu0 : ~~ odd (subdeg (e187_tog e f C) u).
+  have := sum_subdeg_cut (e187_tog e f C) S; rewrite hcut => hs.
+  rewrite -(e187_sum_parity (f := subdeg (e187_tog e f C)) hu); last first.
+    by move=> v hv hvu; apply: hoth => //; apply: contraNneq hw => <-.
+  rewrite hs oddD oddM /=.
+  have -> : e187_tog e f C :&: [set e; f] = if f \in C then [set e; f] else set0.
+    apply/setP => g; rewrite [in LHS]inE [in LHS]inE.
+    case: (g =P e) => [->|/eqP hge].
+      by rewrite e187_tog_e // !inE eqxx /=; case: (f \in C); rewrite ?inE ?eqxx.
+    rewrite e187_tog_mem // !inE (negbTE hge) /=; case: (g =P f) => [->|/eqP hgf].
+      by case: (f \in C); rewrite ?inE ?eqxx ?orbT.
+    by rewrite andbF; case: (f \in C); rewrite ?inE ?(negbTE hge) ?(negbTE hgf).
+  by case: (f \in C); rewrite ?cards2 ?hef ?cards0.
+(* [w]: the merged vertex's parity, which the toggle keeps since [i u + i w = 2] *)
+move=> v; case: (v =P u) => [->|/eqP hvu] //; case: (v =P w) => [->|/eqP hvw]; last exact: hoth.
+have hm := hH' u huw; rewrite eqxx mul1n in hm.
+have hpar : odd (subdeg (e187_tog e f C) u + subdeg (e187_tog e f C) w)
+            = odd (subdeg C u + subdeg C w).
+  rewrite (hdC' u) (hdC' w) (hdC u) (hdC w) addnACA [in RHS]addnACA -mulnDr -mulnDr hiuw.
+  by rewrite oddD [in RHS]oddD !oddM /= !andbF !addbF.
+by move: hm; rewrite -hpar oddD (negbTE hu0).
+Qed.
+
+(** *** B4: the reduction, by strong induction on the number of vertices *)
+
+(** If every cut separating two vertices has at least 3 edges, A5. Otherwise a cut [S] has 0 or 2
+    edges ([implications_U6.bridgeless_cut2] excludes 1): identify across it ([e167_ident], still
+    bridgeless), then lift the identified graph's even double cover (B2, B3). *)
+Lemma e187_reduce : U6.decomposing_eulerian_graphs_statement ->
+  forall (n : nat) (G : mgraph),
+    (#|G| <= n)%N -> (0 < #|edge G|)%N -> bridgeless G -> exists L : seq {set edge G}, e187_edc L.
+Proof.
+move=> HD; elim=> [|n IH] G hn hE hbl.
+  case/card_gt0P: hE => e _.
+  by move: hn; rewrite leqn0 => /eqP/card0_eq/(_ (source e)).
+have hV : (0 < #|G|)%N.
+  by case/card_gt0P: hE => e _; apply/card_gt0P; exists (source e).
+case: (boolP [forall S : {set G}, [forall x : G, [forall y : G,
+         (x \in S) ==> (y \notin S) ==> (3 <= #|cut S|)%N]]]) => [hall|].
+  (* Every separating cut has at least 3 edges: A's double cover, whose circuits are even. *)
+  have [L [hc hcnt]] : exists L : seq {set edge G}, U6.cdc L.
+    apply: e187_cdc_3cut => // S x y hx hy.
+    by move/forallP: hall => /(_ S)/forallP/(_ x)/forallP/(_ y); rewrite hx hy.
+  exists L; split => // C hC v.
+  by case: (hc C hC) => _ /(_ v) [] ->.
+rewrite negb_forall => /existsP[S]; rewrite negb_forall => /existsP[x].
+rewrite negb_forall => /existsP[y]; rewrite negb_imply => /andP[hx].
+rewrite negb_imply => /andP[hy]; rewrite -ltnNge => hlt.
+case: (set_0Vmem (cut S)) => [h0|[e he]].
+  (* An empty cut: identify [y] into [x]; the same members are even in [G]. *)
+  have hxy : x != y by apply: contraNneq hy => <-.
+  have hc : (#|e167_ident hxy| <= n)%N.
+    by rewrite -ltnS; apply: leq_trans (e167_ident_card hxy) hn.
+  have hE' : (0 < #|edge (e167_ident hxy)|)%N := hE.
+  have hbl' := e167_ident_bridgeless (huw := hxy) hbl.
+  have [L [hev hcnt]] := IH (e167_ident hxy) hc hE' hbl'.
+  by exists L; split => // C hC; exact: e187_even_lift0 hx hy h0 (hev C hC).
+(* A two-edge cut [{e, f}]: identify the end of [e] outside [S] into the one inside, then toggle
+   [e] in the members holding exactly one of [e], [f]. *)
+have h2 : #|cut S| = 2.
+  by apply/eqP; rewrite eqn_leq -ltnS hlt (implications_U6.bridgeless_cut2 hbl he).
+have [f hfe hcut] : exists2 f, f != e & cut S = [set e; f].
+  have /cards1P[f hf] : #|cut S :\ e| == 1.
+    by move: h2; rewrite (cardsD1 e) he add1n => -[->].
+  exists f; first by have := set11 f; rewrite -hf !inE => /andP[].
+  by rewrite -(setD1K he) hf.
+have [u [w [hu hw hends]]] : exists u w, [/\ u \in S, w \notin S &
+    ((source e == u) && (target e == w)) || ((source e == w) && (target e == u))].
+  move: he; rewrite inE; case hs: (source e \in S) => /= ht.
+    by exists (source e), (target e); rewrite hs ht !eqxx.
+  by exists (target e), (source e); rewrite ht hs !eqxx orbT.
+have huw : u != w by apply: contraNneq hw => <-.
+have hc : (#|e167_ident huw| <= n)%N.
+  by rewrite -ltnS; apply: leq_trans (e167_ident_card huw) hn.
+have hE' : (0 < #|edge (e167_ident huw)|)%N := hE.
+have hbl' := e167_ident_bridgeless (huw := huw) hbl.
+have [L [hev hcnt]] := IH (e167_ident huw) hc hE' hbl'.
+have hef : e != f by rewrite eq_sym.
+exists (map (e187_tog e f) L); split.
+  by move=> C' /mapP[C hC ->]; exact: e187_even_lift2 hu hw hcut hef hends (hev C hC).
+(* [e] now lies in exactly the members holding [f]; every other edge keeps its members *)
+move=> g; rewrite count_map.
+case: (g =P e) => [->|/eqP hge].
+  rewrite -(hcnt f); apply: eq_count => C /=.
+  by rewrite e187_tog_e.
+rewrite -(hcnt g); apply: eq_count => C /=.
+by rewrite e187_tog_mem.
+Qed.
+
+(** *** C: the edge *)
+
+(** The decomposition conjecture for 6-edge-connected eulerian graphs gives every bridgeless
+    multigraph with a vertex and an edge a cycle double cover (B4, then C). *)
+(*@EDGE from=decomposing_eulerian_graphs_statement to=cycle_double_cover_statement kind=implies status=verified proof=e187_decomposing_eulerian_graphs_implies_cycle_double_cover cite="gc:e187" note="Unconditional. A: if every cut separating two vertices has at least 3 edges, the graph with every edge doubled (e187_doubled) has separating cuts of at least 6 edges, so it is 6-edge-connected (e167_cut_edge_connected), connected and of even degrees, hence eulerian (e187_doubled_eulerian); pairing the two copies of each edge at each vertex is a 2-transition system (e187_P_system), and the premise gives a compatible decomposition into circuits; no compatible circuit holds both copies of an edge (e187_one_copy: at a non-loop's end they would form its transition, a loop would have degree 4), so the projected members are circuits of G covering every edge exactly twice (e187_cdc_proj, e187_cdc_3cut). B: otherwise some cut separating two vertices has 0 or 2 edges (bridgeless excludes 1); identifying two vertices across it (e167_ident, still bridgeless by e167_ident_bridgeless) leaves one vertex fewer and the same edges, and a double cover of the identified graph by even subgraphs (e187_edc) lifts to G unchanged across an empty cut (e187_even_lift0) and, across a two-edge cut {e, f}, with e toggled in the members holding exactly one of e and f, the parities following from the degree sum over the side (e187_even_lift2); strong induction on the number of vertices (e187_reduce). C: the even members split into circuits with the same multiplicities (even_list_circuit_decomposition)." *)
+Theorem e187_decomposing_eulerian_graphs_implies_cycle_double_cover :
+  U6.decomposing_eulerian_graphs_statement -> U6.cycle_double_cover_statement.
+Proof.
+move=> HD G hV hE hbl.
+have [L [hev hcnt]] := e187_reduce HD (leqnn #|G|) hE hbl.
+have [M [hM hMc]] := even_list_circuit_decomposition hev.
+by exists M; split => // e; rewrite hMc hcnt.
+Qed.
+
 (** ── Audited non-edges (machine-readable; extracted by build_edge_graph.py) ── *)
 
 
@@ -2642,3 +3091,7 @@ Print Assumptions e185_circular_flow_numbers_of_r_graphs_implies_five_flow.
 (** ** Axiom audit (gc:e167) *)
 
 Print Assumptions e167_jaegers_modular_orientation_implies_five_flow.
+
+(** ** Axiom audit (gc:e187) *)
+
+Print Assumptions e187_decomposing_eulerian_graphs_implies_cycle_double_cover.
