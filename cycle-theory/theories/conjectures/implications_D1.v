@@ -2188,6 +2188,422 @@ have [hphi hnd] := e185_tripled_sum hc hv.
 exact: e185_mod5_flow hphi hnd.
 Qed.
 
+(** ================================================================= *)
+(** ** gc:e167: Jaeger's modular orientation conjecture => the 5-flow conjecture
+
+    Jaeger's reduction, in-repo and unconditional, using the premise at k = 2 only:
+    - A1-A5, when every cut separating two vertices has at least 3 edges: the tripled graph
+      ([e185_tripled]) is then 8-edge-connected ([e167_cut_edge_connected]); a mod-5 orientation of
+      it becomes a circulation with values 1 or -4 along the orientation ([e167_mod_circ], the
+      argument of [modular_orientation_to_flow]); the sums over the three copies are never 0 mod 5
+      ([e167_tripled_sum], [e167_sum3_mod5]), and [e185_mod5_flow] gives the 5-flow
+      ([e167_flow_3cut]).
+    - B1-B6, the reduction to that case by strong induction on the number of vertices
+      ([e167_reduce]): a bridgeless graph with a cut of 0 or 2 edges ([bridgeless_cut2] excludes 1)
+      identifies two vertices across it ([e167_ident], comp_reduce's [Hc] pattern for one pair),
+      staying bridgeless ([e167_ident_bridgeless]) with one vertex fewer; a nowhere-zero flow lifts
+      back unchanged across an empty cut ([e167_lift0]) and, across a two-edge cut [{e, f}], with
+      [e] corrected by the imbalance at its end, of absolute value [|f|] ([e167_lift2]).
+    No cubic reduction is needed: the tripling only asks for separating cuts of 3 edges. *)
+
+(** *** A2: three values each +-1 mod 5 never sum to 0 mod 5 *)
+
+Lemma e167_sum3_mod5 (x y z : int) :
+  ((x %% 5)%Z \in [:: 1; 4]) -> ((y %% 5)%Z \in [:: 1; 4]) -> ((z %% 5)%Z \in [:: 1; 4]) ->
+  ~~ (5 %| x + y + z)%Z.
+Proof.
+move=> hx hy hz; apply/dvdz_mod0P.
+rewrite -modzDml -modzDmr -(modzDml x y 5) -(modzDmr (x %% 5)%Z y 5).
+by move: hx hy hz; rewrite !inE => /orP[] /eqP-> /orP[] /eqP-> /orP[] /eqP->.
+Qed.
+
+(** *** A1: a mod-m orientation gives a circulation with values +-1 mod m along it *)
+
+(** [modular_orientation_to_flow]'s argument, keeping the values: [odiff_demand] gives [X] meeting
+    the demands [imbalance / m], and [1 - m [e in X]] along [o] is conservative. *)
+Lemma e167_mod_circ (T : mgraph) (m : nat) (o : edge T -> bool) :
+  (0 < m)%N -> (forall v : T, exists q : int, imbalance o v = m%:R * q) ->
+  exists X : {set edge T},
+    iconservative (fun e => if o e then 1 - m%:R * (e \in X)%:R else - (1 - m%:R * (e \in X)%:R)).
+Proof.
+move=> hm ho.
+have [q hq] : exists q : T -> int, forall v, imbalance o v = m%:R * q v.
+  have ho' : forall v, exists q : int, imbalance o v == m%:R * q.
+    by move=> v; have [q hq] := ho v; exists q; apply/eqP.
+  by exists (fun v => xchoose (ho' v)) => v; apply/eqP; exact: (xchooseP (ho' v)).
+have [X hX] := odiff_demand hm hq.
+(* Along [o], the value is [1] off [X] and [1 - m] on [X]. *)
+pose a e : int := 1 - m%:R * (e \in X)%:R.
+exists X.
+move=> v; apply/eqP; rewrite -subr_eq0.
+have hc : forall (C : {set edge T}) (P : pred (edge T)),
+    \sum_e ((e \in C) && P e)%:R = #|[set e in C | P e]|%:R :> int.
+  move=> C P; rewrite -sum_indz [RHS]big_mkcond; apply: eq_bigr => e _.
+  by case: (P e); case: (e \in C).
+have hc' : forall P : pred (edge T),
+    \sum_e (P e)%:R = #|[set e | P e]|%:R :> int.
+  move=> P; rewrite -(_ : [set e in [set: edge T] | P e] = [set e | P e]);
+    last by apply/setP => e; rewrite !inE.
+  by rewrite -hc; apply: eq_bigr => e _; rewrite in_setT.
+rewrite (big_mkcond (fun e => source e == v)).
+rewrite (big_mkcond (fun e => target e == v)) -sumrB.
+rewrite (eq_bigr (fun e => ((otail o e == v)%:R - (ohead o e == v)%:R)
+  - m%:R * (((e \in X) && (otail o e == v))%:R
+            - ((e \in X) && (ohead o e == v))%:R))); last first.
+  move=> e _.
+  have h1 : forall (b : bool) (x : int), (if b then x else 0) = x * b%:R.
+    by move=> [] x; rewrite ?mulr1 ?mulr0.
+  have h2 : (if o e then a e else - a e)
+              * ((source e == v)%:R - (target e == v)%:R)
+            = a e * ((otail o e == v)%:R - (ohead o e == v)%:R).
+    by rewrite /otail /ohead; case: (o e); rewrite // mulNr -mulrN opprB.
+  have h3 : forall b1 b2 : bool, ((b1 && b2)%:R : int) = b1%:R * b2%:R.
+    by move=> [] []; rewrite ?mulr1 ?mulr0.
+  by rewrite !h1 -mulrBr h2 !h3 -mulrBr /a mulrBl mul1r -mulrA.
+rewrite sumrB -mulr_sumr !sumrB !hc !hc'.
+have e1 : (#|[set e | otail o e == v]|%:R
+           - #|[set e | ohead o e == v]|%:R : int) = - (m%:R * q v).
+  by rewrite -hq /imbalance opprB.
+have e2 : (#|[set e in X | otail o e == v]|%:R
+           - #|[set e in X | ohead o e == v]|%:R : int) = - q v.
+  by rewrite -(hX v) /odiff opprB.
+by rewrite e1 e2 mulrN opprK addNr.
+Qed.
+
+(** A1's values are 1 or 4 mod 5. *)
+Lemma e167_res5 (b c : bool) :
+  ((if b then 1 - (5%N)%:R * c%:R else - (1 - (5%N)%:R * c%:R)) %% 5)%Z \in [:: 1; 4 : int].
+Proof. by case: b; case: c. Qed.
+
+(** *** A3: the sums over the three copies, a circulation never 0 mod 5 *)
+
+(** [e185_tripled_sum]'s argument, for values 1 or 4 mod 5. *)
+Lemma e167_tripled_sum (H : mgraph) (h : edge (e185_tripled H) -> int) :
+  iconservative h -> (forall f, (h f %% 5)%Z \in [:: 1; 4]) ->
+  let phi := fun e : edge H => \sum_(i < 3) h (e, i) in
+  iconservative phi /\ forall e, ~~ (5 %| phi e)%Z.
+Proof.
+move=> hc hv phi; split.
+- move=> v; have hcv := hc (v : e185_tripled H).
+  rewrite /phi !(pair_big_dep _ (fun _ _ => true)) /=.
+  have hp : forall b, \sum_(p | (endpoint b p.1 == v) && true) h (p.1, p.2)
+                      = \sum_(f : edge (e185_tripled H) | endpoint b f == v) h f.
+    by move=> b; apply: eq_big => [[e i]|[e i] _] /=; rewrite ?andbT.
+  by rewrite (hp false) (hp true).
+- move=> e; rewrite /phi !big_ord_recl big_ord0 addr0 addrA.
+  by apply: e167_sum3_mod5; apply: hv.
+Qed.
+
+(** *** A4: large separating cuts give edge-connectivity *)
+
+(** If every cut separating two vertices has at least [k] edges, deleting fewer than [k] edges keeps
+    the graph connected: the vertices reachable from [x] without [E] form a set whose whole cut lies
+    in [E]. *)
+Lemma e167_cut_edge_connected (G : mgraph) (k : nat) :
+  (forall (S : {set G}) (x y : G), x \in S -> y \notin S -> (k <= #|cut S|)%N) ->
+  edge_connected G k.
+Proof.
+move=> hcut E hE x y.
+pose r : rel G := fun a b => [exists e, (e \notin E) &&
+  (((source e == a) && (target e == b)) || ((source e == b) && (target e == a)))].
+have hr : forall a b, connect r a b -> exists w, uwalk a b w /\ all (fun e => e \notin E) w.
+  move=> a b /connectP[p]; elim: p a => [a _ hl|z p IH a /= /andP[ha hp] hl].
+    by exists [::]; rewrite /= hl eqxx.
+  have [w [hw hall]] := IH z hp hl.
+  case/existsP: ha => e /andP[heE /orP[/andP[/eqP hs /eqP ht]|/andP[/eqP hs /eqP ht]]].
+  - exists (e :: w); split; last by rewrite /= heE.
+    by apply: uwalk_cons; [exact: hs | rewrite ht].
+  - exists (e :: w); split; last by rewrite /= heE.
+    by apply: uwalk_cons_rev; [exact: ht | rewrite hs].
+pose S := [set z | connect r x z].
+case hy: (y \in S).
+  by apply: hr; rewrite inE in hy.
+exfalso.
+have hsub : cut S \subset E.
+  apply/subsetP => e; rewrite inE => hx; apply/negPn/negP => heE.
+  have hst : r (source e) (target e) by apply/existsP; exists e; rewrite heE !eqxx.
+  have hts : r (target e) (source e) by apply/existsP; exists e; rewrite heE !eqxx orbT.
+  move: hx; rewrite !inE.
+  case hs: (connect r x (source e)); case ht: (connect r x (target e)) => //= _.
+  + by move: ht; rewrite (connect_trans hs (connect1 hst)).
+  + by move: hs; rewrite (connect_trans ht (connect1 hts)).
+have := hcut S x y; rewrite hy inE connect0 => /(_ isT isT) hk.
+by move: (leq_trans hk (subset_leq_card hsub)); rewrite leqNgt hE.
+Qed.
+
+(** *** A5: every separating cut of at least 3 edges *)
+
+(** The tripled graph then has separating cuts of at least 9 edges, so it is 8-edge-connected;
+    Jaeger's conjecture at [k = 2] orients it modulo 5, A1 turns the orientation into a circulation
+    with values 1 or 4 mod 5, A3 sums the copies, and [e185_mod5_flow] gives the 5-flow. *)
+Lemma e167_flow_3cut (G : mgraph) :
+  jaegers_modular_orientation_statement -> (0 < #|edge G|)%N ->
+  (forall (S : {set G}) (x y : G), x \in S -> y \notin S -> (3 <= #|cut S|)%N) ->
+  has_nz_kflow G 5.
+Proof.
+move=> HJ hE hcut.
+have hT : edge_connected (e185_tripled G) (4 * 2).
+  apply: e167_cut_edge_connected => S x y hx hy.
+  rewrite (e185_tripled_cut (S : {set G})).
+  apply: (@leq_trans (3 * 3)) => //; rewrite leq_mul2l /=.
+  exact: hcut hx hy.
+have hE3 : (0 < #|edge (e185_tripled G)|)%N.
+  by rewrite card_prod card_ord muln_gt0 hE.
+have [o ho] := HJ 2%N (e185_tripled G) hE3 isT hT.
+have [X hX] := @e167_mod_circ (e185_tripled G) 5 o isT ho.
+have [hphi hnd] := e167_tripled_sum hX (fun f => e167_res5 (o f) (f \in X)).
+exact: e185_mod5_flow hphi hnd.
+Qed.
+
+(** *** B1: identifying [w] into [u] (comp_reduce's [Hc] pattern, for one pair) *)
+
+(** The vertices other than [w], the same edge type, every endpoint [w] sent to [u]. *)
+Definition e167_pr (G : mgraph) (u w v : G) : G := if v == w then u else v.
+
+Lemma e167_pr_mem (G : mgraph) (u w : G) (huw : u != w) (v : G) : e167_pr u w v != w.
+Proof. by rewrite /e167_pr; case: ifP => // /negbT. Qed.
+
+Definition e167_prj (G : mgraph) (u w : G) (huw : u != w) (v : G) : {v : G | v != w} :=
+  Sub (e167_pr u w v) (e167_pr_mem huw v).
+
+Definition e167_ident (G : mgraph) (u w : G) (huw : u != w) : mgraph :=
+  @Graph unit unit {v : G | v != w} (edge G) (fun b e => e167_prj huw (endpoint b e))
+         (fun _ => tt) (fun _ => tt).
+
+Lemma e167_ident_card (G : mgraph) (u w : G) (huw : u != w) : (#|e167_ident huw| < #|G|)%N.
+Proof.
+rewrite /= card_sig.
+have -> : #|[pred x | x != w]| = #|predC1 w| by apply: eq_card.
+by rewrite cardC1 prednK //; apply/card_gt0P; exists w.
+Qed.
+
+Lemma e167_ident_uwalk (G : mgraph) (u w : G) (huw : u != w) (x y : G) (p : seq (edge G)) :
+  uwalk x y p -> @uwalk (e167_ident huw) (e167_prj huw x) (e167_prj huw y) p.
+Proof.
+elim: p x => [x /eqP ->|e p IH x h]; first by rewrite /= eqxx.
+have [/andP[/eqP hx hp]|/andP[/eqP hx hp]] := orP h.
+- by apply: uwalk_cons; [rewrite /= hx | exact: IH hp].
+- by apply: uwalk_cons_rev; [rewrite /= hx | exact: IH hp].
+Qed.
+
+(** *** B2: the identified graph is bridgeless (walks map with the same edge list) *)
+
+Lemma e167_ident_bridgeless (G : mgraph) (u w : G) (huw : u != w) :
+  bridgeless G -> bridgeless (e167_ident huw).
+Proof.
+move=> hbl e hbr; apply: (hbl e); apply/is_bridgeP => p hp.
+have h := e167_ident_uwalk huw hp.
+by have /is_bridgeP hb := hbr; apply: hb; exact: h.
+Qed.
+
+(** *** B3: imbalances, summed over a set *)
+
+(** The net value leaving [v]: a flow is conservative iff every [e167_imb] is 0. *)
+Definition e167_imb (G : mgraph) (phi : edge G -> int) (v : G) : int :=
+  \sum_(e | source e == v) phi e - \sum_(e | target e == v) phi e.
+
+Lemma e167_cons_imb (G : mgraph) (phi : edge G -> int) :
+  iconservative phi <-> forall v, e167_imb phi v = 0.
+Proof.
+split => h v; first by rewrite /e167_imb (h v) subrr.
+by apply/eqP; rewrite -subr_eq0; apply/eqP; exact: h.
+Qed.
+
+(** Summed over [S], the imbalances count each edge by its ends in [S] (my e185 F7 identity). *)
+Lemma e167_imb_sum (G : mgraph) (phi : edge G -> int) (S : {set G}) :
+  \sum_(v in S) e167_imb phi v = \sum_e phi e * ((source e \in S)%:R - (target e \in S)%:R).
+Proof.
+have hend : forall b : bool,
+    \sum_(v in S) \sum_(e | endpoint b e == v) phi e = \sum_e phi e * (endpoint b e \in S)%:R.
+  move=> b.
+  have -> : \sum_e phi e * (endpoint b e \in S)%:R = \sum_(e | endpoint b e \in S) phi e.
+    rewrite [RHS]big_mkcond.
+    by apply: eq_bigr => e _; case: (endpoint b e \in S); rewrite ?mulr1 ?mulr0.
+  rewrite [RHS](partition_big (fun e => endpoint b e) (mem S)) //=.
+  apply: eq_bigr => v hv; apply: eq_bigl => e.
+  by case: (endpoint b e =P v) => [->|]; rewrite ?hv ?andbF ?andbT.
+rewrite /e167_imb sumrB (hend false) (hend true) -sumrB.
+by apply: eq_bigr => e _; rewrite mulrBr.
+Qed.
+
+(** In the identified graph the imbalance at [v] is [G]'s, plus [G]'s at [w] when [v = u]. *)
+Lemma e167_ident_imb (G : mgraph) (u w : G) (huw : u != w) (phi : edge G -> int) (v : G)
+    (hv : v != w) :
+  @e167_imb (e167_ident huw) phi (e167_prj huw v) = e167_imb phi v + (v == u)%:R * e167_imb phi w.
+Proof.
+have hs : forall b : bool,
+    \sum_(e | @endpoint _ _ (e167_ident huw) b e == e167_prj huw v) phi e
+    = \sum_(e | endpoint b e == v) phi e + (v == u)%:R * \sum_(e | endpoint b e == w) phi e.
+  move=> b; rewrite mulr_sumr !(big_mkcond (fun e => _ == _)) -big_split /=.
+  apply: eq_bigr => e _.
+  rewrite -val_eqE /= /e167_pr (negbTE hv).
+  case: (endpoint b e =P w) => [hew|hnew]; last by rewrite addr0.
+  rewrite hew [w == v]eq_sym (negbTE hv) add0r [u == v]eq_sym.
+  by case: (v == u); rewrite ?mul1r ?mul0r.
+by rewrite /e167_imb (hs false) (hs true) opprD addrACA -mulrBr.
+Qed.
+
+(** *** B4: across an empty cut, a flow of the identified graph is one of [G] *)
+
+(** The merged vertex conserves [imb u + imb w]; summed over [S], the imbalances count the empty
+    cut, so [imb u = 0] (every other vertex of [S] conserves), then [imb w = 0]. *)
+Lemma e167_lift0 (G : mgraph) (u w : G) (huw : u != w) (S : {set G}) (phi : edge G -> int) :
+  u \in S -> w \notin S -> cut S = set0 ->
+  @iconservative (e167_ident huw) phi -> iconservative phi.
+Proof.
+move=> hu hw h0 /e167_cons_imb hH; apply/e167_cons_imb.
+have hH' : forall v, v != w -> e167_imb phi v + (v == u)%:R * e167_imb phi w = 0.
+  by move=> v hv; rewrite -(e167_ident_imb huw phi hv); exact: hH.
+have hoth : forall v, v != u -> v != w -> e167_imb phi v = 0.
+  by move=> v hvu hvw; have := hH' v hvw; rewrite (negbTE hvu) mul0r addr0.
+have hz : \sum_e phi e * ((source e \in S)%:R - (target e \in S)%:R) = 0.
+  apply: big1 => e _.
+  have : e \notin cut S by rewrite h0 inE.
+  by rewrite inE negb_add => /eqP ->; rewrite subrr mulr0.
+have hu0 : e167_imb phi u = 0.
+  have := e167_imb_sum phi S; rewrite hz (bigD1 u) //= big1 ?addr0 //.
+  move=> v /andP[hvS hvu]; apply: hoth => //.
+  by apply: contraNneq hw => <-.
+have hw0 : e167_imb phi w = 0.
+  by have := hH' u huw; rewrite eqxx mul1r hu0 add0r.
+move=> v; case: (v =P u) => [->|/eqP hvu] //; case: (v =P w) => [->|/eqP hvw] //.
+exact: hoth.
+Qed.
+
+(** *** B5: across a two-edge cut [{e, f}], correcting [e] gives a flow of [G] *)
+
+(** [e] joins [u] in [S] to [w] outside. Changing its value by [s * imb u] ([s = +-1] its direction
+    at [u]) restores conservation at [u] and, as the merged vertex conserved [imb u + imb w], at
+    [w]; summed over [S] the imbalances count [e] and [f] once each, so [|value e| = |phi f|]. *)
+Lemma e167_lift2 (G : mgraph) (u w : G) (huw : u != w) (S : {set G}) (e f : edge G) (k : nat)
+    (phi : edge G -> int) :
+  u \in S -> w \notin S -> cut S = [set e; f] -> e != f ->
+  ((source e == u) && (target e == w)) || ((source e == w) && (target e == u)) ->
+  @iconservative (e167_ident huw) phi -> @int_bounded (e167_ident huw) k phi ->
+  exists psi : edge G -> int, iconservative psi /\ int_bounded k psi.
+Proof.
+move=> hu hw hcut hef hends /e167_cons_imb hH hb.
+have hH' : forall v, v != w -> e167_imb phi v + (v == u)%:R * e167_imb phi w = 0.
+  by move=> v hv; rewrite -(e167_ident_imb huw phi hv); exact: hH.
+pose s : int := (source e == u)%:R - (target e == u)%:R.
+pose d := e167_imb phi u.
+pose psi g := if g == e then phi e - s * d else phi g.
+(* Changing the value on [e] shifts the sums at its ends. *)
+have hb' : forall (b : bool) (v : G), \sum_(g | endpoint b g == v) psi g
+    = \sum_(g | endpoint b g == v) phi g - s * d * (endpoint b e == v)%:R.
+  move=> b v; rewrite !(big_mkcond (fun g => endpoint b g == v)).
+  rewrite (bigD1 e) //= [in RHS](bigD1 e) //= /psi eqxx.
+  rewrite (eq_bigr (fun i => if endpoint b i == v then phi i else 0)); last by move=> i /negbTE ->.
+  by case: (endpoint b e == v); rewrite ?mulr1 ?mulr0 ?subr0 // addrAC.
+have hR : forall a b x y : int, a - x - (b - y) = a - b - (x - y).
+  move=> a b x y; rewrite !opprB !addrA.
+  by rewrite addrAC [a - x - b]addrAC [RHS]addrAC.
+have hchg : forall v,
+    e167_imb psi v = e167_imb phi v - s * d * ((source e == v)%:R - (target e == v)%:R).
+  by move=> v; rewrite /e167_imb (hb' false v) (hb' true v) mulrBr hR.
+(* [e] joins [u] and [w]: [s = +-1], its direction at [w] is [- s], no other vertex is an end. *)
+have huw' : (w == u) = false by rewrite eq_sym (negbTE huw).
+have [hss hsw] : s * s = 1 /\ (source e == w)%:R - (target e == w)%:R = - s.
+  rewrite /s; case/orP: hends => /andP[/eqP -> /eqP ->]; rewrite eqxx (negbTE huw) huw' /=.
+    by rewrite eqxx; split.
+  by rewrite eqxx; split.
+have hothv : forall v, v != u -> v != w -> (source e == v)%:R - (target e == v)%:R = 0 :> int.
+  move=> v hvu hvw; have hu' : (u == v) = false by rewrite eq_sym (negbTE hvu).
+  have hw' : (w == v) = false by rewrite eq_sym (negbTE hvw).
+  by case/orP: hends => /andP[/eqP -> /eqP ->]; rewrite hu' hw' subrr.
+have hpsi : forall v, e167_imb psi v = 0.
+  move=> v; rewrite hchg.
+  case: (v =P u) => [->|/eqP hvu].
+    by rewrite -/s -/d mulrAC hss mul1r subrr.
+  case: (v =P w) => [->|/eqP hvw].
+    rewrite hsw mulrN opprK mulrAC hss mul1r.
+    by have := hH' u huw; rewrite eqxx mul1r -/d addrC.
+  rewrite hothv // mulr0 subr0.
+  by have := hH' v hvw; rewrite (negbTE hvu) mul0r addr0.
+(* Summed over [S], only [e] and [f] count, each by +-1. *)
+have hc0 : forall g, g \notin cut S -> (source g \in S)%:R - (target g \in S)%:R = 0 :> int.
+  by move=> g; rewrite inE negb_add => /eqP ->; rewrite subrr.
+have hc1 : forall g, g \in cut S -> `|(source g \in S)%:R - (target g \in S)%:R : int| = 1.
+  by move=> g; rewrite inE; case: (source g \in S); case: (target g \in S) => //= _;
+    rewrite ?subr0 ?sub0r ?normrN normr1.
+have he : e \in cut S by rewrite hcut !inE eqxx.
+have hf : f \in cut S by rewrite hcut !inE eqxx orbT.
+have hfe : f != e by rewrite eq_sym.
+have hsum2 : psi e * ((source e \in S)%:R - (target e \in S)%:R)
+              + psi f * ((source f \in S)%:R - (target f \in S)%:R) = 0.
+  have := e167_imb_sum psi S; rewrite big1 => [|v _]; last exact: hpsi v.
+  rewrite (bigD1 e) //= (bigD1 f) //=.
+  rewrite big1 ?addr0 => [/esym //|g /andP[hge hgf]].
+  by rewrite hc0 ?mulr0 // hcut !inE negb_or hge hgf.
+have habs : `|psi e| = `|phi f|.
+  have hpf : psi f = phi f by rewrite /psi (negbTE hfe).
+  move/eqP: hsum2; rewrite addr_eq0 => /eqP /(congr1 (fun x : int => `|x|)).
+  by rewrite normrN !normrM (hc1 e he) (hc1 f hf) !mulr1 hpf.
+exists psi; split; first by apply/e167_cons_imb.
+move=> g; case: (g =P e) => [->|/eqP hge]; first by rewrite habs; exact: hb f.
+by rewrite /psi (negbTE hge); exact: hb g.
+Qed.
+
+(** *** B6: the reduction, by strong induction on the number of vertices *)
+
+(** If every cut separating two vertices has at least 3 edges, A5. Otherwise a cut [S] has 0 or 2
+    edges ([implications_U6.bridgeless_cut2] excludes 1): identify across it (B1, B2), then lift
+    (B4, B5). *)
+Lemma e167_reduce : jaegers_modular_orientation_statement ->
+  forall (n : nat) (G : mgraph),
+    (#|G| <= n)%N -> (0 < #|edge G|)%N -> bridgeless G -> has_nz_kflow G 5.
+Proof.
+move=> HJ; elim=> [|n IH] G hn hE hbl.
+  case/card_gt0P: hE => e _.
+  by move: hn; rewrite leqn0 => /eqP/card0_eq/(_ (source e)).
+case: (boolP [forall S : {set G}, [forall x : G, [forall y : G,
+         (x \in S) ==> (y \notin S) ==> (3 <= #|cut S|)%N]]]) => [hall|].
+  apply: e167_flow_3cut => // S x y hx hy.
+  by move/forallP: hall => /(_ S)/forallP/(_ x)/forallP/(_ y); rewrite hx hy.
+rewrite negb_forall => /existsP[S]; rewrite negb_forall => /existsP[x].
+rewrite negb_forall => /existsP[y]; rewrite negb_imply => /andP[hx].
+rewrite negb_imply => /andP[hy]; rewrite -ltnNge => hlt.
+case: (set_0Vmem (cut S)) => [h0|[e he]].
+  (* An empty cut: identify [y] into [x]. *)
+  have hxy : x != y by apply: contraNneq hy => <-.
+  have hc : (#|e167_ident hxy| <= n)%N.
+    by rewrite -ltnS; apply: leq_trans (e167_ident_card hxy) hn.
+  have hE' : (0 < #|edge (e167_ident hxy)|)%N := hE.
+  have hbl' := e167_ident_bridgeless (huw := hxy) hbl.
+  have [phi [hcons hbd]] := IH (e167_ident hxy) hc hE' hbl'.
+  by exists phi; split; [exact: e167_lift0 hx hy h0 hcons | exact: hbd].
+(* A two-edge cut [{e, f}]: identify the end of [e] outside [S] into the one inside. *)
+have h2 : #|cut S| = 2.
+  by apply/eqP; rewrite eqn_leq -ltnS hlt (implications_U6.bridgeless_cut2 hbl he).
+have [f hfe hcut] : exists2 f, f != e & cut S = [set e; f].
+  have /cards1P[f hf] : #|cut S :\ e| == 1.
+    by move: h2; rewrite (cardsD1 e) he add1n => -[->].
+  exists f; first by have := set11 f; rewrite -hf !inE => /andP[].
+  by rewrite -(setD1K he) hf.
+have [u [w [hu hw hends]]] : exists u w, [/\ u \in S, w \notin S &
+    ((source e == u) && (target e == w)) || ((source e == w) && (target e == u))].
+  move: he; rewrite inE; case hs: (source e \in S) => /= ht.
+    by exists (source e), (target e); rewrite hs ht !eqxx.
+  by exists (target e), (source e); rewrite ht hs !eqxx orbT.
+have huw : u != w by apply: contraNneq hw => <-.
+have hc : (#|e167_ident huw| <= n)%N.
+  by rewrite -ltnS; apply: leq_trans (e167_ident_card huw) hn.
+have hE' : (0 < #|edge (e167_ident huw)|)%N := hE.
+have hbl' := e167_ident_bridgeless (huw := huw) hbl.
+have [phi [hcons hbd]] := IH (e167_ident huw) hc hE' hbl'.
+apply: (e167_lift2 hu hw hcut _ hends hcons hbd).
+by rewrite eq_sym.
+Qed.
+
+(** *** C: the edge *)
+
+(** Jaeger's conjecture at [k = 2] gives every bridgeless multigraph with an edge a nowhere-zero
+    5-flow (B6). *)
+(*@EDGE from=jaegers_modular_orientation_statement to=five_flow_statement kind=implies status=verified proof=e167_jaegers_modular_orientation_implies_five_flow cite="gc:e167" note="Unconditional, by Jaeger's conjecture at k = 2 only. A: if every cut separating two vertices has at least 3 edges, the graph with every edge tripled (e185_tripled) has separating cuts of at least 9 edges, so it is 8-edge-connected (e167_cut_edge_connected); Jaeger at k = 2 orients it with every imbalance a multiple of 5, odiff_demand (as in modular_orientation_to_flow) turns that orientation into an integer circulation with values 1 or -4 along it (e167_mod_circ), the sums over the three copies form a circulation of G that is never 0 mod 5 (e167_tripled_sum, e167_sum3_mod5), and Tutte's step e185_mod5_flow gives a nowhere-zero 5-flow (e167_flow_3cut). B: otherwise some cut separating two vertices has 0 or 2 edges (bridgeless excludes 1); identifying two vertices across it (e167_ident, still bridgeless by e167_ident_bridgeless) leaves one vertex fewer and the same edges, and a nowhere-zero 5-flow of the identified graph lifts to G unchanged across an empty cut (e167_lift0), and across a two-edge cut {e, f} with the value of e corrected by the imbalance at its end, where the sum over the side gives |value(e)| = |value(f)| (e167_lift2); strong induction on the number of vertices (e167_reduce)." *)
+Theorem e167_jaegers_modular_orientation_implies_five_flow :
+  jaegers_modular_orientation_statement -> five_flow_statement.
+Proof. by move=> HJ G hE hbl; exact: (e167_reduce HJ (leqnn #|G|) hE hbl). Qed.
+
 (** ── Audited non-edges (machine-readable; extracted by build_edge_graph.py) ── *)
 
 
@@ -2222,3 +2638,7 @@ Print Assumptions e032_petersen_coloring_implies_three_4_flows.
 (** ** Axiom audit (gc:e185) *)
 
 Print Assumptions e185_circular_flow_numbers_of_r_graphs_implies_five_flow.
+
+(** ** Axiom audit (gc:e167) *)
+
+Print Assumptions e167_jaegers_modular_orientation_implies_five_flow.
