@@ -2410,7 +2410,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "bipartite_digraph_asymmetric_outdegree_girth_statement->caccetta_haggkvist_statement:implies:candidate",
+   "rocq_edge": "bipartite_digraph_asymmetric_outdegree_girth_statement->caccetta_haggkvist_statement:implies:verified",
    "argument": "Stated in the paper's abstract (the asymmetric conjecture \"implies the Caccetta-Häggkvist conjecture (set beta>0 and very small)\"), and verifiable directly: given a digraph D on n vertices with min out-degree r, build a bipartite digraph with parts A, B both copies of V(D), arcs v_A -> v_B for every vertex v and u_B -> v_A for every arc uv of D. Vertices of A have out-degree 1 = beta|B| with beta = 1/n; vertices of B have out-degree >= r = alpha|A| with alpha = r/n. Take k = ceil(n/r): then k*alpha + beta = ceil(n/r)*r/n + 1/n >= 1 + 1/n > 1, so the asymmetric conjecture gives a directed cycle of length <= 2k, which projects to a closed walk of length <= k in D, hence a cycle of length <= ceil(n/r). Direction as claimed.",
    "citations": [
     "https://arxiv.org/abs/1809.08324"

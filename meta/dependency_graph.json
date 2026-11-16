@@ -19,10 +19,10 @@
  "totals": {
   "edges": 171,
   "by_status": {
-   "candidate": 26,
+   "candidate": 25,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 111
+   "verified": 112
   },
   "by_kind": {
    "equiv": 13,
@@ -30,7 +30,7 @@
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 129
+  "proved_theorems": 130
  },
  "edges": [
   {
@@ -128,10 +128,10 @@
    "from": "bipartite_digraph_asymmetric_outdegree_girth_statement",
    "to": "caccetta_haggkvist_statement",
    "kind": "implies",
-   "status": "candidate",
+   "status": "verified",
    "cite": "gc:e101",
-   "proof": "",
-   "note": "BLOCKED on ONE missing general lemma, not on a mathematical gap: the corpus reduction is explicit and self-contained. Construction (checked on the bodies): for D loopless with 0 < #|D| = n and minimum out-degree r >= 1, let H be the bipartite double cover on the carrier D * bool with arcs (v,false) --> (v,true) for every v and (u,true) --> (v,false) whenever u --> v; then A := [set x | ~~ x.2] and B := [set x | x.2] satisfy x53_bipartition, #|A| = #|B| = n, and x53_out_to B x = 1 for x in A while x53_out_to A x = outdeg x.1 >= r for x in B. So the source applies with alpha = r/n, beta = 1/n and k := (n + r - 1) %/ r >= 1, the condition k*alpha + beta > 1 reducing (after clearing denominators) to n <= k * r, which is divn_eq plus ltn_pmod. MISSING: the projection lemma - a dicycle of H of size at most 2k yields a dicycle of D of size at most k. On paper it is immediate (a dicycle of H alternates sides, and its B-vertices in cyclic order form the D-cycle). Formally it is a new foundations lemma; the route, using core/dipath.v, is: g := next c \\o next c is injective (prev_next) and maps the B-part of the dicycle c into itself (dicycle_next plus the arc structure of H), orbit g x0 is a duplicate-free fcycle (cycle_orbit, orbit_uniq) whose image under fst is a dicycle of D (arc transfer along g), and 2 * size (orbit g x0) <= size c because orbit g x0 and its image under next c are disjoint equinumerous subsets of c. Estimated 200 lines of new machinery, outside this wave's budget; nothing about the two bodies blocks it.",
+   "proof": "e101_bipartite_digraph_asymmetric_outdegree_girth_implies_caccetta_haggkvist",
+   "note": "Bipartite double cover: H on D * bool with (v, false) --> (v, true) and (u, true) --> (v, false) for u --> v; its sides are a bipartition with n vertices each, one out-neighbour across from a false vertex and outdeg u >= r from (u, true), so the source at alpha = r / n, beta = 1 / n and k = (n + r - 1) %/ r (k alpha + beta > 1 is n <= k r, by ltn_ceil) gives a dicycle of H with at most 2 k vertices; it alternates sides, and its false vertices, projected to D, form a dicycle with half as many. The looplessness hypothesis of the target is not needed.",
    "external": [],
    "sources": [
     "digraph-theory/implications_P9.v"
@@ -2264,7 +2264,7 @@
  ],
  "legacy": {
   "repo": "digraph-theory (absorbed)",
-  "implies_theorems_in_source": 70,
+  "implies_theorems_in_source": 71,
   "committed_dependency_graph_edges": 34,
   "note": "Legacy digraph-only graph: source _implies_ theorem count vs the committed graph differ (theorem-name pattern includes helper lemmas; the old extractor filtered). Reconcile within digraph-theory separately; it does NOT define the federation format."
  }

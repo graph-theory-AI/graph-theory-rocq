@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2293,
-      "cross_file_files": 1133,
+      "cross_file_declarations": 2294,
+      "cross_file_files": 1134,
       "implicit_use": 4,
       "packages_without_project": [
         "graph-theory-base"
@@ -19,7 +19,7 @@
       ],
       "undecided_files": 0,
       "unlisted_files": 0,
-      "with_cross_file": 373,
+      "with_cross_file": 374,
       "with_own_certificate": 511,
       "with_same_file": 448
     },
@@ -6630,8 +6630,12 @@
         "alias": "Digraph.conjectures.X53.x53_bipartition",
         "cross_file": {
           "certificates_of": [],
-          "declarations": [],
-          "files": [],
+          "declarations": [
+            "digraph-theory/theories/conjectures/implications_P9.v:e101_bipartition"
+          ],
+          "files": [
+            "digraph-theory/theories/conjectures/implications_P9.v"
+          ],
           "statements": [],
           "undecided": [],
           "unlisted": []
@@ -6649,7 +6653,9 @@
           ]
         },
         "provider_unlisted": false,
-        "require_chain": {},
+        "require_chain": {
+          "digraph-theory/theories/conjectures/implications_P9.v": "no"
+        },
         "same_file": {
           "declarations": [
             "bipartite_digraph_asymmetric_outdegree_girth_statement"
