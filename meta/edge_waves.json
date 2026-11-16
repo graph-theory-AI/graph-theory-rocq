@@ -246,14 +246,14 @@
    "tier": "T3",
    "wave": "M",
    "host": "cycle-theory",
-   "state": "candidate",
-   "proof": null,
+   "state": "verified",
+   "proof": "e185_circular_flow_numbers_of_r_graphs_implies_five_flow",
    "external": [],
    "reason": "",
-   "proved_by": null,
-   "reviewed_by": null,
-   "reviewed_at": null,
-   "note": "keep candidate: two chained Jaeger reductions (8-edge-connected => bridgeless via Z_5-flows), not compactly statable"
+   "proved_by": "Arthur (Claude Opus 5.5), 2026-11-16: cycle-theory implications_D1.v (opg:circular_flow_numbers_of_r_graphs => opg:5_flow_conjecture; unconditional, Row 1 at t = 4 and Tutte's mod-5 step: the inflation infG of implications_U6 with every edge tripled is a 9-graph, its rational flow rounds to a circulation with values +-2 and +-3, the sums over the three copies are never 0 mod 5, and Tutte's step with odiff_demand_cut gives a nowhere-zero 5-flow, contracted to G)",
+   "reviewed_by": "Marcol (second reader of the circular flow numbers of (2t+1)-graphs => 5-flow edge, gc:e185, 2026-11-16)",
+   "reviewed_at": "2026-11-16",
+   "note": "Unconditional: the t = 4 instance of Row 1 and Tutte's mod-5 step. F1-F3: for a bridgeless G with an edge, the inflation infG G of implications_U6 is loopless, cubic and bridgeless; there every odd vertex set has a cut of at least 3 edges (e185_odd_cut3), so the graph with every edge tripled is a 9-graph (e185_tripled_2t1). F4: Row 1 at t = 4 gives it a nowhere-zero rational r-flow for r = (5 + 1/(m+1))/2, which orients the edges so that 2 out(S) <= 3 in(S) for every vertex set S (e185_rflow_cut_orientation). F5: odiff_demand_cut turns the orientation into an integer circulation with values +-2 and +-3 (e185_cut_orientation_flow23). F6: the sums over the three copies form a circulation of infG G that is never 0 mod 5 (e185_tripled_sum). F7: Tutte's step (odiff_demand_cut at the intrinsic orientation with a = phi div 5) gives a nowhere-zero 5-flow (e185_mod5_flow). F8: the values on the copies of the edges of G form a nowhere-zero 5-flow of G (e185_inf_contract_flow)."
   },
   "circular_flow_numbers_of_r_graphs_statement->jaegers_modular_orientation_statement:implies": {
    "gc": "e186",
