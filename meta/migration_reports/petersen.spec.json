@@ -361,6 +361,36 @@
       "note": "Proof consumers: pj_01_23, pj_01_24 and pj_01_34 add one unfold (/GTBase.petersen.kneser52_adj); the other Kneser, Pedge, psupp and Padj witnesses and identities are unchanged; all types unchanged."
     },
     {
+      "name": "Padj",
+      "note": "e032_petersen_coloring_implies_three_4_flows (gc:e032) and its Petersen certificate (e032_code, e032_Cq_supp, e032_claw_even, e032_Cq_cover) read the Petersen edges through U10's Pedge / Padj / psupp / padj / petersenV, and the theorem takes petersen_coloring_statement as its hypothesis; new code, every name and type unchanged.",
+      "path": "cycle-theory/theories/conjectures/implications_D1.v"
+    },
+    {
+      "name": "Pedge",
+      "note": "e032_petersen_coloring_implies_three_4_flows (gc:e032) and its Petersen certificate (e032_code, e032_Cq_supp, e032_claw_even, e032_Cq_cover) read the Petersen edges through U10's Pedge / Padj / psupp / padj / petersenV, and the theorem takes petersen_coloring_statement as its hypothesis; new code, every name and type unchanged.",
+      "path": "cycle-theory/theories/conjectures/implications_D1.v"
+    },
+    {
+      "name": "padj",
+      "note": "e032_petersen_coloring_implies_three_4_flows (gc:e032) and its Petersen certificate (e032_code, e032_Cq_supp, e032_claw_even, e032_Cq_cover) read the Petersen edges through U10's Pedge / Padj / psupp / padj / petersenV, and the theorem takes petersen_coloring_statement as its hypothesis; new code, every name and type unchanged.",
+      "path": "cycle-theory/theories/conjectures/implications_D1.v"
+    },
+    {
+      "name": "petersenV",
+      "note": "e032_petersen_coloring_implies_three_4_flows (gc:e032) and its Petersen certificate (e032_code, e032_Cq_supp, e032_claw_even, e032_Cq_cover) read the Petersen edges through U10's Pedge / Padj / psupp / padj / petersenV, and the theorem takes petersen_coloring_statement as its hypothesis; new code, every name and type unchanged.",
+      "path": "cycle-theory/theories/conjectures/implications_D1.v"
+    },
+    {
+      "name": "petersen_coloring_statement",
+      "note": "e032_petersen_coloring_implies_three_4_flows (gc:e032) and its Petersen certificate (e032_code, e032_Cq_supp, e032_claw_even, e032_Cq_cover) read the Petersen edges through U10's Pedge / Padj / psupp / padj / petersenV, and the theorem takes petersen_coloring_statement as its hypothesis; new code, every name and type unchanged.",
+      "path": "cycle-theory/theories/conjectures/implications_D1.v"
+    },
+    {
+      "name": "psupp",
+      "note": "e032_petersen_coloring_implies_three_4_flows (gc:e032) and its Petersen certificate (e032_code, e032_Cq_supp, e032_claw_even, e032_Cq_cover) read the Petersen edges through U10's Pedge / Padj / psupp / padj / petersenV, and the theorem takes petersen_coloring_statement as its hypothesis; new code, every name and type unchanged.",
+      "path": "cycle-theory/theories/conjectures/implications_D1.v"
+    },
+    {
       "path": "cycle-theory/theories/conjectures/implications_U10.v",
       "name": "Padj",
       "note": "External hypothesis and proof consumer: external_petersen_BF_cover_statement (frozen as ImplicationsU10Legacy, explicitly non-corpus) stays an explicit hypothesis; petersen_coloring_implies_berge_fulkerson keeps its type and proof."

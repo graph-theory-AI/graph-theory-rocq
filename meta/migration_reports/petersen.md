@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py petersen --details /tmp/migrati
 
 - Canonical: `GTBase.petersen.petersen_ord`.
 - Baseline: `ba3c7488b171091c9121dd8ea0ab2f73c3d294bf`.
-- Scope: 7 helpers, 3 statements, 20 frozen objects, 141 recorded references.
-- Source checks: 254/254 pass; consistent.
+- Scope: 7 helpers, 3 statements, 20 frozen objects, 161 recorded references.
+- Source checks: 274/274 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

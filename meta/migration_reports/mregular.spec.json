@@ -305,6 +305,16 @@
       "path": "cycle-theory/theories/conjectures/implications_U6.v",
       "name": "cycle_double_covers_containing_predefined_2_regular_statement",
       "note": "Implication from the live row; unchanged."
+    },
+    {
+      "name": "cubic",
+      "note": "e032_pull_even takes U6's cubic (gc:e032: the Petersen pull-back on a cubic multigraph, as implications_U6.ppull_even); new code, cubic unchanged.",
+      "path": "cycle-theory/theories/conjectures/implications_D1.v"
+    },
+    {
+      "name": "petersen_coloring_statement",
+      "note": "e032_petersen_coloring_implies_three_4_flows (gc:e032) takes petersen_coloring_statement as its hypothesis; new code, the statement unchanged.",
+      "path": "cycle-theory/theories/conjectures/implications_D1.v"
     }
   ],
   "distinct_variants": [
