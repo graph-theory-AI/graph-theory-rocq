@@ -109,8 +109,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (Claude Opus 5.5), 2026-11-16: digraph-theory implications_P9.v (arxiv:1809.08324#01 => opg:caccetta_haggkvist_conjecture; unconditional: the bipartite double cover of D on D * bool, its false and true sides a bipartition with n vertices each, the source at alpha = r / n, beta = 1 / n and k = (n + r - 1) %/ r, then the projection of the cover's dicycle to D)",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (second reader of the bipartite asymmetric out-degree => Caccetta-Haggkvist edge, gc:e101, 2026-11-16)",
+   "reviewed_at": "2026-11-16",
    "note": "Bipartite double cover: H on D * bool with (v, false) --> (v, true) and (u, true) --> (v, false) for u --> v; its sides are a bipartition with n vertices each, one out-neighbour across from a false vertex and outdeg u >= r from (u, true), so the source at alpha = r / n, beta = 1 / n and k = (n + r - 1) %/ r (k alpha + beta > 1 is n <= k r, by ltn_ceil) gives a dicycle of H with at most 2 k vertices; it alternates sides, and its false vertices, projected to D, form a dicycle with half as many. The looplessness hypothesis of the target is not needed."
   },
   "bounded_degree_induced_wall_or_line_wall_statement->bounded_degree_even_hole_free_bounded_treewidth_statement:implies": {
