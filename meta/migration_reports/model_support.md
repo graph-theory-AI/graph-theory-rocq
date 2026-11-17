@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py model_support --details /tmp/mi
 - Canonical: `GTBase.model_support.model_support`.
 - Baseline: `bb0bf3cd7c1d14e014704ebd5e24b03e4c475cb8`.
 - Scope: 3 helpers, 4 statements, 24 frozen objects, 153 recorded references.
-- Source checks: 209/209 pass; consistent.
+- Source checks: 212/212 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -17,6 +17,8 @@ Full evidence: `python3 meta/migration_report.py model_support --details /tmp/mi
 | `Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement` / arxiv:2203.06775#00 | `Minor.migration.model_support.theta_prism_even_wheel_free_bounded_treewidth_statement_compat` |
 
 Text-preserving reblocks after migration (statement text unchanged and the exact iff kept; the doc block and the listed leg fields changed, each listed leg state now blocked): `GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement` (record `meta/STATEMENT_IMPROVEMENTS.md`; row fields `source_verified_by`, `source_verified_at`, `verification_note`; leg fields `statement`, `note`).
+
+Literature status updates after migration (statement text, doc block and the exact iff kept; only the manifest row's status and status_semantics changed): `Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement` (record `meta/CORPUS_FEEDBACK.md`; row fields `status`, `status_semantics`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py model_support --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
