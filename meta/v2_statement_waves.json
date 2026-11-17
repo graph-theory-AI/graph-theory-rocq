@@ -3318,20 +3318,19 @@
       "phase": "X141",
       "repo": "graph-theory-misc",
       "defines_file": "X141.v",
-      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
-      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
-      "source_verified_at": "2026-07-15",
-      "commit": "x131-x150-batch1",
+      "implemented_by": "Marcol (Claude Opus 5.5), A1 re-encoding of the 2026-07-15 Codex statement (coordination/PROGRAMME.md A1; routing Lancelot NOTE 2026-11-17T07:01:22Z with wave X314; design x314-design-by-marcol, approved in Lancelot's NOTE 2026-11-17T22:10:01Z; reviewer Lancelot), branch math/marcol-x314-20261117, 2026-11-17",
+      "source_verified_by": "Marcol (source re-read: the pinned studies row cid 10, statement_text 'Is $z(G \\square H) \\leq z(G) + z(H)$ for all graphs $G$ and $H$?'; the record arXiv:2008.03587v3 main.tex, deposit x312-source-mac-20261116 (7274a06f), l.167-185, 191-194, 201, 208-210 and 438-441; FHMP16, Discrete Applied Mathematics 213 (2016) 1-12, deposit fhmp16-source-mac-20261117 (19dafd9f, paper.txt), l.57-64, 78-109, 114-121, 422 and 524-525; 2026-11-17)",
+      "source_verified_at": "2026-11-17",
+      "commit": "x141-zombie-number-reencoding",
       "rows": {
         "std_fitzpatrick_howell_messinger_pike_subadditivity": {
           "formal_name": "zero_forcing_cartesian_product_subadditivity_statement",
-          "note": "Encodes z(G square H)<=z(G)+z(H) with a local zero-forcing closure relation and base cartesian_product.",
-          "state": "blocked",
-          "blocked_reason": "Fresh-rows independent adversarial audit (wf_bdaea8ab, 2026-07-18): WRONG OBJECT. Manifest source is arXiv 2008.03587 'A note on deterministic zombies' (source_text: 'Is z(G box H) <= z(G)+z(H)?'); there and in FHMP 2016, z = deterministic ZOMBIE number (pursuit game where cops must move closer to the survivor). X141.v instead encodes z as the ZERO FORCING number (the corpus topic field 'zero-forcing' mislabel propagated into the formalization and its FHMP-attribution comment). The two parameter"
+          "note": "Re-encoded 2026-11-17 (coordination/PROGRAMME.md A1; frozen by no migration family): for connected nonempty G and H, z(G box H) <= z(G) + z(H), z the deterministic zombie number of Fitzpatrick, Howell, Messinger and Pike (foundations/zombies.v), the product's number named as in the record's Theorem 1.3 (arXiv:2008.03587v3, l.208-210). The formal name is historical: the earlier body encoded the zero forcing number, a wrong object.",
+          "state": "done"
         }
       },
-      "faithfulness_verified_by": "Fresh-rows independent adversarial audit, one distinct reader per row with machine probes (wf_bdaea8ab, 2026-07-18)",
-      "faithfulness_result": "DEFECT. WRONG OBJECT. Manifest source is arXiv 2008.03587 'A note on deterministic zombies' (source_text: 'Is z(G box H) <= z(G)+z(H)?'); there and in FHMP 2016, z = deterministic ZOMBIE number (pursuit game where cops must move closer to the survivor). X141.v instead encodes z as the ZERO FORCING number (the corpus topic field 'zero-forcing' mislabel propagated into the formalization and its FHMP-attribution comment). The two parameters diverge wildly (zombie z(K_n)=1 vs ZF Z(K_n)=n-1). Consequence: the encoded statement is provably FALSE — brute force gives Z(K3)=2 but Z(K3 box K3)=5 > 4, an"
+      "faithfulness_verified_by": "",
+      "faithfulness_result": "RE-ENCODED 2026-11-17 (A1), independent review pending (Lancelot): for connected nonempty G and H, z(G box H) <= z(G) + z(H) with z the deterministic zombie number (foundations/zombies.v), the record's Theorem 1.3 (arXiv:2008.03587v3, l.208-210); the earlier body (2026-07-15) encoded the zero forcing number, a wrong object (audit wf_bdaea8ab); relation old -> new: none by content."
     },
     "X142": {
       "phase": "X142",
