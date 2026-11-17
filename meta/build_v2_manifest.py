@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Sixty-one
+corrections are applied explicitly (ERRATA below) since the review files predate them. Sixty-two
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -118,6 +118,9 @@ conjecture behind wave X254, is proved in its own record (arXiv:1701.07217v3, st
 Fitzpatrick, Howell, Messinger and Pike's two questions on the deterministic zombie number, subadditivity on the
 Cartesian product (the row behind wave X141, whose encoding is blocked as unfaithful) and the ratio to the cop
 number, are answered in their own record (arXiv:2008.03587v3, Theorems 1.3 and 1.4).
+The conjecture of Nadjafi-Arani, Khodashenas and Ashrafi that eta(G) = Sz(G) - W(G) >= sum_i (2 n_i - 6) over the
+non-complete blocks of a connected graph G, behind wave X313, is proved in its own record (Bonamy, Knor, Luzar, Pinlou
+and Skrekovski, arXiv:1602.05184v1, Theorem 2 and Corollary 3).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -683,6 +686,13 @@ ERRATA = [
      "'a simple graph family with cop number 2 and an arbitrarily large zombie number'), l.212-217 (the ratio 'can "
      "be arbitrarily large', argued before by Offner and Ojakian) and l.219-222 (Theorem 1.4: for every k a union "
      "of cycles sharing a vertex with z(G_k) >= k) answer it: the ratio is unbounded."),
+    ("studies", "std_nadjafi_arani_khodashenas_ashrafi_conjecture_sze", "solved",
+     "Literature: proved in its own record by Bonamy, Knor, Luzar, Pinlou and Skrekovski, 'On the difference between "
+     "the Szeged and Wiener index', arXiv:1602.05184v1 (16 February 2016): 1602.05184v1.txt l.79-84 state the "
+     "conjecture of Nadjafi-Arani, Khodashenas and Ashrafi (Conjecture 1) as the record does: for a connected graph G "
+     "whose non-complete blocks B_1, ..., B_k have orders n_1, ..., n_k, eta(G) = Sz(G) - W(G) >= sum_i (2 n_i - 6). "
+     "Theorem 2 (l.87-89) proves eta(G) >= 2n - 6 for every 2-connected non-complete G on n vertices, and l.91 ('As a "
+     "consequence of Theorem 2 we obtain that Conjecture 1 is true') with Corollary 3 (l.92-95) gives the conjecture."),
 ]
 
 
@@ -1291,7 +1301,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 61 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 62 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
