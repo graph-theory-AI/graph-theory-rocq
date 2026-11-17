@@ -31,7 +31,7 @@ Frozen in `<area>/theories/migration/edge_colour_class.v`:
 - the linear-forest and linear-arboricity chains, as frozen dependencies only, not newly owned;
 - the three rows.
 
-There are four whole iffs:
+At D12 there were four whole iffs:
 - the X34, X212 and X23 current rows, by kernel-checked conversion (`is_forest` and `Delta` read only the carrier and the
   adjacency);
 - the complete `X34Original`, over M1's frozen raw edge set `simple_edges.Legacy.exists_edge_set` (the X34 text at
@@ -46,6 +46,11 @@ X212 and X23 keep:
 - the supplied total colouring;
 - the attained AND universal minimum;
 - all of their guards.
+
+History: since the X34 source repair (2026-10-24; record `meta/STATEMENT_IMPROVEMENTS.md`, X34 entry), the live X34
+guard is `7 <= Delta G`, while the frozen `X34Legacy` and `X34Original` keep `9 <= Delta G`. The X34 current row and
+`X34Original` are certified one way only (live -> frozen; the converse is the open case Delta = 7); the X212 and X23
+rows stay iff.
 
 There are 26 owned mappings and 1 borrowed one.
 

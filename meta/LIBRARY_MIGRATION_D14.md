@@ -19,9 +19,12 @@ and implicit arguments unchanged; no proof adaptation.
 **Mappings (36).** Owned (11), frozen at the baseline in `<area>/theories/migration/linear_forest.v`: the three sources,
 five chains (X34 `linear_forests_and_matching`; X212/X23 `linear_arboricity_at_most`, `linear_arboricity`) and three current
 rows, each certified by kernel-checked conversion. Borrowed (25) with their exact D12 descriptors and certificates, unchanged.
-Six whole iff: the three current rows and D12's complete `X34Original` (M1 raw edge set, 061154c), `X212Legacy` and
-`X23Legacy` (2f37b10a). Every guard is kept, including the q = 0 impossibility, the attained and universal minimum, X34's
-widen_ord / ord_max split with the documented 9-vs-7 defect and X212's documented k = 0 divergence; nothing is repaired.
+At D14, six whole iff: the three current rows and D12's complete `X34Original` (M1 raw edge set, 061154c), `X212Legacy`
+and `X23Legacy` (2f37b10a). Every guard is kept, including the q = 0 impossibility, the attained and universal minimum,
+X34's widen_ord / ord_max split with the documented 9-vs-7 defect and X212's documented k = 0 divergence; nothing was
+repaired at D14. History: since the X34 source repair (2026-10-24; record `meta/STATEMENT_IMPROVEMENTS.md`, X34 entry),
+the X34 current row and `X34Original` are certified one way only (live -> frozen; the converse is the open case
+Delta = 7); the other four stay iff.
 
 **Metadata.** Three reciprocal stale-snapshot notes in D12's spec (the new frozen sources keep D12's live colour class); the
 regularity lexical note (the new frozen X212 row uses `GTBase.base.regular`); path-tree's three colour-class
