@@ -14876,6 +14876,55 @@
       },
       "faithfulness_verified_by": "Arthur (X313 wave verification, 2026-11-17)",
       "faithfulness_result": "Readback 2026-11-17 (verifier Arthur): 1/1 PASS against the pinned text and the source, at math/marcol-x313-20261117 = e6b625c28a51237bd38b3aa84aa4e4ded91884c5 (5 commits on work/coordinator 89719773), after my kit A3 read ((738), SOUND, no required change; packet x313-kit-a3-read-by-arthur 185a6ee9) of x313-kit-r1-by-marcol (02e0b124; r0 x313-kit-by-marcol f2adc00d, the same files but the probe's misc plan); design x313-design-by-marcol (e8d0472e; Lancelot's review APPROVE). At e6b625c28a51237bd38b3aa84aa4e4ded91884c5 X313.v (9b10a93c) and grounding_X313.v (ebd5742d) are the kit's byte for byte; waves.X313 = the kit's x313-wave.json. The row studies:std_nadjafi_arani_khodashenas_ashrafi_conjecture_sze (szeged_wiener_difference_noncomplete_blocks_statement) = Conjecture 1 (l.79-84): forall G, connected [set: G] -> x165_wiener_index G + \\sum_(B in x313_noncomplete_blocks G) (2 * #|B|) <= x165_szeged_index G + 6 * #|x313_noncomplete_blocks G|; over the integers this is eta(G) = Sz(G) - W(G) >= \\sum_i (2 n_i - 6) exactly, with no truncated subtraction (X165's x165_eta is not used) and no appeal to Sz >= W. X165.v l.11-19: W is half the sum over ordered pairs of graph_dist (the sum over unordered pairs; u = v contributes 0) and Sz half the sum over ordered adjacent pairs of x165_closer_count u v * x165_closer_count v u, x165_closer_count u v the vertices strictly closer to u than to v (n_uv(u), l.64-65), the symmetric product counted twice per edge (l.61). X156.v l.19-24: x156_no_cut_vertexb B is B non-empty, connected and connected after removing any one vertex (singletons and edges qualify), x156_blockb B the maximal such sets: l.134-136's blocks; x313_noncomplete_blocks G keeps those with ~~ cliqueb B, dropping the complete K_1 and K_2 blocks, which leaves the 2-connected non-clique blocks (l.73's non-complete blocks too); k is its cardinality and n_i #|B|. graph_metric.v l.20-24: graph_dist is the least k with y in the k-ball or k = #|G|, so the record's connectivity hypothesis is needed (not_trivially_true). The doc block: the six fields, Site / Review none (the manifest's null), the English statement the pinned text with eta = Sz - W, the Definitions of the four notions with their files, the Notes (the subtraction-free equivalence, the record's blocks, the connectivity hypothesis, Status: solved in its own record by Theorem 2, l.91 and Corollary 3, the pinned status open, a literature item to record it, statement read, proof not verified), each cited line as the deposit has it. Grounding: helper_sanity g313_helper_claim [x313_noncomplete_blocks is set0 on 'K_4, [set [set: C4]] on cycle_graph 4, and [set [set O5 0; O5 1; O5 2; O5 3]] on C_4 with one pendant edge (the bridge block is a K_2, complete)]; hyp g313_swb_hyp_claim [C_4 is connected with one non-complete block, and the statement gives the inequality there]; ntt g313_swb_ntt_claim [two isolated vertices: disconnected, W > 0 while Sz = 0 and no non-complete block, so the unguarded variant (every G) fails, and it implies the row]; every claim names its reference, no theorem of type S or ~S. No assumption command, Section or admission in either file (my comment-stripped scan); six vm_compute calls, each on an explicit vertex list or a closed boolean. Metadata: source_hash d9d93aee recomputed (sha256 of the studies row's statement), equal to the manifest's and the wave's; waves.X313 the only waves change, verifier fields empty before this; the row done; helper_ownership x313_noncomplete_blocks paper_specific; no lint allowlist entry (81 -> 81), no consumer spec entry; legs: the row statement todo -> done, grounding todo -> done, edges todo, no other legs entry changed; README 650 / 13 / 39 / 971 -> 651 / 13 / 39 / 970; LANDED gains X313 graph-theory-misc after X312 graph-theory-misc; _CoqProject: X313.v and grounding_X313.v after implications_X312.v. Probe 1 (x313-probe1-by-marcol f08afd2e, -c OK, 68 listed = present): run-x313-1.sh ee5d1128 (= my own fill of kit r1's template) on c5 e6b625c28a51237bd38b3aa84aa4e4ded91884c5, JOB 2026-11-17T02:33:41Z-2026-11-17T03:52:38Z, WRAPPER rc 0, RESULT PASS-WITH-EXPECTED, 36 STEP lines, 32 rc 0, the four rc 1 exactly W1 / A3a / A3 / A10 on the empty A3 fields (W1 REJECTED 12/14 on exactly the audit + grounding contract, missing faithfulness_verified_by / faithfulness_result, and the leg state of the done row without source_verified_by / source_verified_at; A3a / A3: \"X313: prospective wave lacks independent faithfulness verdict\"; A10: the row's two source_verified tuple violations); the plans guarded before the builds (base, topological-graph-theory and minor-theory 0 files, graph-theory-misc exactly X313.v, grounding_X313.v, grounding_X312.v and implications_X312.v, kit r1's measured four), K4 the same four; W1's other 12 checks pass: the kernel facts of my kit read's O2 (1/1 formal name Defined, the package compiles, no top-level Axiom / Parameter / Admitted, Print Assumptions clean on 1/1 statement + 3 grounding certificates, faithfulness exact-type probes 10 forbidden shapes) and the prospective helper ownership and hard lint; W2 975 / 975 documented, reverse coverage 930 / 930; W3 1 probed, 0 FLAGGED; W4 84 files, 0 active, 81 allowlisted; A2 172 edges, no drift; A8 0 violations; A12 101 OK; written: CORPUS_STATUS.md, library_helper_inventory.json (x313_noncomplete_blocks added) and v2_corpus_manifest.json (the X313 row only; 3 files, +36 / -14; generated, rule 8, not committed); no migration report written (reports.stat empty), so no report commit; END HEAD c5 e6b625c28a51237bd38b3aa84aa4e4ded91884c5."
+    },
+    "X314": {
+      "phase": "X314",
+      "repo": "graph-theory-misc",
+      "defines_file": "X314.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X314 (A3 verifier Arthur; routing Lancelot NOTE 2026-11-17T07:01:22Z, unparked 21:32:48Z; selection x314-selection-by-marcol, read 21:53:07Z; design x314-design-by-marcol, approved in Lancelot's NOTE 2026-11-17T22:10:01Z), branch math/marcol-x314-20261117, 2026-11-17",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x314-zombie-number-pendant-vertices",
+      "rows": {
+        "axv_2008_03587_00": {
+          "formal_name": "zombie_number_pendant_vertices_statement",
+          "source_hash": "97f202d118c674b746bab6dc62bffee28f1573f3f5fe94f2c37ae44b8c87c24d",
+          "note": "Bartier, Beneteau, Bonamy, La and Narboni's Question 4.1 (arXiv:2008.03587v3, l.420-423) as its affirmative answer: for a connected nonempty G and every G' obtained from G by successively adding vertices of degree 1 (up to isomorphism), z(G') = z(G), z the deterministic zombie number of Fitzpatrick, Howell, Messinger and Pike (foundations/zombies.v). Open in the record and at the pin.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g314_R1_hyp_inhabited",
+              "claim": "g314_R1_hyp_claim",
+              "references": [
+                "zombie_number_pendant_vertices_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g314_R1_not_trivially_true",
+              "claim": "g314_R1_ntt_claim",
+              "references": [
+                "zombie_number_pendant_vertices_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g314_helper_sanity",
+                "claim": "g314_helper_claim",
+                "references": [
+                  "x314_pendant_extension"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x314_pendant_extension": {
+          "classification": "paper_specific",
+          "reason": "The graphs obtained from G by successively adding vertices of degree 1 (arXiv:2008.03587v3, Question 4.1, l.420-422), up to isomorphism: G itself, or add_node H [set v] (coq-graph-theory: one new vertex adjacent to v only) for such an H."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
