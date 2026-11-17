@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py induced_free --details /tmp/mig
 
 - Canonical: `GTBase.common.induced_free`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
-- Scope: 10 helpers, 10 statements, 33 frozen objects, 100 recorded references.
-- Source checks: 280/280 pass; consistent.
+- Scope: 10 helpers, 10 statements, 33 frozen objects, 101 recorded references.
+- Source checks: 281/281 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
