@@ -2015,8 +2015,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (Claude Opus 5.5), 2026-11-17: atlas implications_A2.v (arxiv:1806.00825#00 => opg:caccetta_haggkvist_conjecture; unconditional: a digon is a 2-dicycle; otherwise the underlying simple graph with each edge coloured by its tail, the source cycle, and the orientation lemma: the cycle or its reversal is a dicycle of the same size)",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (second reader of the proper edge-coloured short cycles => Caccetta-Haggkvist edge, gc:e099, 2026-11-17)",
+   "reviewed_at": "2026-11-17",
    "note": "Underlying graph: u -- v when u != v and u --> v or v --> u. A digon u --> v --> u is a dicycle with 2 <= (n + r - 1) %/ r vertices, as r <= outdeg u <= n - 1 by looplessness. Without a digon, the edge [set u; w] with u --> w gets the colour enum_rank u (its tail), so colour class i holds the edges from enum_val i to its at least r out-neighbours; the source cycle, with at most ceil_div n r = (n + r - 1) %/ r vertices, gives incident edges distinct colours, so no vertex is the tail of both of its cycle edges, a backward arc propagates along the cycle, and the cycle or its reversal is a dicycle of D of the same size."
   },
   "ptas_for_feedback_arc_set_in_tournaments_statement->algorithm_for_graph_homomorphisms_statement:implies": {
