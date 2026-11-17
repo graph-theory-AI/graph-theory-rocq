@@ -12858,11 +12858,14 @@
    "note": "Authored in X21.v:nydl_tree_l_deck_reconstruction_statement. Encodes the Nydl tree deck row: for n>=4 and ell>=floor(n/2)+1, two n-vertex trees with the same ell-deck are isomorphic."
   },
   "std_nadjafi_arani_khodashenas_ashrafi_conjecture_sze": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x313-szeged-wiener-noncomplete-blocks",
+   "package": "graph-theory-misc",
+   "note": "Authored in X313.v:szeged_wiener_difference_noncomplete_blocks_statement. Nadjafi-Arani, Khodashenas and Ashrafi's conjecture as arXiv:1602.05184v1 states it (Conjecture 1, l.79-84), encoded without subtraction: every connected G has W(G) + the sum over its non-complete blocks B of 2 |B| <= Sz(G) + 6 k (X165's Wiener and Szeged indices, X156's blocks), that is eta(G) >= sum (2 n_i - 6). The record proves it (Theorem 2, l.87-89; l.91; Corollary 3, l.92-95); the pinned status is open."
   },
   "std_nassar_yuster_problem_acyclic_k_chromatic_subgra": {
    "statement": "todo",
