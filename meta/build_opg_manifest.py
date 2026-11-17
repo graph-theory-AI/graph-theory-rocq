@@ -85,9 +85,10 @@ ALREADY = {
  'erdos_posa_property_for_long_directed_cycles':'erdos_posa_long_dicycles_statement',
 }
 
-# exact settled/open semantics for every non-open record (14 partial + 3 solved + 1 disproved)
+# exact settled/open semantics for every non-open record (14 partial + 3 solved + 2 disproved)
 STATUS_SEM = {
  'hedetniemis_conjecture':"DISPROVED — Shitov (2019): there exist finite G,H with χ(G×H) < min(χ(G),χ(H)). The historical equality is stated as a Definition; its negation/refutation is OPTIONAL applications/ work (not required for M-CORE).",
+ 'jaegers_modular_orientation_conjecture':"DISPROVED — Han, Li, Wu and Zhang (2018), J. Combin. Theory Ser. B 131: for every p >= 3 a 4p-edge-connected graph with no modulo (2p+1)-orientation (Theorem 1.3). The conjecture over all k is stated as a Definition; its refutation is OPTIONAL applications/ work (not required for M-CORE). k = 1 (Tutte's 3-flow conjecture) and k = 2 remain open.",
  'erdos_faber_lovasz_conjecture':"SOLVED for all large n — Kang–Kelly–Kühn–Methuku–Osthus (2023). Stated as a Definition (statement-only goal); a proof is optional applications/ work.",
  'signing_a_graph_to_have_small_magnitude_eigenvalues':"SOLVED (Bilu–Linial signing → bipartite Ramanujan, Marcus–Spielman–Srivastava 2015). DEFERRED (spectral, D5); stated as a Definition only.",
  'ptas_for_feedback_arc_set_in_tournaments':"SOLVED — Kenyon-Mathieu-Schudy PTAS (2007). Stated as the math predicate ∃ approximation-scheme; the cost-model/algorithm is out of scope (D7).",
