@@ -135,7 +135,7 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Conjecture dependency graph
 
-- **171 edges** — by status {'candidate': 25, 'conditional': 2, 'refuted-direction': 32, 'verified': 112}, by kind {'equiv': 13, 'implies': 158, 'refutes': 0, 'specializes': 0}; 130 Qed-proved relative theorems.
+- **172 edges** — by status {'candidate': 25, 'conditional': 2, 'refuted-direction': 32, 'verified': 113}, by kind {'equiv': 13, 'implies': 159, 'refutes': 0, 'specializes': 0}; 131 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
   - `alon_pach_solymosi_tournament_erdos_hajnal_statement` equiv `erdos_hajnal_tournament_transitive_subtournament_statement` (digraph-theory/implications_X136.v)
   - `asymmetric_bipartite_list_colouring_statement` implies `list_chromatic_number_and_maximum_degree_of_bipartit_statement` (atlas/implications_A1.v)
@@ -167,6 +167,7 @@ Area-local foundations (each area builds these on top of `base`):
   - `eta_bounded_forest_free_classes_statement` implies `eta_bounded_path_free_classes_statement` (packing-theory/implications_X226.v)
   - `eta_bounded_forest_free_classes_statement` implies `eta_bounded_two_stars_free_classes_statement` (packing-theory/implications_X226.v)
   - `even_hole_diamond_free_bounded_tree_alpha_statement` implies `even_hole_k4_diamond_free_bounded_treewidth_statement` (minor-theory/implications_X42.v)
+  - `even_hole_diamond_kt_free_bounded_treewidth_statement` implies `even_hole_k4_diamond_free_bounded_treewidth_statement` (graph-theory-misc/implications_X312.v)
   - `every_forest_is_good_statement` implies `every_forest_is_multibounding_statement` (chromatic-theory/implications_X218.v)
   - `every_forest_is_good_statement` implies `good_trees_disjoint_union_good_statement` (chromatic-theory/implications_X66.v)
   - `every_forest_is_multibounding_statement` implies `graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement` (chromatic-theory/implications_X218.v)
@@ -249,13 +250,13 @@ Area-local foundations (each area builds these on top of `base`):
   - `triangle_free_min_degree_log_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
   - `triangle_free_planar_large_induced_two_degenerate_statement` implies `triangle_free_planar_five_sixths_two_degenerate_statement` (chromatic-theory/implications_X219.v)
   - `triangle_packing_transversal_statement` equiv `triangle_packing_vs_triangle_edge_transversal_statement` (packing-theory/implications_X5.v)
-- Edge evidence: **112 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
+- Edge evidence: **113 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
 - Conditional edges (with the external assumptions they are relative to):
   - `bounded_layered_treewidth_bounded_queue_number_statement` implies `planar_graphs_bounded_queue_number_statement` — external: `external_layered_treewidth_planar_statement` (atlas/implications_A1.v)
   - `reconstruction_statement` implies `edge_reconstruction_statement` — external: `external_whitney_line_inversion_statement` (reconstruction-theory/implications_U11.v)
 - Edge legs (overlay `edges` state over the non-alias rows of each corpus; derived from the evidence above by `meta/sync_edge_legs.py`):
   - **opg**: 49 done · 5 partial · 0 blocked · 173 todo  (227 rows)
-  - **v2**: 122 done · 3 partial · 0 blocked · 1548 todo  (1673 rows)
+  - **v2**: 123 done · 3 partial · 0 blocked · 1547 todo  (1673 rows)
 
 ### Documented non-edges (32 `refuted-direction`)
 

@@ -17,20 +17,20 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 171,
+  "edges": 172,
   "by_status": {
    "candidate": 25,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 112
+   "verified": 113
   },
   "by_kind": {
    "equiv": 13,
-   "implies": 158,
+   "implies": 159,
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 130
+  "proved_theorems": 131
  },
  "edges": [
   {
@@ -618,6 +618,19 @@
    "external": [],
    "sources": [
     "minor-theory/implications_X42.v"
+   ]
+  },
+  {
+   "from": "even_hole_diamond_kt_free_bounded_treewidth_statement",
+   "to": "even_hole_k4_diamond_free_bounded_treewidth_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "",
+   "proof": "even_hole_diamond_kt_free_bounded_treewidth_implies_even_hole_k4_diamond_free_bounded_treewidth",
+   "note": "Rocq-only edge (no corpus relation): the Sintiari-Trotignon conjecture (X312, every t: every graph with every hole odd, no induced diamond and no induced K_t has treewidth at most c(t)) at t = 4 gives X42 (every even-hole, K_4 and diamond-free graph has treewidth at most c). The hypotheses agree: x27_even_hole_free G (no x27_hole of even size, x27_hole = hole) gives every hole odd, x42_induced_free is induced_free, and implications_X42 tw_le_x27 turns tw_le G c into x27_treewidth_at_most G c. It is a relative theorem and resolves neither endpoint (X312 R2 open, X42 partial in the corpus).",
+   "external": [],
+   "sources": [
+    "graph-theory-misc/implications_X312.v"
    ]
   },
   {
