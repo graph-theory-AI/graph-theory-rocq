@@ -67,7 +67,16 @@
       "substitutions": {
         "x220_prism": "Legacy.x220_prism"
       },
-      "certificate": "Minor.migration.prism_configuration.theta_prism_even_wheel_free_bounded_treewidth_statement_compat"
+      "certificate": "Minor.migration.prism_configuration.theta_prism_even_wheel_free_bounded_treewidth_statement_compat",
+      "repair": {
+        "direction": "restatus",
+        "doc_block_sha256": "5f40eb06c35ce9584b294c064717f98b4f70a418941679302bdd0e2d9b85e6b6",
+        "record": "meta/CORPUS_FEEDBACK.md",
+        "row_fields": [
+          "status",
+          "status_semantics"
+        ]
+      }
     },
     {
       "kind": "original-chain",

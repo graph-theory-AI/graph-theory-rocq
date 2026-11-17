@@ -685,7 +685,16 @@
       },
       "certificate": "Minor.migration.consecutive_in_cycle.even_hole_k4_diamond_free_bounded_treewidth_statement_compat",
       "corpus": "v2",
-      "original_certificate": "Minor.migration.consecutive_in_cycle.even_hole_k4_diamond_free_bounded_treewidth_statement_original_compat"
+      "original_certificate": "Minor.migration.consecutive_in_cycle.even_hole_k4_diamond_free_bounded_treewidth_statement_original_compat",
+      "repair": {
+        "direction": "restatus",
+        "doc_block_sha256": "6430e6b2d9f4c43012c930939db756ef52628f8ff5cc497d6296652d3663dab0",
+        "record": "meta/CORPUS_FEEDBACK.md",
+        "row_fields": [
+          "status",
+          "status_semantics"
+        ]
+      }
     },
     {
       "kind": "chain",
@@ -711,7 +720,16 @@
         "x220_even_wheel_free": "even_wheel_free"
       },
       "certificate": "Minor.migration.consecutive_in_cycle.theta_prism_even_wheel_free_bounded_treewidth_statement_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "direction": "restatus",
+        "doc_block_sha256": "5f40eb06c35ce9584b294c064717f98b4f70a418941679302bdd0e2d9b85e6b6",
+        "record": "meta/CORPUS_FEEDBACK.md",
+        "row_fields": [
+          "status",
+          "status_semantics"
+        ]
+      }
     },
     {
       "kind": "statement",
