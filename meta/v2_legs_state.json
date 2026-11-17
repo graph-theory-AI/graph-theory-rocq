@@ -11698,14 +11698,14 @@
    "audit_page": "todo"
   },
   "std_fitzpatrick_howell_messinger_pike_subadditivity": {
-   "statement": "blocked",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "x131-x150-batch1",
+   "commit": "x141-zombie-number-reencoding",
    "package": "graph-theory-misc",
-   "note": "BLOCKED — Fresh-rows independent adversarial audit (wf_bdaea8ab, 2026-07-18): WRONG OBJECT. Manifest source is arXiv 2008.03587 'A note on deterministic zombies' (source_text: 'Is z(G box H) <= z(G)+z(H)?'); there and in FHMP 2016, z = deterministic ZOMBIE number (pursuit game where cops must move closer to the survivor). X141.v instead encodes z as the ZERO FORCING number (the corpus topic field 'zero-forcing' mislabel propagated into the formalization and its FHMP-attribution comment). The two parameter"
+   "note": "Authored in X141.v:zero_forcing_cartesian_product_subadditivity_statement. Re-encoded 2026-11-17 (coordination/PROGRAMME.md A1; frozen by no migration family): for connected nonempty G and H, z(G box H) <= z(G) + z(H), z the deterministic zombie number of Fitzpatrick, Howell, Messinger and Pike (foundations/zombies.v), the product's number named as in the record's Theorem 1.3 (arXiv:2008.03587v3, l.208-210). The formal name is historical: the earlier body encoded the zero forcing number, a wrong object."
   },
   "std_fitzsimons_angel_holroyd_problem_u_n_c_n_2": {
    "statement": "todo",
