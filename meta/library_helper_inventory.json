@@ -25070,13 +25070,13 @@
     ]
   },
   "counts": {
-    "files": 405,
-    "helpers": 2782,
+    "files": 406,
+    "helpers": 2783,
     "repeated_body_shapes": 153,
     "repeated_normalized_names": 223,
     "repeated_signature_shapes": 339,
-    "statements_excluded": 931,
-    "x_wave_helpers": 1621
+    "statements_excluded": 932,
+    "x_wave_helpers": 1622
   },
   "groups": {
     "body_shape_hash": {
@@ -28172,6 +28172,7 @@
         "GTMisc.conjectures.X102.x102_edge_set",
         "GTMisc.conjectures.X14.x14_edge_set",
         "GTMisc.conjectures.X20.x20_edge_set",
+        "GTMisc.conjectures.X313.x313_noncomplete_blocks",
         "GTMisc.conjectures.X37.x37_edge_set",
         "GTMisc.conjectures.X38.x38_edge_set",
         "GTMisc.conjectures.X77.x77_edge_set",
@@ -70591,6 +70592,25 @@
       "qualified_name": "GTMisc.conjectures.X312.x312_packing",
       "signature": "(G : sgraph) (P : {set G}) : Prop",
       "signature_shape_hash": "e11a6e93dc7ad7569e3192fb12a8152bed6a4f13569141f7c5241c449cc443f4"
+    },
+    {
+      "body_hash": "87d169cfca54c6917aca066f458ae9753713ef7059349608133a86e5ecc2480c",
+      "body_shape_hash": "20e2d90b5ece4ba0ab44daf578c48ea794c02f2fdd7b183082638628d8a14d9c",
+      "declaration_hash": "261b361cf3f2a96ae103bf69afc5813f1dfea298e0e269b25bf310a3f14cc546",
+      "direct_consumers": [
+        "GTMisc.conjectures.X313.szeged_wiener_difference_noncomplete_blocks_statement"
+      ],
+      "kind": "Definition",
+      "line": 10,
+      "local_dependencies": [],
+      "name": "x313_noncomplete_blocks",
+      "normalized_name": "noncomplete_blocks",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X313.v",
+      "phase": "X313",
+      "qualified_name": "GTMisc.conjectures.X313.x313_noncomplete_blocks",
+      "signature": "(G : sgraph) : {set {set G}}",
+      "signature_shape_hash": "4efb584da06ad8a83a527b97108d055474beb96dccc05ca26ea26b6c254ef1e4"
     },
     {
       "body_hash": "e4408f2db71d93537093e7dd2dd69aaf55568e65fbe5e1ab1bf5f48158bdd073",
