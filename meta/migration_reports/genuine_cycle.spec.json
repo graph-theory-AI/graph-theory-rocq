@@ -823,6 +823,16 @@
       "path": "graph-theory-misc/theories/conjectures/vocabulary_misc.v",
       "name": "xe1_rel_cycle",
       "note": "Proof consumer: x113_is_cycle_equiv_xe1_rel_cycle; unchanged."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A2.v",
+      "name": "x9_genuine_cycle",
+      "note": "e099_step and e099_orient (gc:e099) take the source genuine cycle (a ucycle with at least three vertices) as a hypothesis; new code, x9_genuine_cycle unchanged."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A2.v",
+      "name": "proper_edge_coloured_short_cycle_statement",
+      "note": "e099_proper_edge_coloured_short_cycle_implies_caccetta_haggkvist (gc:e099) takes the source statement as its hypothesis; new code, the statement unchanged."
     }
   ],
   "distinct_variants": [
