@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py cycle_edges --details /tmp/migr
 
 - Canonical: `GTBase.walks_paths.seq_cycle_edge_set`.
 - Baseline: `0a0203ee4e1ff00605e4cbfa89108dcbea0e812f`.
-- Scope: 8 helpers, 11 statements, 34 frozen objects, 92 recorded references.
-- Source checks: 334/334 pass; consistent.
+- Scope: 8 helpers, 11 statements, 34 frozen objects, 96 recorded references.
+- Source checks: 338/338 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
