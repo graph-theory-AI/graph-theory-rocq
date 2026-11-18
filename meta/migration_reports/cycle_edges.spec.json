@@ -581,6 +581,21 @@
       "path": "hamiltonicity-theory/theories/conjectures/implications_U2.v",
       "name": "hamilton_decomposition_into_two",
       "note": "Proof consumer decomp_into_two_is_hamiltonian; compiles unchanged, statement unchanged."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A2.v",
+      "name": "x9_cycle_edges",
+      "note": "e099_step (gc:e099) unfolds x9_cycle_edges to place the two cycle edges at a vertex in the cycle edge list of the source cycle; new code, x9_cycle_edges unchanged."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A2.v",
+      "name": "x9_cycle_incident_edges_properly_coloured",
+      "note": "e099_step and e099_orient (gc:e099) take the source cycle with properly coloured incident edges as a hypothesis; new code, the predicate unchanged."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A2.v",
+      "name": "proper_edge_coloured_short_cycle_statement",
+      "note": "e099_proper_edge_coloured_short_cycle_implies_caccetta_haggkvist (gc:e099) takes the source statement as its hypothesis; new code, the statement unchanged."
     }
   ],
   "distinct_variants": [
