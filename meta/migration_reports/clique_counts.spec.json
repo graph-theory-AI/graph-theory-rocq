@@ -333,6 +333,21 @@
       "path": "extremal-graph-theory/theories/conjectures/implications_D2tur.v",
       "name": "number_of_cliques_in_minor_closed_classes_statement",
       "note": "A sanity Check that the live row is a Prop; no edge is asserted, and the row text is unchanged."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "clique_count",
+      "note": "Inside the proof of e054_kt_subdivision_clique_count_asymptotic_implies_number_of_cliques_in_minor_closed_classes (gc:e054): the local bound states the live D2tur clique_count of a K_s-minor-free graph and is fed by the X175 source; new code, no definition changed."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "kt_subdivision_clique_count_asymptotic_statement",
+      "note": "Source of the verified edge e054 (e054_kt_subdivision_clique_count_asymptotic_implies_number_of_cliques_in_minor_closed_classes); new code, the statement unchanged."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "number_of_cliques_in_minor_closed_classes_statement",
+      "note": "Target of the verified edge e054 (e054_kt_subdivision_clique_count_asymptotic_implies_number_of_cliques_in_minor_closed_classes); new code, the statement unchanged."
     }
   ],
   "distinct_variants": [

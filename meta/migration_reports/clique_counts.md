@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py clique_counts --details /tmp/mi
 
 - Canonical: `GTBase.clique_counts.all_clique_count`.
 - Baseline: `16d5a05dea232c0b2e3321675e31e8279c3f2350`.
-- Scope: 5 helpers, 4 statements, 19 frozen objects, 26 recorded references.
-- Source checks: 151/151 pass; consistent.
+- Scope: 5 helpers, 4 statements, 19 frozen objects, 29 recorded references.
+- Source checks: 154/154 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

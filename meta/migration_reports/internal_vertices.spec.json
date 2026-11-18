@@ -569,6 +569,21 @@
       "path": "digraph-theory/theories/conjectures/implications_X52.v",
       "name": "x2_path_internal",
       "note": "The proof unfolds x2_path_internal and rewrites the membership with inE; it keeps its statement and compiles against x2_path_internal = seq_interior (branch u) (branch v) (branch u :: s) (see the B2 build)."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "x175_path_internal",
+      "note": "e054_last_step and e054_subdivision_minor (gc:e054) unfold x175_path_internal and rewrite the membership with in_seq_interior (x175_path_internal x y p = seq_interior x y (x :: p)): the internal vertices of the routes form the branch sets of the K_t minor; new code."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "x175_Kt_subdivision",
+      "note": "e054_subdivision_minor (gc:e054) turns an X175 K_t subdivision into a K_t minor (minor_of_rmap): branch vertex i with the internal vertices of its routes to the larger branch vertices; new code."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "kt_subdivision_clique_count_asymptotic_statement",
+      "note": "Source of the verified edge e054 (e054_kt_subdivision_clique_count_asymptotic_implies_number_of_cliques_in_minor_closed_classes); new code, the statement unchanged."
     }
   ],
   "distinct_variants": [
