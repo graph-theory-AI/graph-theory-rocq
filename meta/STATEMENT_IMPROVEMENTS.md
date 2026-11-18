@@ -686,6 +686,25 @@ carry their own `complete_between`/`anticomplete_between`/`pure_pair`.
 - `studies:std_fitzpatrick_howell_messinger_pike_subadditivity` (`X141.v:36`) — the source
   parameter `z` is the deterministic ZOMBIE number; the file encodes the ZERO FORCING number.
   Severity: wrong object.  (Row leg already `blocked`.)
+  **RE-ENCODED 2026-11-17** (coordination/PROGRAMME.md A1; the row is frozen by no migration family; Lancelot's
+  routing of 2026-11-17T07:01:22Z with wave X314 and design approval of 22:10:01Z; Lancelot the A1 reviewer): the
+  audit above found the defect. Sources: the record arXiv:2008.03587v3 (deposit coordination/sources/
+  x312-source-mac-20261116, SHA256SUMS 7274a06f), main.tex l.167-175 (the game, quoted from FHMP16), l.182-185 (one
+  survivor, connected graphs, z(G) the minimum number of zombies), l.191-194 (Question 1.1, FHMP16's Question 10, the
+  row's question), l.201 and l.208-210 (Theorem 1.3, z(G box H) <= z(G) + z(H)), l.438-441 (an independent proof);
+  FHMP16, "A deterministic version of the game of zombies and survivors on graphs", Discrete Applied Mathematics 213
+  (2016) 1-12 (deposit coordination/sources/fhmp16-source-mac-20261117, SHA256SUMS 19dafd9f; paper.txt), l.57-64,
+  l.78-109, l.114-121 and l.524-525 (the rules) and l.422 (Question 10). The defect: z is the deterministic zombie
+  number, a pursuit-game parameter, and the body encoded the zero forcing number. The game is now
+  GTMisc.foundations.zombies (every zombie steps to a neighbour strictly closer to the survivor by graph_dist, the
+  survivor rests or steps, capture at placement and after either half of a round, the zombies existential, a finite
+  horizon; zombie_number G k: k zombies win and fewer do not), shared with wave X314.
+  `zero_forcing_cartesian_product_subadditivity_statement` (name kept, as X197's) became `forall G H : sgraph,
+  connected [set: G] -> 0 < #|G| -> connected [set: H] -> 0 < #|H| -> forall zG zH zGH, zombie_number G zG ->
+  zombie_number H zH -> zombie_number (cartesian_product G H) zGH -> zGH <= zG + zH` (both sources play on connected
+  graphs); the six x141_ zero forcing names are removed. Sanity lemmas in X141.v: one zombie wins on K_1 box K_1, and
+  the hypotheses are inhabited at G = H = K_1. Relation old -> new: none by content (different parameters). The row
+  leaves `blocked` for done; it stays `solved` (lit39), encoded as stated.
 - `arxiv:1408.4257#00` (`X156.v:43`) — the hypothesis `forall N, exists n, N <= n /\ N <= f n`
   says `f` is unbounded, whereas the conjecture assumes `f` tends to infinity; the weaker
   hypothesis makes the statement false (an `f` dipping to 0 infinitely often forces certificate

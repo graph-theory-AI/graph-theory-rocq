@@ -1,63 +1,64 @@
-(** * GTMisc.conjectures.X141 -- v2 zero-forcing Cartesian product row *)
+(** * GTMisc.conjectures.X141 -- v2 row: the zombie number is subadditive on the Cartesian product (Fitzpatrick,
+      Howell, Messinger and Pike, Question 10) *)
 
 From GTBase Require Export base.
+From GTMisc.foundations Require Import zombies.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
-(** ** Local X141 vocabulary ***********************************************)
+(** ** X141 sanity *)
 
-(** Zero-forcing closure: from a blue set [S], a blue vertex [u] may force the
-    unique uncoloured neighbour [v] when [N(u) \ S] is exactly [{v}]. *)
-Inductive x141_zf_closure (G : sgraph) : {set G} -> {set G} -> Prop :=
-| x141_zf_done (S : {set G}) : @x141_zf_closure G S S
-| x141_zf_step (S T : {set G}) (u v : G) :
-    u \in S ->
-    v \notin S ->
-    N(u) :\: S = [set v] ->
-    @x141_zf_closure G (S :|: [set v]) T ->
-    @x141_zf_closure G S T.
+(** The hypotheses are inhabited: on K_1 box K_1 one zombie wins and zero do not. *)
+Lemma x141_K1_box_K1_zombie_number : zombie_number (cartesian_product 'K_1 'K_1) 1.
+Proof.
+split.
+  by apply: (@zombies_win_dominating (cartesian_product 'K_1 'K_1) (ord0, ord0)) => -[a b];
+    rewrite (ord1 a) (ord1 b) eqxx.
+by move=> j; rewrite ltnS leqn0 => /eqP ->; apply: not_zombies_win_0; rewrite card_prod card_ord.
+Qed.
 
-Definition x141_zero_forcing_set (G : sgraph) (S : {set G}) : Prop :=
-  @x141_zf_closure G S [set: G].
-
-Definition x141_zero_forcing_number_le (G : sgraph) (k : nat) : Prop :=
-  exists S : {set G}, #|S| <= k /\ x141_zero_forcing_set S.
-
-Definition x141_zero_forcing_number (G : sgraph) (z : nat) : Prop :=
-  x141_zero_forcing_number_le G z /\
-  forall k : nat, x141_zero_forcing_number_le G k -> z <= k.
-
-(** ** X141 statements *****************************************************)
+(** ** X141 statement ********************************************************* *)
 
 (** Corpus row: studies:std_fitzpatrick_howell_messinger_pike_subadditivity
     Site: none
     Review: none
-    English statement: (Fitzpatrick, Howell, Messinger and Pike, subadditivity conjecture for
-      the Cartesian product)
-      For all finite simple graphs G and H, if zG is the zero forcing number of G and zH that
-      of H, then the Cartesian product of G and H has a zero forcing set of size at most
-      zG + zH.
-    Definitions: [x141_zf_closure S T] - T is reachable from the blue set S by zero-forcing
-      steps, a step letting a blue vertex u colour the unique uncoloured vertex of its
-      neighbourhood (this file); [x141_zero_forcing_set S] - the closure of S is the whole
-      vertex set (this file); [x141_zero_forcing_number_le G k] - some zero forcing set has size
-      at most k (this file); [x141_zero_forcing_number G z] - z is the least such size (this
-      file); [cartesian_product] - the Cartesian graph product (GTBase).
-    Notes: KNOWN UNFAITHFUL, row leg is blocked (independent adversarial audit wf_bdaea8ab,
-      2026-07-18).  WRONG OBJECT: in the source (arXiv:2008.03587, "A note on deterministic
-      zombies", and Fitzpatrick-Howell-Messinger-Pike 2016) the parameter z is the
-      deterministic ZOMBIE number, a pursuit-game parameter in which the pursuers must move
-      closer to the survivor; this file encodes z as the ZERO FORCING number, a propagation
-      parameter.  The two are different graph parameters, so the Rocq body states a different
-      conjecture than the corpus row, which the "zero-forcing" topic label of the corpus
-      propagated into the formalization.  Recorded in meta/STATEMENT_IMPROVEMENTS.md.
-      Secondary modelling note: the conclusion is the inequality form
-      "the product has a zero forcing set of size at most zG + zH" rather than
-      "z(G box H) <= z(G) + z(H)" with the product's number named, which is equivalent. *)
+    English statement: (Fitzpatrick, Howell, Messinger and Pike, "A deterministic version of the game of zombies
+      and survivors on graphs", Discrete Applied Mathematics 213 (2016) 1-12, Question 10; studies slice of the
+      corpus, record arXiv:2008.03587, Question 1.1) Is z(G box H) <= z(G) + z(H) for all graphs G and H?  Here
+      z(G) is the zombie number of the deterministic game of Zombies and Survivors (the minimum number of zombies
+      that capture the survivor, the zombies choosing their vertices first and then, every round, each moving along
+      a geodesic towards the survivor) and G box H the Cartesian product.
+    Definitions: [connected [set: G]] - G is connected (coq-graph-theory); [zombie_number G k] - z(G) = k: k zombies
+      win the game and fewer do not (graph-theory-misc foundations/zombies.v, where each rule is encoded and cited);
+      [cartesian_product G H] - G box H, (a, b) adjacent to (a', b') when a = a' and b -- b' or b = b' and a -- a'
+      (GTBase base.v).
+    Notes: RE-ENCODED 2026-11-17 (coordination/PROGRAMME.md A1; meta/STATEMENT_IMPROVEMENTS.md).  The earlier body
+      encoded the ZERO FORCING number, another parameter (a wrong object, the corpus topic label "zero-forcing"
+      having been followed); the parameter of the source is the zombie number, now from foundations/zombies.v.  The
+      formal name is kept (the precedent of X197's re-encoding); its "zero_forcing" is historical.  The conclusion
+      names z(G box H) as the record's Theorem 1.3 does (main.tex l.208-210).  Both sources play on connected graphs
+      (the record, l.182-184: "assume all graphs throughout the paper to be connected"; FHMP16 l.94), hence the
+      hypotheses that G and H are connected and nonempty; G box H is then connected and nonempty.  Status: solved
+      in its own record (Theorem 1.3, l.208-210, "we answer Question 1.1 in the affirmative", l.201; an independent
+      proof is reported at l.438-441), recorded solved through the literature item lit39 (statement read, proof not
+      verified).  Line numbers are those of the deposited 2008.03587v3 main.tex and of FHMP16's deposited
+      paper.txt. *)
 Definition zero_forcing_cartesian_product_subadditivity_statement : Prop :=
-  forall (G H : sgraph) (zG zH : nat),
-    x141_zero_forcing_number G zG ->
-    x141_zero_forcing_number H zH ->
-    x141_zero_forcing_number_le (cartesian_product G H) (zG + zH).
+  forall G H : sgraph,
+    connected [set: G] -> 0 < #|G| -> connected [set: H] -> 0 < #|H| ->
+    forall zG zH zGH : nat,
+      zombie_number G zG -> zombie_number H zH ->
+      zombie_number (cartesian_product G H) zGH -> zGH <= zG + zH.
+
+(** The statement's instance at G = H = K_1 has inhabited hypotheses: z(K_1) = 1 and z(K_1 box K_1) = 1 <= 1 + 1. *)
+Lemma x141_K1_instance :
+  [/\ connected [set: 'K_1] /\ 0 < #|'K_1|, zombie_number 'K_1 1,
+      zombie_number (cartesian_product 'K_1 'K_1) 1 & 1 <= 1 + 1].
+Proof.
+split => //; last exact: x141_K1_box_K1_zombie_number; last exact: zombie_number_K1.
+split; last by rewrite card_ord.
+have -> : [set: 'K_1] = [set ord0] by apply/setP => x; rewrite !inE (ord1 x) eqxx.
+exact: connected1.
+Qed.
