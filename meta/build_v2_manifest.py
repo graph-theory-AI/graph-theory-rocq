@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Seventy-three
+corrections are applied explicitly (ERRATA below) since the review files predate them. Eighty-five
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -133,6 +133,14 @@ conjecture of Gross, Robbins and Tucker, in its two rows, is refuted (arXiv:2405
 Richter's cone crossing-number question is answered negatively at n = 6 (arXiv:1608.07680v1); Robertson's
 4-flow conjecture for the torus and Grunbaum's torus conjecture, in its refined row and in the row behind wave
 X307, are proved (arXiv:2505.07002v1, Theorem 1.4 and Conjecture 2).
+Twelve studies rows were settled before the corpus pin in their own deposited records: Dujmovic, Joret, Morin,
+Norin and Wood's orthogonal tree-decomposition question is answered negatively by Felsner, Joret, Micek, Trotter
+and Wiechert, as arXiv:2404.05992v1 reports; Alspach's perimeter gap question (arXiv:2602.16333v1) and Fomin and
+Thilikos' pathwidth approximation problem (arXiv:2008.00779v4) are answered affirmatively; Grunbaum's edge
+density of 4-critical planar graphs is L = 2.5 (arXiv:2311.03132v1); two conjectures of Asgarli, Krehbiel,
+Levinson and Russell (arXiv:2402.04237v2), two of Esperet and Ochem (arXiv:1710.02727v1), Kelly and Postle's
+(arXiv:2501.00567v1), Kohayakawa and Kreuter's (arXiv:2402.03045v2), Mohar's projective planar snark conjecture
+(arXiv:2405.16586v1) and Pardey and Rautenbach's (arXiv:2604.09449v2) are proved.
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -801,6 +809,93 @@ ERRATA = [
      "record's theorem implies it (a planar graph has no K_5 and no K_(3,3) minor; genus 0 adds no graph, a "
      "2-connected cubic planar graph being 3-edge-colorable, txt l.68). This row's own record, arXiv:2405.16586v1, "
      "called it open."),
+    ("studies", "std_dujmovi_joret_morin_norin_wood_problem_orthogona", "disproved",
+     "Literature: answered negatively before the pin, as its own record reports (Chaniotis, Miraftab and Spirkl, "
+     "'Graphs of bounded chordality', arXiv:2404.05992v1, 9 April 2024): Problem 3.3 (2404.05992v1.txt l.550-552, "
+     "chordality.tex l.816-820), Open Problem 3 of Dujmovic, Joret, Morin, Norin and Wood, is the row's question; "
+     "'Felsner, Joret, Micek, Trotter and Wiechert, answered Problem 3.3 in the negative' (txt l.556-557), and the "
+     "record restates their theorem as Theorem 3.4 (txt l.560-563, tex l.832-835): for every k, a graph of chromatic "
+     "number at least k with a tree-decomposition and a path-decomposition that are 2-orthogonal, so no f(2) exists "
+     "(a path-decomposition is a tree-decomposition). The proof is in the cited paper (Electronic Notes in Discrete "
+     "Mathematics 61 (2017)), not in the record."),
+    ("studies", "std_alspach_s_question_on_the_perimeter_gap_of_verte", "solved",
+     "Literature: answered in the affirmative in its own record by Bucic, Hendrey, Mohar, Steiner and Yepremyan, "
+     "'Long cycles in vertex transitive digraphs', arXiv:2602.16333v1 (18 February 2026): the record reads Alspach's "
+     "question (Question 7 of Alspach, 1981) as whether, for every constant C, some connected vertex transitive "
+     "digraph has perimeter gap larger than C (2602.16333v1.txt l.89-94), and answers it ('We answer this question in "
+     "the affirmative', l.22): Theorem 1.1 (txt l.96-97, main.tex l.157) gives, for infinitely many n, a connected "
+     "vertex transitive digraph on n vertices with perimeter gap at least (1 - o(1)) ln n. So the maximum perimeter "
+     "gap is unbounded along infinitely many n, which is the record's reading of 'growing'."),
+    ("studies", "std_asgarli_krehbiel_levinson_russell_conjecture_the", "solved",
+     "Literature: proved in its own record by Hogan, Scott, Tamitegama and Tan, 'A note on graphs of k-colourings', "
+     "arXiv:2402.04237v2 (29 February 2024): Conjecture 2 (2402.04237v2.txt l.93-94, chromaticpolys.tex l.153-156), "
+     "Conjecture 6.1 of Asgarli, Krehbiel, Levinson and Russell, is the row's statement; 'we confirm both conjectures "
+     "by proving a stronger result' (txt l.102): Theorem 4 (txt l.104-105, tex l.165), for a graph G on n vertices "
+     "and any k > 5n^2, the colouring graph C_k(G) determines G up to isomorphism."),
+    ("studies", "std_asgarli_krehbiel_levinson_russell_conjecture_fin", "solved",
+     "Literature: proved in its own record by Hogan, Scott, Tamitegama and Tan, arXiv:2402.04237v2 (29 February "
+     "2024): Conjecture 3 (2402.04237v2.txt l.98-100, chromaticpolys.tex l.158-160), Conjecture 6.2 of Asgarli, "
+     "Krehbiel, Levinson and Russell, is the row's statement; 'we confirm both conjectures by proving a stronger "
+     "result' (txt l.102): by Theorem 4 (txt l.104-105, tex l.165) the single colouring graph C_k(G) with "
+     "k = 5n^2 + 1, n the order of G, determines G up to isomorphism, so f(G) = 5n^2 + 1 suffices."),
+    ("studies", "std_esperet_ochem_conjecture_3_of_surface_graph_clas", "solved",
+     "Literature: proved in its own record by Dvorak and Norin, 'Islands in minor-closed classes. I. Bounded "
+     "treewidth and separators', arXiv:1710.02727v1 (7 October 2017): Corollary cor-surface (IslandsI4.tex "
+     "l.224-226) gives, for every surface Sigma, chi_star(G(Sigma)) = chi^l_star(G(Sigma)) = col_star(G(Sigma)) = 4, "
+     "the lower bounds being tight 'as conjectured by Esperet and Ochem' (l.222, their Conjecture 3; the abstract, "
+     "l.47-49: 'proving the conjecture of Esperet and Ochem'). The row's chi^star is the record's chi_star, the "
+     "clustered chromatic number (l.44-46, l.66-67); the corollary gives the value 4 for the clustered coloring "
+     "number col_star (l.96-97) as well."),
+    ("studies", "std_esperet_ochem_conjecture_7_col_of_surface_graph", "solved",
+     "Literature: proved in its own record by Dvorak and Norin, arXiv:1710.02727v1 (7 October 2017): Corollary "
+     "cor-girth (IslandsI4.tex l.231-233) gives, for every surface Sigma, chi_star(G_5(Sigma)) = "
+     "chi^l_star(G_5(Sigma)) = col_star(G_5(Sigma)) = 2, G_5(Sigma) being the graphs of girth at least five "
+     "embeddable on Sigma (l.228), the bound that l.229 says Esperet and Ochem conjectured (their Conjecture 7; "
+     "the sentence writes G(Sigma) for G_5(Sigma)). The row's col^star is the record's col_star, the clustered "
+     "coloring number (l.96-97)."),
+    ("studies", "std_fomin_thilikos_open_problem_approximating_pathwi", "solved",
+     "Literature: answered in the affirmative in its own record by Groenland, Joret, Nadara and Walczak, "
+     "'Approximating pathwidth for graphs of small treewidth', arXiv:2008.00779v4 (8 December 2022): Fomin and "
+     "Thilikos 'pointed out that even obtaining an approximation of pathwidth when parameterized by treewidth is "
+     "open' (arxiv_v4.tex l.174), and 'Our approximation algorithm is a solution to the latter problem' (l.175): the "
+     "abstract (l.83-84) and the corollary labelled cor:approx (l.158-162) give a polynomial-time algorithm computing "
+     "a path decomposition of width O(t sqrt(log t) p), t the treewidth and p the pathwidth of G. Version 4 follows "
+     "the preliminary SODA 2021 version, which 'contains two serious errors' (l.35-36)."),
+    ("studies", "std_gr_nbaum_s_problem_on_edge_density_of_4_critical", "solved",
+     "Literature: answered in its own record by Dvorak and Feghali, 'Solution to a problem of Grunbaum on the edge "
+     "density of 4-critical planar graphs', arXiv:2311.03132v1 (6 November 2023): Grunbaum's question (txt l.63-66), "
+     "the precise value of L = limsup |E(G)|/|V(G)| over all 4-critical planar graphs G, is the row's problem; "
+     "Theorem 1 (txt l.74, main.tex l.99) gives L = 2.5. The upper bound L <= 2.5 is Koester's (1991), as the record "
+     "reports (txt l.71-72: 'The object of this note is to show that Koester's bound is best possible'); the record "
+     "proves the matching construction."),
+    ("studies", "std_kelly_postle_conjecture_occupancy_in_triangle_fr", "solved",
+     "Literature: proved in its own record by Martinsson and Steiner, 'Local Shearer bound', arXiv:2501.00567v1 (31 "
+     "December 2024): Conjecture 1.1 (2501.00567v1.txt l.112-117, main.tex l.123-124), Kelly and Postle's local "
+     "fractional Shearer/Molloy conjecture, is the row's statement; 'we fully resolve Conjecture 1.1' (txt l.153): "
+     "Theorem 1.2 (txt l.157-162, tex l.137) gives, for every triangle-free graph G, a probability "
+     "distribution on its independent sets with P[v in I] >= (1 - o(1)) ln(d(v))/d(v) for every vertex v, the o(1) a "
+     "function of d(v) tending to 0."),
+    ("studies", "std_kohayakawa_kreuter_conjecture", "solved",
+     "Literature: proved in its own record by Christoph, Martinsson, Steiner and Wigderson, 'Resolution of the "
+     "Kohayakawa--Kreuter conjecture', arXiv:2402.03045v2 (20 August 2024), with results it cites: the Conjecture "
+     "labelled conj:KK (main.tex l.141-150) is the row's statement; the theorem of Bowtell, Hancock and Hyde and of "
+     "Kuperwasser, Samotij and Wigderson (l.154-155) reduces it to a deterministic condition (their result gives the "
+     "0-statement; the 1-statement is Mousset, Nenadov and Samotij's, l.155), and the record's theorem labelled "
+     "thm:det lem (l.162-164) proves that condition, 'thus completing the proof' (l.161)."),
+    ("studies", "std_mohar_s_conjecture_on_projective_planar_snarks", "solved",
+     "Literature: proved in its own record by Inoue, Kawarabayashi, Miyashita, Mohar and Sonobe, 'Three-edge-coloring "
+     "projective planar cubic graphs: A generalization of the Four Color Theorem', arXiv:2405.16586v1 (26 May 2024): "
+     "'Mohar conjectured in 2004 ... that the only snark that is embeddable on the projective plane is the Petersen "
+     "graph' and 'The main result of this paper verifies this conjecture' (2405.16586v1.txt l.101-105); Theorem 1.2 "
+     "(txt l.113-115, main.tex l.171): the only snark embeddable in the projective plane is the Petersen graph, a "
+     "snark being a cyclically 4-edge-connected cubic graph of girth at least 5 that is not 3-edge-colorable (txt "
+     "l.87-88). Some of the proofs use extensive computer verification (txt l.36)."),
+    ("studies", "std_pardey_rautenbach_conjecture_on_colour_balanced", "solved",
+     "Literature: proved in its own record by Hogan, Scott and Tsarev, 'Colour-balanced subgraphs', "
+     "arXiv:2604.09449v2 (11 July 2026): Conjecture 1.1 (2604.09449v2.txt l.78-79, main.tex l.84-85), Conjecture 1 "
+     "of Pardey and Rautenbach, is the row's statement; the record 'resolves the conjecture of Pardey and Rautenbach' "
+     "(txt l.86): Theorem 1.2 (txt l.87-89, tex l.88-90) gives, for every colour-balanced k-edge-colouring of K_2n "
+     "with n = kt, a perfect matching M with f_c(M) = O(k^2)."),
 ]
 
 
@@ -1409,7 +1504,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 73 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 85 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
