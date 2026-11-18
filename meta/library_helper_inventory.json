@@ -25087,13 +25087,13 @@
     ]
   },
   "counts": {
-    "files": 406,
-    "helpers": 2783,
+    "files": 407,
+    "helpers": 2782,
     "repeated_body_shapes": 153,
     "repeated_normalized_names": 223,
     "repeated_signature_shapes": 339,
-    "statements_excluded": 932,
-    "x_wave_helpers": 1622
+    "statements_excluded": 933,
+    "x_wave_helpers": 1621
   },
   "groups": {
     "body_shape_hash": {
@@ -26037,6 +26037,8 @@
         "GTMisc.conjectures.D7.level_rel_sym",
         "GTMisc.conjectures.U13.relAdj_irrefl",
         "GTMisc.conjectures.U13.relAdj_sym",
+        "GTMisc.conjectures.X141.x141_K1_box_K1_zombie_number",
+        "GTMisc.conjectures.X141.x141_K1_instance",
         "GTMisc.conjectures.X156.x156_K2_block_tree_not_diameter0",
         "GTMisc.conjectures.X156.x156_K2_vertex_not_block",
         "GTMisc.conjectures.X156.x156_all_graphs_block_stable",
@@ -27872,7 +27874,6 @@
         "GTMisc.conjectures.U13.book_embedding",
         "GTMisc.conjectures.U13.has_induced_cycle",
         "GTMisc.conjectures.U13.is_book_thickness",
-        "GTMisc.conjectures.X141.x141_zero_forcing_number_le",
         "GTMisc.conjectures.X169.x169_token_sliding_connected",
         "GTMisc.conjectures.X197.x197_cop_number",
         "GTMisc.conjectures.X77.x77_separation_dimension_at_most",
@@ -28836,7 +28837,6 @@
         "Extremal.conjectures.X97.x97_maximum_independent_set",
         "Extremal.conjectures.X97.x97_stable_set",
         "Extremal.conjectures.XE1.xe1_stable_set",
-        "GTMisc.conjectures.X141.x141_zero_forcing_set",
         "GTMisc.conjectures.X169.x169_stable_set",
         "GTMisc.conjectures.X208.x208_stable_set",
         "GTMisc.conjectures.X29.x29_stable_set",
@@ -67536,87 +67536,38 @@
       "signature_shape_hash": "36f0438630899743e4e782a65ff604f71ece847b8e19b42d3811f6349614824b"
     },
     {
-      "body_hash": "51d6b89d03e02d9f8b5a98da83b97138a3df57c15a2ddea1bc05f877127b5b66",
-      "body_shape_hash": "128a500c5b631353da5217607909473c2db9ee6976d50cb31469192461179a1a",
-      "declaration_hash": "58e7779ee299a0d105bee625b1e63a700bd4840809722a42003f331b5a35ece8",
-      "direct_consumers": [
-        "GTMisc.conjectures.X141.x141_zero_forcing_set"
-      ],
-      "kind": "Inductive",
-      "line": 8,
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "f7e2b7b38f46b67a79fad7c8b883393fa750e01da2e2f15bc8f97a788c2e3a13",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 10,
       "local_dependencies": [],
-      "name": "x141_zf_closure",
-      "normalized_name": "zf_closure",
+      "name": "x141_K1_box_K1_zombie_number",
+      "normalized_name": "K1_box_K1_zombie_number",
       "package": "graph-theory-misc",
       "path": "graph-theory-misc/theories/conjectures/X141.v",
       "phase": "X141",
-      "qualified_name": "GTMisc.conjectures.X141.x141_zf_closure",
-      "signature": "(G : sgraph) : {set G} -> {set G} -> Prop",
-      "signature_shape_hash": "4847728ac8d529864d63b548921431c0e57cfa5f4dbdfd71461d97fd751544c8"
+      "qualified_name": "GTMisc.conjectures.X141.x141_K1_box_K1_zombie_number",
+      "signature": ": zombie_number (cartesian_product 'K_1 'K_1) 1",
+      "signature_shape_hash": "4b1e64677bb27498c7c827044e2d9847f19eb2d630ecc5402b506d4ef7ceded4"
     },
     {
-      "body_hash": "47adcef24bf536f38524fd418abd7720fde014aa97cf6190cdd313990e59973f",
-      "body_shape_hash": "2d468b67869eaa4a35f3429a7df6f04d6079a314b651670c1aa0c8950c139088",
-      "declaration_hash": "9c63a88904d1f3d27c3ed128730e95acee132890611afe868b21be2d995ed924",
-      "direct_consumers": [
-        "GTMisc.conjectures.X141.x141_zero_forcing_number_le"
-      ],
-      "kind": "Definition",
-      "line": 21,
-      "local_dependencies": [
-        "x141_zf_closure"
-      ],
-      "name": "x141_zero_forcing_set",
-      "normalized_name": "zero_forcing_set",
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "e4eccc259213563ed9bfdec6c750fd11d8ff454d066b52b8aae7e0423b5359e3",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 54,
+      "local_dependencies": [],
+      "name": "x141_K1_instance",
+      "normalized_name": "K1_instance",
       "package": "graph-theory-misc",
       "path": "graph-theory-misc/theories/conjectures/X141.v",
       "phase": "X141",
-      "qualified_name": "GTMisc.conjectures.X141.x141_zero_forcing_set",
-      "signature": "(G : sgraph) (S : {set G}) : Prop",
-      "signature_shape_hash": "b349edbd8727460c5c27fae24985aaf8e8bf31eebc8916f711a74ad4c152d099"
-    },
-    {
-      "body_hash": "c4ec5f8a510200106b435253e894ac884c5adcfa1e93c5ed35fd4ca6ccd15c05",
-      "body_shape_hash": "f1c4cedbb5c944b7f5d373bb2dc4eaa7495f70104aac36ed8cc4ccdd3de79982",
-      "declaration_hash": "6b6933f5ef844ade1ff60ea849ec6a6475eeb37823b770fd0734bc666854a95c",
-      "direct_consumers": [
-        "GTMisc.conjectures.X141.x141_zero_forcing_number",
-        "GTMisc.conjectures.X141.zero_forcing_cartesian_product_subadditivity_statement"
-      ],
-      "kind": "Definition",
-      "line": 24,
-      "local_dependencies": [
-        "x141_zero_forcing_set"
-      ],
-      "name": "x141_zero_forcing_number_le",
-      "normalized_name": "zero_forcing_number_le",
-      "package": "graph-theory-misc",
-      "path": "graph-theory-misc/theories/conjectures/X141.v",
-      "phase": "X141",
-      "qualified_name": "GTMisc.conjectures.X141.x141_zero_forcing_number_le",
-      "signature": "(G : sgraph) (k : nat) : Prop",
-      "signature_shape_hash": "2cf69232ae4a655dc39c6e8919882e178b2cdf73018734822b5a52b739de6f6e"
-    },
-    {
-      "body_hash": "a6330f913adb46c05d306c29e92cc715f42a1b5291cc978ef86774fabcc68b41",
-      "body_shape_hash": "689eb896d1f5b74779481a59221cac5337b2b4288477b34c269c0edb6b9d2c55",
-      "declaration_hash": "fc187d45d392e1a15d53ced092297002abe3eacaa684418a11cc51f6759acee8",
-      "direct_consumers": [
-        "GTMisc.conjectures.X141.zero_forcing_cartesian_product_subadditivity_statement"
-      ],
-      "kind": "Definition",
-      "line": 27,
-      "local_dependencies": [
-        "x141_zero_forcing_number_le"
-      ],
-      "name": "x141_zero_forcing_number",
-      "normalized_name": "zero_forcing_number",
-      "package": "graph-theory-misc",
-      "path": "graph-theory-misc/theories/conjectures/X141.v",
-      "phase": "X141",
-      "qualified_name": "GTMisc.conjectures.X141.x141_zero_forcing_number",
-      "signature": "(G : sgraph) (z : nat) : Prop",
-      "signature_shape_hash": "a324b6eaf136150c7c210a6c823755ae5b2098462f3e5bb4418674af977ae1f2"
+      "qualified_name": "GTMisc.conjectures.X141.x141_K1_instance",
+      "signature": ": [/\\ connected [set: 'K_1] /\\ 0 < #|'K_1|, zombie_number 'K_1 1, zombie_number (cartesian_product 'K_1 'K_1) 1 & 1 <= 1 + 1]",
+      "signature_shape_hash": "aec5f1f95ac8aae578223c4599a871c5f652a9961a8066a839a95dea82f0c45a"
     },
     {
       "body_hash": "01672b20b1cc8344c545724ad777a74cb13c3b24ee5676579f88085210187648",
@@ -70628,6 +70579,25 @@
       "qualified_name": "GTMisc.conjectures.X313.x313_noncomplete_blocks",
       "signature": "(G : sgraph) : {set {set G}}",
       "signature_shape_hash": "4efb584da06ad8a83a527b97108d055474beb96dccc05ca26ea26b6c254ef1e4"
+    },
+    {
+      "body_hash": "ca584c18e3fcab8f4467b4a90ff71e0e35f368f14ff6bf61aa7bcd4621341244",
+      "body_shape_hash": "8729a4c8debfbcd8ab29ae8224d9ec48ec3375e07124d3af7c4ec6401cbc2cd0",
+      "declaration_hash": "2f5b93b20518a4a6a15e379576e6ef4daee07f950f403bcfa222150ddbccd2cf",
+      "direct_consumers": [
+        "GTMisc.conjectures.X314.zombie_number_pendant_vertices_statement"
+      ],
+      "kind": "Inductive",
+      "line": 10,
+      "local_dependencies": [],
+      "name": "x314_pendant_extension",
+      "normalized_name": "pendant_extension",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X314.v",
+      "phase": "X314",
+      "qualified_name": "GTMisc.conjectures.X314.x314_pendant_extension",
+      "signature": "(G : sgraph) : sgraph -> Prop",
+      "signature_shape_hash": "652482f68111daac069500900c873a668e24816d1efe05abd6cd3154944da8b5"
     },
     {
       "body_hash": "e4408f2db71d93537093e7dd2dd69aaf55568e65fbe5e1ab1bf5f48158bdd073",

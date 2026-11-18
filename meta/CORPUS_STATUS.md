@@ -124,7 +124,7 @@ Area-local foundations (each area builds these on top of `base`):
 | cycle-theory | `comp_reduce`, `connectivity`, `cycle_space`, `eulerian`, `matchings_cuts`, `path_subgraphs`, `spanning_trees` |
 | digraph-theory | `cycles`, `degree_balance`, `interop_graph_theory`, `longest_cycles`, `neighbourhoods`, `prelude`, `subdivision`, `tournament_unavoidability` |
 | extremal-graph-theory | `circular_colouring`, `degree_bounds`, `edge_colourings`, `edge_cycles`, `fractional_colouring`, `fractional_hadwiger`, `list_ramsey`, `lp_rational`, `ramsey`, `vc` |
-| graph-theory-misc | `ambient_shallow_minors`, `complexity`, `cops` |
+| graph-theory-misc | `ambient_shallow_minors`, `complexity`, `cops`, `zombies` |
 | hypergraph-theory | `hedgehog`, `hypergraph`, `hypergraph_copies`, `hypergraph_forcing`, `hypergraph_matchings`, `hypergraph_ramsey`, `hypergraph_regularity` |
 | infinite-graph-theory | `igraph`, `regularity` |
 | minor-theory | `containment`, `hole_containments`, `minor_dec`, `poset_unavoidability`, `prism_configurations`, `ramsey_small`, `shallow_minors`, `width_params` |
@@ -322,7 +322,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 > Programme plan: `meta/V2_FULL_CORPUS_PLAN.md`. A growing corpus: `todo` rows are expected until the M-V2-STATEMENT-COMPLETE release; the gate here checks consistency, not completion.
 
 - **1790 tracked rows** — by corpus tag: arxiv 768, arxiv-studied 568, bm 38, derived 138, erdos 277, others 1; **117 alias rows** (no statement owed).
-- Statement legs over the 1673 non-alias rows: **651 done** · 13 partial · 39 blocked · 970 todo.
+- Statement legs over the 1673 non-alias rows: **653 done** · 13 partial · 38 blocked · 969 todo.
 
 | v2 phase | done | partial | blocked | todo | total |
 |---|--:|--:|--:|--:|--:|
@@ -373,7 +373,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X139 | 0 | 0 | 1 | 0 | 1 |
 | X14 | 2 | 0 | 0 | 0 | 2 |
 | X140 | 0 | 0 | 1 | 0 | 1 |
-| X141 | 0 | 0 | 1 | 0 | 1 |
+| X141 | 1 | 0 | 0 | 0 | 1 |
 | X142 | 1 | 0 | 0 | 0 | 1 |
 | X143 | 0 | 0 | 1 | 0 | 1 |
 | X144 | 1 | 0 | 0 | 0 | 1 |
@@ -563,6 +563,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X311 | 1 | 0 | 0 | 0 | 1 |
 | X312 | 2 | 1 | 0 | 0 | 3 |
 | X313 | 1 | 0 | 0 | 0 | 1 |
+| X314 | 1 | 0 | 0 | 0 | 1 |
 | X32 | 1 | 0 | 0 | 0 | 1 |
 | X33 | 1 | 0 | 0 | 0 | 1 |
 | X34 | 1 | 0 | 0 | 0 | 1 |
