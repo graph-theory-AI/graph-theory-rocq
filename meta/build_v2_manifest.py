@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Eighty-five
+corrections are applied explicitly (ERRATA below) since the review files predate them. Eighty-eight
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -141,6 +141,11 @@ density of 4-critical planar graphs is L = 2.5 (arXiv:2311.03132v1); two conject
 Levinson and Russell (arXiv:2402.04237v2), two of Esperet and Ochem (arXiv:1710.02727v1), Kelly and Postle's
 (arXiv:2501.00567v1), Kohayakawa and Kreuter's (arXiv:2402.03045v2), Mohar's projective planar snark conjecture
 (arXiv:2405.16586v1) and Pardey and Rautenbach's (arXiv:2604.09449v2) are proved.
+Three encoded studies rows were settled before the corpus pin in their own records: Lovasz's r-partite matching
+conjecture behind wave X6 (arXiv:2505.05339v2, Theorem 1.3) and Bosek, Dudek, Farnik, Grytczuk and Mazur's hat
+guessing conjecture behind wave X99 (arXiv:2107.05995v2, Theorem 1.1) are disproved, and the avoidable path
+conjecture of Beisegel, Chudnovsky, Gurvich, Milanic and Servatius behind wave X91 (arXiv:1908.03788v1, Theorem
+1.9) is proved; the statements of X6 and X91 carry restatus repairs in their migration families.
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -896,6 +901,31 @@ ERRATA = [
      "of Pardey and Rautenbach, is the row's statement; the record 'resolves the conjecture of Pardey and Rautenbach' "
      "(txt l.86): Theorem 1.2 (txt l.87-89, tex l.88-90) gives, for every colour-balanced k-edge-colouring of K_2n "
      "with n = kt, a perfect matching M with f_c(M) = O(k^2)."),
+    ("studies", "std_lov_sz_conjecture_on_r_partite_hypergraph_matchi", "disproved",
+     "Literature: refuted in its own record by Clow, Haxell and Mohar, 'A Counterexample to a Conjecture of Lovasz', "
+     "arXiv:2505.05339v2 (10 June 2025): Conjecture 1.2 (2505.05339v2.txt l.62-63, main.tex l.103-105), Lovasz's "
+     "conjecture of 1975, is the row's statement; 'The primary contribution of this paper is to prove that "
+     "Conjecture 1.2 is false' (txt l.92): Theorem 1.3 (txt l.94-95, tex l.128-130) gives a 3-partite, 3-uniform "
+     "hypergraph in which deleting any pair of vertices does not reduce the matching number, the line hypergraph of "
+     "the Biggs-Smith graph (l.19-21), tripartite since that cubic graph is 3-edge-colourable (l.206-207). At r = 3 "
+     "this refutes the encoded statement of wave X6 exactly."),
+    ("studies", "std_beisegel_chudnovsky_gurvich_milani_servatius_con", "solved",
+     "Literature: proved in its own record by Bonamy, Defrain, Hatzel and Thiebaut, 'Avoidable paths in graphs', "
+     "arXiv:1908.03788v1 (10 August 2019): the conjecture of Beisegel, Chudnovsky, Gurvich, Milanic and Servatius "
+     "that for every positive integer k every graph either is P_k-free or contains an avoidable path on k vertices "
+     "(1908.03788v1.txt l.70-72, main.tex l.296-297) is the row's statement, a path being avoidable if it is induced "
+     "and no extension xPy of it is failing, that is, contained in no induced cycle (Definitions 1.5-1.7, txt "
+     "l.60-68); 'Here, we confirm the aforementioned conjecture' (txt l.85): Theorem 1.9 (txt l.87-88, tex "
+     "l.314-316), proved through the stronger Theorem 2.4 of Section 2 (l.90-91)."),
+    ("studies", "std_bosek_dudek_farnik_grytczuk_mazur_conjecture_hat", "disproved",
+     "Literature: refuted in its own record by Alon and Chizewer, 'On the Hat Guessing Number of Graphs', "
+     "arXiv:2107.05995v2 (21 July 2021): the conjecture of Bosek, Dudek, Farnik, Grytczuk and Mazur that the hat "
+     "guessing number of any graph is at most its Hadwiger number (2107.05995v2.txt l.58-60, main.tex l.117-121) is "
+     "the row's statement; Theorem 1.1 (txt l.53, tex l.104-107, proved from txt l.93) gives a planar graph with hat "
+     "guessing number 12, which the record calls 'of course, a counterexample to that as well' (txt l.59-60); the "
+     "standard fact behind that phrase, which the record does not state, is that a planar graph has no K_5 minor "
+     "(Wagner), so its Hadwiger number is at most 4. With q = 12 this refutes the encoded statement of wave X99 "
+     "exactly."),
 ]
 
 
@@ -1504,7 +1534,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 85 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 88 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "

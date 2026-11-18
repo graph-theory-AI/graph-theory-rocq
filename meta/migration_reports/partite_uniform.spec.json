@@ -91,7 +91,16 @@
         "x6_r_partite_uniform": "PartiteLegacy.x6_r_partite_uniform"
       },
       "certificate": "Hypergraph.migration.partite_uniform.lovasz_r_partite_matching_deletion_statement_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "direction": "restatus",
+        "doc_block_sha256": "f5bf351a115b4920c589552eb5b59d12d4b612a69ae2a450a6f0905bc72a907a",
+        "record": "meta/CORPUS_FEEDBACK.md",
+        "row_fields": [
+          "status",
+          "status_semantics"
+        ]
+      }
     },
     {
       "kind": "statement",
