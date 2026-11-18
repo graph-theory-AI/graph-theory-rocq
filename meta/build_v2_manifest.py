@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Sixty-six
+corrections are applied explicitly (ERRATA below) since the review files predate them. Seventy-three
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -127,6 +127,12 @@ record answers the question behind wave X42 (t = 4) and proves the conjecture be
 T the two-edge path).
 DeVos et al.'s matroid Conjecture 12 (arxiv:1806.00825#01) is false as printed: its own record refutes it with the
 uniform matroid U_{n-1,m} (arXiv:1806.00825v4, main.tex l.314).
+Seven topological studies rows were settled before the corpus pin: Richter's bounded maximum degree conjecture
+for c-crossing-critical graphs is refuted for every c >= 13 (arXiv:1903.05363v2, Corollary 1.3); the LCGD
+conjecture of Gross, Robbins and Tucker, in its two rows, is refuted (arXiv:2405.10854v2, Theorems 3 and 9);
+Richter's cone crossing-number question is answered negatively at n = 6 (arXiv:1608.07680v1); Robertson's
+4-flow conjecture for the torus and Grunbaum's torus conjecture, in its refined row and in the row behind wave
+X307, are proved (arXiv:2505.07002v1, Theorem 1.4 and Conjecture 2).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -738,6 +744,63 @@ ERRATA = [
      "summary also reports (not deposited, not checked here) that McGuinness (arXiv:2601.17624) extends it to all "
      "regular matroids: every simple regular matroid of rank r with r+1 colour classes of size at least 2 contains a "
      "rainbow circuit of size at most ceil((r+1)/2). These are the cases behind the pinned review's partial."),
+    ("studies", "std_richter_s_bounded_maximum_degree_conjecture", "disproved",
+     "Literature: refuted in its own record by Bokal, Dvorak, Hlineny, Leanos, Mohar and Wiedera, 'Bounded maximum "
+     "degree conjecture holds precisely for c-crossing-critical graphs with c <= 12', arXiv:1903.05363v2 (5 May 2021): "
+     "Richter's conjecture (1903.05363v2.txt l.102-103, main_journal_r0.tex l.290-292), for every positive integer c "
+     "some D(c) bounds the maximum degree of every c-crossing-critical graph, is the row's statement; Corollary 1.3 "
+     "(txt l.148-149, tex l.377-382) gives, for every c >= 13 and all d and m, a 3-connected c-crossing-critical graph "
+     "with at least m vertices of degree at least d, so no D(c) exists for c >= 13. Theorem 1.1 (txt l.137-138) "
+     "proves the bound for c <= 12; the record recalls Dvorak and Mohar's non-constructive disproof for c >= 171 (txt "
+     "l.121-122)."),
+    ("studies", "std_log_concavity_genus_distribution_conjecture", "disproved",
+     "Literature: refuted in its own record by Mohar, 'Strong log-convexity of genus sequences', arXiv:2405.10854v2 "
+     "(27 December 2025): Conjecture 1 (2405.10854v2.txt l.57-58, LogConcavityConjecture_revised.tex l.82-85), the "
+     "genus distribution of every graph is log-concave (Gross, Robbins and Tucker, 1989), is the row's statement; "
+     "'Theorems 3 and 9 ... refute the LCGD Conjecture' (txt l.74). Theorem 3 (txt l.99-100, tex l.111-114) gives, "
+     "for every g >= 0 and k >= 2, a 4-connected graph of genus g whose genus sequence has the k strictly log-convex "
+     "terms a_{g+1}, a_{g+3}, ..., a_{g+2k-1}, each one a term where log-concavity fails (txt l.87-89)."),
+    ("studies", "std_lcgd_conjecture_log_concavity_of_genus_distribut", "disproved",
+     "Literature: refuted by Mohar, arXiv:2405.10854v2 (27 December 2025), the record of the studies row "
+     "std_log_concavity_genus_distribution_conjecture, which states the same conjecture of Gross, Robbins and Tucker: "
+     "this row is its genus-polynomial form (the coefficients g_k(G) of the genus polynomial are the genus "
+     "distribution), and Theorem 3 (2405.10854v2.txt l.99-100) gives 4-connected graphs with strictly log-convex terms "
+     "in their genus sequence. This row's own record, Carr, Dhaliwal and Mohar, arXiv:2212.09971 (2022), predates the "
+     "disproof and is not deposited."),
+    ("studies", "std_richter_s_cone_crossing_number_question", "disproved",
+     "Literature: answered negatively in its own record by Alfaro, Arroyo, Dernar and Mohar, 'The crossing number of "
+     "the cone of a graph', arXiv:1608.07680v1 (27 August 2016): Richter's question (1608.07680v1.txt l.49-51 and "
+     "l.60, cone_arxiv.tex l.184), whether cr(G) >= cr(K_n) with n >= 5 implies cr(CG) >= cr(K_{n+1}) for the cone "
+     "CG, is the row's statement; the answer is positive for n = 5 (txt l.63-66) and negative for n = 6 (txt "
+     "l.66-69, tex l.190-191): the simple graph of Figure 1 has crossing number 3 = cr(K_6) and a cone of crossing "
+     "number at most 6 < cr(K_7) = 9."),
+    ("studies", "std_robertson_s_4_flow_conjecture_for_the_torus", "solved",
+     "Literature: proved in its own record by Inoue, Kawarabayashi, Miyashita, Mohar and Sonobe, 'Three-edge-coloring "
+     "(Tait coloring) cubic graphs on the torus: A proof of Grunbaum's conjecture', arXiv:2505.07002v1 (11 May 2025): "
+     "Conjecture 3 (2505.07002v1.txt l.142-143, 4CT.tex l.196-197), every 2-edge-connected graph in the torus of "
+     "representativity at least 3 has a nowhere-zero 4-flow (Robertson, 1994), is the row's statement; the record "
+     "states that its Theorem 1.4 implies it (txt l.140-141; 'by Theorem 1.4, r = 3 works for the torus', l.148-149), "
+     "and its appendix (section G) proves that a 2-edge-connected toroidal graph that is not Petersen-like has a "
+     "nowhere-zero 4-flow; the step that a Petersen-like toroidal graph has representativity below 3 is not spelled "
+     "out. Some of the proofs use extensive computer verification (txt l.27, l.37)."),
+    ("studies", "std_gr_nbaum_s_conjecture_torus_cubic_graphs_refined", "solved",
+     "Literature: proved in its own record by Inoue, Kawarabayashi, Miyashita, Mohar and Sonobe, arXiv:2505.07002v1 "
+     "(11 May 2025): Conjecture 2 (2505.07002v1.txt l.99-101, 4CT.tex l.163-165), Grunbaum's conjecture that a "
+     "2-connected cubic graph embedded in the torus that is not 3-edge-colorable has two edges on the same face whose "
+     "removal gives a planar graph with the four endpoints on the boundaries of two faces, is the row's statement; "
+     "with Theorem 1.3 (txt l.120-121: the only toroidal snarks are the Petersen graph, its dot products and the two "
+     "Blanusa families) and the classification of their embeddings of genus 1, 'we obtain a proof of Grunbaum's "
+     "Conjecture' (txt l.118-119, tex l.174). Some of the proofs use extensive computer verification (txt l.27, "
+     "l.37)."),
+    ("studies", "std_gr_nbaum_s_conjecture_torus_cubic_graphs", "solved",
+     "Literature: proved by Inoue, Kawarabayashi, Miyashita, Mohar and Sonobe, arXiv:2505.07002v1 (11 May 2025), the "
+     "record of the refined row studies:std_gr_nbaum_s_conjecture_torus_cubic_graphs_refined: its Conjecture 2 "
+     "(2505.07002v1.txt l.99-101), proved there ('we obtain a proof of Grunbaum's Conjecture', txt l.118-119), gives "
+     "two edges on the same face whose removal gives a planar graph; this row's statement (X307's "
+     "grunbaum_torus_cubic_statement) is that conclusion with the same-face and face-boundary clauses dropped, so the "
+     "record's theorem implies it (a planar graph has no K_5 and no K_(3,3) minor; genus 0 adds no graph, a "
+     "2-connected cubic planar graph being 3-edge-colorable, txt l.68). This row's own record, arXiv:2405.16586v1, "
+     "called it open."),
 ]
 
 
@@ -1346,7 +1409,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 66 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 73 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
