@@ -19,10 +19,10 @@
  "totals": {
   "edges": 172,
   "by_status": {
-   "candidate": 22,
+   "candidate": 21,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 116
+   "verified": 117
   },
   "by_kind": {
    "equiv": 13,
@@ -30,7 +30,7 @@
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 134
+  "proved_theorems": 135
  },
  "edges": [
   {
@@ -1808,10 +1808,10 @@
    "from": "random_embedding_expected_faces_third_statement",
    "to": "random_embedding_expected_faces_linear_statement",
    "kind": "implies",
-   "status": "candidate",
+   "status": "verified",
    "cite": "gc:e125",
-   "proof": "",
-   "note": "BLOCKED: the source row is guarded by connected [set: G] (guard added 2026-09-23) while the target row quantifies over ALL graphs, so the corpus argument needs the component decomposition of the finite average, which is not formalised. Exact missing lemmas (theories/foundations/, F12): (1) x228_nrot (sjoin A B) = x228_nrot A * x228_nrot B, and (2) x228_total_faces (sjoin A B) = x228_total_faces A * x228_nrot B + x228_nrot A * x228_total_faces B -- i.e. the rotation systems of a disjoint union are pairs of rotation systems (surface_dart (sjoin A B) ~ surface_dart A + surface_dart B, and the face permutation splits), plus the induction that every sgraph is the join of a connected component and the rest (a diso G ~ sjoin (induced C) (induced (~: C))). Given (1)+(2), c = 4 works: the connected case is proved here as x228_third_implies_linear_connected, and summing n_i/3 + 1 <= (4/3) n_i over the components keeps the constant. No crude route exists: a single rotation system can have up to 2*#|E| faces, which is not O(n).",
+   "proof": "e125_random_embedding_expected_faces_third_implies_random_embedding_expected_faces_linear",
+   "note": "The connected half is x228_third_implies_linear_connected (c = 4). For a disconnected G take the connect class S of a vertex: no edge leaves S, so the darts leaving S are stable under the edge reversal and under every rotation system, a rotation system is exactly a pair (its restrictions to the darts leaving S and to the others), and the faces of the product are the faces of each part (e125_rot_pairs, e125_faces_split); hence nrot G = N(S) N(~S) and total G = T(S) N(~S) + N(S) T(~S). The darts of induced S are the darts leaving S, which transports N and T to the induced subgraphs (e125_transport). Strong induction on #|G| with c = 4: induced S is connected, induced ~S has fewer vertices, and 4|S| N N2 + N 4|~S| N2 = 4 n N N2.",
    "external": [],
    "sources": [
     "topological-graph-theory/implications_X228.v"
