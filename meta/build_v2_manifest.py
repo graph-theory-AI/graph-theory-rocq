@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Eighty-eight
+corrections are applied explicitly (ERRATA below) since the review files predate them. 117
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -146,6 +146,15 @@ conjecture behind wave X6 (arXiv:2505.05339v2, Theorem 1.3) and Bosek, Dudek, Fa
 guessing conjecture behind wave X99 (arXiv:2107.05995v2, Theorem 1.1) are disproved, and the avoidable path
 conjecture of Beisegel, Chudnovsky, Gurvich, Milanic and Servatius behind wave X91 (arXiv:1908.03788v1, Theorem
 1.9) is proved; the statements of X6 and X91 carry restatus repairs in their migration families.
+Twenty-nine studies alias rows whose canonical row is settled or partial carry the status the pinned
+sources fix (lit46; Arthur's alias survey, alias-survey-by-arthur df65820e): 21 have their canonical's
+text and take its status, except the four aliases of erdos:762, 641, 632 and 808, whose pinned prize
+lines read DISPROVED and which are disproved; eight differ in text: the Barat-Thomassen conjecture is
+solved in its own record (arXiv:1603.00197) while its stronger canonical is disproved, three weaker
+aliases are solved, the asymptotic Alon-Wei conjecture is partial, the hypergraph edge-statistics
+conjecture is solved as its canonical's review reports, and the two statements that every chi-bounded
+class is polynomially chi-bounded are disproved. Two alias rows stay open (Esperet's H-free conjecture
+and the hat-guessing degeneracy question).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -926,6 +935,146 @@ ERRATA = [
      "standard fact behind that phrase, which the record does not state, is that a planar graph has no K_5 minor "
      "(Wagner), so its Hadwiger number is at most 4. With q = 12 this refutes the encoded statement of wave X99 "
      "exactly."),
+    ("studies", "std_bar_t_thomassen_conjecture", "solved",
+     "Literature: proved in its own record, not by its canonical. Alias of arxiv:1507.08208#00, whose text is "
+     "stronger (edge-connectivity f(Delta_T) and minimum degree f(e(T)), e(T) the size of T) and is disproved "
+     "(Klimosova and Thomasse, arXiv:1803.03704, as the canonical's pinned review reports); the alias is the "
+     "Barat-Thomassen conjecture itself (a constant c_T for each tree T), which its own record arXiv:1603.00197 "
+     "(Bensmail, Harutyunyan, Le, Merker and Thomasse, 'A Proof of the Barat-Thomassen Conjecture', pinned "
+     "extraction: proves the full statement) settles."),
+    ("studies", "std_bensmail_et_al_tree_t_decomposition_conjecture", "disproved",
+     "Literature: alias of arxiv:1507.08208#00 with its text (the conditions reordered); its canonical's status, "
+     "from the canonical's pinned review (graph-conjectures b72c5857, 1507.08208__00, disproved): Klimosova and "
+     "Thomasse (arXiv:1803.03704) show that no such f exists for trees of maximum degree 3."),
+    ("studies", "std_small_conjecture_twin_width", "disproved",
+     "Literature: alias of arxiv:2006.09877#00 with its text (every small hereditary class has bounded twin-width); "
+     "its canonical's status, from the canonical's pinned review (graph-conjectures b72c5857, 2006.09877__00, "
+     "disproved): Bonnet, Geniet, Tessera and Thomasse, Twin-width VII (arXiv:2204.12330)."),
+    ("studies", "std_aboulker_charbit_naserasr_heroic_set_conjecture", "partial",
+     "Literature: alias of arxiv:2009.13319#01 with its text (verbatim); its canonical's status, from the "
+     "canonical's pinned review (graph-conjectures b72c5857, 2009.13319__01, partial): the 'only if' direction is in "
+     "the source paper and several cases of the 'if' direction are proved."),
+    ("studies", "std_alon_wei_conjecture", "partial",
+     "Literature: alias of arxiv:2108.02685#00, whose text is the exact form, m(H,k) within 2 of n/(d+1); the alias "
+     "is the weaker asymptotic form m(H,k) = (1 + o(1)) n/(d+1) for d = o(n) (Alon and Wei's Conjecture 1.2). "
+     "Partial by its own record arXiv:2207.13651 (Fox, Luo and Pham; pinned extraction: Theorem 1.3 confirms this "
+     "form for d = o(n/(log n)^12)), which the canonical's pinned review (2108.02685__00, partial) also reports."),
+    ("studies", "std_bonamy_perrett_path_decomposition_question", "partial",
+     "Literature: alias of arxiv:1609.06257#00 with its text; its canonical's status, from the canonical's pinned "
+     "review (graph-conjectures b72c5857, 1609.06257__00, partial): settled for planar graphs and for 2-degenerate "
+     "graphs, open in general."),
+    ("studies", "std_dvo_k_ossona_de_mendez_wu_problem_fractional_chr", "partial",
+     "Literature: alias of arxiv:1812.07327#00 with its text (g(n), the largest ratio chi_f(G)/rho(G) over n-vertex "
+     "graphs, is the smallest g with chi_f(G) <= rho(G) g(n) on n vertices); its canonical's status, from the "
+     "canonical's pinned review (graph-conjectures b72c5857, 1812.07327__00, partial): Steiner (arXiv:2411.16465) "
+     "gives g(n) = (log n)^(1 - o(1)), the exact function remaining open."),
+    ("studies", "std_fox_sudakov_conjecture_polynomial_r_dl_property", "partial",
+     "Literature: alias of arxiv:1803.03588#00 with its proposition (the polynomial Rodl property of H-free graphs, "
+     "here in its epsilon^c-homogeneous-set form); its canonical's status, from the canonical's pinned review "
+     "(graph-conjectures b72c5857, 1803.03588__00, partial)."),
+    ("studies", "std_fox_sudakov_polynomial_density_conjecture", "partial",
+     "Literature: alias of arxiv:1803.03588#00 with its text (delta in Rodl's theorem polynomial in the density "
+     "parameter); its canonical's status, from the canonical's pinned review (graph-conjectures b72c5857, "
+     "1803.03588__00, partial)."),
+    ("studies", "std_fox_sudakov_polynomial_r_dl_conjecture", "partial",
+     "Literature: alias of arxiv:1803.03588#00 with its proposition (every hereditary family other than all graphs "
+     "lies in the H-free graphs for some H, so its polynomial Rodl property is the canonical's); its canonical's "
+     "status, from the canonical's pinned review (graph-conjectures b72c5857, 1803.03588__00, partial)."),
+    ("studies", "std_majority_2_colouring_recognition_question_kreutz", "partial",
+     "Literature: alias of arxiv:1608.03040#05 with its text (verbatim); its canonical's status, from the "
+     "canonical's pinned review (graph-conjectures b72c5857, 1608.03040__05, partial): recognising majority "
+     "2-colourable digraphs is NP-complete (arXiv:1911.01954), the characterisation half remaining open."),
+    ("studies", "std_mis_complexity_on_even_hole_free_graphs", "partial",
+     "Literature: alias of arxiv:1912.11246#01 with its text; its canonical's status, from the canonical's pinned "
+     "review (graph-conjectures b72c5857, 1912.11246__01, partial): quasi-polynomial time (arXiv:2407.08927), the "
+     "polynomial question remaining open."),
+    ("studies", "std_polynomial_time_solvability_of_totally_modular_i", "partial",
+     "Literature: alias of arxiv:1908.06300#00 with its proposition (totally Delta-modular means subdeterminants "
+     "bounded by Delta); its canonical's status, from the canonical's pinned review (graph-conjectures b72c5857, "
+     "1908.06300__00, partial)."),
+    ("studies", "std_totally_modular_integer_programming_conjecture_a", "partial",
+     "Literature: alias of arxiv:1908.06300#00 with its proposition (integer programs whose subdeterminants lie in "
+     "{-Delta, ..., Delta}); its canonical's status, from the canonical's pinned review (graph-conjectures b72c5857, "
+     "1908.06300__00, partial)."),
+    ("studies", "std_aboulker_adler_kim_sintiari_trotignon_conjecture", "solved",
+     "Literature: alias of arxiv:2008.05504#01, whose text asks, read literally, for an induced (k x k)-wall or the "
+     "line graph of one; the alias asks for an induced subdivision of the wall or the line graph of one. Solved: the "
+     "alias's subdivided form is what Korhonen proved (arXiv:2203.13233), as the canonical's pinned review "
+     "(graph-conjectures b72c5857, 2008.05504__01, solved) reports. The canonical's literal text is not the ground: "
+     "read literally it fails, a heavily subdivided wall having maximum degree 3, large treewidth and no induced "
+     "unsubdivided wall."),
+    ("studies", "std_aboulker_bang_jensen_bousquet_charbit_havet_maff", "solved",
+     "Literature: alias of arxiv:1605.07411#02 (Conjecture 5: Forb(P) chi-bounded for every non-exceptional set P of "
+     "orientations of P_4); the alias is its case P = {the orientation with arcs right, left, left}, so it is "
+     "implied by its canonical. Solved, from the canonical's pinned review (graph-conjectures b72c5857, "
+     "1605.07411__02, solved): Cook, Masarik, Pilipczuk, Reinald and Souza, with the source's Corollary 35."),
+    ("studies", "std_dvo_k_ossona_de_mendez_wu_problem_on_fractional", "solved",
+     "Literature: alias of arxiv:1812.07327#01 with its text (verbatim); its canonical's status, from the "
+     "canonical's pinned review (graph-conjectures b72c5857, 1812.07327__01, solved): answered affirmatively by "
+     "Steiner (arXiv:2411.16465, Theorem 1.5)."),
+    ("studies", "std_edge_statistics_conjecture_alon_hefetz_krivelevi", "solved",
+     "Literature: alias of arxiv:1805.06848#00 with its text (the o_k(1) form of ind(k,l) <= 1/e + epsilon); its "
+     "canonical's status, from the canonical's pinned review (graph-conjectures b72c5857, 1805.06848__00, solved): "
+     "Kwan, Sudakov and Tran, and Fox and Sauermann (arXiv:1809.01352)."),
+    ("studies", "std_erd_s_gimbel_straight_conjecture", "disproved",
+     "Literature: alias of erdos:762 with its text (no K_5 and zeta(G) >= 4 imply chi(G) <= zeta(G) + 2). The "
+     "canonical's 'solved' in the pinned erdos record is the erdos site's 'resolved': its prize line reads "
+     "'DISPROVED (LEAN) This has been solved in the negative'; the studies corpus records a negative answer as "
+     "disproved, as lit44 did. Its own record disproves it: arXiv:2408.02400v2, Conjecture 1.2 (2408.02400v2.txt "
+     "l.68-69) is the row's statement, disproved (l.80) by Theorem 1.4 (l.82-83): infinitely many graphs with clique "
+     "number less than 5, zeta(G) = 4 and chi(G) = 7."),
+    ("studies", "std_erd_s_hajnal_edge_disjoint_cycles_conjecture", "disproved",
+     "Literature: alias of erdos:641 with its question. The canonical's 'solved' in the pinned erdos record is the "
+     "erdos site's 'resolved': its prize line reads 'DISPROVED This has been solved in the negative'; the studies "
+     "corpus records a question answered no as disproved, as lit44 did. Its own record answers it negatively: "
+     "arXiv:2410.02437v1 (Janzer, Steiner and Sudakov), Problem 1.1 (2410.02437v1.txt l.35-36) is the row's "
+     "question, and Theorem 1.2 (l.65-66) gives graphs of large fractional chromatic number with no 4-regular "
+     "subgraph, so no F(r) exists for r >= 2 (l.12-13)."),
+    ("studies", "std_erd_s_rubin_taylor_am_bm_conjecture", "disproved",
+     "Literature: alias of erdos:632 with its text (every (a:b)-choosable graph is (am:bm)-choosable). The "
+     "canonical's 'solved' in the pinned erdos record is the erdos site's 'resolved': its prize line reads "
+     "'DISPROVED This has been solved in the negative'; the studies corpus records a negative answer as disproved, "
+     "as lit44 did."),
+    ("studies", "std_esperet_s_polynomial_boundedness_conjecture_237", "disproved",
+     "Literature: alias of arxiv:1910.00697#00, whose text asks the negation (is there a hereditary chi-bounded "
+     "class that is not polynomially chi-bounded?). Its canonical's pinned review (graph-conjectures b72c5857, "
+     "1910.00697__00, solved) records the answer yes (Brianski, Davies and Walczak), so the alias's question (can "
+     "the bounding function of every chi-bounded class be polynomial?) is answered no: disproved."),
+    ("studies", "std_esperet_s_polynomial_boundedness_conjecture_238", "disproved",
+     "Literature: alias of arxiv:1910.00697#00, whose text asks the negation (is there a hereditary chi-bounded "
+     "class that is not polynomially chi-bounded?). Its canonical's pinned review (graph-conjectures b72c5857, "
+     "1910.00697__00, solved) records the answer yes (Brianski, Davies and Walczak) and that it refutes the hope "
+     "that every chi-bounded hereditary class admits a polynomial bounding function, the alias's statement."),
+    ("studies", "std_fox_pach_suk_conjecture", "solved",
+     "Literature: alias of arxiv:1912.02342#00 with its text (d > 0 instead of d >= 2, the case d = 1 trivial); its "
+     "canonical's status, from the canonical's pinned review (graph-conjectures b72c5857, 1912.02342__00, solved): "
+     "Nguyen, Scott and Seymour (arXiv:2312.15572)."),
+    ("studies", "std_heath_leighton_rosenberg_conjecture", "solved",
+     "Literature: alias of arxiv:1507.01120#00 with its proposition (planar graphs have bounded queue number); its "
+     "canonical's status, from the canonical's pinned review (graph-conjectures b72c5857, 1507.01120__00, solved): "
+     "Dujmovic, Joret, Micek, Morin, Ueckerdt and Wood."),
+    ("studies", "std_hypergraph_edge_statistics_conjecture", "solved",
+     "Literature: as the canonical's pinned review reports. Alias of arxiv:1805.06848#00, whose text is the graph "
+     "case r = 2; the alias is its r-uniform generalisation, so it is stronger. Solved as the canonical's pinned "
+     "review (graph-conjectures b72c5857, 1805.06848__00) reports: 'The hypergraph generalisation suggested in the "
+     "original paper was subsequently proved by Jain, Kwan, Mubayi and Tran (arXiv:2505.03954)'; that record is not "
+     "deposited."),
+    ("studies", "std_induced_wall_conjecture_for_bounded_degree_graph", "solved",
+     "Literature: alias of arxiv:2008.05504#01, whose text asks, read literally, for an induced (k x k)-wall or the "
+     "line graph of one; the alias asks for an induced subdivision of the wall or the line graph of one. Solved: the "
+     "alias's subdivided form is what Korhonen proved (arXiv:2203.13233), as the canonical's pinned review "
+     "(graph-conjectures b72c5857, 2008.05504__01, solved) reports. The canonical's literal text is not the ground: "
+     "read literally it fails, a heavily subdivided wall having maximum degree 3, large treewidth and no induced "
+     "unsubdivided wall."),
+    ("studies", "std_sintiari_trotignon_conjecture_logarithmic_treewi", "solved",
+     "Literature: alias of arxiv:2305.16258#01 with its text ((even hole, K_t)-free graphs have logarithmic "
+     "treewidth); its canonical's status, from the canonical's pinned review (graph-conjectures b72c5857, "
+     "2305.16258__01, solved): Chudnovsky, Gartland, Hajebi, Lokshtanov and Spirkl (arXiv:2402.14211)."),
+    ("studies", "std_strong_erd_s_szemer_di_conjecture_graph_restrict", "disproved",
+     "Literature: alias of erdos:808 with its proposition (the sum of the sizes of A +_G A and A ._G A instead of "
+     "their maximum, a factor 2 that epsilon absorbs). The canonical's 'solved' in the pinned erdos record is the "
+     "erdos site's 'resolved': its prize line reads 'DISPROVED This has been solved in the negative'; the studies "
+     "corpus records a negative answer as disproved, as lit44 did."),
 ]
 
 
@@ -1534,7 +1683,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 88 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 117 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
