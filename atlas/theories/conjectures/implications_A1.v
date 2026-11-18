@@ -333,9 +333,97 @@ apply: (nest a d b c ead gbc); first by rewrite -ee -ge.
 - by rewrite -si.
 Qed.
 
+(** ** Wave A1 -- tier T4 edge gc:e147: its BLOCKED note answered by D5's seven explicit graphs *)
+
+(*@EDGE from=fiftyseven_regular_moore_graph_statement to=triangle_free_strongly_regular_graphs_statement kind=implies status=verified proof=e147_fiftyseven_regular_moore_graph_implies_triangle_free_strongly_regular_graphs cite="gc:e147" note="A 57-regular graph G of diameter 2 and girth 5 is strongly regular with (57, 0, 1): adjacent vertices have no common neighbour (else a 3-cycle) and distinct non-adjacent ones exactly one (one by diameter 2, a second would close a 4-cycle); girth 5 makes it triangle-free, and 0 < 1 < 57. An isomorphism keeps degrees, and the seven known triangle-free strongly regular graphs of spectral foundations/triangle_free_srg.v have degrees 2, 3, 5, 7, 10, 16 and 22, so G is isomorphic to none of them." *)
+Section E147.
+(** The two modules are loaded through D5; imported here, inside the section only. *)
+Import GTBase.strongly_regular Spectral.foundations.triangle_free_srg.
+
+(* L1a: under girth 5, adjacent vertices have no common neighbour (a 3-ucycle). *)
+Lemma e147_adj_no_common (G : sgraph) (x y z : G) :
+  girth_geq G 5 -> x -- y -> z \in common_nbr x y -> False.
+Proof.
+move=> gG xy; rewrite /common_nbr inE !in_opn => /andP[xz yz].
+have uc : ucycle (--) [:: x; y; z].
+  by rewrite /ucycle /= xy yz (sg_sym z x) xz !inE negb_or (sg_edgeNeq xy) (sg_edgeNeq xz) (sg_edgeNeq yz).
+by have := gG _ uc isT.
+Qed.
+
+(* L1b: under girth 5, distinct non-adjacent vertices have at most one common neighbour (a 4-ucycle). *)
+Lemma e147_nonadj_common_le1 (G : sgraph) (x y : G) :
+  girth_geq G 5 -> x != y -> ~~ x -- y -> #|common_nbr x y| <= 1.
+Proof.
+move=> gG xNy nxy; apply/card_le1_eqP => w w'.
+rewrite /common_nbr !inE => /andP[xw yw] /andP[xw' yw'].
+apply/eqP/negPn/negP => wNw'.
+have uc : ucycle (--) [:: x; w; y; w'].
+  rewrite /ucycle /= xw (sg_sym w y) yw yw' (sg_sym w' x) xw' /=.
+  by rewrite !inE !negb_or xNy (sg_edgeNeq xw) (sg_edgeNeq xw') (eq_sym w w') wNw' eq_sym (sg_edgeNeq yw)
+    (sg_edgeNeq yw').
+by have := gG _ uc isT.
+Qed.
+
+(* L2: under diameter 2, distinct non-adjacent vertices have a common neighbour. *)
+Lemma e147_nonadj_common_gt0 (G : sgraph) (x y : G) :
+  y \in ball 2 x -> x != y -> ~~ x -- y -> 0 < #|common_nbr x y|.
+Proof.
+move=> yB xNy nxy; apply/card_gt0P.
+move: yB; rewrite /= !inE; case/orP => [/orP[yx|]|].
+- by rewrite eq_sym yx in xNy.
+- by case/bigcupP => z; rewrite !inE => /eqP -> xy; rewrite xy in nxy.
+- case/bigcupP => z; rewrite !inE => /orP[/eqP -> xy|]; first by rewrite xy in nxy.
+  case/bigcupP => z'; rewrite !inE => /eqP -> xz zy.
+  by exists z; rewrite /common_nbr !inE xz sg_sym zy.
+Qed.
+
+(* L3: a 57-regular graph of diameter 2 and girth 5 is strongly regular with (57, 0, 1). *)
+Lemma e147_moore_srg (G : sgraph) :
+  regular G 57 -> has_diameter G 2 -> has_girth G 5 -> strongly_regular_parameters G 57 0 1.
+Proof.
+move=> reg [dall _] [gG _]; split => // x y.
+- move=> xy; apply/eqP; rewrite cards_eq0; apply/eqP/setP => z; rewrite inE in_set0.
+  by apply/negP => zS; apply: (e147_adj_no_common (z := z) gG xy); rewrite /common_nbr inE.
+- move=> xNy nxy; apply/eqP; rewrite eqn_leq e147_nonadj_common_le1 //.
+  exact: e147_nonadj_common_gt0 (dall x y) xNy nxy.
+Qed.
+
+(* L4: the seven known graphs have degree below 57 (2, 3, 5, 7, 10, 16, 22). *)
+Lemma e147_known_degree (j : 'I_7) (v : known_triangle_free_srg j) : #|N(v)| < 57.
+Proof.
+case: j v => [[|[|[|[|[|[|[|//]]]]]]]] ? /= v.
+- by case: c5_srg => -> _ _.
+- by case: petersen_srg => -> _ _.
+- by case: clebsch_srg => -> _ _.
+- by case: hoffman_singleton_srg => -> _ _.
+- by case: gewirtz_srg => -> _ _.
+- by case: m22_srg => -> _ _.
+- by case: higman_sims_srg => -> _ _.
+Qed.
+
+Lemma e147_not_known (G : sgraph) (j : 'I_7) :
+  regular G 57 -> 0 < #|G| -> ~ inhabited (G ≃ known_triangle_free_srg j).
+Proof.
+move=> reg /card_gt0P [x _] [i].
+by have := e147_known_degree (bij.bij_fwd i x); rewrite diso_degree reg.
+Qed.
+
+(* L5: the edge gc:e147. *)
+Theorem e147_fiftyseven_regular_moore_graph_implies_triangle_free_strongly_regular_graphs :
+  fiftyseven_regular_moore_graph_statement -> triangle_free_strongly_regular_graphs_statement.
+Proof.
+case=> G [reg dG gG]; have [_ [x [y _]]] := dG.
+have G0 : 0 < #|G| by apply/card_gt0P; exists x.
+exists G, 57, 0, 1; split.
+- split => //; last exact: e147_moore_srg.
+  apply/girth_geq4_equiv_triangle_free => c uc sz.
+  by case: gG => gG _; exact: ltnW (gG c uc sz).
+- by move=> j; exact: e147_not_known.
+Qed.
+End E147.
+
 (** ** Blocked / kept-candidate cross-package relations (recorded, not stated) *)
 
 (*@EDGE from=jaegers_modular_orientation_statement to=mapping_planar_graphs_to_odd_cycles_statement kind=implies status=candidate cite="gc:e015" note="BLOCKED: planar duality (cycles of G correspond to minimal edge cuts of the planar dual) needs a real planarity/dual layer (F31)" *)
 (*@EDGE from=kt_subdivision_clique_count_asymptotic_statement to=number_of_cliques_in_minor_closed_classes_statement kind=implies status=candidate cite="gc:e054" note="BLOCKED: the source is asymptotic (eventually in t) while the target is a uniform exists c forall t bound; small t not covered as encoded" *)
-(*@EDGE from=fiftyseven_regular_moore_graph_statement to=triangle_free_strongly_regular_graphs_statement kind=implies status=candidate cite="gc:e147" note="BLOCKED: needs the seven known triangle-free strongly regular graphs constructed in the spectral layer" *)
 (*@EDGE from=matthews_sumner_four_connected_claw_free_statement to=bondy_linear_cycle_cubic_statement kind=implies status=candidate cite="gc:e244" note="keep candidate: Fleischner-Jackson / Kochol equivalences (dominating cycles), not compactly statable as an external theorem" *)
