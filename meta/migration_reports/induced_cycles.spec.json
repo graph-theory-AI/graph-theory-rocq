@@ -373,7 +373,16 @@
       },
       "certificate": "GTMisc.migration.induced_cycles.avoidable_path_or_pk_free_statement_compat",
       "original_certificate": "GTMisc.migration.induced_cycles.avoidable_path_or_pk_free_statement_original_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "direction": "restatus",
+        "doc_block_sha256": "a86a2b90d93480e931539c0dc446a73455589e75854d142832a47ec4e254d42a",
+        "record": "meta/CORPUS_FEEDBACK.md",
+        "row_fields": [
+          "status",
+          "status_semantics"
+        ]
+      }
     },
     {
       "kind": "statement",

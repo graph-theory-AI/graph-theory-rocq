@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py matching --details /tmp/migrati
 - Canonical: `GraphTheory.connectivity.matching`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
 - Scope: 7 helpers, 16 statements, 48 frozen objects, 182 recorded references.
-- Source checks: 440/440 pass; consistent.
+- Source checks: 443/443 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -27,6 +27,8 @@ Full evidence: `python3 meta/migration_report.py matching --details /tmp/migrati
 | `Hypergraph.conjectures.X6.r_partite_matching_deletion_tradeoff_statement` / arxiv:2505.05339#02 | `Hypergraph.migration.matching.r_partite_matching_deletion_tradeoff_statement_compat` |
 | `Hypergraph.conjectures.X6.erdos_matching_extremal_formula_statement` / erdos:1020 | `Hypergraph.migration.matching.erdos_matching_extremal_formula_statement_compat` |
 | `Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement` / studies:std_aharoni_charbit_howard_conjecture_on_matchings_i | `Hypergraph.migration.matching.regular_tripartite_hypergraph_matching_lower_bound_statement_compat` |
+
+Literature status updates after migration (statement text, doc block and the exact iff kept; only the manifest row's status and status_semantics changed): `Hypergraph.conjectures.X6.lovasz_r_partite_matching_deletion_statement` (record `meta/CORPUS_FEEDBACK.md`; row fields `status`, `status_semantics`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py matching --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.

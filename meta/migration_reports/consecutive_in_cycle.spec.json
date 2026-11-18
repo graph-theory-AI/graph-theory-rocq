@@ -594,7 +594,16 @@
       },
       "certificate": "GTMisc.migration.consecutive_in_cycle.avoidable_path_or_pk_free_statement_compat",
       "corpus": "v2",
-      "original_certificate": "GTMisc.migration.consecutive_in_cycle.avoidable_path_or_pk_free_statement_original_compat"
+      "original_certificate": "GTMisc.migration.consecutive_in_cycle.avoidable_path_or_pk_free_statement_original_compat",
+      "repair": {
+        "direction": "restatus",
+        "doc_block_sha256": "a86a2b90d93480e931539c0dc446a73455589e75854d142832a47ec4e254d42a",
+        "record": "meta/CORPUS_FEEDBACK.md",
+        "row_fields": [
+          "status",
+          "status_semantics"
+        ]
+      }
     },
     {
       "kind": "original-chain",

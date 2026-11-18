@@ -610,7 +610,16 @@
       "certificate": "Hypergraph.migration.matching.lovasz_r_partite_matching_deletion_statement_compat",
       "corpus": "v2",
       "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
-      "binding_note": "Frozen at the D5 pin e14645d; the text there is byte-identical to the family baseline 9e03072, so the text is bound there."
+      "binding_note": "Frozen at the D5 pin e14645d; the text there is byte-identical to the family baseline 9e03072, so the text is bound there.",
+      "repair": {
+        "direction": "restatus",
+        "doc_block_sha256": "f5bf351a115b4920c589552eb5b59d12d4b612a69ae2a450a6f0905bc72a907a",
+        "record": "meta/CORPUS_FEEDBACK.md",
+        "row_fields": [
+          "status",
+          "status_semantics"
+        ]
+      }
     },
     {
       "kind": "statement",

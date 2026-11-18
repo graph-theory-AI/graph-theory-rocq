@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py induced_paths --details /tmp/mi
 - Canonical: `GTBase.induced_paths.induced_path_between`.
 - Baseline: `00e59d190216a0cf26724bb6334d3aceee0f3b68`.
 - Scope: 8 helpers, 8 statements, 31 frozen objects, 160 recorded references.
-- Source checks: 307/307 pass; consistent.
+- Source checks: 310/310 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -21,6 +21,8 @@ Full evidence: `python3 meta/migration_report.py induced_paths --details /tmp/mi
 | `GTMisc.conjectures.X208.Pt_free_maximum_independent_set_polytime_statement` / arxiv:1803.05396#01 | `GTMisc.migration.induced_paths.Pt_free_maximum_independent_set_polytime_statement_compat` |
 
 Text-preserving reblocks after migration (statement text unchanged and the exact iff kept; the doc block and the listed leg fields changed, each listed leg state now blocked): `GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement` (record `meta/STATEMENT_IMPROVEMENTS.md`; row fields `source_verified_by`, `source_verified_at`, `verification_note`; leg fields `statement`, `note`).
+
+Literature status updates after migration (statement text, doc block and the exact iff kept; only the manifest row's status and status_semantics changed): `GTMisc.conjectures.X91.avoidable_path_or_pk_free_statement` (record `meta/CORPUS_FEEDBACK.md`; row fields `status`, `status_semantics`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py induced_paths --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
