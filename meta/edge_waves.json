@@ -1413,8 +1413,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (Claude Opus 5.5), 2026-11-18: atlas implications_A1.v (arxiv:1606.06810#01 => opg:number_of_cliques_in_minor_closed_classes; unconditional: a K_t subdivision gives a K_t minor, and K_t-minor-freeness is monotone in t, so c = 9^T for the source threshold T at a = b = 1 bounds every t > 0)",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (second reader of the K_t subdivision clique count asymptotics => number of cliques in minor-closed classes edge, gc:e054, 2026-11-18)",
+   "reviewed_at": "2026-11-18",
    "note": "Take N from the source at a = b = 1, T := max N 1 and c := 9^T. A K_t subdivision gives a K_t minor (the branch set of i is branch i with the internal vertices of its routes to the larger branch vertices: nonempty, connected along the routes, disjoint by the subdivision clauses, adjacent through the vertex before each larger branch vertex), so for t >= T a K_t-minor-free graph has no K_t subdivision and the source gives cliques^3 <= 3^(5t) n^3 <= (9^t n)^3, i.e. at most 9^t n <= c^t n cliques. For t < T it is K_T-minor-free (minor_dec.minor_K_le), so it has at most 9^T n = c n <= c^t n cliques. Both rows count nonempty cliques (GTBase nonempty_clique_count), so the small t of the old BLOCKED note are covered."
   },
   "levine_hat_intersecting_success_vanishes_statement->kneser_cartesian_power_independence_ratio_statement:equiv": {
