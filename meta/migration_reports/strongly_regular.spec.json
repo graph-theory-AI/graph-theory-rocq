@@ -185,6 +185,16 @@
       "path": "spectral-graph-theory/theories/foundations/triangle_free_srg.v",
       "name": "strongly_regular",
       "note": "the GTBase.strongly_regular module import (lexical only): the seven known graphs are checked against the canonical strongly_regular_parameters; no use of the D5 or U3 definition"
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "strongly_regular",
+      "note": "the GTBase.strongly_regular module import inside Section E147 (lexical only): e147_moore_srg states the canonical strongly_regular_parameters G 57 0 1; no use of the D5 or U3 definition"
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "triangle_free_strongly_regular_graphs_statement",
+      "note": "e147_fiftyseven_regular_moore_graph_implies_triangle_free_strongly_regular_graphs (gc:e147) proves the live D5 statement from the 57-regular Moore graph statement; new code, the statement unchanged"
     }
   ],
   "distinct_variants": [],

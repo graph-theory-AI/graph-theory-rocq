@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py strongly_regular --details /tmp
 
 - Canonical: `GTBase.strongly_regular.strongly_regular_parameters`.
 - Baseline: `a69e27fedb17b9a509dc794b45f6e2aa5c8f4e9e`.
-- Scope: 3 helpers, 2 statements, 8 frozen objects, 26 recorded references.
-- Source checks: 91/91 pass; consistent.
+- Scope: 3 helpers, 2 statements, 8 frozen objects, 28 recorded references.
+- Source checks: 93/93 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

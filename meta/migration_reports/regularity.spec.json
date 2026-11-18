@@ -411,6 +411,11 @@
       "path": "extremal-graph-theory/theories/conjectures/grounding_X289.v",
       "name": "regular",
       "note": "Wave X289 (2026-11-05): lexical short-name match only: this file never imports Infinite (it is outside the reverse closure of Infinite.conjectures.D4inf3), so its regular is GTBase.base.regular (K_5 is 4-regular, the hypothesis witness), not the migrated Infinite source; declared as for U1 / X213 / X239 / X242 / X256 / X263 / X267 / X285."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source: e147_moore_srg and e147_not_known (gc:e147) take regular G 57 as a hypothesis."
     }
   ],
   "distinct_variants": [],
