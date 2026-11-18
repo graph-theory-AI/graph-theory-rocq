@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2294,
-      "cross_file_files": 1134,
+      "cross_file_declarations": 2299,
+      "cross_file_files": 1137,
       "implicit_use": 4,
       "packages_without_project": [
         "graph-theory-base"
@@ -19,7 +19,7 @@
       ],
       "undecided_files": 0,
       "unlisted_files": 0,
-      "with_cross_file": 374,
+      "with_cross_file": 376,
       "with_own_certificate": 511,
       "with_same_file": 448
     },
@@ -346,7 +346,7 @@
             "poly-list-chi-bounded"
           ],
           "declarations": [
-            "atlas/theories/conjectures/implications_A2.v:<line 12>",
+            "atlas/theories/conjectures/implications_A2.v:<line 13>",
             "chromatic-theory/theories/conjectures/X3.v:gyarfas_alpha_omega_chi_bounded_statement",
             "chromatic-theory/theories/conjectures/X3.v:gyarfas_complementation_chi_bounded_statement",
             "chromatic-theory/theories/conjectures/X3.v:hereditary_chi_bounded_not_polynomial_statement",
@@ -5870,8 +5870,13 @@
         "alias": "Cycle.conjectures.X9.x9_cycle_edges",
         "cross_file": {
           "certificates_of": [],
-          "declarations": [],
-          "files": [],
+          "declarations": [
+            "atlas/theories/conjectures/implications_A2.v:<line 97>",
+            "atlas/theories/conjectures/implications_A2.v:<line 98>"
+          ],
+          "files": [
+            "atlas/theories/conjectures/implications_A2.v"
+          ],
           "statements": [],
           "undecided": [],
           "unlisted": []
@@ -5889,7 +5894,9 @@
           ]
         },
         "provider_unlisted": false,
-        "require_chain": {},
+        "require_chain": {
+          "atlas/theories/conjectures/implications_A2.v": "unknown"
+        },
         "same_file": {
           "declarations": [
             "x9_cycle_incident_edges_properly_coloured"
@@ -5903,8 +5910,12 @@
         "alias": "Cycle.conjectures.X9.x9_edge_set",
         "cross_file": {
           "certificates_of": [],
-          "declarations": [],
-          "files": [],
+          "declarations": [
+            "atlas/theories/conjectures/implications_A2.v:<line 84>"
+          ],
+          "files": [
+            "atlas/theories/conjectures/implications_A2.v"
+          ],
           "statements": [],
           "undecided": [],
           "unlisted": []
@@ -5923,7 +5934,9 @@
           ]
         },
         "provider_unlisted": false,
-        "require_chain": {},
+        "require_chain": {
+          "atlas/theories/conjectures/implications_A2.v": "unknown"
+        },
         "same_file": {
           "declarations": [
             "x9_colour_classes_large"
@@ -5941,10 +5954,13 @@
             "cycle-edges"
           ],
           "declarations": [
+            "atlas/theories/conjectures/implications_A2.v:e099_orient",
+            "atlas/theories/conjectures/implications_A2.v:e099_step",
             "cycle-theory/theories/migration/consecutive_in_cycle.v:min_degree_three_linearly_many_chords_cycle_statement",
             "cycle-theory/theories/migration/cycle_edges.v:proper_edge_coloured_short_cycle_statement"
           ],
           "files": [
+            "atlas/theories/conjectures/implications_A2.v",
             "cycle-theory/theories/migration/consecutive_in_cycle.v",
             "cycle-theory/theories/migration/cycle_edges.v"
           ],
@@ -5969,6 +5985,7 @@
         },
         "provider_unlisted": false,
         "require_chain": {
+          "atlas/theories/conjectures/implications_A2.v": "unknown",
           "cycle-theory/theories/migration/consecutive_in_cycle.v": "unknown",
           "cycle-theory/theories/migration/cycle_edges.v": "unknown"
         },

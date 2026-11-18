@@ -19,10 +19,10 @@
  "totals": {
   "edges": 172,
   "by_status": {
-   "candidate": 25,
+   "candidate": 24,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 113
+   "verified": 114
   },
   "by_kind": {
    "equiv": 13,
@@ -30,7 +30,7 @@
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 131
+  "proved_theorems": 132
  },
  "edges": [
   {
@@ -1756,10 +1756,10 @@
    "from": "proper_edge_coloured_short_cycle_statement",
    "to": "caccetta_haggkvist_statement",
    "kind": "implies",
-   "status": "candidate",
+   "status": "verified",
    "cite": "gc:e099",
-   "proof": "",
-   "note": "BLOCKED by budget (re-read 2026-09-24; the reduction is elementary and in-paper, so the edge is provable in principle): a loopless digraph with a digon has a 2-dicycle and ceil(n/r) >= 2 since r <= outdeg <= n-1; otherwise colour each edge of the underlying sgraph by enum_rank of its tail (col : {set G} -> I_n, x9_colour_classes_large from outdeg >= r), and the missing lemma is: a ucycle of the underlying graph whose incident edges get distinct tail colours is consistently oriented (each vertex is the tail of exactly one of its two cycle edges), hence it or its reversal is a dicycle of classic_core (core/dipath.v) of the same size, with ceil_div n r = (n + r - 1) %/ r. Estimated well above the 40k-token A2 budget (seq/ucycle orientation bookkeeping).",
+   "proof": "e099_proper_edge_coloured_short_cycle_implies_caccetta_haggkvist",
+   "note": "Underlying graph: u -- v when u != v and u --> v or v --> u. A digon u --> v --> u is a dicycle with 2 <= (n + r - 1) %/ r vertices, as r <= outdeg u <= n - 1 by looplessness. Without a digon, the edge [set u; w] with u --> w gets the colour enum_rank u (its tail), so colour class i holds the edges from enum_val i to its at least r out-neighbours; the source cycle, with at most ceil_div n r = (n + r - 1) %/ r vertices, gives incident edges distinct colours, so no vertex is the tail of both of its cycle edges, a backward arc propagates along the cycle, and the cycle or its reversal is a dicycle of D of the same size.",
    "external": [],
    "sources": [
     "atlas/implications_A2.v"

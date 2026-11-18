@@ -135,7 +135,7 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Conjecture dependency graph
 
-- **172 edges** — by status {'candidate': 25, 'conditional': 2, 'refuted-direction': 32, 'verified': 113}, by kind {'equiv': 13, 'implies': 159, 'refutes': 0, 'specializes': 0}; 131 Qed-proved relative theorems.
+- **172 edges** — by status {'candidate': 24, 'conditional': 2, 'refuted-direction': 32, 'verified': 114}, by kind {'equiv': 13, 'implies': 159, 'refutes': 0, 'specializes': 0}; 132 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
   - `alon_pach_solymosi_tournament_erdos_hajnal_statement` equiv `erdos_hajnal_tournament_transitive_subtournament_statement` (digraph-theory/implications_X136.v)
   - `asymmetric_bipartite_list_colouring_statement` implies `list_chromatic_number_and_maximum_degree_of_bipartit_statement` (atlas/implications_A1.v)
@@ -230,6 +230,7 @@ Area-local foundations (each area builds these on top of `base`):
   - `polynomial_gyarfas_sumner_statement` equiv `forest_free_polynomial_chi_bound_statement` (chromatic-theory/implications_X65.v)
   - `polynomial_gyarfas_sumner_tree_statement` implies `graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement` (chromatic-theory/implications_X218.v)
   - `polynomial_gyarfas_sumner_tree_statement` implies `path_induced_rooted_tree_polynomial_chi_bound_statement` (chromatic-theory/implications_X218.v)
+  - `proper_edge_coloured_short_cycle_statement` implies `caccetta_haggkvist_statement` (atlas/implications_A2.v)
   - `r_partite_matching_deletion_tradeoff_statement` implies `rysers_statement` (hypergraph-theory/implications_U12.v)
   - `ramsey_nice_forest_family_eventual_statement` implies `ramsey_nice_forest_family_infinite_statement` (extremal-graph-theory/implications_X223.v)
   - `reeds_omega_delta_and_chi_statement` implies `bounding_the_chromatic_number_of_triangle_free_graph_statement` (chromatic-theory/implications_U8.v)
@@ -250,7 +251,7 @@ Area-local foundations (each area builds these on top of `base`):
   - `triangle_free_min_degree_log_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
   - `triangle_free_planar_large_induced_two_degenerate_statement` implies `triangle_free_planar_five_sixths_two_degenerate_statement` (chromatic-theory/implications_X219.v)
   - `triangle_packing_transversal_statement` equiv `triangle_packing_vs_triangle_edge_transversal_statement` (packing-theory/implications_X5.v)
-- Edge evidence: **113 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
+- Edge evidence: **114 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
 - Conditional edges (with the external assumptions they are relative to):
   - `bounded_layered_treewidth_bounded_queue_number_statement` implies `planar_graphs_bounded_queue_number_statement` — external: `external_layered_treewidth_planar_statement` (atlas/implications_A1.v)
   - `reconstruction_statement` implies `edge_reconstruction_statement` — external: `external_whitney_line_inversion_statement` (reconstruction-theory/implications_U11.v)

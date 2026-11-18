@@ -2358,7 +2358,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "proper_edge_coloured_short_cycle_statement->caccetta_haggkvist_statement:implies:candidate",
+   "rocq_edge": "proper_edge_coloured_short_cycle_statement->caccetta_haggkvist_statement:implies:verified",
    "argument": "Stated in the source's context ('the authors prove that Conjecture 4 implies the Caccetta-Häggkvist conjecture') and the reduction verifies directly. Given a simple digraph D on n vertices with minimum out-degree ≥ r: if D has a digon there is a directed 2-cycle and ⌈n/r⌉ ≥ 2 whenever r < n (r ≥ n is vacuous). Otherwise colour each edge of the underlying simple graph by its tail in D: n colour classes, each of size ≥ r. The source gives a cycle C of length k ≤ ⌈n/r⌉ with no two incident edges of the same colour; since each edge is coloured by one of its endpoints and no vertex of C is the tail of both its incident cycle edges, the edge→tail map is a bijection onto V(C), so C is consistently oriented — a directed cycle of length ≤ ⌈n/r⌉.",
    "citations": [
     "https://arxiv.org/abs/1806.00825"
