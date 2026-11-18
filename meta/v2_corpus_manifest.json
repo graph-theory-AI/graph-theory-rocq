@@ -1,5 +1,5 @@
 {
- "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — deterministic; regenerate + diff to review changes. Status uses the exact-type-gate vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 65 literature errata applied). b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. source_text currently holds the extractor's statement; REC/implementation replaces it with our normalized statement (licensing: LICENSE-DATA.md). Corpus tags: arxiv, erdos, derived, arxiv-studied, bm (Bondy–Murty Appendix A records bm-NNN) and others (curated data/others_conjectures.json records). site_url/review_url are derived from row_id by corpus_registry.row_urls() (null for erdos/derived/studies rows, which have no public per-record page). Legs merge in from meta/v2_legs_state.json (the source of truth). Classifier fields (bucket/topic/formalizability/repo/phase/formal_name) come from the hand-maintained meta/v2_classification.json (edit there, then rebuild — never hand-edit this file) and from wave planning.",
+ "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — deterministic; regenerate + diff to review changes. Status uses the exact-type-gate vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 66 literature errata applied). b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. source_text currently holds the extractor's statement; REC/implementation replaces it with our normalized statement (licensing: LICENSE-DATA.md). Corpus tags: arxiv, erdos, derived, arxiv-studied, bm (Bondy–Murty Appendix A records bm-NNN) and others (curated data/others_conjectures.json records). site_url/review_url are derived from row_id by corpus_registry.row_urls() (null for erdos/derived/studies rows, which have no public per-record page). Legs merge in from meta/v2_legs_state.json (the source of truth). Classifier fields (bucket/topic/formalizability/repo/phase/formal_name) come from the hand-maintained meta/v2_classification.json (edit there, then rebuild — never hand-edit this file) and from wave planning.",
  "schema_version": 1,
  "provenance": {
   "graph_conjectures_commit": "b72c5857060addbe4523016e88ae3aa626e958fd",
@@ -25,9 +25,9 @@
    "others": 1
   },
   "by_status": {
-   "disproved": 108,
+   "disproved": 109,
    "open": 1293,
-   "partial": 151,
+   "partial": 150,
    "solved": 238
   },
   "by_kind": {
@@ -10465,8 +10465,8 @@
    "source_verified_at": null,
    "verification_note": null,
    "status_verified_at": null,
-   "status": "partial",
-   "status_semantics": "The conjecture holds for graphic matroids (by Theorem 5 of the source paper) and cographic matroids (Theorem 13 of the source paper). A 2026 paper by McGuinness (arXiv:2601.17624) extends the result to all regular matroids, proving that every simple regular matroid of rank r with r+1 colour classes of size at least 2 contains a rainbow circuit of size at most ⌈(r+1)/2⌉. The full conjecture for arbitrary simple rank-(n-1) matroids fails: the source paper itself notes that uniform matroids U_{n-1,m} (for large m) provide counterexamples, as their circuits all have size n.",
+   "status": "disproved",
+   "status_semantics": "Literature: false as printed, refuted in its own record. DeVos, Drescher, Funk, Gonzalez Hermosillo de la Maza, Guo, Huynh, Mohar and Montejano, 'Short rainbow cycles in graphs and matroids', arXiv:1806.00825v4 (28 July 2026): Conjecture 12 (1806.00825v4.txt l.312-314, main.tex l.308-310) is followed at once by 'it is easy to see that Conjecture 12 is false, since the uniform matroid U_{n-1,m} does not contain any circuits of size less than n' (txt l.318-319, main.tex l.314): for n >= 3 and m >= 2n, U_{n-1,m} is simple of rank n - 1, takes n colour classes of size at least 2, and its circuits all have size n > ceil(n/2). Theorem 14 (txt l.360-362, main.tex l.341-342) adds simple binary counterexamples for every even n >= 6, a slight modification gives them for every odd n >= 7 (txt l.408-409, main.tex l.413), and Conjecture 12 holds for binary matroids iff n <= 5 (txt l.409-411). It holds for graphic and cographic matroids (Theorems 5 and 13, txt l.317 and l.320); the pinned summary also reports (not deposited, not checked here) that McGuinness (arXiv:2601.17624) extends it to all regular matroids: every simple regular matroid of rank r with r+1 colour classes of size at least 2 contains a rainbow circuit of size at most ceil((r+1)/2). These are the cases behind the pinned review's partial.",
    "review_status": "partial",
    "review_date": "2026-05-15",
    "review_confidence": "high",

@@ -3403,7 +3403,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "fiftyseven_regular_moore_graph_statement->triangle_free_strongly_regular_graphs_statement:implies:candidate",
+   "rocq_edge": "fiftyseven_regular_moore_graph_statement->triangle_free_strongly_regular_graphs_statement:implies:verified",
    "argument": "A 57-regular Moore graph of diameter 2 and girth 5 has 3250 vertices and is strongly regular with parameters (3250,57,0,1): girth 5 forces lambda=0 (triangle-free) and diameter 2 with girth 5 forces mu=1. None of the seven known triangle-free strongly regular graphs (C5, Petersen, Clebsch, Hoffman-Singleton, Gewirtz, the (77,16,0,4) graph, Higman-Sims) has these parameters, so its existence yields an eighth, answering the target affirmatively. The target's OPG context states this implication verbatim: 'Every Moore Graph of diameter 2 is a triangle-free strongly regular graph, so if there is a 57-regular Moore graph of diameter 2, this would add another to the list.' Direction correct.",
    "citations": [
     "http://www.openproblemgarden.org/op/triangle_free_strongly_regular_graphs"

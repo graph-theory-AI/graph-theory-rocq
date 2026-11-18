@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2299,
-      "cross_file_files": 1137,
+      "cross_file_declarations": 2303,
+      "cross_file_files": 1140,
       "implicit_use": 4,
       "packages_without_project": [
         "graph-theory-base"
@@ -19,7 +19,7 @@
       ],
       "undecided_files": 0,
       "unlisted_files": 0,
-      "with_cross_file": 376,
+      "with_cross_file": 377,
       "with_own_certificate": 511,
       "with_same_file": 448
     },
@@ -18220,9 +18220,11 @@
         "cross_file": {
           "certificates_of": [],
           "declarations": [
+            "atlas/theories/conjectures/implications_A1.v:<line 341>",
             "homomorphism-theory/theories/conjectures/grounding_U3.v:strongly_regular_K2"
           ],
           "files": [
+            "atlas/theories/conjectures/implications_A1.v",
             "homomorphism-theory/theories/conjectures/grounding_U3.v"
           ],
           "statements": [],
@@ -18244,6 +18246,7 @@
         },
         "provider_unlisted": false,
         "require_chain": {
+          "atlas/theories/conjectures/implications_A1.v": "unknown",
           "homomorphism-theory/theories/conjectures/grounding_U3.v": "unknown"
         },
         "same_file": {
@@ -20174,8 +20177,13 @@
         "alias": "Infinite.conjectures.D4inf3.regular",
         "cross_file": {
           "certificates_of": [],
-          "declarations": [],
-          "files": [],
+          "declarations": [
+            "atlas/theories/conjectures/implications_A1.v:e147_moore_srg",
+            "atlas/theories/conjectures/implications_A1.v:e147_not_known"
+          ],
+          "files": [
+            "atlas/theories/conjectures/implications_A1.v"
+          ],
           "statements": [],
           "undecided": [],
           "unlisted": []
@@ -20193,7 +20201,9 @@
           ]
         },
         "provider_unlisted": false,
-        "require_chain": {},
+        "require_chain": {
+          "atlas/theories/conjectures/implications_A1.v": "unknown"
+        },
         "same_file": {
           "declarations": [
             "infinite_uniquely_hamiltonian_graphs_statement"
@@ -24729,6 +24739,7 @@
         "cross_file": {
           "certificates_of": [],
           "declarations": [
+            "atlas/theories/conjectures/implications_A1.v:<line 341>",
             "spectral-graph-theory/theories/conjectures/grounding_D5.v:<line 29>",
             "spectral-graph-theory/theories/conjectures/grounding_D5.v:sr_K22",
             "spectral-graph-theory/theories/conjectures/grounding_D5.v:strongly_regularE",
@@ -24738,6 +24749,7 @@
             "spectral-graph-theory/theories/foundations/triangle_free_srg.v:<line 20>"
           ],
           "files": [
+            "atlas/theories/conjectures/implications_A1.v",
             "spectral-graph-theory/theories/conjectures/grounding_D5.v",
             "spectral-graph-theory/theories/foundations/strongly_regular_matrix.v",
             "spectral-graph-theory/theories/foundations/triangle_free_srg.v"
@@ -24761,6 +24773,7 @@
         },
         "provider_unlisted": false,
         "require_chain": {
+          "atlas/theories/conjectures/implications_A1.v": "unknown",
           "spectral-graph-theory/theories/conjectures/grounding_D5.v": "unknown",
           "spectral-graph-theory/theories/foundations/strongly_regular_matrix.v": "no",
           "spectral-graph-theory/theories/foundations/triangle_free_srg.v": "no"

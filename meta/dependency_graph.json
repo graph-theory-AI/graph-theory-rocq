@@ -19,10 +19,10 @@
  "totals": {
   "edges": 172,
   "by_status": {
-   "candidate": 24,
+   "candidate": 23,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 114
+   "verified": 115
   },
   "by_kind": {
    "equiv": 13,
@@ -30,7 +30,7 @@
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 132
+  "proved_theorems": 133
  },
  "edges": [
   {
@@ -728,10 +728,10 @@
    "from": "fiftyseven_regular_moore_graph_statement",
    "to": "triangle_free_strongly_regular_graphs_statement",
    "kind": "implies",
-   "status": "candidate",
+   "status": "verified",
    "cite": "gc:e147",
-   "proof": "",
-   "note": "BLOCKED: needs the seven known triangle-free strongly regular graphs constructed in the spectral layer",
+   "proof": "e147_fiftyseven_regular_moore_graph_implies_triangle_free_strongly_regular_graphs",
+   "note": "A 57-regular graph G of diameter 2 and girth 5 is strongly regular with (57, 0, 1): adjacent vertices have no common neighbour (else a 3-cycle) and distinct non-adjacent ones exactly one (one by diameter 2, a second would close a 4-cycle); girth 5 makes it triangle-free, and 0 < 1 < 57. An isomorphism keeps degrees, and the seven known triangle-free strongly regular graphs of spectral foundations/triangle_free_srg.v have degrees 2, 3, 5, 7, 10, 16 and 22, so G is isomorphic to none of them.",
    "external": [],
    "sources": [
     "atlas/implications_A1.v"
