@@ -135,7 +135,7 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Conjecture dependency graph
 
-- **172 edges** — by status {'candidate': 23, 'conditional': 2, 'refuted-direction': 32, 'verified': 115}, by kind {'equiv': 13, 'implies': 159, 'refutes': 0, 'specializes': 0}; 133 Qed-proved relative theorems.
+- **172 edges** — by status {'candidate': 22, 'conditional': 2, 'refuted-direction': 32, 'verified': 116}, by kind {'equiv': 13, 'implies': 159, 'refutes': 0, 'specializes': 0}; 134 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
   - `alon_pach_solymosi_tournament_erdos_hajnal_statement` equiv `erdos_hajnal_tournament_transitive_subtournament_statement` (digraph-theory/implications_X136.v)
   - `asymmetric_bipartite_list_colouring_statement` implies `list_chromatic_number_and_maximum_degree_of_bipartit_statement` (atlas/implications_A1.v)
@@ -205,6 +205,7 @@ Area-local foundations (each area builds these on top of `base`):
   - `jaegers_modular_orientation_statement` implies `three_flow_statement` (cycle-theory/implications_D1.v)
   - `kt_minor_free_hypergraph_chromatic_three_halves_statement` implies `k3_minor_free_hypergraph_three_colourable_statement` (hypergraph-theory/implications_X225.v)
   - `kt_minor_free_two_s_plus_t_choosable_statement` implies `list_hadwiger_statement` (atlas/implications_A1.v)
+  - `kt_subdivision_clique_count_asymptotic_statement` implies `number_of_cliques_in_minor_closed_classes_statement` (atlas/implications_A1.v)
   - `list_reed_choice_number_statement` implies `reeds_omega_delta_and_chi_statement` (chromatic-theory/implications_U1.v)
   - `m_n_cycle_covers_statement` implies `cycle_double_cover_statement` (cycle-theory/implications_U6.v)
   - `majority_3col_statement` implies `majority_3col_eulerian_statement` (digraph-theory/implications_X1.v)
@@ -252,7 +253,7 @@ Area-local foundations (each area builds these on top of `base`):
   - `triangle_free_min_degree_log_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
   - `triangle_free_planar_large_induced_two_degenerate_statement` implies `triangle_free_planar_five_sixths_two_degenerate_statement` (chromatic-theory/implications_X219.v)
   - `triangle_packing_transversal_statement` equiv `triangle_packing_vs_triangle_edge_transversal_statement` (packing-theory/implications_X5.v)
-- Edge evidence: **115 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
+- Edge evidence: **116 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
 - Conditional edges (with the external assumptions they are relative to):
   - `bounded_layered_treewidth_bounded_queue_number_statement` implies `planar_graphs_bounded_queue_number_statement` — external: `external_layered_treewidth_planar_statement` (atlas/implications_A1.v)
   - `reconstruction_statement` implies `edge_reconstruction_statement` — external: `external_whitney_line_inversion_statement` (reconstruction-theory/implications_U11.v)

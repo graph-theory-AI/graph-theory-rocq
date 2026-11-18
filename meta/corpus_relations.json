@@ -1271,7 +1271,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "kt_subdivision_clique_count_asymptotic_statement->number_of_cliques_in_minor_closed_classes_statement:implies:candidate",
+   "rocq_edge": "kt_subdivision_clique_count_asymptotic_statement->number_of_cliques_in_minor_closed_classes_statement:implies:verified",
    "argument": "A K_t-subdivision yields a K_t-minor, so every K_t-minor-free graph is K_t-subdivision-free; the containment goes the right way for the claimed direction. The source's conjectured bound 3^{2t/3+o(t)} n on cliques in K_t-subdivision-free graphs is at most c^t n for a fixed constant c (3^{2t/3} = (3^{2/3})^t and the 3^{o(t)} factor is absorbed by slightly enlarging c, with finitely many small t handled by a constant), which answers the OPG question affirmatively. The target was independently resolved (Lee-Oum 2014, Fox-Wei 2019, as noted on the OPG page), which is consistent with but not needed for the implication.",
    "citations": [
     "http://www.openproblemgarden.org/op/number_of_cliques_in_minor_closed_classes"

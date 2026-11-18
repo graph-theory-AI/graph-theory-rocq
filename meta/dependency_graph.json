@@ -19,10 +19,10 @@
  "totals": {
   "edges": 172,
   "by_status": {
-   "candidate": 23,
+   "candidate": 22,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 115
+   "verified": 116
   },
   "by_kind": {
    "equiv": 13,
@@ -30,7 +30,7 @@
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 133
+  "proved_theorems": 134
  },
  "edges": [
   {
@@ -1274,10 +1274,10 @@
    "from": "kt_subdivision_clique_count_asymptotic_statement",
    "to": "number_of_cliques_in_minor_closed_classes_statement",
    "kind": "implies",
-   "status": "candidate",
+   "status": "verified",
    "cite": "gc:e054",
-   "proof": "",
-   "note": "BLOCKED: the source is asymptotic (eventually in t) while the target is a uniform exists c forall t bound; small t not covered as encoded",
+   "proof": "e054_kt_subdivision_clique_count_asymptotic_implies_number_of_cliques_in_minor_closed_classes",
+   "note": "Take N from the source at a = b = 1, T := max N 1 and c := 9^T. A K_t subdivision gives a K_t minor (the branch set of i is branch i with the internal vertices of its routes to the larger branch vertices: nonempty, connected along the routes, disjoint by the subdivision clauses, adjacent through the vertex before each larger branch vertex), so for t >= T a K_t-minor-free graph has no K_t subdivision and the source gives cliques^3 <= 3^(5t) n^3 <= (9^t n)^3, i.e. at most 9^t n <= c^t n cliques. For t < T it is K_T-minor-free (minor_dec.minor_K_le), so it has at most 9^T n = c n <= c^t n cliques. Both rows count nonempty cliques (GTBase nonempty_clique_count), so the small t of the old BLOCKED note are covered.",
    "external": [],
    "sources": [
     "atlas/implications_A1.v"
