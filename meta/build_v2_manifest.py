@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Sixty-five
+corrections are applied explicitly (ERRATA below) since the review files predate them. Sixty-six
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -125,6 +125,8 @@ Sintiari and Trotignon's conjecture that (even hole, diamond, K_t)-free graphs h
 behind wave X312, is proved by Alecu, Chudnovsky, Hajebi and Spirkl (arXiv:2309.04390v3, Corollary 1.7); the same
 record answers the question behind wave X42 (t = 4) and proves the conjecture behind wave X220 (Theorem 1.10, with
 T the two-edge path).
+DeVos et al.'s matroid Conjecture 12 (arxiv:1806.00825#01) is false as printed: its own record refutes it with the
+uniform matroid U_{n-1,m} (arXiv:1806.00825v4, main.tex l.314).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -723,6 +725,19 @@ ERRATA = [
      "an even number of them) than arXiv:2309.04390 (l.280: an even number, at least three, of neighbours on a "
      "hole); in diamond-free graphs the two agree, as X220's Notes show, so C*_t is the diamond-free part of E_t. "
      "arXiv:2309.04390 does not name this conjecture; the instance is immediate."),
+    ("1806.00825", "Conjecture 12", "disproved",
+     "Literature: false as printed, refuted in its own record. DeVos, Drescher, Funk, Gonzalez Hermosillo de la Maza, "
+     "Guo, Huynh, Mohar and Montejano, 'Short rainbow cycles in graphs and matroids', arXiv:1806.00825v4 (28 July "
+     "2026): Conjecture 12 (1806.00825v4.txt l.312-314, main.tex l.308-310) is followed at once by 'it is easy to see "
+     "that Conjecture 12 is false, since the uniform matroid U_{n-1,m} does not contain any circuits of size less than "
+     "n' (txt l.318-319, main.tex l.314): for n >= 3 and m >= 2n, U_{n-1,m} is simple of rank n - 1, takes n colour "
+     "classes of size at least 2, and its circuits all have size n > ceil(n/2). Theorem 14 (txt l.360-362, main.tex "
+     "l.341-342) adds simple binary counterexamples for every even n >= 6, a slight modification gives them for every "
+     "odd n >= 7 (txt l.408-409, main.tex l.413), and Conjecture 12 holds for binary matroids iff n <= 5 (txt "
+     "l.409-411). It holds for graphic and cographic matroids (Theorems 5 and 13, txt l.317 and l.320); the pinned "
+     "summary also reports (not deposited, not checked here) that McGuinness (arXiv:2601.17624) extends it to all "
+     "regular matroids: every simple regular matroid of rank r with r+1 colour classes of size at least 2 contains a "
+     "rainbow circuit of size at most ceil((r+1)/2). These are the cases behind the pinned review's partial."),
 ]
 
 
@@ -1331,7 +1346,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 65 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 66 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
