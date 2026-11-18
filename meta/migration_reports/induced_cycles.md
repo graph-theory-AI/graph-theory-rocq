@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py induced_cycles --details /tmp/m
 - Canonical: `GTBase.induced_cycles.chordless_cycle`.
 - Baseline: `7d8cc47829b045a122d6f6421ddc2d928dd9675a`.
 - Scope: 7 helpers, 14 statements, 44 frozen objects, 173 recorded references.
-- Source checks: 449/449 pass; consistent.
+- Source checks: 455/455 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -25,6 +25,8 @@ Full evidence: `python3 meta/migration_report.py induced_cycles --details /tmp/m
 | `Minor.conjectures.X220.even_hole_diamond_free_bounded_tree_alpha_statement` / arxiv:2305.16258#00 | `Minor.migration.induced_cycles.even_hole_diamond_free_bounded_tree_alpha_statement_compat` |
 | `Packing.conjectures.XE1.erdos_81_statement` / erdos:81 | `Packing.migration.induced_cycles.erdos_81_statement_compat` |
 | `GTMisc.conjectures.U13.two_colouring_a_graph_without_a_monochromatic_maximu_statement` / opg:2_colouring_a_graph_without_a_monochromatic_maximum_clique | `GTMisc.migration.induced_cycles.two_colouring_a_graph_without_a_monochromatic_maximu_statement_compat` |
+
+Literature status updates after migration (statement text, doc block and the exact iff kept; only the manifest row's status and status_semantics changed): `Minor.conjectures.X42.even_hole_k4_diamond_free_bounded_treewidth_statement` (record `meta/CORPUS_FEEDBACK.md`; row fields `status`, `status_semantics`), `Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement` (record `meta/CORPUS_FEEDBACK.md`; row fields `status`, `status_semantics`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py induced_cycles --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.

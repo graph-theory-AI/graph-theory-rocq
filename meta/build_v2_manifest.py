@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Sixty-two
+corrections are applied explicitly (ERRATA below) since the review files predate them. Sixty-five
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -121,6 +121,10 @@ number, are answered in their own record (arXiv:2008.03587v3, Theorems 1.3 and 1
 The conjecture of Nadjafi-Arani, Khodashenas and Ashrafi that eta(G) = Sz(G) - W(G) >= sum_i (2 n_i - 6) over the
 non-complete blocks of a connected graph G, behind wave X313, is proved in its own record (Bonamy, Knor, Luzar, Pinlou
 and Skrekovski, arXiv:1602.05184v1, Theorem 2 and Corollary 3).
+Sintiari and Trotignon's conjecture that (even hole, diamond, K_t)-free graphs have bounded treewidth for every t,
+behind wave X312, is proved by Alecu, Chudnovsky, Hajebi and Spirkl (arXiv:2309.04390v3, Corollary 1.7); the same
+record answers the question behind wave X42 (t = 4) and proves the conjecture behind wave X220 (Theorem 1.10, with
+T the two-edge path).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -693,6 +697,32 @@ ERRATA = [
      "whose non-complete blocks B_1, ..., B_k have orders n_1, ..., n_k, eta(G) = Sz(G) - W(G) >= sum_i (2 n_i - 6). "
      "Theorem 2 (l.87-89) proves eta(G) >= 2n - 6 for every 2-connected non-complete G on n vertices, and l.91 ('As a "
      "consequence of Theorem 2 we obtain that Conjecture 1 is true') with Corollary 3 (l.92-95) gives the conjecture."),
+    ("studies", "std_sintiari_trotignon_conjecture_bounded_treewidth", "solved",
+     "Literature: proved by Alecu, Chudnovsky, Hajebi and Spirkl, 'Induced subgraphs and tree decompositions XI. "
+     "Local structure in even-hole-free graphs of large treewidth', arXiv:2309.04390v3 (7 October 2025): main.tex "
+     "l.187-189 (Corollary 1.7: for all t, (even hole, diamond, K_t)-free graphs have bounded treewidth) is the row's "
+     "statement, 'contains' and 'free' meaning induced (l.109), a hole an induced cycle on at least four vertices "
+     "(l.131); it is Theorem 1.6 (l.181-183) for the two-edge path, whose cone is the diamond (l.179). The row's "
+     "record, arXiv:2307.13684v3, reports the proof in its [6], then a manuscript; Chudnovsky, Gartland, Hajebi, "
+     "Lokshtanov and Spirkl, arXiv:2402.14211v2, arxivable.tex l.178-183 and l.192 ('Conjecture 1.1 was resolved "
+     "in [TWXI]', l.3021-3024: arXiv:2309.04390) confirm it."),
+    ("2001.01607", "Open Question: (even hole, K4, diamond)-free treewidth/cliquewidth", "solved",
+     "Literature: answered in the affirmative by Alecu, Chudnovsky, Hajebi and Spirkl, arXiv:2309.04390v3 (7 "
+     "October 2025): main.tex l.187-189 (Corollary 1.7) at t = 4 says that (even hole, diamond, K_4)-free graphs "
+     "have bounded treewidth, hence bounded cliquewidth; l.152-156 state Sintiari and Trotignon's Conjecture 1.3 "
+     "(every (even hole, K_4)-free graph of large enough treewidth contains the diamond, 'contains' meaning induced, "
+     "l.109), the same statement, and prove it. The pinned review (status partial) reports this structure theorem "
+     "without naming the paper."),
+    ("2203.06775", "Conjecture 1.6", "solved",
+     "Literature: proved by Alecu, Chudnovsky, Hajebi and Spirkl, arXiv:2309.04390v3 (7 October 2025): main.tex "
+     "l.227-229 (Theorem 1.10: for every t >= 1 and every tree T there is Gamma(t, T) such that every G in E_t with "
+     "tw(G) > Gamma contains cone(T)), E_t the K_t-free (C_4, theta, prism, even wheel)-free graphs (l.223, "
+     "l.274-282); for T the two-edge path, cone(T) is the diamond (l.179), so the diamond-free graphs in E_t have "
+     "treewidth at most Gamma(t, T). The record's class C*_t (arXiv:2203.06775v2 source.tex l.177-181) uses a "
+     "narrower even wheel (l.149: a line wheel, or a wheel with at least three pairwise non-adjacent neighbours and "
+     "an even number of them) than arXiv:2309.04390 (l.280: an even number, at least three, of neighbours on a "
+     "hole); in diamond-free graphs the two agree, as X220's Notes show, so C*_t is the diamond-free part of E_t. "
+     "arXiv:2309.04390 does not name this conjecture; the instance is immediate."),
 ]
 
 
@@ -1301,7 +1331,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 62 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 65 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "

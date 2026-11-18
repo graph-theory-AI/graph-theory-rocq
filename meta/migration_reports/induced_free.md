@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py induced_free --details /tmp/mig
 - Canonical: `GTBase.common.induced_free`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
 - Scope: 10 helpers, 10 statements, 33 frozen objects, 101 recorded references.
-- Source checks: 281/281 pass; consistent.
+- Source checks: 284/284 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -21,6 +21,8 @@ Full evidence: `python3 meta/migration_report.py induced_free --details /tmp/mig
 | `GTMisc.conjectures.X41.sparse_linear_pure_pair_statement` / studies:std_conlon_fox_sudakov_sparse_linear_conjecture | `GTMisc.migration.induced_free.x41_statement_compat` |
 | `GTMisc.conjectures.X102.bounded_tree_independence_forbidden_family_statement` / studies:std_bounded_tree_independence_number_conjecture_dall | `GTMisc.migration.induced_free.x102_statement_compat` |
 | `Minor.conjectures.X42.even_hole_k4_diamond_free_bounded_treewidth_statement` / arxiv:2001.01607#00 | `Minor.migration.induced_free.x42_statement_compat` |
+
+Literature status updates after migration (statement text, doc block and the exact iff kept; only the manifest row's status and status_semantics changed): `Minor.conjectures.X42.even_hole_k4_diamond_free_bounded_treewidth_statement` (record `meta/CORPUS_FEEDBACK.md`; row fields `status`, `status_semantics`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py induced_free --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.

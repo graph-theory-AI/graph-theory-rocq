@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py tree_decomposition --details /t
 - Canonical: `GTBase.bag_decompositions.bag_decomposition`.
 - Baseline: `58d6d6090cfe12c200bc4ab64f86858074098294`.
 - Scope: 4 helpers, 11 statements, 64 frozen objects, 151 recorded references.
-- Source checks: 454/454 pass; consistent.
+- Source checks: 457/457 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -22,6 +22,8 @@ Full evidence: `python3 meta/migration_report.py tree_decomposition --details /t
 | `Minor.conjectures.X42.even_hole_k4_diamond_free_bounded_treewidth_statement` / arxiv:2001.01607#00 | `Minor.migration.bag_decompositions.even_hole_k4_diamond_free_bounded_treewidth_statement_compat` |
 | `Minor.conjectures.X67.theta_triangle_free_bounded_degree_treewidth_statement` / arxiv:2001.01607#01 | `Minor.migration.bag_decompositions.theta_triangle_free_bounded_degree_treewidth_statement_compat` |
 | `Minor.conjectures.X95.subgraph_indexed_tree_decomposition_pathwidth_bound_statement` / studies:std_blanco_cook_hatzel_hilaire_illingworth_mccarty_q | `Minor.migration.bag_decompositions.subgraph_indexed_tree_decomposition_pathwidth_bound_statement_compat` |
+
+Literature status updates after migration (statement text, doc block and the exact iff kept; only the manifest row's status and status_semantics changed): `Minor.conjectures.X42.even_hole_k4_diamond_free_bounded_treewidth_statement` (record `meta/CORPUS_FEEDBACK.md`; row fields `status`, `status_semantics`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py tree_decomposition --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.

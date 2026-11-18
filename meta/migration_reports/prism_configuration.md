@@ -7,11 +7,13 @@ Full evidence: `python3 meta/migration_report.py prism_configuration --details /
 - Canonical: `Minor.foundations.prism_configurations.prism_configuration`.
 - Baseline: `29336a8c9d22d7016d665c696c444bfb15dbefb5`.
 - Scope: 2 helpers, 1 statements, 12 frozen objects, 22 recorded references.
-- Source checks: 95/95 pass; consistent.
+- Source checks: 98/98 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
 | `Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement` / arxiv:2203.06775#00 | `Minor.migration.prism_configuration.theta_prism_even_wheel_free_bounded_treewidth_statement_compat` |
+
+Literature status updates after migration (statement text, doc block and the exact iff kept; only the manifest row's status and status_semantics changed): `Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement` (record `meta/CORPUS_FEEDBACK.md`; row fields `status`, `status_semantics`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py prism_configuration --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.

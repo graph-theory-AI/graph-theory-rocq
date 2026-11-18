@@ -327,7 +327,16 @@
         "even_hole_k4_diamond_free_bounded_treewidth_statement": "statement",
         "x42_induced_free": "Legacy.x42_induced_free"
       },
-      "certificate": "Minor.migration.induced_free.x42_statement_compat"
+      "certificate": "Minor.migration.induced_free.x42_statement_compat",
+      "repair": {
+        "direction": "restatus",
+        "doc_block_sha256": "6430e6b2d9f4c43012c930939db756ef52628f8ff5cc497d6296652d3663dab0",
+        "record": "meta/CORPUS_FEEDBACK.md",
+        "row_fields": [
+          "status",
+          "status_semantics"
+        ]
+      }
     },
     {
       "kind": "original-chain",
