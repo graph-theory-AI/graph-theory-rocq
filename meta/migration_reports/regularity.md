@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py regularity --details /tmp/migra
 
 - Canonical: `Hypergraph.foundations.hypergraph_regularity.hg_regular`.
 - Baseline: `7e030f252c859c5334185673b10b69971cab9402`.
-- Scope: 2 helpers, 2 statements, 9 frozen objects, 17 recorded references.
-- Source checks: 79/79 pass; consistent.
+- Scope: 2 helpers, 2 statements, 9 frozen objects, 19 recorded references.
+- Source checks: 81/81 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
