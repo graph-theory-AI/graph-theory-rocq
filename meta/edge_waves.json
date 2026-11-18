@@ -2071,8 +2071,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (Claude Opus 5.5), 2026-11-18: topological-graph-theory implications_X228.v (arxiv:2202.07746#00 => arxiv:2103.05036#00; unconditional: rotation systems of a graph are the pairs of rotations on the darts leaving a closed vertex set and on the rest, faces add, each part is the induced subgraph, and strong induction gives c = 4)",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (second reader of the random embedding expected faces n/3 + 1 => linear in n edge, gc:e125, 2026-11-18)",
+   "reviewed_at": "2026-11-18",
    "note": "The connected half is x228_third_implies_linear_connected (c = 4). For a disconnected G take the connect class S of a vertex: no edge leaves S, so the darts leaving S are stable under the edge reversal and under every rotation system, a rotation system is exactly a pair (its restrictions to the darts leaving S and to the others), and the faces of the product are the faces of each part (e125_rot_pairs, e125_faces_split); hence nrot G = N(S) N(~S) and total G = T(S) N(~S) + N(S) T(~S). The darts of induced S are the darts leaving S, which transports N and T to the induced subgraphs (e125_transport). Strong induction on #|G| with c = 4: induced S is connected, induced ~S has fewer vertices, and 4|S| N N2 + N 4|~S| N2 = 4 n N N2."
   },
   "real_roots_of_the_flow_polynomial_statement->five_flow_statement:implies": {
