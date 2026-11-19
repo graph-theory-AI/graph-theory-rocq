@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2303,
-      "cross_file_files": 1140,
+      "cross_file_declarations": 2310,
+      "cross_file_files": 1142,
       "implicit_use": 4,
       "packages_without_project": [
         "graph-theory-base"
@@ -19,7 +19,7 @@
       ],
       "undecided_files": 0,
       "unlisted_files": 0,
-      "with_cross_file": 377,
+      "with_cross_file": 378,
       "with_own_certificate": 511,
       "with_same_file": 448
     },
@@ -8766,12 +8766,14 @@
         "cross_file": {
           "certificates_of": [],
           "declarations": [
+            "atlas/theories/conjectures/implications_A1.v:<line 535>",
             "extremal-graph-theory/theories/conjectures/grounding_D2tur.v:<line 243>",
             "extremal-graph-theory/theories/conjectures/grounding_D2tur.v:<line 252>",
             "extremal-graph-theory/theories/conjectures/grounding_D2tur.v:clique_count_K0",
             "extremal-graph-theory/theories/conjectures/grounding_D2tur.v:clique_count_gt0"
           ],
           "files": [
+            "atlas/theories/conjectures/implications_A1.v",
             "extremal-graph-theory/theories/conjectures/grounding_D2tur.v"
           ],
           "statements": [],
@@ -8793,6 +8795,7 @@
         },
         "provider_unlisted": false,
         "require_chain": {
+          "atlas/theories/conjectures/implications_A1.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_D2tur.v": "unknown"
         },
         "same_file": {
@@ -20584,8 +20587,17 @@
         "alias": "Minor.conjectures.X175.x175_path_internal",
         "cross_file": {
           "certificates_of": [],
-          "declarations": [],
-          "files": [],
+          "declarations": [
+            "atlas/theories/conjectures/implications_A1.v:<line 468>",
+            "atlas/theories/conjectures/implications_A1.v:<line 484>",
+            "atlas/theories/conjectures/implications_A1.v:<line 488>",
+            "atlas/theories/conjectures/implications_A1.v:<line 500>",
+            "atlas/theories/conjectures/implications_A1.v:<line 504>",
+            "atlas/theories/conjectures/implications_A1.v:e054_last_step"
+          ],
+          "files": [
+            "atlas/theories/conjectures/implications_A1.v"
+          ],
           "statements": [],
           "undecided": [],
           "unlisted": []
@@ -20604,7 +20616,9 @@
           ]
         },
         "provider_unlisted": false,
-        "require_chain": {},
+        "require_chain": {
+          "atlas/theories/conjectures/implications_A1.v": "unknown"
+        },
         "same_file": {
           "declarations": [
             "x175_Kt_subdivision"

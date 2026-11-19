@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py internal_vertices --details /tm
 
 - Canonical: `GTBase.walks_paths.seq_interior`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
-- Scope: 6 helpers, 10 statements, 32 frozen objects, 127 recorded references.
-- Source checks: 296/296 pass; consistent.
+- Scope: 6 helpers, 10 statements, 32 frozen objects, 131 recorded references.
+- Source checks: 300/300 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py partite_uniform --details /tmp/
 - Canonical: `Hypergraph.foundations.hypergraph.hg_partite_uniform`.
 - Baseline: `e53098e84635d8612e34e5d239fd13fe5afa9fb8`.
 - Scope: 3 helpers, 6 statements, 22 frozen objects, 76 recorded references.
-- Source checks: 207/207 pass; consistent.
+- Source checks: 210/210 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -17,6 +17,8 @@ Full evidence: `python3 meta/migration_report.py partite_uniform --details /tmp/
 | `Hypergraph.conjectures.X72.ryser_intersecting_partite_cover_gap_statement` / studies:std_abu_khazneh_bar_t_pokrovskiy_szab_question_on_co | `Hypergraph.migration.partite_uniform.ryser_intersecting_partite_cover_gap_statement_compat` |
 | `Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement` / studies:std_aharoni_charbit_howard_conjecture_on_matchings_i | `Hypergraph.migration.partite_uniform.regular_tripartite_hypergraph_matching_lower_bound_statement_compat` |
 | `Hypergraph.conjectures.X225.kpartite_hypergraph_turan_exponent_dmax_statement` / arxiv:2401.00359#01 | `Hypergraph.migration.partite_uniform.kpartite_hypergraph_turan_exponent_dmax_statement_compat` |
+
+Literature status updates after migration (statement text, doc block and the exact iff kept; only the manifest row's status and status_semantics changed): `Hypergraph.conjectures.X6.lovasz_r_partite_matching_deletion_statement` (record `meta/CORPUS_FEEDBACK.md`; row fields `status`, `status_semantics`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py partite_uniform --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.

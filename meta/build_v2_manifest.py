@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Sixty-six
+corrections are applied explicitly (ERRATA below) since the review files predate them. 117
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -127,6 +127,34 @@ record answers the question behind wave X42 (t = 4) and proves the conjecture be
 T the two-edge path).
 DeVos et al.'s matroid Conjecture 12 (arxiv:1806.00825#01) is false as printed: its own record refutes it with the
 uniform matroid U_{n-1,m} (arXiv:1806.00825v4, main.tex l.314).
+Seven topological studies rows were settled before the corpus pin: Richter's bounded maximum degree conjecture
+for c-crossing-critical graphs is refuted for every c >= 13 (arXiv:1903.05363v2, Corollary 1.3); the LCGD
+conjecture of Gross, Robbins and Tucker, in its two rows, is refuted (arXiv:2405.10854v2, Theorems 3 and 9);
+Richter's cone crossing-number question is answered negatively at n = 6 (arXiv:1608.07680v1); Robertson's
+4-flow conjecture for the torus and Grunbaum's torus conjecture, in its refined row and in the row behind wave
+X307, are proved (arXiv:2505.07002v1, Theorem 1.4 and Conjecture 2).
+Twelve studies rows were settled before the corpus pin in their own deposited records: Dujmovic, Joret, Morin,
+Norin and Wood's orthogonal tree-decomposition question is answered negatively by Felsner, Joret, Micek, Trotter
+and Wiechert, as arXiv:2404.05992v1 reports; Alspach's perimeter gap question (arXiv:2602.16333v1) and Fomin and
+Thilikos' pathwidth approximation problem (arXiv:2008.00779v4) are answered affirmatively; Grunbaum's edge
+density of 4-critical planar graphs is L = 2.5 (arXiv:2311.03132v1); two conjectures of Asgarli, Krehbiel,
+Levinson and Russell (arXiv:2402.04237v2), two of Esperet and Ochem (arXiv:1710.02727v1), Kelly and Postle's
+(arXiv:2501.00567v1), Kohayakawa and Kreuter's (arXiv:2402.03045v2), Mohar's projective planar snark conjecture
+(arXiv:2405.16586v1) and Pardey and Rautenbach's (arXiv:2604.09449v2) are proved.
+Three encoded studies rows were settled before the corpus pin in their own records: Lovasz's r-partite matching
+conjecture behind wave X6 (arXiv:2505.05339v2, Theorem 1.3) and Bosek, Dudek, Farnik, Grytczuk and Mazur's hat
+guessing conjecture behind wave X99 (arXiv:2107.05995v2, Theorem 1.1) are disproved, and the avoidable path
+conjecture of Beisegel, Chudnovsky, Gurvich, Milanic and Servatius behind wave X91 (arXiv:1908.03788v1, Theorem
+1.9) is proved; the statements of X6 and X91 carry restatus repairs in their migration families.
+Twenty-nine studies alias rows whose canonical row is settled or partial carry the status the pinned
+sources fix (lit46; Arthur's alias survey, alias-survey-by-arthur df65820e): 21 have their canonical's
+text and take its status, except the four aliases of erdos:762, 641, 632 and 808, whose pinned prize
+lines read DISPROVED and which are disproved; eight differ in text: the Barat-Thomassen conjecture is
+solved in its own record (arXiv:1603.00197) while its stronger canonical is disproved, three weaker
+aliases are solved, the asymptotic Alon-Wei conjecture is partial, the hypergraph edge-statistics
+conjecture is solved as its canonical's review reports, and the two statements that every chi-bounded
+class is polynomially chi-bounded are disproved. Two alias rows stay open (Esperet's H-free conjecture
+and the hat-guessing degeneracy question).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -738,6 +766,315 @@ ERRATA = [
      "summary also reports (not deposited, not checked here) that McGuinness (arXiv:2601.17624) extends it to all "
      "regular matroids: every simple regular matroid of rank r with r+1 colour classes of size at least 2 contains a "
      "rainbow circuit of size at most ceil((r+1)/2). These are the cases behind the pinned review's partial."),
+    ("studies", "std_richter_s_bounded_maximum_degree_conjecture", "disproved",
+     "Literature: refuted in its own record by Bokal, Dvorak, Hlineny, Leanos, Mohar and Wiedera, 'Bounded maximum "
+     "degree conjecture holds precisely for c-crossing-critical graphs with c <= 12', arXiv:1903.05363v2 (5 May 2021): "
+     "Richter's conjecture (1903.05363v2.txt l.102-103, main_journal_r0.tex l.290-292), for every positive integer c "
+     "some D(c) bounds the maximum degree of every c-crossing-critical graph, is the row's statement; Corollary 1.3 "
+     "(txt l.148-149, tex l.377-382) gives, for every c >= 13 and all d and m, a 3-connected c-crossing-critical graph "
+     "with at least m vertices of degree at least d, so no D(c) exists for c >= 13. Theorem 1.1 (txt l.137-138) "
+     "proves the bound for c <= 12; the record recalls Dvorak and Mohar's non-constructive disproof for c >= 171 (txt "
+     "l.121-122)."),
+    ("studies", "std_log_concavity_genus_distribution_conjecture", "disproved",
+     "Literature: refuted in its own record by Mohar, 'Strong log-convexity of genus sequences', arXiv:2405.10854v2 "
+     "(27 December 2025): Conjecture 1 (2405.10854v2.txt l.57-58, LogConcavityConjecture_revised.tex l.82-85), the "
+     "genus distribution of every graph is log-concave (Gross, Robbins and Tucker, 1989), is the row's statement; "
+     "'Theorems 3 and 9 ... refute the LCGD Conjecture' (txt l.74). Theorem 3 (txt l.99-100, tex l.111-114) gives, "
+     "for every g >= 0 and k >= 2, a 4-connected graph of genus g whose genus sequence has the k strictly log-convex "
+     "terms a_{g+1}, a_{g+3}, ..., a_{g+2k-1}, each one a term where log-concavity fails (txt l.87-89)."),
+    ("studies", "std_lcgd_conjecture_log_concavity_of_genus_distribut", "disproved",
+     "Literature: refuted by Mohar, arXiv:2405.10854v2 (27 December 2025), the record of the studies row "
+     "std_log_concavity_genus_distribution_conjecture, which states the same conjecture of Gross, Robbins and Tucker: "
+     "this row is its genus-polynomial form (the coefficients g_k(G) of the genus polynomial are the genus "
+     "distribution), and Theorem 3 (2405.10854v2.txt l.99-100) gives 4-connected graphs with strictly log-convex terms "
+     "in their genus sequence. This row's own record, Carr, Dhaliwal and Mohar, arXiv:2212.09971 (2022), predates the "
+     "disproof and is not deposited."),
+    ("studies", "std_richter_s_cone_crossing_number_question", "disproved",
+     "Literature: answered negatively in its own record by Alfaro, Arroyo, Dernar and Mohar, 'The crossing number of "
+     "the cone of a graph', arXiv:1608.07680v1 (27 August 2016): Richter's question (1608.07680v1.txt l.49-51 and "
+     "l.60, cone_arxiv.tex l.184), whether cr(G) >= cr(K_n) with n >= 5 implies cr(CG) >= cr(K_{n+1}) for the cone "
+     "CG, is the row's statement; the answer is positive for n = 5 (txt l.63-66) and negative for n = 6 (txt "
+     "l.66-69, tex l.190-191): the simple graph of Figure 1 has crossing number 3 = cr(K_6) and a cone of crossing "
+     "number at most 6 < cr(K_7) = 9."),
+    ("studies", "std_robertson_s_4_flow_conjecture_for_the_torus", "solved",
+     "Literature: proved in its own record by Inoue, Kawarabayashi, Miyashita, Mohar and Sonobe, 'Three-edge-coloring "
+     "(Tait coloring) cubic graphs on the torus: A proof of Grunbaum's conjecture', arXiv:2505.07002v1 (11 May 2025): "
+     "Conjecture 3 (2505.07002v1.txt l.142-143, 4CT.tex l.196-197), every 2-edge-connected graph in the torus of "
+     "representativity at least 3 has a nowhere-zero 4-flow (Robertson, 1994), is the row's statement; the record "
+     "states that its Theorem 1.4 implies it (txt l.140-141; 'by Theorem 1.4, r = 3 works for the torus', l.148-149), "
+     "and its appendix (section G) proves that a 2-edge-connected toroidal graph that is not Petersen-like has a "
+     "nowhere-zero 4-flow; the step that a Petersen-like toroidal graph has representativity below 3 is not spelled "
+     "out. Some of the proofs use extensive computer verification (txt l.27, l.37)."),
+    ("studies", "std_gr_nbaum_s_conjecture_torus_cubic_graphs_refined", "solved",
+     "Literature: proved in its own record by Inoue, Kawarabayashi, Miyashita, Mohar and Sonobe, arXiv:2505.07002v1 "
+     "(11 May 2025): Conjecture 2 (2505.07002v1.txt l.99-101, 4CT.tex l.163-165), Grunbaum's conjecture that a "
+     "2-connected cubic graph embedded in the torus that is not 3-edge-colorable has two edges on the same face whose "
+     "removal gives a planar graph with the four endpoints on the boundaries of two faces, is the row's statement; "
+     "with Theorem 1.3 (txt l.120-121: the only toroidal snarks are the Petersen graph, its dot products and the two "
+     "Blanusa families) and the classification of their embeddings of genus 1, 'we obtain a proof of Grunbaum's "
+     "Conjecture' (txt l.118-119, tex l.174). Some of the proofs use extensive computer verification (txt l.27, "
+     "l.37)."),
+    ("studies", "std_gr_nbaum_s_conjecture_torus_cubic_graphs", "solved",
+     "Literature: proved by Inoue, Kawarabayashi, Miyashita, Mohar and Sonobe, arXiv:2505.07002v1 (11 May 2025), the "
+     "record of the refined row studies:std_gr_nbaum_s_conjecture_torus_cubic_graphs_refined: its Conjecture 2 "
+     "(2505.07002v1.txt l.99-101), proved there ('we obtain a proof of Grunbaum's Conjecture', txt l.118-119), gives "
+     "two edges on the same face whose removal gives a planar graph; this row's statement (X307's "
+     "grunbaum_torus_cubic_statement) is that conclusion with the same-face and face-boundary clauses dropped, so the "
+     "record's theorem implies it (a planar graph has no K_5 and no K_(3,3) minor; genus 0 adds no graph, a "
+     "2-connected cubic planar graph being 3-edge-colorable, txt l.68). This row's own record, arXiv:2405.16586v1, "
+     "called it open."),
+    ("studies", "std_dujmovi_joret_morin_norin_wood_problem_orthogona", "disproved",
+     "Literature: answered negatively before the pin, as its own record reports (Chaniotis, Miraftab and Spirkl, "
+     "'Graphs of bounded chordality', arXiv:2404.05992v1, 9 April 2024): Problem 3.3 (2404.05992v1.txt l.550-552, "
+     "chordality.tex l.816-820), Open Problem 3 of Dujmovic, Joret, Morin, Norin and Wood, is the row's question; "
+     "'Felsner, Joret, Micek, Trotter and Wiechert, answered Problem 3.3 in the negative' (txt l.556-557), and the "
+     "record restates their theorem as Theorem 3.4 (txt l.560-563, tex l.832-835): for every k, a graph of chromatic "
+     "number at least k with a tree-decomposition and a path-decomposition that are 2-orthogonal, so no f(2) exists "
+     "(a path-decomposition is a tree-decomposition). The proof is in the cited paper (Electronic Notes in Discrete "
+     "Mathematics 61 (2017)), not in the record."),
+    ("studies", "std_alspach_s_question_on_the_perimeter_gap_of_verte", "solved",
+     "Literature: answered in the affirmative in its own record by Bucic, Hendrey, Mohar, Steiner and Yepremyan, "
+     "'Long cycles in vertex transitive digraphs', arXiv:2602.16333v1 (18 February 2026): the record reads Alspach's "
+     "question (Question 7 of Alspach, 1981) as whether, for every constant C, some connected vertex transitive "
+     "digraph has perimeter gap larger than C (2602.16333v1.txt l.89-94), and answers it ('We answer this question in "
+     "the affirmative', l.22): Theorem 1.1 (txt l.96-97, main.tex l.157) gives, for infinitely many n, a connected "
+     "vertex transitive digraph on n vertices with perimeter gap at least (1 - o(1)) ln n. So the maximum perimeter "
+     "gap is unbounded along infinitely many n, which is the record's reading of 'growing'."),
+    ("studies", "std_asgarli_krehbiel_levinson_russell_conjecture_the", "solved",
+     "Literature: proved in its own record by Hogan, Scott, Tamitegama and Tan, 'A note on graphs of k-colourings', "
+     "arXiv:2402.04237v2 (29 February 2024): Conjecture 2 (2402.04237v2.txt l.93-94, chromaticpolys.tex l.153-156), "
+     "Conjecture 6.1 of Asgarli, Krehbiel, Levinson and Russell, is the row's statement; 'we confirm both conjectures "
+     "by proving a stronger result' (txt l.102): Theorem 4 (txt l.104-105, tex l.165), for a graph G on n vertices "
+     "and any k > 5n^2, the colouring graph C_k(G) determines G up to isomorphism."),
+    ("studies", "std_asgarli_krehbiel_levinson_russell_conjecture_fin", "solved",
+     "Literature: proved in its own record by Hogan, Scott, Tamitegama and Tan, arXiv:2402.04237v2 (29 February "
+     "2024): Conjecture 3 (2402.04237v2.txt l.98-100, chromaticpolys.tex l.158-160), Conjecture 6.2 of Asgarli, "
+     "Krehbiel, Levinson and Russell, is the row's statement; 'we confirm both conjectures by proving a stronger "
+     "result' (txt l.102): by Theorem 4 (txt l.104-105, tex l.165) the single colouring graph C_k(G) with "
+     "k = 5n^2 + 1, n the order of G, determines G up to isomorphism, so f(G) = 5n^2 + 1 suffices."),
+    ("studies", "std_esperet_ochem_conjecture_3_of_surface_graph_clas", "solved",
+     "Literature: proved in its own record by Dvorak and Norin, 'Islands in minor-closed classes. I. Bounded "
+     "treewidth and separators', arXiv:1710.02727v1 (7 October 2017): Corollary cor-surface (IslandsI4.tex "
+     "l.224-226) gives, for every surface Sigma, chi_star(G(Sigma)) = chi^l_star(G(Sigma)) = col_star(G(Sigma)) = 4, "
+     "the lower bounds being tight 'as conjectured by Esperet and Ochem' (l.222, their Conjecture 3; the abstract, "
+     "l.47-49: 'proving the conjecture of Esperet and Ochem'). The row's chi^star is the record's chi_star, the "
+     "clustered chromatic number (l.44-46, l.66-67); the corollary gives the value 4 for the clustered coloring "
+     "number col_star (l.96-97) as well."),
+    ("studies", "std_esperet_ochem_conjecture_7_col_of_surface_graph", "solved",
+     "Literature: proved in its own record by Dvorak and Norin, arXiv:1710.02727v1 (7 October 2017): Corollary "
+     "cor-girth (IslandsI4.tex l.231-233) gives, for every surface Sigma, chi_star(G_5(Sigma)) = "
+     "chi^l_star(G_5(Sigma)) = col_star(G_5(Sigma)) = 2, G_5(Sigma) being the graphs of girth at least five "
+     "embeddable on Sigma (l.228), the bound that l.229 says Esperet and Ochem conjectured (their Conjecture 7; "
+     "the sentence writes G(Sigma) for G_5(Sigma)). The row's col^star is the record's col_star, the clustered "
+     "coloring number (l.96-97)."),
+    ("studies", "std_fomin_thilikos_open_problem_approximating_pathwi", "solved",
+     "Literature: answered in the affirmative in its own record by Groenland, Joret, Nadara and Walczak, "
+     "'Approximating pathwidth for graphs of small treewidth', arXiv:2008.00779v4 (8 December 2022): Fomin and "
+     "Thilikos 'pointed out that even obtaining an approximation of pathwidth when parameterized by treewidth is "
+     "open' (arxiv_v4.tex l.174), and 'Our approximation algorithm is a solution to the latter problem' (l.175): the "
+     "abstract (l.83-84) and the corollary labelled cor:approx (l.158-162) give a polynomial-time algorithm computing "
+     "a path decomposition of width O(t sqrt(log t) p), t the treewidth and p the pathwidth of G. Version 4 follows "
+     "the preliminary SODA 2021 version, which 'contains two serious errors' (l.35-36)."),
+    ("studies", "std_gr_nbaum_s_problem_on_edge_density_of_4_critical", "solved",
+     "Literature: answered in its own record by Dvorak and Feghali, 'Solution to a problem of Grunbaum on the edge "
+     "density of 4-critical planar graphs', arXiv:2311.03132v1 (6 November 2023): Grunbaum's question (txt l.63-66), "
+     "the precise value of L = limsup |E(G)|/|V(G)| over all 4-critical planar graphs G, is the row's problem; "
+     "Theorem 1 (txt l.74, main.tex l.99) gives L = 2.5. The upper bound L <= 2.5 is Koester's (1991), as the record "
+     "reports (txt l.71-72: 'The object of this note is to show that Koester's bound is best possible'); the record "
+     "proves the matching construction."),
+    ("studies", "std_kelly_postle_conjecture_occupancy_in_triangle_fr", "solved",
+     "Literature: proved in its own record by Martinsson and Steiner, 'Local Shearer bound', arXiv:2501.00567v1 (31 "
+     "December 2024): Conjecture 1.1 (2501.00567v1.txt l.112-117, main.tex l.123-124), Kelly and Postle's local "
+     "fractional Shearer/Molloy conjecture, is the row's statement; 'we fully resolve Conjecture 1.1' (txt l.153): "
+     "Theorem 1.2 (txt l.157-162, tex l.137) gives, for every triangle-free graph G, a probability "
+     "distribution on its independent sets with P[v in I] >= (1 - o(1)) ln(d(v))/d(v) for every vertex v, the o(1) a "
+     "function of d(v) tending to 0."),
+    ("studies", "std_kohayakawa_kreuter_conjecture", "solved",
+     "Literature: proved in its own record by Christoph, Martinsson, Steiner and Wigderson, 'Resolution of the "
+     "Kohayakawa--Kreuter conjecture', arXiv:2402.03045v2 (20 August 2024), with results it cites: the Conjecture "
+     "labelled conj:KK (main.tex l.141-150) is the row's statement; the theorem of Bowtell, Hancock and Hyde and of "
+     "Kuperwasser, Samotij and Wigderson (l.154-155) reduces it to a deterministic condition (their result gives the "
+     "0-statement; the 1-statement is Mousset, Nenadov and Samotij's, l.155), and the record's theorem labelled "
+     "thm:det lem (l.162-164) proves that condition, 'thus completing the proof' (l.161)."),
+    ("studies", "std_mohar_s_conjecture_on_projective_planar_snarks", "solved",
+     "Literature: proved in its own record by Inoue, Kawarabayashi, Miyashita, Mohar and Sonobe, 'Three-edge-coloring "
+     "projective planar cubic graphs: A generalization of the Four Color Theorem', arXiv:2405.16586v1 (26 May 2024): "
+     "'Mohar conjectured in 2004 ... that the only snark that is embeddable on the projective plane is the Petersen "
+     "graph' and 'The main result of this paper verifies this conjecture' (2405.16586v1.txt l.101-105); Theorem 1.2 "
+     "(txt l.113-115, main.tex l.171): the only snark embeddable in the projective plane is the Petersen graph, a "
+     "snark being a cyclically 4-edge-connected cubic graph of girth at least 5 that is not 3-edge-colorable (txt "
+     "l.87-88). Some of the proofs use extensive computer verification (txt l.36)."),
+    ("studies", "std_pardey_rautenbach_conjecture_on_colour_balanced", "solved",
+     "Literature: proved in its own record by Hogan, Scott and Tsarev, 'Colour-balanced subgraphs', "
+     "arXiv:2604.09449v2 (11 July 2026): Conjecture 1.1 (2604.09449v2.txt l.78-79, main.tex l.84-85), Conjecture 1 "
+     "of Pardey and Rautenbach, is the row's statement; the record 'resolves the conjecture of Pardey and Rautenbach' "
+     "(txt l.86): Theorem 1.2 (txt l.87-89, tex l.88-90) gives, for every colour-balanced k-edge-colouring of K_2n "
+     "with n = kt, a perfect matching M with f_c(M) = O(k^2)."),
+    ("studies", "std_lov_sz_conjecture_on_r_partite_hypergraph_matchi", "disproved",
+     "Literature: refuted in its own record by Clow, Haxell and Mohar, 'A Counterexample to a Conjecture of Lovasz', "
+     "arXiv:2505.05339v2 (10 June 2025): Conjecture 1.2 (2505.05339v2.txt l.62-63, main.tex l.103-105), Lovasz's "
+     "conjecture of 1975, is the row's statement; 'The primary contribution of this paper is to prove that "
+     "Conjecture 1.2 is false' (txt l.92): Theorem 1.3 (txt l.94-95, tex l.128-130) gives a 3-partite, 3-uniform "
+     "hypergraph in which deleting any pair of vertices does not reduce the matching number, the line hypergraph of "
+     "the Biggs-Smith graph (l.19-21), tripartite since that cubic graph is 3-edge-colourable (l.206-207). At r = 3 "
+     "this refutes the encoded statement of wave X6 exactly."),
+    ("studies", "std_beisegel_chudnovsky_gurvich_milani_servatius_con", "solved",
+     "Literature: proved in its own record by Bonamy, Defrain, Hatzel and Thiebaut, 'Avoidable paths in graphs', "
+     "arXiv:1908.03788v1 (10 August 2019): the conjecture of Beisegel, Chudnovsky, Gurvich, Milanic and Servatius "
+     "that for every positive integer k every graph either is P_k-free or contains an avoidable path on k vertices "
+     "(1908.03788v1.txt l.70-72, main.tex l.296-297) is the row's statement, a path being avoidable if it is induced "
+     "and no extension xPy of it is failing, that is, contained in no induced cycle (Definitions 1.5-1.7, txt "
+     "l.60-68); 'Here, we confirm the aforementioned conjecture' (txt l.85): Theorem 1.9 (txt l.87-88, tex "
+     "l.314-316), proved through the stronger Theorem 2.4 of Section 2 (l.90-91)."),
+    ("studies", "std_bosek_dudek_farnik_grytczuk_mazur_conjecture_hat", "disproved",
+     "Literature: refuted in its own record by Alon and Chizewer, 'On the Hat Guessing Number of Graphs', "
+     "arXiv:2107.05995v2 (21 July 2021): the conjecture of Bosek, Dudek, Farnik, Grytczuk and Mazur that the hat "
+     "guessing number of any graph is at most its Hadwiger number (2107.05995v2.txt l.58-60, main.tex l.117-121) is "
+     "the row's statement; Theorem 1.1 (txt l.53, tex l.104-107, proved from txt l.93) gives a planar graph with hat "
+     "guessing number 12, which the record calls 'of course, a counterexample to that as well' (txt l.59-60); the "
+     "standard fact behind that phrase, which the record does not state, is that a planar graph has no K_5 minor "
+     "(Wagner), so its Hadwiger number is at most 4. With q = 12 this refutes the encoded statement of wave X99 "
+     "exactly."),
+    ("studies", "std_bar_t_thomassen_conjecture", "solved",
+     "Literature: proved in its own record, not by its canonical. Alias of arxiv:1507.08208#00, whose text is "
+     "stronger (edge-connectivity f(Delta_T) and minimum degree f(e(T)), e(T) the size of T) and is disproved "
+     "(Klimosova and Thomasse, arXiv:1803.03704, as the canonical's pinned review reports); the alias is the "
+     "Barat-Thomassen conjecture itself (a constant c_T for each tree T), which its own record arXiv:1603.00197 "
+     "(Bensmail, Harutyunyan, Le, Merker and Thomasse, 'A Proof of the Barat-Thomassen Conjecture', pinned "
+     "extraction: proves the full statement) settles."),
+    ("studies", "std_bensmail_et_al_tree_t_decomposition_conjecture", "disproved",
+     "Literature: alias of arxiv:1507.08208#00 with its text (the conditions reordered); its canonical's status, "
+     "from the canonical's pinned review (graph-conjectures b72c5857, 1507.08208__00, disproved): Klimosova and "
+     "Thomasse (arXiv:1803.03704) show that no such f exists for trees of maximum degree 3."),
+    ("studies", "std_small_conjecture_twin_width", "disproved",
+     "Literature: alias of arxiv:2006.09877#00 with its text (every small hereditary class has bounded twin-width); "
+     "its canonical's status, from the canonical's pinned review (graph-conjectures b72c5857, 2006.09877__00, "
+     "disproved): Bonnet, Geniet, Tessera and Thomasse, Twin-width VII (arXiv:2204.12330)."),
+    ("studies", "std_aboulker_charbit_naserasr_heroic_set_conjecture", "partial",
+     "Literature: alias of arxiv:2009.13319#01 with its text (verbatim); its canonical's status, from the "
+     "canonical's pinned review (graph-conjectures b72c5857, 2009.13319__01, partial): the 'only if' direction is in "
+     "the source paper and several cases of the 'if' direction are proved."),
+    ("studies", "std_alon_wei_conjecture", "partial",
+     "Literature: alias of arxiv:2108.02685#00, whose text is the exact form, m(H,k) within 2 of n/(d+1); the alias "
+     "is the weaker asymptotic form m(H,k) = (1 + o(1)) n/(d+1) for d = o(n) (Alon and Wei's Conjecture 1.2). "
+     "Partial by its own record arXiv:2207.13651 (Fox, Luo and Pham; pinned extraction: Theorem 1.3 confirms this "
+     "form for d = o(n/(log n)^12)), which the canonical's pinned review (2108.02685__00, partial) also reports."),
+    ("studies", "std_bonamy_perrett_path_decomposition_question", "partial",
+     "Literature: alias of arxiv:1609.06257#00 with its text; its canonical's status, from the canonical's pinned "
+     "review (graph-conjectures b72c5857, 1609.06257__00, partial): settled for planar graphs and for 2-degenerate "
+     "graphs, open in general."),
+    ("studies", "std_dvo_k_ossona_de_mendez_wu_problem_fractional_chr", "partial",
+     "Literature: alias of arxiv:1812.07327#00 with its text (g(n), the largest ratio chi_f(G)/rho(G) over n-vertex "
+     "graphs, is the smallest g with chi_f(G) <= rho(G) g(n) on n vertices); its canonical's status, from the "
+     "canonical's pinned review (graph-conjectures b72c5857, 1812.07327__00, partial): Steiner (arXiv:2411.16465) "
+     "gives g(n) = (log n)^(1 - o(1)), the exact function remaining open."),
+    ("studies", "std_fox_sudakov_conjecture_polynomial_r_dl_property", "partial",
+     "Literature: alias of arxiv:1803.03588#00 with its proposition (the polynomial Rodl property of H-free graphs, "
+     "here in its epsilon^c-homogeneous-set form); its canonical's status, from the canonical's pinned review "
+     "(graph-conjectures b72c5857, 1803.03588__00, partial)."),
+    ("studies", "std_fox_sudakov_polynomial_density_conjecture", "partial",
+     "Literature: alias of arxiv:1803.03588#00 with its text (delta in Rodl's theorem polynomial in the density "
+     "parameter); its canonical's status, from the canonical's pinned review (graph-conjectures b72c5857, "
+     "1803.03588__00, partial)."),
+    ("studies", "std_fox_sudakov_polynomial_r_dl_conjecture", "partial",
+     "Literature: alias of arxiv:1803.03588#00 with its proposition (every hereditary family other than all graphs "
+     "lies in the H-free graphs for some H, so its polynomial Rodl property is the canonical's); its canonical's "
+     "status, from the canonical's pinned review (graph-conjectures b72c5857, 1803.03588__00, partial)."),
+    ("studies", "std_majority_2_colouring_recognition_question_kreutz", "partial",
+     "Literature: alias of arxiv:1608.03040#05 with its text (verbatim); its canonical's status, from the "
+     "canonical's pinned review (graph-conjectures b72c5857, 1608.03040__05, partial): recognising majority "
+     "2-colourable digraphs is NP-complete (arXiv:1911.01954), the characterisation half remaining open."),
+    ("studies", "std_mis_complexity_on_even_hole_free_graphs", "partial",
+     "Literature: alias of arxiv:1912.11246#01 with its text; its canonical's status, from the canonical's pinned "
+     "review (graph-conjectures b72c5857, 1912.11246__01, partial): quasi-polynomial time (arXiv:2407.08927), the "
+     "polynomial question remaining open."),
+    ("studies", "std_polynomial_time_solvability_of_totally_modular_i", "partial",
+     "Literature: alias of arxiv:1908.06300#00 with its proposition (totally Delta-modular means subdeterminants "
+     "bounded by Delta); its canonical's status, from the canonical's pinned review (graph-conjectures b72c5857, "
+     "1908.06300__00, partial)."),
+    ("studies", "std_totally_modular_integer_programming_conjecture_a", "partial",
+     "Literature: alias of arxiv:1908.06300#00 with its proposition (integer programs whose subdeterminants lie in "
+     "{-Delta, ..., Delta}); its canonical's status, from the canonical's pinned review (graph-conjectures b72c5857, "
+     "1908.06300__00, partial)."),
+    ("studies", "std_aboulker_adler_kim_sintiari_trotignon_conjecture", "solved",
+     "Literature: alias of arxiv:2008.05504#01, whose text asks, read literally, for an induced (k x k)-wall or the "
+     "line graph of one; the alias asks for an induced subdivision of the wall or the line graph of one. Solved: the "
+     "alias's subdivided form is what Korhonen proved (arXiv:2203.13233), as the canonical's pinned review "
+     "(graph-conjectures b72c5857, 2008.05504__01, solved) reports. The canonical's literal text is not the ground: "
+     "read literally it fails, a heavily subdivided wall having maximum degree 3, large treewidth and no induced "
+     "unsubdivided wall."),
+    ("studies", "std_aboulker_bang_jensen_bousquet_charbit_havet_maff", "solved",
+     "Literature: alias of arxiv:1605.07411#02 (Conjecture 5: Forb(P) chi-bounded for every non-exceptional set P of "
+     "orientations of P_4); the alias is its case P = {the orientation with arcs right, left, left}, so it is "
+     "implied by its canonical. Solved, from the canonical's pinned review (graph-conjectures b72c5857, "
+     "1605.07411__02, solved): Cook, Masarik, Pilipczuk, Reinald and Souza, with the source's Corollary 35."),
+    ("studies", "std_dvo_k_ossona_de_mendez_wu_problem_on_fractional", "solved",
+     "Literature: alias of arxiv:1812.07327#01 with its text (verbatim); its canonical's status, from the "
+     "canonical's pinned review (graph-conjectures b72c5857, 1812.07327__01, solved): answered affirmatively by "
+     "Steiner (arXiv:2411.16465, Theorem 1.5)."),
+    ("studies", "std_edge_statistics_conjecture_alon_hefetz_krivelevi", "solved",
+     "Literature: alias of arxiv:1805.06848#00 with its text (the o_k(1) form of ind(k,l) <= 1/e + epsilon); its "
+     "canonical's status, from the canonical's pinned review (graph-conjectures b72c5857, 1805.06848__00, solved): "
+     "Kwan, Sudakov and Tran, and Fox and Sauermann (arXiv:1809.01352)."),
+    ("studies", "std_erd_s_gimbel_straight_conjecture", "disproved",
+     "Literature: alias of erdos:762 with its text (no K_5 and zeta(G) >= 4 imply chi(G) <= zeta(G) + 2). The "
+     "canonical's 'solved' in the pinned erdos record is the erdos site's 'resolved': its prize line reads "
+     "'DISPROVED (LEAN) This has been solved in the negative'; the studies corpus records a negative answer as "
+     "disproved, as lit44 did. Its own record disproves it: arXiv:2408.02400v2, Conjecture 1.2 (2408.02400v2.txt "
+     "l.68-69) is the row's statement, disproved (l.80) by Theorem 1.4 (l.82-83): infinitely many graphs with clique "
+     "number less than 5, zeta(G) = 4 and chi(G) = 7."),
+    ("studies", "std_erd_s_hajnal_edge_disjoint_cycles_conjecture", "disproved",
+     "Literature: alias of erdos:641 with its question. The canonical's 'solved' in the pinned erdos record is the "
+     "erdos site's 'resolved': its prize line reads 'DISPROVED This has been solved in the negative'; the studies "
+     "corpus records a question answered no as disproved, as lit44 did. Its own record answers it negatively: "
+     "arXiv:2410.02437v1 (Janzer, Steiner and Sudakov), Problem 1.1 (2410.02437v1.txt l.35-36) is the row's "
+     "question, and Theorem 1.2 (l.65-66) gives graphs of large fractional chromatic number with no 4-regular "
+     "subgraph, so no F(r) exists for r >= 2 (l.12-13)."),
+    ("studies", "std_erd_s_rubin_taylor_am_bm_conjecture", "disproved",
+     "Literature: alias of erdos:632 with its text (every (a:b)-choosable graph is (am:bm)-choosable). The "
+     "canonical's 'solved' in the pinned erdos record is the erdos site's 'resolved': its prize line reads "
+     "'DISPROVED This has been solved in the negative'; the studies corpus records a negative answer as disproved, "
+     "as lit44 did."),
+    ("studies", "std_esperet_s_polynomial_boundedness_conjecture_237", "disproved",
+     "Literature: alias of arxiv:1910.00697#00, whose text asks the negation (is there a hereditary chi-bounded "
+     "class that is not polynomially chi-bounded?). Its canonical's pinned review (graph-conjectures b72c5857, "
+     "1910.00697__00, solved) records the answer yes (Brianski, Davies and Walczak), so the alias's question (can "
+     "the bounding function of every chi-bounded class be polynomial?) is answered no: disproved."),
+    ("studies", "std_esperet_s_polynomial_boundedness_conjecture_238", "disproved",
+     "Literature: alias of arxiv:1910.00697#00, whose text asks the negation (is there a hereditary chi-bounded "
+     "class that is not polynomially chi-bounded?). Its canonical's pinned review (graph-conjectures b72c5857, "
+     "1910.00697__00, solved) records the answer yes (Brianski, Davies and Walczak) and that it refutes the hope "
+     "that every chi-bounded hereditary class admits a polynomial bounding function, the alias's statement."),
+    ("studies", "std_fox_pach_suk_conjecture", "solved",
+     "Literature: alias of arxiv:1912.02342#00 with its text (d > 0 instead of d >= 2, the case d = 1 trivial); its "
+     "canonical's status, from the canonical's pinned review (graph-conjectures b72c5857, 1912.02342__00, solved): "
+     "Nguyen, Scott and Seymour (arXiv:2312.15572)."),
+    ("studies", "std_heath_leighton_rosenberg_conjecture", "solved",
+     "Literature: alias of arxiv:1507.01120#00 with its proposition (planar graphs have bounded queue number); its "
+     "canonical's status, from the canonical's pinned review (graph-conjectures b72c5857, 1507.01120__00, solved): "
+     "Dujmovic, Joret, Micek, Morin, Ueckerdt and Wood."),
+    ("studies", "std_hypergraph_edge_statistics_conjecture", "solved",
+     "Literature: as the canonical's pinned review reports. Alias of arxiv:1805.06848#00, whose text is the graph "
+     "case r = 2; the alias is its r-uniform generalisation, so it is stronger. Solved as the canonical's pinned "
+     "review (graph-conjectures b72c5857, 1805.06848__00) reports: 'The hypergraph generalisation suggested in the "
+     "original paper was subsequently proved by Jain, Kwan, Mubayi and Tran (arXiv:2505.03954)'; that record is not "
+     "deposited."),
+    ("studies", "std_induced_wall_conjecture_for_bounded_degree_graph", "solved",
+     "Literature: alias of arxiv:2008.05504#01, whose text asks, read literally, for an induced (k x k)-wall or the "
+     "line graph of one; the alias asks for an induced subdivision of the wall or the line graph of one. Solved: the "
+     "alias's subdivided form is what Korhonen proved (arXiv:2203.13233), as the canonical's pinned review "
+     "(graph-conjectures b72c5857, 2008.05504__01, solved) reports. The canonical's literal text is not the ground: "
+     "read literally it fails, a heavily subdivided wall having maximum degree 3, large treewidth and no induced "
+     "unsubdivided wall."),
+    ("studies", "std_sintiari_trotignon_conjecture_logarithmic_treewi", "solved",
+     "Literature: alias of arxiv:2305.16258#01 with its text ((even hole, K_t)-free graphs have logarithmic "
+     "treewidth); its canonical's status, from the canonical's pinned review (graph-conjectures b72c5857, "
+     "2305.16258__01, solved): Chudnovsky, Gartland, Hajebi, Lokshtanov and Spirkl (arXiv:2402.14211)."),
+    ("studies", "std_strong_erd_s_szemer_di_conjecture_graph_restrict", "disproved",
+     "Literature: alias of erdos:808 with its proposition (the sum of the sizes of A +_G A and A ._G A instead of "
+     "their maximum, a factor 2 that epsilon absorbs). The canonical's 'solved' in the pinned erdos record is the "
+     "erdos site's 'resolved': its prize line reads 'DISPROVED This has been solved in the negative'; the studies "
+     "corpus records a negative answer as disproved, as lit44 did."),
 ]
 
 
@@ -1346,7 +1683,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 66 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 117 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "

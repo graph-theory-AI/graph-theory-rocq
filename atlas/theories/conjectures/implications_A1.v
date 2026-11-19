@@ -422,8 +422,133 @@ exists G, 57, 0, 1; split.
 Qed.
 End E147.
 
+(** ** Wave A1 -- tier T4 edge gc:e054: its BLOCKED note answered by the monotonicity of K_t minors *)
+
+(*@EDGE from=kt_subdivision_clique_count_asymptotic_statement to=number_of_cliques_in_minor_closed_classes_statement kind=implies status=verified proof=e054_kt_subdivision_clique_count_asymptotic_implies_number_of_cliques_in_minor_closed_classes cite="gc:e054" note="Take N from the source at a = b = 1, T := max N 1 and c := 9^T. A K_t subdivision gives a K_t minor (the branch set of i is branch i with the internal vertices of its routes to the larger branch vertices: nonempty, connected along the routes, disjoint by the subdivision clauses, adjacent through the vertex before each larger branch vertex), so for t >= T a K_t-minor-free graph has no K_t subdivision and the source gives cliques^3 <= 3^(5t) n^3 <= (9^t n)^3, i.e. at most 9^t n <= c^t n cliques. For t < T it is K_T-minor-free (minor_dec.minor_K_le), so it has at most 9^T n = c n <= c^t n cliques. Both rows count nonempty cliques (GTBase nonempty_clique_count), so the small t of the old BLOCKED note are covered." *)
+Section E054.
+
+(** L1a: along a simple path [x :: p], every vertex before the last one is joined to [x] inside any set [A]
+    holding all of them. *)
+Lemma e054_prefix_connect (G : sgraph) (A : {set G}) (p : seq G) (x : G) :
+  uniq (x :: p) -> path (--) x p ->
+  {in x :: p, forall w, w != last x p -> w \in A} ->
+  {in x :: p, forall z, z != last x p -> connect (preliminaries.restrict_mem (mem A) (--)) x z}.
+Proof.
+elim: p x => [|a p IH] x Hu Hp HA z.
+  by rewrite inE => /eqP -> _; exact: connect0.
+move=> zin zl; case/andP: Hp => xa Hp.
+have Hu' : uniq (a :: p) by case/andP: Hu.
+have xn : x \notin a :: p by case/andP: Hu.
+move: zin; rewrite inE => /orP[/eqP ->|za]; first exact: connect0.
+rewrite /= in zl.
+have Hp' : path (--) a p := Hp.
+have lin : last a p \in a :: p by exact: mem_last.
+have xA : x \in A.
+  apply: HA; first by rewrite inE eqxx.
+  by rewrite /=; apply/eqP => e; move: xn; rewrite {1}e lin.
+have al : a != last a p.
+  case: p {IH Hp Hp' HA lin Hu xn} Hu' za zl => [|b p] Hu' za zl.
+    by move: za zl; rewrite inE => /eqP -> /=; rewrite eqxx.
+  apply/eqP => e; move: Hu' => /= /andP[anin _].
+  by move: anin; rewrite e /= mem_last.
+have aA : a \in A by apply: HA => //; rewrite !inE eqxx orbT.
+apply: connect_trans (connect1 _) (IH a Hu' Hp' _ z za zl).
+  by rewrite /= xA aA xa.
+by move=> w win wl; apply: HA => //; rewrite inE win orbT.
+Qed.
+
+(** L1b: the vertex before the end of a simple path from [x] to [y <> x] is [x] or an internal vertex, and it
+    is adjacent to [y]. *)
+Lemma e054_last_step (G : sgraph) (x y : G) (p : seq G) :
+  x != y -> x175_simple_path_between x y p ->
+  exists2 w, (w == x) || (w \in x175_path_internal x y p) & w -- y.
+Proof.
+move=> xy [Hu Hp Hl].
+case: p Hu Hp Hl => [|a p] Hu Hp Hl; first by move: xy; rewrite -Hl /= eqxx.
+rewrite /= in Hl; move: Hu Hp; rewrite /x175_path_internal (lastI a p) Hl => Hu Hp.
+move: Hp; rewrite rcons_path => /andP[_ Hw].
+exists (last x (belast a p)) => //.
+have yn : y \notin x :: belast a p by move: Hu; rewrite -rcons_cons rcons_uniq => /andP[].
+have win : last x (belast a p) \in x :: belast a p by exact: mem_last.
+case: eqP => //= wx; rewrite in_seq_interior -rcons_cons mem_rcons inE win orbT /=.
+apply/andP; split; first by apply/eqP.
+by apply: contraNneq yn => <-.
+Qed.
+
+(** L1: a subdivision of [K_t] gives a [K_t] minor.  The branch set of [i] is its branch vertex together with the
+    internal vertices of its routes to the larger branch vertices. *)
+Lemma e054_subdivision_minor (G : sgraph) (t : nat) : x175_Kt_subdivision G t -> minor G 'K_t.
+Proof.
+move=> [br [inj [rt [Hpath Havoid Hdis]]]].
+pose phi (i : 'K_t) : {set G} :=
+  br i |: \bigcup_(l : 'I_t | i < l) x175_path_internal (br i) (br l) (rt i l).
+have brn (i j : 'I_t) : i != j -> br i != br j.
+  by move=> ij; apply: contra ij => /eqP /inj ->.
+have inphi (i l : 'I_t) w : i < l ->
+    (w == br i) || (w \in x175_path_internal (br i) (br l) (rt i l)) -> w \in phi i.
+  move=> il /orP[/eqP ->|wl]; first exact: setU11.
+  by apply/setU1P; right; apply/bigcupP; exists l.
+have adj (i j : 'I_t) : i < j -> neighbor (phi i) (phi j).
+  move=> ij; have ne : br i != br j by apply: brn; rewrite neq_ltn ij.
+  have [w Hw wj] := e054_last_step ne (Hpath i j ij).
+  by apply/neighborP; exists w, (br j); split => //; [exact: inphi Hw | exact: setU11].
+apply: (@minor_of_rmap G 'K_t phi); split.
+- by move=> i; apply/set0Pn; exists (br i); exact: setU11.
+- move=> i; apply: (@connected_center _ (br i)); last exact: setU11.
+  move=> v /setU1P[->|/bigcupP[l il vl]]; first exact: connect0.
+  have [Hu Hp Hl] := Hpath i l il.
+  have vl' := vl; rewrite /x175_path_internal in_seq_interior in vl'.
+  case/and3P: vl' => vin vi vlast.
+  apply: (e054_prefix_connect Hu Hp) => //; last by rewrite Hl.
+  move=> w win wl; apply: (inphi i l w il); case: (w =P br i) => //= wi.
+  by rewrite /x175_path_internal in_seq_interior win -Hl wl andbT; apply/eqP.
+- move=> i j ij; rewrite disjoint_subset; apply/subsetP => v vi; rewrite inE; apply/negP => vj.
+  move: vi vj => /setU1P[vi|/bigcupP[l il vl]] /setU1P[vj|/bigcupP[l' jl vl']].
+  + by move: (brn i j ij); rewrite -vi -vj eqxx.
+  + by move: (Havoid j l' i jl); rewrite -vi vl'.
+  + by move: (Havoid i l j il); rewrite -vj vl.
+  + have := Hdis i l j l' il jl; rewrite ij => /(_ isT) dis.
+    by rewrite (disjointFr dis vl) in vl'.
+- move=> i j ij; have {}ij : (i : nat) != j by exact: ij.
+  case: (ltngtP i j) => [lt|gt|eq]; first exact: adj.
+    by rewrite neighborC; exact: adj.
+  by rewrite eq eqxx in ij.
+Qed.
+
+(** L2: the source's bound at [a = b = 1] is [cliques^3 <= 3^(5t) n^3], and [3^(5t) n^3 <= (9^t n)^3]. *)
+Lemma e054_cube_root_bound (t n c : nat) :
+  x175_subdivision_clique_asymptotic_bound 1 1 t n c -> c <= 9 ^ t * n.
+Proof.
+rewrite /x175_subdivision_clique_asymptotic_bound !muln1 => h.
+rewrite -(leq_exp2r _ _ (isT : 0 < 3)); apply: leq_trans h _.
+rewrite expnMn -expnM leq_mul2r; apply/orP; right.
+rewrite (_ : 9 = 3 ^ 2) // -expnM; apply: leq_pexp2l => //.
+by rewrite (mulnC t 3) mulnA leq_mul2r orbC.
+Qed.
+
+(** L3, the edge: [c := 9^T] with [T := maxn N 1] for the source's threshold [N] at [a = b = 1]; [T <= t] by L1
+    and L2, [t < T] by [minor_K_le] (a [K_t]-minor-free graph is [K_T]-minor-free). *)
+Theorem e054_kt_subdivision_clique_count_asymptotic_implies_number_of_cliques_in_minor_closed_classes :
+  kt_subdivision_clique_count_asymptotic_statement -> number_of_cliques_in_minor_closed_classes_statement.
+Proof.
+move=> Src; have [N HN] := Src 1 1 isT isT.
+have bound (s : nat) (G : sgraph) : N <= s -> ~ minor G 'K_s -> clique_count G <= 9 ^ s * #|G|.
+  move=> Ns nKs; apply: e054_cube_root_bound.
+  exact: (HN s Ns G (fun sub => nKs (e054_subdivision_minor sub))).
+pose T := maxn N 1.
+have T1 : 0 < T by rewrite leq_max orbT.
+exists (9 ^ T) => t G t0 nK.
+case: (leqP T t) => Tt.
+  have N_t : N <= t by apply: leq_trans Tt; rewrite leq_maxl.
+  apply: leq_trans (bound t G N_t nK) _; rewrite leq_mul2r; apply/orP; right.
+  by rewrite leq_exp2r // (leq_pexp2l (isT : 0 < 9) T1).
+have nKT : ~ minor G 'K_T by move=> m; apply: nK; exact: minor_K_le (ltnW Tt) m.
+apply: leq_trans (bound T G (leq_maxl N 1) nKT) _; rewrite leq_mul2r; apply/orP; right.
+by rewrite -{1}(expn1 (9 ^ T)) leq_pexp2l // expn_gt0.
+Qed.
+End E054.
+
 (** ** Blocked / kept-candidate cross-package relations (recorded, not stated) *)
 
 (*@EDGE from=jaegers_modular_orientation_statement to=mapping_planar_graphs_to_odd_cycles_statement kind=implies status=candidate cite="gc:e015" note="BLOCKED: planar duality (cycles of G correspond to minimal edge cuts of the planar dual) needs a real planarity/dual layer (F31)" *)
-(*@EDGE from=kt_subdivision_clique_count_asymptotic_statement to=number_of_cliques_in_minor_closed_classes_statement kind=implies status=candidate cite="gc:e054" note="BLOCKED: the source is asymptotic (eventually in t) while the target is a uniform exists c forall t bound; small t not covered as encoded" *)
 (*@EDGE from=matthews_sumner_four_connected_claw_free_statement to=bondy_linear_cycle_cubic_statement kind=implies status=candidate cite="gc:e244" note="keep candidate: Fleischner-Jackson / Kochol equivalences (dominating cycles), not compactly statable as an external theorem" *)
